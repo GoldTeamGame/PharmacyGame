@@ -35,8 +35,10 @@ public static class Globals
     //Game time storage
     public static int loadTime = 0;
     public static int month = 0;
+    public static int year = 2019;
+    
 
     public static int getInGameTime(){
-        return loadTime + (int)Time.time;
+        return Globals.loadTime + (int)Time.time;
     }
 }
