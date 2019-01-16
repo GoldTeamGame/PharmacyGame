@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/*
+    Author: Jon Hearn
+    Ver.: 1.1
+    Date: 1/16/19
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,4 +32,10 @@ public static class Globals
     public static bool unlockedB = false;
 
 
+    //Game time storage
+    public static int loadTime = 0;
+
+    public static int getInGameTime(){
+        return loadTime + (int)Time.time;
+    }
 }
