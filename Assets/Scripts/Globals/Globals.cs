@@ -7,8 +7,8 @@ public static class Globals
 {
 
     //Player currencies
-    public static int playerGold = 999;
-    public static int playerPlatinum = 999;
+    public static int playerGold;
+    public static int playerPlatinum;
 
     //Player inventory of drugs (in "units")
     public static int drugA = 0;
@@ -26,5 +26,20 @@ public static class Globals
     //Flags for unlocked materials from expansions
     public static bool unlockedB = false;
 
-
+    public static int getGold()
+    {
+        return playerGold;
+    }
+    public static int getPlatinum()
+    {
+        return playerPlatinum;
+    }
+    public static void setGold(int gold)
+    {
+        playerGold = gold;
+    }
+    public static void setPlatinum(int platinum)
+    {
+        playerPlatinum = platinum;
+    }
 }
