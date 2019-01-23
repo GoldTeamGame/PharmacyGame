@@ -39,7 +39,8 @@ public class DEMO_SimpleMovement {
             transform.position += new Vector3(-speed * Time.deltaTime, 0, 0);
             if (!hasPurchased && transform.position.x <= 0.2123806)
             {
-                gold.text = "" + (int.Parse(gold.text) + Random.Range(1, 3));
+                Globals.setGold(Globals.getGold() + Random.Range(1, 3));
+                //gold.text = "" + (int.Parse(gold.text) + Random.Range(1, 3));
                 hasPurchased = true;
             }
         }
