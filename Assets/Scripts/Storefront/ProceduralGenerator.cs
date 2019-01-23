@@ -15,7 +15,7 @@ public class ProceduralGenerator : MonoBehaviour {
     {
         InvokeRepeating("Spawn", 0, spawnTime); // start the script and repeat it every spawnTime seconds
     }
-    
+
     // Spawn the customer
     void Spawn()
     {
@@ -23,4 +23,16 @@ public class ProceduralGenerator : MonoBehaviour {
         sprite.size.Scale(new Vector2(1, 1)); // set the size of the sprite, just in case it isn't set properly
         Instantiate(customer, spawnPoint.position, spawnPoint.rotation); // spawn the customer
     }
+
+    public static string generateName()
+    {
+        return Globals_Customer.name[Random.Range(0, 3)];
+    }
+
+    public static float generateSpeed()
+    {
+        return Random.Range(0.5f, 1f);
+    }
+
+
 }

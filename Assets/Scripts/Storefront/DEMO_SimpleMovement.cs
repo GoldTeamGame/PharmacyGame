@@ -9,16 +9,16 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DEMO_SimpleMovement : MonoBehaviour {
+public class DEMO_SimpleMovement {
 
-    public Text gold;
-    public float speed = 2f; // speed of the object
+    //public Text gold;
+    //public float speed = 2f; // speed of the object
     bool hasTraveledRight = false;
     bool hasTraveledDown = false;
     bool hasPurchased = false;
 
     // Update is called once per frame
-    void Update()
+    public void move(Transform transform, float speed, Text gold)
     {
         // Used to keep the original object from moving
         // (Although its sorting order is so low, that it wont be seen even if it did)
@@ -45,9 +45,5 @@ public class DEMO_SimpleMovement : MonoBehaviour {
         }
         else
             transform.position += new Vector3(0, speed * Time.deltaTime, 0);
-
-        // Delete the object after it has reached the end
-        if (transform.position.y > 4)
-            Destroy(gameObject);
     }
 }
