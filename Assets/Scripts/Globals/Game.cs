@@ -9,8 +9,8 @@ using UnityEngine.UI;
 public class Game : MonoBehaviour
 {
 
-    public int g = 0;
-    public int p = 0;
+    public int g;
+    public int p;
 
     [SerializeField]
     private Text Text_Gold;
@@ -29,15 +29,15 @@ public class Game : MonoBehaviour
         SaveGame();
     }
 
-    void Start()
-    {
-        Cursor.lockState = CursorLockMode.Confined;
-    }
+    //void Start()
+    //{
+    //    Cursor.lockState = CursorLockMode.Confined;
+    //}
 
 
     public void Pause()
     {
-
+        SaveGame();
         //menu.SetActive(true);
         Cursor.visible = true;
         Time.timeScale = 0;
@@ -92,10 +92,10 @@ public class Game : MonoBehaviour
 
     public void NewGame()
     {
-        g = 0;
-        p = 0;
-        Text_Gold.text = g.ToString();
-        Text_Platinum.text = p.ToString();
+        //g = 0;
+        //p = 0;
+        //Text_Gold.text = g.ToString();
+        //Text_Platinum.text = p.ToString();
 
 
         //ClearCustomers();
@@ -164,7 +164,7 @@ public class Game : MonoBehaviour
     private Save CreateSaveGameObject()
     {
         Save save = new Save();
-        int i = 0;
+
         //foreach (GameObject targetGameObject in targets)
         //{
         //    Target target = targetGameObject.GetComponent<Target>();

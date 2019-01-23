@@ -8,8 +8,8 @@ public class Save
 
     public List<int> CustomerPositions = new List<int>();
 
-    public int p = 0;
-    public int g = 0;
+    public int p;
+    public int g;
 
-    public object shots { get; internal set; }
+    //public object shots { get; internal set; }
 }
