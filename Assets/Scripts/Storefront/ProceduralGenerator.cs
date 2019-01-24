@@ -19,20 +19,22 @@ public class ProceduralGenerator : MonoBehaviour {
     // Spawn the customer
     void Spawn()
     {
-        sprite.sortingOrder = -3; // move sprite sorting order up so that it can be seen
-        sprite.size.Scale(new Vector2(1, 1)); // set the size of the sprite, just in case it isn't set properly
-        Instantiate(customer, spawnPoint.position, spawnPoint.rotation); // spawn the customer
+        // Do not Spawn customer if max capacity is reached
+        if (Globals_Customer.numberOfCustomers < Globals_Customer.MAX_CUSTOMERS)
+            Instantiate(customer, spawnPoint.position, spawnPoint.rotation); // spawn the customer
     }
 
-    public static string generateName()
+    // Generate customer data
+    public static void generate(ref int id, ref string name, ref float speed, ref DEMO_SimpleMovement movement)
     {
-        return Globals_Customer.name[Random.Range(0, 3)];
+        // Find an available id
+        id = 0;
+        while (Globals_Customer.customerData[id] != null && Globals_Customer.customerData[id].isAlive)
+            id++;
+
+        name = Globals_Customer.name[Random.Range(0, Globals_Customer.name.Length)]; // generate a name
+        speed = Random.Range(0.5f, 1f); // generate a speed
+        movement = new DEMO_SimpleMovement(); // instantiate movement class
+        Globals_Customer.numberOfCustomers++; // increment number of customers
     }
-
-    public static float generateSpeed()
-    {
-        return Random.Range(0.5f, 1f);
-    }
-
-
 }

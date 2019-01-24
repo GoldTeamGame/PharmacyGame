@@ -18,7 +18,7 @@ public class DEMO_SimpleMovement {
     bool hasPurchased = false;
 
     // Update is called once per frame
-    public void move(Transform transform, float speed, Text gold)
+    public void move(Transform transform, float speed)
     {
         // Used to keep the original object from moving
         // (Although its sorting order is so low, that it wont be seen even if it did)
