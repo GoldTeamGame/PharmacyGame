@@ -13,4 +13,21 @@ public static class Globals_Customer
     public static Customer[] customerData = new Customer[MAX_CUSTOMERS]; // holds the customer's data (customer attributes)
 
     public static string[] name = { "Alex", "Dylan", "Jon", "Ross" }; // List of names
+
+    public static GameObject[] GetGameObjects()
+    {
+        return customer;
+    }
+    public static Customer[] GetCustomers()
+    {
+        return customerData;
+    }
+    public static void setGameObjects(GameObject[] customers)
+    {
+        customer = customers;
+    }
+    public static void setCustomers(Customer[] customerDatas)
+    {
+        customerData = customerDatas;
+    }
 }

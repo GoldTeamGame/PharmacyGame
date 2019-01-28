@@ -9,15 +9,7 @@ using UnityEngine.UI;
 public class Game : MonoBehaviour
 {
 
-    public int g;
-    public int p;
-
-    [SerializeField]
-    private Text Text_Gold;
-    [SerializeField]
-    private Text Text_Platinum;
-    [SerializeField]
-    private GameObject menu;
+   
     private bool isPaused = false;
 
     private void Awake()
@@ -28,11 +20,6 @@ public class Game : MonoBehaviour
     {
         SaveGame();
     }
-
-    //void Start()
-    //{
-    //    Cursor.lockState = CursorLockMode.Confined;
-    //}
 
 
     public void Pause()
@@ -141,6 +128,8 @@ public class Game : MonoBehaviour
 
             Globals.setGold(save.g);
             Globals.setPlatinum(save.p);
+            //Globals_Customer.setGameObjects(save.c);
+            //Globals_Customer.setCustomers(save.cd);
 
             Debug.Log("Game Loaded");
 
@@ -178,6 +167,9 @@ public class Game : MonoBehaviour
 
         save.g = Globals.getGold();
         save.p = Globals.getPlatinum();
+        //save.c = Globals_Customer.GetGameObjects();
+        save.cd = Globals_Customer.GetCustomers();
+
 
         return save;
     }
