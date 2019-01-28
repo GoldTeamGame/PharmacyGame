@@ -49,7 +49,7 @@ public class Game : MonoBehaviour
     {
 
         //menu.SetActive(false);
-        Cursor.visible = false;
+        //Cursor.visible = false;
         Time.timeScale = 1;
         isPaused = false;
     }

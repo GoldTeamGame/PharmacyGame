@@ -1,6 +1,6 @@
 ﻿/* 
  * Most Recent Author: Dylan Cyphers
- * Version 1.1
+ * Version 1.2
  * Date: 1/28/2019
  * Description: Attach to button in store. It hires EMPLOYEE C at the listed rate.
  */
@@ -24,11 +24,14 @@ public class EmployC : MonoBehaviour
 
     void Hire()
     {
-        int wage = Globals.wageC;
-        if(Globals.playerGold >= wage)
+        if (!Globals.hiredC)
         {
-            Globals.hiredC = true; //worker becomes employed
-            Globals.playerGold -= wage; //at the cost of 19 gold
+            int wage = Globals.wageC;
+            if (Globals.playerGold >= wage)
+            {
+                Globals.hiredC = true; //worker becomes employed
+                Globals.playerGold -= wage; //at the cost of 19 gold
+            }
         }
         //TODO: Subtract the wage each "hour"
     }

@@ -19,21 +19,34 @@ public static class Globals
     public static int playerPlatinum;
 
     //Player inventory of drugs (in "units") and price (in gold)
+    //Consider making a struct for drugs that have fields: amount, price, and name
     public static int drugA = 0;
-    public static int drugB = 0;
-    public static int drugC = 0;
     public static int priceA = 5;
+    public static string medicationA = "Ventolin";
+    public static int drugB = 0;
     public static int priceB = 7;
+    public static string medicationB = "Vyvanse";
+    public static int drugC = 0;
     public static int priceC = 10;
+    public static string medicationC = "Lyrica";
 
+    /* Hypothetical organization for adding drugD, E, F... Would push drugs made in a form into these data structures
+    public const int NUM_DRUGS = 3;
+    public static string[] all_drugs = new string[NUM_DRUGS];
+    public const int NUM_EMPLOYEES = 3;
+    public static string[] all_employees = new string[NUM_EMPLOYEES];
+    */
 
     //Player inventory of workers (in per "hour")
     public static bool hiredA = false;
     public static int wageA = 15;
+    public static string nameA = "Jon";
     public static bool hiredB = false;
     public static int wageB = 22;
+    public static string nameB = "Alex";
     public static bool hiredC = false;
     public static int wageC = 19;
+    public static string nameC = "Ross";
 
     //Flags for unlocked materials from expansions
     public static bool unlockedB = false;
