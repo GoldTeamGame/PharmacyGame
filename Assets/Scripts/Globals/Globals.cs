@@ -37,6 +37,8 @@ public static class Globals
     public static int month = 0;
     public static int year = 2019;
     
+    //Game time flags
+    public static bool newMonth = false;
 
     public static int getInGameTime(){
         return Globals.loadTime + (int)Time.time;
