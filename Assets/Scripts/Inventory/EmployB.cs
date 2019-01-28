@@ -1,6 +1,6 @@
 ﻿/* 
  * Most Recent Author: Dylan Cyphers
- * Version 1.0
+ * Version 1.1
  * Date: 1/16/2019
  * Description: Attach to button in store. It hires EMPLOYEE B at the listed rate.
  */
@@ -19,18 +19,17 @@ public class EmployB : MonoBehaviour
     void Start()
     {
         button = GetComponent<Button>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         button.onClick.AddListener(() => Hire());
     }
 
     void Hire()
     {
-        Globals.hiredB = true; //worker becomes employed
-        Globals.playerGold -= 22; //at the cost of 22 gold
+        int wage = Globals.wageB;
+        if(Globals.playerGold >= wage)
+        {
+            Globals.hiredB = true; //worker becomes employed
+            Globals.playerGold -= wage; //at the cost of 22 gold
+        }
         //TODO: Subtract the wage each "hour"
     }
 }
