@@ -13,7 +13,17 @@ public class ProceduralGenerator : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        InvokeRepeating("Spawn", 1, spawnTime); // start the script and repeat it every spawnTime seconds
+        if (Globals_Customer.customerData == null)
+            Globals_Customer.customerData = new CustomerData[Globals_Customer.MAX_CUSTOMERS];
+        for (int i = 0; i < Globals_Customer.MAX_CUSTOMERS; i++)
+        {
+            if (Globals_Customer.customerData[i] != null && Globals_Customer.customerData[i].isAlive)
+            {
+                Vector3 v = new Vector3(Globals_Customer.customerData[i].locationX, Globals_Customer.customerData[i].locationY, 0);
+                Instantiate(customer, v, spawnPoint.rotation);
+            }
+        }
+        InvokeRepeating("Spawn", 1, spawnTime); // start the script and repeat it every spawnTime second
     }
 
     // Spawn the customer
@@ -29,10 +39,14 @@ public class ProceduralGenerator : MonoBehaviour {
     {
         // Find an available id
         int id = 0;
-        while (Globals_Customer.customerData[id] != null && Globals_Customer.customerData[id].isAlive)
-            id++;
-
-        string name = Globals_Customer.name[Random.Range(0, Globals_Customer.name.Length)]; // generate a name
+        for (int i = 0; i < Globals_Customer.MAX_CUSTOMERS; i++)
+        {
+            if (Globals_Customer.customerData[i] != null && Globals_Customer.customerData[i].isAlive && id < 9)
+            {
+                id++;
+            }
+        }
+                string name = Globals_Customer.name[Random.Range(0, Globals_Customer.name.Length)]; // generate a name
         float speed = Random.Range(0.5f, 1f); // generate a speed
 
         cd = new CustomerData(id, name, speed);
@@ -40,4 +54,5 @@ public class ProceduralGenerator : MonoBehaviour {
         movement = new DEMO_SimpleMovement(); // instantiate movement class
         Globals_Customer.numberOfCustomers++; // increment number of customers
     }
+
 }

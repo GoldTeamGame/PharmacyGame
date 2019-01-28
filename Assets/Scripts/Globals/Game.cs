@@ -16,6 +16,7 @@ public class Game : MonoBehaviour
     {
         LoadGame();
     }
+
     void OnApplicationQuit()
     {
         SaveGame();
@@ -128,9 +129,7 @@ public class Game : MonoBehaviour
 
             Globals.setGold(save.g);
             Globals.setPlatinum(save.p);
-            //Globals_Customer.setGameObjects(save.c);
-            //Globals_Customer.setCustomers(save.cd);
-
+            Globals_Customer.setCustomers(save.cd);
             Debug.Log("Game Loaded");
 
             Unpause();

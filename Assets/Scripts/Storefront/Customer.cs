@@ -9,11 +9,12 @@ public class Customer : MonoBehaviour {
     // Generate Customer Data
     private void Start()
     {
-        if (cd == null)
-        {
+        //if (cd == null)
+        //{
             ProceduralGenerator.generate(ref cd, ref movement); // pass variables to ProceduralGenerator
+        Debug.Log(cd.id);
             Globals_Customer.customerData[cd.id] = cd; // update Customer in Globals_Customer
-        }
+        //}
     }
 
     // Dictates a customer's actions

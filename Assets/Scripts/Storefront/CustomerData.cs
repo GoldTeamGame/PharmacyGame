@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class CustomerData
 {
     public int id; // unique id to find customer in its array
