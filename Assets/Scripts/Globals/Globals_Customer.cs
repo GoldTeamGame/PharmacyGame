@@ -20,8 +20,9 @@ public static class Globals_Customer
         return customerData;
     }
    
-    public static void setCustomers(List<CustomerData> customerDatas)
+    public static void setCustomers(List<CustomerData> customerDatas, int number)
     {
         customerData = customerDatas;
+        currentNumberOfCustomers = number;
     }
 }

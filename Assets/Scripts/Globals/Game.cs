@@ -27,23 +27,16 @@ public class Game : MonoBehaviour
         SaveGame();
     }
 
-
+    //not used yet but might when go to monthly report
     public void Pause()
     {
-        SaveGame();
-        //menu.SetActive(true);
-        Cursor.visible = true;
-        Time.timeScale = 0;
         isPaused = true;
 
     }
-
+    //not used yet but might when go to monthly report
     public void Unpause()
     {
-
-        //menu.SetActive(false);
-        Cursor.visible = false;
-        Time.timeScale = 1;
+      
         isPaused = false;
     }
 
@@ -69,111 +62,51 @@ public class Game : MonoBehaviour
 
     public void SaveGame()
     {
-        // 1
+        //create save object
         Save save = CreateSaveGameObject();
-
-        // 2
         BinaryFormatter bf = new BinaryFormatter();
+        //write out to device with save file
         FileStream file = File.Create(Application.persistentDataPath + "/gamesave.save");
+        //add save object to file
         bf.Serialize(file, save);
         file.Close();
-
-
-
         Debug.Log("Game Saved");
     }
 
-    public void NewGame()
-    {
-        //g = 0;
-        //p = 0;
-        //Text_Gold.text = g.ToString();
-        //Text_Platinum.text = p.ToString();
-
-
-        //ClearCustomers();
-
-
-        Unpause();
-    }
-
-    //private void ClearCustomers()
-    //{
-    //    foreach (GameObject target in targets)
-    //    {
-    //        target.GetComponent<Target>().DisableRobot();
-    //    }
-    //}
-
-
-
     public void LoadGame()
     {
-        // 1
+        //check if file exists
+        //if so, read file and set global varables
         if (File.Exists(Application.persistentDataPath + "/gamesave.save"))
         {
-
-
-            // 2
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/gamesave.save", FileMode.Open);
             Save save = (Save)bf.Deserialize(file);
-            file.Close();
 
-            //// 3
-            //for (int i = 0; i < save.CustomerPositions.Count; i++)
-            //{
-            //    int position = save.CustomerPositions[i];
-            //    //Target target = targets[position].GetComponent<Target>();
-            //    //target.ActivateRobot((RobotTypes)save.livingTargetsTypes[i]);
-            //    //target.GetComponent<Target>().ResetDeathTimer();
-            //}
-
-            // 4
-           
-
+            //set globals from save object
             Globals.setGold(save.g);
             Globals.setPlatinum(save.p);
-            Globals_Customer.setCustomers(save.cd);
-            Globals_Customer.currentNumberOfCustomers = save.cd.Count;
+            Globals_Customer.setCustomers(save.cd, save.cd.Count);
             Debug.Log("Game Loaded");
             Unpause();
         }
+        //no saved game, just proceed with default globals
         else
         {
             Debug.Log("No game saved!");
         }
     }
-
-    //public void SaveAsJSON()
-    //{
-
-    //    Save save = CreateSaveGameObject();
-    //    string json = JsonUtility.ToJson(save);
-    //    Save save2 = JsonUtility.FromJson<Save>(json);
-
-    //    Debug.Log("Saving as JSON: " + json);
-    //}
     private Save CreateSaveGameObject()
     {
+        //create save object using the object class
         Save save = new Save();
 
-        //foreach (GameObject targetGameObject in targets)
-        //{
-        //    Target target = targetGameObject.GetComponent<Target>();
-        //    if (target.activeRobot != null)
-        //    {
-        //        save.livingTargetPositions.Add(target.position);
-        //        save.livingTargetsTypes.Add((int)target.activeRobot.GetComponent<Robot>().type);
-        //        i++;
-        //    }
-        //}
-
+        //save globals, eventualy can change to a void setVarables fuction
         save.g = Globals.getGold();
         save.p = Globals.getPlatinum();
-        //save.c = Globals_Customer.GetGameObjects();
         save.cd = Globals_Customer.GetCustomers();
 
+        //return the object to write to the file
         return save;
     }
 }
