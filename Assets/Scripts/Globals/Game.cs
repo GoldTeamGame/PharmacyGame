@@ -8,8 +8,6 @@ using UnityEngine.UI;
 
 public class Game : MonoBehaviour
 {
-
-   
     private bool isPaused = false;
 
     private void Awake()
@@ -130,8 +128,9 @@ public class Game : MonoBehaviour
             Globals.setGold(save.g);
             Globals.setPlatinum(save.p);
             Globals_Customer.setCustomers(save.cd);
+            Globals_Customer.currentNumberOfCustomers = save.cd.Count;
             Debug.Log("Game Loaded");
-
+            Debug.Log("After Load: " + Globals_Customer.customerData.Count);
             Unpause();
         }
         else
@@ -168,7 +167,7 @@ public class Game : MonoBehaviour
         save.p = Globals.getPlatinum();
         //save.c = Globals_Customer.GetGameObjects();
         save.cd = Globals_Customer.GetCustomers();
-
+        Debug.Log("After Save: " + Globals_Customer.customerData.Count);
 
         return save;
     }

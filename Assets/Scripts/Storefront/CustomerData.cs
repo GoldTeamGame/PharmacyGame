@@ -5,7 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class CustomerData
 {
-    public int id; // unique id to find customer in its array
     public string name; // name of customer
     public float speed; // speed that customer moves
     public string[] desires; // what a customer wants to buy
@@ -15,9 +14,8 @@ public class CustomerData
     public float locationX; // x-coordinate
     public float locationY; // y-coordinate
 
-    public CustomerData(int id, string name, float speed)
+    public CustomerData(string name, float speed)
     {
-        this.id = id;
         this.name = name;
         this.speed = speed;
         isAlive = true;

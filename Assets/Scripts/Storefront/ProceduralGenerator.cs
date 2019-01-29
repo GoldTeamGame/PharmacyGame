@@ -2,6 +2,7 @@
 // Description: Simply spawns customers at the specified time
 
 using UnityEngine;
+using System.Collections.Generic;
 
 public class ProceduralGenerator : MonoBehaviour {
 
@@ -14,45 +15,44 @@ public class ProceduralGenerator : MonoBehaviour {
     void Start()
     {
         if (Globals_Customer.customerData == null)
-            Globals_Customer.customerData = new CustomerData[Globals_Customer.MAX_CUSTOMERS];
-        for (int i = 0; i < Globals_Customer.MAX_CUSTOMERS; i++)
+            Globals_Customer.customerData = new List<CustomerData>();
+
+        int number = Globals_Customer.customerData.Count;
+
+        for (int i = 0; i < number; i++)
         {
-            if (Globals_Customer.customerData[i] != null && Globals_Customer.customerData[i].isAlive)
-            {
-                Vector3 v = new Vector3(Globals_Customer.customerData[i].locationX, Globals_Customer.customerData[i].locationY, 0);
-                Instantiate(customer, v, spawnPoint.rotation);
-            }
+            Vector3 v = new Vector3(Globals_Customer.customerData[i].locationX, Globals_Customer.customerData[i].locationY, 0);
+            Instantiate(customer, v, spawnPoint.rotation);
         }
-        InvokeRepeating("Spawn", 1, spawnTime); // start the script and repeat it every spawnTime second
+
+        InvokeRepeating("Spawn", 0, spawnTime); // start the script and repeat it every spawnTime second
     }
 
     // Spawn the customer
     void Spawn()
     {
-        // Do not Spawn customer if max capacity is reached
-        if (Globals_Customer.numberOfCustomers < Globals_Customer.MAX_CUSTOMERS)
+        if (Globals_Customer.customerData.Count < Globals_Customer.LIMIT)
             Instantiate(customer, spawnPoint.position, spawnPoint.rotation); // spawn the customer
     }
 
     // Generate customer data
     public static void generate(ref CustomerData cd, ref DEMO_SimpleMovement movement)
     {
-        // Find an available id
-        int id = 0;
-        for (int i = 0; i < Globals_Customer.MAX_CUSTOMERS; i++)
+        if (Globals_Customer.numberOfCustomers < Globals_Customer.currentNumberOfCustomers)
         {
-            if (Globals_Customer.customerData[i] != null && Globals_Customer.customerData[i].isAlive && id < 9)
-            {
-                id++;
-            }
+            cd = Globals_Customer.customerData[Globals_Customer.numberOfCustomers];
+            Globals_Customer.numberOfCustomers++;
         }
-                string name = Globals_Customer.name[Random.Range(0, Globals_Customer.name.Length)]; // generate a name
-        float speed = Random.Range(0.5f, 1f); // generate a speed
+        else
+        {
+            string name = Globals_Customer.name[Random.Range(0, Globals_Customer.name.Length)]; // generate a name
+            float speed = Random.Range(0.5f, 1f); // generate a speed
 
-        cd = new CustomerData(id, name, speed);
+            cd = new CustomerData(name, speed);
+            Globals_Customer.customerData.Add(cd);
+        }
 
         movement = new DEMO_SimpleMovement(); // instantiate movement class
-        Globals_Customer.numberOfCustomers++; // increment number of customers
     }
 
 }
