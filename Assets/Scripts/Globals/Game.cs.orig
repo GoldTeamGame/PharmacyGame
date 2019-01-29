@@ -36,7 +36,14 @@ public class Game : MonoBehaviour
     //not used yet but might when go to monthly report
     public void Unpause()
     {
+<<<<<<< HEAD
+
+        //menu.SetActive(false);
+        //Cursor.visible = false;
+        Time.timeScale = 1;
+=======
       
+>>>>>>> SaveRoss
         isPaused = false;
     }
 
