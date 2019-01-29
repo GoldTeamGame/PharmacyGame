@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿/* 
+ * Most Recent Author: Ross
+ * Version 1.0
+ * Date: 1/28/2019
+ * Description: Save object class
+ * 
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
