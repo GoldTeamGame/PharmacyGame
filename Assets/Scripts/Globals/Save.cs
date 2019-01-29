@@ -5,11 +5,11 @@ using UnityEngine;
 [System.Serializable]
 public class Save
 {
-
-    public List<int> CustomerPositions = new List<int>();
-
     public int p;
+
     public int g;
+    //public static int currentID;
+    public List<CustomerData> cd;
 
     //public object shots { get; internal set; }
 }

@@ -2,6 +2,7 @@
 // Description: Simply spawns customers at the specified time
 
 using UnityEngine;
+using System.Collections.Generic;
 
 public class ProceduralGenerator : MonoBehaviour {
 
@@ -13,31 +14,45 @@ public class ProceduralGenerator : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        InvokeRepeating("Spawn", 1, spawnTime); // start the script and repeat it every spawnTime seconds
+        if (Globals_Customer.customerData == null)
+            Globals_Customer.customerData = new List<CustomerData>();
+
+        int number = Globals_Customer.customerData.Count;
+
+        for (int i = 0; i < number; i++)
+        {
+            Vector3 v = new Vector3(Globals_Customer.customerData[i].locationX, Globals_Customer.customerData[i].locationY, 0);
+            Instantiate(customer, v, spawnPoint.rotation);
+        }
+
+        InvokeRepeating("Spawn", 0, spawnTime); // start the script and repeat it every spawnTime second
     }
 
     // Spawn the customer
     void Spawn()
     {
-        // Do not Spawn customer if max capacity is reached
-        if (Globals_Customer.numberOfCustomers < Globals_Customer.MAX_CUSTOMERS)
+        if (Globals_Customer.customerData.Count < Globals_Customer.LIMIT)
             Instantiate(customer, spawnPoint.position, spawnPoint.rotation); // spawn the customer
     }
 
     // Generate customer data
     public static void generate(ref CustomerData cd, ref DEMO_SimpleMovement movement)
     {
-        // Find an available id
-        int id = 0;
-        while (Globals_Customer.customerData[id] != null && Globals_Customer.customerData[id].isAlive)
-            id++;
+        if (Globals_Customer.numberOfCustomers < Globals_Customer.currentNumberOfCustomers)
+        {
+            cd = Globals_Customer.customerData[Globals_Customer.numberOfCustomers];
+            Globals_Customer.numberOfCustomers++;
+        }
+        else
+        {
+            string name = Globals_Customer.name[Random.Range(0, Globals_Customer.name.Length)]; // generate a name
+            float speed = Random.Range(0.5f, 1f); // generate a speed
 
-        string name = Globals_Customer.name[Random.Range(0, Globals_Customer.name.Length)]; // generate a name
-        float speed = Random.Range(0.5f, 1f); // generate a speed
-
-        cd = new CustomerData(id, name, speed);
+            cd = new CustomerData(name, speed);
+            Globals_Customer.customerData.Add(cd);
+        }
 
         movement = new DEMO_SimpleMovement(); // instantiate movement class
-        Globals_Customer.numberOfCustomers++; // increment number of customers
     }
+
 }
