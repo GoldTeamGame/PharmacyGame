@@ -11,6 +11,8 @@ public class CustomerData
     public int happiness; // how happy a customer is
     public bool isAlive; // does the customer gameObject still exist?
 
+    public int appearance;
+
     public float locationX; // x-coordinate
     public float locationY; // y-coordinate
 
