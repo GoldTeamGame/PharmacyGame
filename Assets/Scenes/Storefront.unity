@@ -844,7 +844,7 @@ MonoBehaviour:
   - {fileID: 21300002, guid: bc8bb572e05574d4dad9bd5114b3a183, type: 3}
   customer: {fileID: 1909597689119352, guid: 48ab7656256affd40814199fa745fa7c, type: 2}
   spawnPoint: {fileID: 484704970}
-  spawnTime: 0.5
+  spawnTime: 3
   sprite: {fileID: 0}
 --- !u!4 &792491896
 Transform:

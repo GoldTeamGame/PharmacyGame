@@ -18,13 +18,14 @@ public class Customer : MonoBehaviour {
     // Dictates a customer's actions
     private void Update()
     {
-        movement.move(transform, 1); // Move
+        movement.move(transform, cd.speed); // Move
         cd.locationX = transform.position.x;
         cd.locationY = transform.position.y;
 
         // Delete the object after it has reached the end
         if (transform.position.y > 4)
         {
+            CustomerScreen.updateList(Globals_Customer.customerData.IndexOf(cd)); ;
             Globals_Customer.customerData.Remove(cd);
             Destroy(gameObject);
             cd.isAlive = false; // set customer to "dead" allowing its id to be replaced

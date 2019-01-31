@@ -62,6 +62,8 @@ public class ProceduralGenerator : MonoBehaviour {
         }
 
         movement = new DEMO_SimpleMovement(); // instantiate movement class
+
+        CustomerScreen.updateList(-1);
     }
 
 }
