@@ -6,6 +6,8 @@ using System.Collections.Generic;
 
 public class ProceduralGenerator : MonoBehaviour {
 
+    public Sprite[] appearanceList; //
+    public static Sprite[] appearance;
     public GameObject customer; // object being spawned
     public Transform spawnPoint; // location the object will be spawned at
     public float spawnTime = 5; // when the object will be spawned
@@ -18,6 +20,11 @@ public class ProceduralGenerator : MonoBehaviour {
             Globals_Customer.customerData = new List<CustomerData>();
 
         int number = Globals_Customer.customerData.Count;
+
+        appearance = new Sprite[appearanceList.Length];
+
+        for (int i = 0; i < appearanceList.Length; i++)
+            appearance[i] = appearanceList[i];
 
         for (int i = 0; i < number; i++)
         {
@@ -47,8 +54,10 @@ public class ProceduralGenerator : MonoBehaviour {
         {
             string name = Globals_Customer.name[Random.Range(0, Globals_Customer.name.Length)]; // generate a name
             float speed = Random.Range(0.5f, 1f); // generate a speed
-
+            
             cd = new CustomerData(name, speed);
+            cd.appearance = Random.Range(0, 9);
+
             Globals_Customer.customerData.Add(cd);
         }
 

@@ -6,10 +6,13 @@ public class Customer : MonoBehaviour {
     CustomerData cd;
     DEMO_SimpleMovement movement;
     
+    
     // Generate Customer Data
     private void Start()
     {
         ProceduralGenerator.generate(ref cd, ref movement); // pass variables to ProceduralGenerator
+        GetComponent<SpriteRenderer>().sprite = ProceduralGenerator.appearance[cd.appearance];
+        transform.localScale = new Vector3(1.5f, 1.5f, 0);
     }
 
     // Dictates a customer's actions
