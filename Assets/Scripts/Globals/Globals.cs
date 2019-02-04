@@ -37,6 +37,21 @@ public static class Globals
     public static string[] all_employees = new string[NUM_EMPLOYEES];
     */
 
+
+    public struct Employee {
+        public static bool isHired;
+        public static int wage;
+        public static string name;
+        public Employee(bool p1, int p2, string p3)
+        {
+            isHired = p1;
+            wage = p2;
+            name = p3;
+        }
+    }
+
+    public static Employee Jon = new Employee(false, 15, "Jon");
+
     //Player inventory of workers (in per "hour")
     public static bool hiredA = false;
     public static int wageA = 15;
