@@ -1,7 +1,7 @@
 ﻿/* 
- * Most Recent Author: Dylan Cyphers
- * Version 1.1
- * Date: 1/28/2019
+ * Most Recent Author: Ross Burnworth
+ * Version 1.2
+ * Date: 2/04/2019
  * Description: Game Controller script to handle flags and data used across the entire game. Allows for scene-to-scene communication.
  * 
  */
@@ -49,8 +49,15 @@ public static class Globals
             name = p3;
         }
     }
+    //public static List<Employee> employees = new List<Employee>();
+
 
     public static Employee Jon = new Employee(false, 15, "Jon");
+    public static Employee Alex = new Employee(false, 22, "Alex");
+    public static Employee Ross = new Employee(false, 19, "Ross");
+   
+    
+
 
     //Player inventory of workers (in per "hour")
     public static bool hiredA = false;
@@ -96,5 +103,20 @@ public static class Globals
     public static void setPlatinum(int platinum)
     {
         playerPlatinum = platinum;
+    }
+    public static List<Employee> getEmployees()
+    {
+        List<Employee> employees = new List<Employee>();
+        employees.Add(Jon);
+        employees.Add(Alex);
+        employees.Add(Ross);
+        return employees;
+    }
+    public static void setEmployees(List<Employee> employees)
+    {
+        Jon = employees[0];
+        Alex = employees[1];
+        Ross = employees[2];
+
     }
 }
