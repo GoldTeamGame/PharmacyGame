@@ -17,6 +17,9 @@ public class Save
     public int g;
     //public static int currentID;
     public List<CustomerData> cd;
+    public List<Globals.Employee> employees;
+    public List<Globals.Drug> drugs;
+
 
     //public object shots { get; internal set; }
 }
