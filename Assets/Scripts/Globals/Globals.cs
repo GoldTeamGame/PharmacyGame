@@ -1,6 +1,6 @@
 ﻿/* 
- * Most Recent Author: Dylan Cyphers
- * Version 1.3.1
+ * Most Recent Author: Ross Burnworth
+ * Version 1.3.2
  * Date: 2/04/2019
  * Description: Game Controller script to handle flags and data used across the entire game. Allows for scene-to-scene communication.
  * 
@@ -10,6 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 
 public static class Globals
 {
@@ -29,7 +30,7 @@ public static class Globals
     public static string[] all_employees = new string[NUM_EMPLOYEES];
     */
 
-
+    [System.Serializable]
     public struct Employee {
         public bool isHired;
         public int wage;
@@ -41,6 +42,7 @@ public static class Globals
             name = p3;
         }
     }
+    [System.Serializable]
     public struct Drug
     {
         public int price;
@@ -112,6 +114,7 @@ public static class Globals
         Ross = employees[2];
 
     }
+
     public static List<Drug> getDrugs()
     {
         List<Drug> drugs = new List<Drug>();

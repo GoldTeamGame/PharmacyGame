@@ -31,7 +31,6 @@ public class Game : MonoBehaviour
     public void Pause()
     {
         isPaused = true;
-
     }
     //not used yet but might when go to monthly report
     public void Unpause()

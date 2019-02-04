@@ -20,6 +20,4 @@ public class Save
     public List<Globals.Employee> employees;
     public List<Globals.Drug> drugs;
 
-
-    //public object shots { get; internal set; }
 }
