@@ -1,6 +1,6 @@
 ﻿/* 
- * Most Recent Author: Ross Burnworth
- * Version 1.3
+ * Most Recent Author: Dylan Cyphers
+ * Version 1.3.1
  * Date: 2/04/2019
  * Description: Game Controller script to handle flags and data used across the entire game. Allows for scene-to-scene communication.
  * 
@@ -31,9 +31,9 @@ public static class Globals
 
 
     public struct Employee {
-        public static bool isHired;
-        public static int wage;
-        public static string name;
+        public bool isHired;
+        public int wage;
+        public string name;
         public Employee(bool p1, int p2, string p3)
         {
             isHired = p1;
@@ -43,9 +43,9 @@ public static class Globals
     }
     public struct Drug
     {
-        public static int price;
-        public static int amount;
-        public static string name;
+        public int price;
+        public int amount;
+        public string name;
         public Drug(int p1, int p2, string p3)
         {
             price = p1;

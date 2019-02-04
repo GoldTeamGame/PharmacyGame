@@ -1,8 +1,8 @@
 ﻿/* 
  * Most Recent Author: Dylan Cyphers
- * Version 1.2
- * Date: 1/16/2019
- * Description: Attach to button in store. It hires EMPLOYEE B at the listed rate.
+ * Version 1.3
+ * Date: 2/4/2019
+ * Description: Attach to button in store. It hires EMPLOYEE B "Alex" at the listed rate.
  */
 
 using System.Collections;
@@ -24,12 +24,12 @@ public class EmployB : MonoBehaviour
 
     void Hire()
     {
-        if (!Globals.hiredB)
+        if (!Globals.Alex.isHired)
         {
-            int wage = Globals.wageB;
+            int wage = Globals.Alex.wage;
             if (Globals.playerGold >= wage)
             {
-                Globals.hiredB = true; //worker becomes employed
+                Globals.Alex.isHired = true; //worker becomes employed
                 Globals.playerGold -= wage; //at the cost of 22 gold
             }
         }

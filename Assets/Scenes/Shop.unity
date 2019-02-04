@@ -324,7 +324,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Drug B: 7g/Unit'
+  m_Text: 'Vyvnase: 7g/Unit'
 --- !u!222 &248363147
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -777,7 +777,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Drug A: 5g/Unit'
+  m_Text: 'Ventolin: 5g/Unit'
 --- !u!222 &735166143
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1740,7 +1740,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Hire C: 19g/hr'
+  m_Text: 'Hire Ross: 19g/hr'
 --- !u!222 &1383917099
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1815,7 +1815,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Hire A: 15g/hr'
+  m_Text: 'Hire Jon: 15g/hr'
 --- !u!222 &1443693287
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2138,7 +2138,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Hire B: 22g/hr'
+  m_Text: 'Hire Alex: 22g/hr'
 --- !u!222 &1564606347
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2495,7 +2495,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Drug C: 10g/Unit'
+  m_Text: 'Lyrica: 10g/Unit'
 --- !u!222 &2080749677
 CanvasRenderer:
   m_ObjectHideFlags: 0

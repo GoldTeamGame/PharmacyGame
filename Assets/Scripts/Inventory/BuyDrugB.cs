@@ -1,8 +1,8 @@
 ﻿/* 
  * Most Recent Author: Dylan Cyphers
- * Version 1.1
- * Date: 1/28/2019
- * Description: Attach to button in store. It adds a unit of DRUG B to the player's stock.
+ * Version 1.3
+ * Date: 2/4/2019
+ * Description: Attach to button in store. It adds a unit of DRUG B "Vyvnase" to the player's stock.
  */
 
 using System.Collections;
@@ -24,10 +24,10 @@ public class BuyDrugB : MonoBehaviour
 
     void Buy()
     {
-        int price = Globals.priceB;
+        int price = Globals.Vyvanse.price;
         if(Globals.playerGold >= price)
         {
-            Globals.drugB += 1; //buy 1 unit
+            Globals.Vyvanse.amount += 1; //buy 1 unit
             Globals.playerGold -= price; //at the cost of 7 gold        
         }
     }
