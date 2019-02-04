@@ -1,6 +1,6 @@
 ﻿/* 
  * Most Recent Author: Ross Burnworth
- * Version 1.2
+ * Version 1.3
  * Date: 2/04/2019
  * Description: Game Controller script to handle flags and data used across the entire game. Allows for scene-to-scene communication.
  * 
@@ -20,15 +20,7 @@ public static class Globals
 
     //Player inventory of drugs (in "units") and price (in gold)
     //Consider making a struct for drugs that have fields: amount, price, and name
-    public static int drugA = 0;
-    public static int priceA = 5;
-    public static string medicationA = "Ventolin";
-    public static int drugB = 0;
-    public static int priceB = 7;
-    public static string medicationB = "Vyvanse";
-    public static int drugC = 0;
-    public static int priceC = 10;
-    public static string medicationC = "Lyrica";
+
 
     /* Hypothetical organization for adding drugD, E, F... Would push drugs made in a form into these data structures
     public const int NUM_DRUGS = 3;
@@ -49,26 +41,27 @@ public static class Globals
             name = p3;
         }
     }
-    //public static List<Employee> employees = new List<Employee>();
-
+    public struct Drug
+    {
+        public static int price;
+        public static int amount;
+        public static string name;
+        public Drug(int p1, int p2, string p3)
+        {
+            price = p1;
+            amount = p2;
+            name = p3;
+        }
+    }
 
     public static Employee Jon = new Employee(false, 15, "Jon");
     public static Employee Alex = new Employee(false, 22, "Alex");
     public static Employee Ross = new Employee(false, 19, "Ross");
-   
-    
 
+    public static Drug Ventolin = new Drug(5, 0, "Ventolin");
+    public static Drug Vyvanse = new Drug(7, 0, "Vyvanse");
+    public static Drug Lyrica = new Drug(10, 0, "Lyrica");
 
-    //Player inventory of workers (in per "hour")
-    public static bool hiredA = false;
-    public static int wageA = 15;
-    public static string nameA = "Jon";
-    public static bool hiredB = false;
-    public static int wageB = 22;
-    public static string nameB = "Alex";
-    public static bool hiredC = false;
-    public static int wageC = 19;
-    public static string nameC = "Ross";
 
     //Flags for unlocked materials from expansions
     public static bool unlockedB = false;
@@ -117,6 +110,22 @@ public static class Globals
         Jon = employees[0];
         Alex = employees[1];
         Ross = employees[2];
+
+    }
+    public static List<Drug> getDrugs()
+    {
+        List<Drug> drugs = new List<Drug>();
+        drugs.Add(Ventolin);
+        drugs.Add(Vyvanse);
+        drugs.Add(Lyrica);
+        
+        return drugs;
+    }
+    public static void setDrugs(List<Drug> drugs)
+    {
+        Ventolin = drugs[0];
+        Vyvanse = drugs[1];
+        Lyrica = drugs[2];
 
     }
 }
