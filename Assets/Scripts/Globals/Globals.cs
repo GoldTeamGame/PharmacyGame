@@ -1,6 +1,6 @@
 ﻿/* 
  * Most Recent Author: Ross Burnworth
- * Version 1.2
+ * Version 1.3
  * Date: 2/04/2019
  * Description: Game Controller script to handle flags and data used across the entire game. Allows for scene-to-scene communication.
  * 
