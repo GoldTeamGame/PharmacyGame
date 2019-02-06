@@ -17,6 +17,9 @@ public class Calendar : MonoBehaviour {
 	public static int inGameTime;
 	public Text calendar;
 	public const int timePerMonth = 30;
+
+	public Button toReports;
+
 	// Use this for initialization
 	void Start () {
 		inGameTime = (Globals.getInGameTime()) % timePerMonth;
@@ -73,6 +76,7 @@ public class Calendar : MonoBehaviour {
 			if(inGameTime == timePerMonth - 1){
 				Globals.newMonth = true;
 				Globals.month = (Globals.month + 1) % 12;
+				toReports.gameObject.SetActive(true);
 			}
 		}
 		switch(Globals.month){
@@ -117,6 +121,10 @@ public class Calendar : MonoBehaviour {
 
 			break;
 		}
+		
+	}
+
+	void changeToReport(){
 		
 	}
 }
