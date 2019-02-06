@@ -1,4 +1,7 @@
 ﻿// File: SceneChanger
+// Version: 1.0.3
+// Last Updated: 2/6/19
+// Authors: Alexander Jacks
 // Description: Has button functions to change scenes
 
 using UnityEngine;
@@ -7,10 +10,10 @@ using UnityEngine.UI;
 
 public class SceneChanger : MonoBehaviour
 {
-    public string currentScene;
-    bool isAtStorefront = true;
-    public Button back;
-    public Button hideShow;
+    public string currentScene; // Keeps track of which scene is currently being viewed
+    public static bool isAtStorefront = true; // True if focus is on storefront scene
+    public Button back; // Button used to return to storefront scene
+    //public Button hideShow; // Button used to hide menu interface
 
     // Change from currentScene to scene
     public void changeScene(string scene)
@@ -26,12 +29,15 @@ public class SceneChanger : MonoBehaviour
         {
             isAtStorefront = false;
             currentScene = scene;
+
+            CustomerScreen.isAtCustomerScene = scene.Equals("Customers");
             SceneManager.LoadScene(scene, LoadSceneMode.Additive);
         }
         // Or close the current scene and load the new scene
         // (if the scene selected is not already open)
         else if (!scene.Equals(currentScene))
         {
+            CustomerScreen.isAtCustomerScene = scene.Equals("Customers");
             SceneManager.UnloadSceneAsync(currentScene);
             currentScene = scene;
             SceneManager.LoadScene(scene, LoadSceneMode.Additive);
@@ -42,6 +48,7 @@ public class SceneChanger : MonoBehaviour
     public void backToStorefront()
     {
         isAtStorefront = true; // reset boolean to true
+        CustomerScreen.isAtCustomerScene = false;
 
         SceneManager.UnloadSceneAsync(currentScene); // unload currentScene
         

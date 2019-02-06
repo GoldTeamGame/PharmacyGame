@@ -1,8 +1,9 @@
 ﻿// File: Globals_Customer
-// Description: Holds Customers
+// Version: 1.0.3
+// Last Updated: 2/6/19
+// Authors: Alexander Jacks, Ross Burnworth
+// Description: Contains Global variables and functions relevent to Customers
 
-using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 public static class Globals_Customer
@@ -13,7 +14,7 @@ public static class Globals_Customer
     public static List<CustomerData> customerData; // holds the customer's data (customer attributes)
 
     public static string[] name = { "Alex", "Dylan", "Jon", "Ross" }; // List of names
-
+    public static string[] mood = { "Irate", "Mad", "Unhappy", "Content", "Satisfied", "Ecstatic", "Euphoric" }; // List of moods
    
     public static List<CustomerData> GetCustomers()
     {
