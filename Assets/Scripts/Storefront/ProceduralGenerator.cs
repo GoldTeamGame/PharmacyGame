@@ -7,8 +7,9 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class ProceduralGenerator : MonoBehaviour {
-
+public class ProceduralGenerator : MonoBehaviour
+{
+    public Transform parent;
     public Sprite[] appearanceList; // contains sprites passed in from unity editor
     public static Sprite[] staticAppearanceList; // Static version of appearanceList which can be used in static functions
     public GameObject customer; // object being spawned
@@ -33,21 +34,27 @@ public class ProceduralGenerator : MonoBehaviour {
         for (int i = 0; i < numberOfCustomers; i++)
         {
             Vector3 v = new Vector3(Globals_Customer.customerData[i].locationX, Globals_Customer.customerData[i].locationY, 0);
-            Instantiate(customer, v, spawnPoint.rotation);
+            instantiateObject(v);
         }
 
         InvokeRepeating("Spawn", 0, spawnTime); // start the script and repeat it every spawnTime second
     }
 
     // Spawn a new customer until the limit is reached
-    void Spawn()
+    private void Spawn()
     {
         if (Globals_Customer.customerData.Count < Globals_Customer.LIMIT)
-            Instantiate(customer, spawnPoint.position, spawnPoint.rotation); // spawn the customer
+            instantiateObject(spawnPoint.position);
+    }
+
+    private void instantiateObject(Vector3 position)
+    {
+        GameObject go = Instantiate(customer, position, spawnPoint.rotation); // spawn the customer
+        go.transform.parent = parent;
     }
 
     // Generate customer data
-    public static void generate(ref CustomerData cd, ref DEMO_SimpleMovement movement)
+    public static void generate(ref CustomerData cd)
     {
         // Set cd equal to the last element in customerData
         // (This if-statement is for the sake of loading in customers that were saved in customerData)
@@ -76,8 +83,6 @@ public class ProceduralGenerator : MonoBehaviour {
 
             Globals_Customer.customerData.Add(cd); // add cd to Globals list
         }
-
-        movement = new DEMO_SimpleMovement(); // instantiate movement class
 
         CustomerScreen.updateList(-1); // update CustomerScreen button list
     }

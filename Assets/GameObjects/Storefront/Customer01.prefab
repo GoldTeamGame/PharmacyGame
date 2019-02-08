@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4822457899976336}
   - component: {fileID: 212013543056412776}
   - component: {fileID: 114835760831164816}
+  - component: {fileID: 114603309364088832}
   m_Layer: 0
   m_Name: Customer01
   m_TagString: Untagged
@@ -41,6 +42,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114603309364088832
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1909597689119352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc0fc55d36b64ec4984bc1ae5d4d9809, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114835760831164816
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -52,12 +64,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4ea5f9043d0ce4faead24c2c3cde7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
-  name: 
-  speed: 0
-  desires: []
-  happiness: 0
-  isAlive: 0
 --- !u!212 &212013543056412776
 SpriteRenderer:
   m_ObjectHideFlags: 1

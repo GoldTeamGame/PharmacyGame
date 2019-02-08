@@ -831,6 +831,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17e6fdf75c2f93641b53e5eec88e83d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 1664628313}
   appearanceList:
   - {fileID: 21300002, guid: 7ebc14c6bd8f1174c899766d434b7a81, type: 3}
   - {fileID: 21300002, guid: e67719e6fd7936348bd64edcc61d3264, type: 3}
@@ -3526,6 +3527,7 @@ GameObject:
   - component: {fileID: 1664628313}
   - component: {fileID: 1664628315}
   - component: {fileID: 1664628314}
+  - component: {fileID: 1664628316}
   m_Layer: 0
   m_Name: Tilemap_Products
   m_TagString: Untagged
@@ -4737,6 +4739,18 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1664628316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1664628312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51d5d8e2d90d334eb3658da08e2932b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilemap: {fileID: 1664628315}
 --- !u!1 &1679902674
 GameObject:
   m_ObjectHideFlags: 0
@@ -4905,7 +4919,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentScene: Storefront
   back: {fileID: 1933662073}
-  hideShow: {fileID: 265743720}
 --- !u!1 &1792911093
 GameObject:
   m_ObjectHideFlags: 0

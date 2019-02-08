@@ -43,9 +43,9 @@ public class Movement : MonoBehaviour {
         q.enqueue("up");
         q.enqueue("up");
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
         if (isMoving == 0)
         {

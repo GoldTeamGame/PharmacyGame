@@ -9,21 +9,20 @@ using UnityEngine;
 public class Customer : MonoBehaviour
 {
     CustomerData cd; // contains information about customer
-    DEMO_SimpleMovement movement; // tells customer how to move
-    
     
     // Generate Customer Data
     private void Start()
     {
-        ProceduralGenerator.generate(ref cd, ref movement); // pass variables to be handled by ProceduralGenerator
+        ProceduralGenerator.generate(ref cd); // pass variables to be handled by ProceduralGenerator
         GetComponent<SpriteRenderer>().sprite = ProceduralGenerator.staticAppearanceList[cd.appearance]; // set customer sprite
-        transform.localScale = new Vector3(1.5f, 1.5f, 0); // set customer sprite size (make it bigger)
+        transform.localScale = new Vector3(2.25f, 2.25f, 0); // set customer sprite size (make it bigger)
+        GetComponent<CustomerController>().speed = cd.speed; // set CustomerController speed
     }
 
     // Dictates a customer's actions
     private void Update()
     {
-        movement.move(transform, cd.speed); // Move customer
+        //movement.move(transform, cd.speed); // Move customer
 
         // Save current coordinate position of customer in customerData (for save/load purposes)
         cd.locationX = transform.position.x;
