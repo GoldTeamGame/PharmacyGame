@@ -111,8 +111,6 @@ public class CustomerScreen : MonoBehaviour
 
             // List desires
             listDesires(Globals_Customer.customerData[index].desires);
-
-            
         }
     }
 

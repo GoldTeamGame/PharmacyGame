@@ -1,6 +1,6 @@
 ﻿// File: ProceduralGenerator
-// Version: 1.0.8
-// Last Updated: 2/6/19
+// Version: 1.0.9
+// Last Updated: 2/13/19
 // Authors: Alexander Jacks
 // Description: Spawns customers into game world
 
@@ -16,10 +16,13 @@ public class ProceduralGenerator : MonoBehaviour
     public Transform spawnPoint; // location the object will be spawned at
     public float spawnTime = 5; // when the object will be spawned
     public SpriteRenderer sprite; // the sprite that represents the customer (will be overwritten)
+    public static float xSpawnPoint; // the x-coordinate of the spawn point
 
     // Use this for initialization
     void Start()
     {
+        xSpawnPoint = spawnPoint.localPosition.x;
+
         // Instantiate customerData list if none currently exists
         if (Globals_Customer.customerData == null)
             Globals_Customer.customerData = new List<CustomerData>();

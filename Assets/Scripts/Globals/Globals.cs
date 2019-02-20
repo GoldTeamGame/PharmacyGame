@@ -15,7 +15,7 @@ public static class Globals
 {
 
     //Player currencies
-    public static int playerGold;
+    public static int playerGold = 1000;
     public static int playerPlatinum;
 
     //Player inventory of drugs (in "units") and price (in gold)

@@ -49,6 +49,7 @@ public class SceneChanger : MonoBehaviour
     {
         isAtStorefront = true; // reset boolean to true
         CustomerScreen.isAtCustomerScene = false;
+        CustomerScreen.currentCustomer = -1;
 
         SceneManager.UnloadSceneAsync(currentScene); // unload currentScene
         

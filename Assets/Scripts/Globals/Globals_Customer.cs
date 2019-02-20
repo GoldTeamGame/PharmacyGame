@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 public static class Globals_Customer
 {
-    public const int LIMIT = 1;
+    public const int LIMIT = 100;
     public static int numberOfCustomers = 0;
     public static int currentNumberOfCustomers;
     public static List<CustomerData> customerData; // holds the customer's data (customer attributes)

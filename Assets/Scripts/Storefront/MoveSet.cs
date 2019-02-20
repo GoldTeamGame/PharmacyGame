@@ -1,6 +1,6 @@
 ﻿// File: MoveSet
 // Version: 1.0.2
-// Last Updated: 2/7/19
+// Last Updated: 2/11/19
 // Authors: Alexander Jacks
 // Description: Contains basic movement directions for customer
 
@@ -18,11 +18,11 @@ public class MoveSet
     Vector3 moveLocation; // the location of the next place the customer will move
     float speed; // the speed that a customer moves at
 
-    private int moveLimitLeft;
-    private int moveLimitRight;
-    private int moveLimitUp;
-    private int moveLimitDown;
-
+    // TODO: Add obsticals into isFilled array
+    int xLocation;
+    int yLocation;
+    bool[][] isFilled;
+    
     public MoveSet(Transform transform, float speed)
     {
         isMoving = -1; // set to stationary state
@@ -31,12 +31,19 @@ public class MoveSet
         tilemap = TilemapReference.staticTilemap;
         this.transform = transform;
         this.speed = speed;
+
+        int sizeX = tilemap.cellBounds.size.x - 1;
+        int sizeY = tilemap.cellBounds.size.y;
+
+        isFilled = new bool[sizeY][];
+        for (int i = 0; i < sizeY; i++)
+            isFilled[i] = new bool[sizeX];
     }
 
     // Determines destination
     public void setMove(int command, ref Queue<int> moveQ)
     {
-        float numberOfMoves = moveDistance;
+        float numberOfMoves = 0;
 
         // Figure out how many consecutive movements of the same type are in the moveQ
         while (!moveQ.isEmpty() && moveQ.peek().Equals(command))
@@ -50,6 +57,14 @@ public class MoveSet
         // Find where the customer will end up after moving.
         moveLocation = new Vector3(transform.localPosition.x + numberOfMoves * Mathf.RoundToInt(directionX[isMoving]), 
             transform.localPosition.y + numberOfMoves * Mathf.RoundToInt(directionY[isMoving]), 0);
+        
+        // Remove a move if the moveLocation is out of bounds
+        while (!isInBounds() && numberOfMoves > 0)
+        {
+            numberOfMoves -= 0.5f;
+            moveLocation = new Vector3(transform.localPosition.x + numberOfMoves * Mathf.RoundToInt(directionX[isMoving]),
+            transform.localPosition.y + numberOfMoves * Mathf.RoundToInt(directionY[isMoving]), 0);
+        }
     }
 
     // Moves gameObject to destination
@@ -69,4 +84,9 @@ public class MoveSet
         }
     }
 
+    bool isInBounds()
+    {
+        return (moveLocation.x >= tilemap.cellBounds.xMin + 0.5f) && (moveLocation.x <= tilemap.cellBounds.xMax - 0.5f) && 
+            (moveLocation.y <= tilemap.cellBounds.yMax) && (moveLocation.y >= tilemap.cellBounds.yMin + 0.5f);
+    }
 }
