@@ -11,8 +11,8 @@ public class CustomerController : MonoBehaviour
     public float speed;
     MoveSet ms;
     Queue<int> moveQ; // 0 = right, 1 = left, 2 = up, 3 = down, 4 = upright, 5 = upleft, 6 = downright, 7 = downleft
-    int limit = 5;
-    int currentAmount = 0;
+    int limit = 20; // "Desire Capacity"
+    int currentAmount = 0; // Number is increased each move. When currentAmmount reaches limit, reset currentAmount and remove a desire
     bool isBuying;
     bool isLeaving;
 
