@@ -1,7 +1,7 @@
 ﻿/* 
  * Most Recent Author: Dylan Cyphers
- * Version 1.1
- * Date: 2/4/2019
+ * Version 1.2
+ * Date: 2/24/2019
  * Description: Displays the inventory items alongside their amount. The items displayed are both drugs and employees.
  * 
  */
@@ -21,8 +21,42 @@ public class DisplayInventory : MonoBehaviour {
     public Text employeeBtext;
     public Text employeeCtext;
 
+    public Button fluShotBtn;
+
+    void Start()
+    {
+        //Globals.unlockedFluShotStation = true;
+        if(Globals.unlockedFluShotStation)
+        {
+            
+            fluShotBtn.onClick.AddListener(PlaceFluShot);
+        }
+    }
+
+    public void PlaceFluShot()
+    {
+        //scene change to storefront
+        Globals.inEditMode = true;
+        //get transform location from mouse click
+        //return to inventory
+    }
+
     void Update()
     {
+        //check to see if you even have the flu shot in your inventory; if so, display it
+        if (Globals.unlockedFluShotStation)
+        {
+            fluShotBtn.gameObject.SetActive(true);
+        }
+        else
+        {
+            fluShotBtn.gameObject.SetActive(false);
+        }
+
+        
+
+
+
         drugAtext.text = Globals.Ventolin.name + ": " + Globals.Ventolin.amount.ToString() + " Units";
         drugBtext.text = Globals.Vyvanse.name + ": " + Globals.Vyvanse.amount.ToString() + " Units";
         drugCtext.text = Globals.Lyrica.name + ": " + Globals.Lyrica.amount.ToString() + " Units";

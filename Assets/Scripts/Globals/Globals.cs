@@ -1,7 +1,7 @@
 ﻿/* 
- * Most Recent Author: Ross Burnworth
- * Version 1.3.2
- * Date: 2/04/2019
+ * Most Recent Author: Dylan Cyphers
+ * Version 1.3.3
+ * Date: 2/24/2019
  * Description: Game Controller script to handle flags and data used across the entire game. Allows for scene-to-scene communication.
  * 
  */
@@ -65,9 +65,11 @@ public static class Globals
     public static Drug Lyrica = new Drug(10, 0, "Lyrica");
 
 
+    public static bool inEditMode = true; //TESTING PLACEMENT
+
     //Flags for unlocked materials from expansions
     public static bool unlockedB = false;
-    public static bool unlockedFluShotStation = false;
+    public static bool unlockedFluShotStation = true; //TESTING PLACEMENT
     public static bool unlockedVaccineStation = false;
     public static bool unlockedC = false;
     public static int employeeCap = 1;
