@@ -20,8 +20,42 @@ public class DisplayInventory : MonoBehaviour {
     public Text employeeBtext;
     public Text employeeCtext;
 
+    public Button fluShotBtn;
+
+    void Start()
+    {
+        //Globals.unlockedFluShotStation = true;
+        if (Globals.unlockedFluShotStation)
+        {
+
+            fluShotBtn.onClick.AddListener(PlaceFluShot);
+        }
+    }
+
+    public void PlaceFluShot()
+    {
+        //prepare edit mode
+        Globals.inEditMode = true;
+        //scene change to storefront
+        SceneChanger.invToStorefront();
+
+        //get transform location from mouse click
+        //return to inventory
+    }
+
     void Update()
     {
+
+        //check to see if you even have the flu shot in your inventory; if so, display it
+        if (Globals.unlockedFluShotStation)
+        {
+            fluShotBtn.gameObject.SetActive(true);
+        }
+        else
+        {
+            fluShotBtn.gameObject.SetActive(false);
+        }
+
         drugAtext.text = Globals.medicationA + ": " + Globals.drugA.ToString() + " Units";
         drugBtext.text = Globals.medicationB + ": " + Globals.drugB.ToString() + " Units";
         drugCtext.text = Globals.medicationC + ": " + Globals.drugC.ToString() + " Units";

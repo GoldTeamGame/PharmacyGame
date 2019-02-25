@@ -54,7 +54,20 @@ public class SceneChanger : MonoBehaviour
         SceneManager.UnloadSceneAsync(currentScene); // unload currentScene
         
         //hideShow.gameObject.SetActive(true); // re-activate hide/show button
-
         back.gameObject.SetActive(false); // de-activate backToStorefront button
+    }
+
+    //called when placing an item from the inventory into the storefront
+    public static void invToStorefront()
+    {
+        isAtStorefront = true;
+        CustomerScreen.isAtCustomerScene = false;
+        CustomerScreen.currentCustomer = -1;
+
+        SceneManager.UnloadSceneAsync("Inventory"); // unload currentScene
+
+        //hideShow.gameObject.SetActive(true); // re-activate hide/show button
+
+        //back.gameObject.SetActive(false); // de-activate backToStorefront button
     }
 }
