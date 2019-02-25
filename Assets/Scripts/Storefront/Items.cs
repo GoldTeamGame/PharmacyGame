@@ -5,7 +5,7 @@
 // Description: GameObject script for Item
 
 using UnityEngine;
-
+[System.Serializable]
 public class Items : MonoBehaviour
 {
     public StoreItems sd; // contains information about item
@@ -24,5 +24,9 @@ public class Items : MonoBehaviour
         // Save current coordinate position of item in itemData (for save/load purposes)
         sd.locationX = transform.position.x;
         sd.locationY = transform.position.y;
+        sd.rotationX = transform.rotation.x;
+        sd.rotationY = transform.rotation.y;
+        sd.rotationZ = transform.rotation.z;
+        sd.rotationW = transform.rotation.w;
     }
 }

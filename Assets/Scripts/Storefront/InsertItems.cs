@@ -36,25 +36,33 @@ public class InsertItems : MonoBehaviour
         for (int i = 0; i < numberOfItems; i++)
         {
             Vector3 v = new Vector3(Globals_Items.storeData[i].locationX, Globals_Items.storeData[i].locationY, 0);
-            instantiateObject(v);
+            Quaternion w = new Quaternion(Globals_Items.storeData[i].rotationX, Globals_Items.storeData[i].rotationY, Globals_Items.storeData[i].rotationZ, Globals_Items.storeData[i].rotationW);
+            instantiateObject(v, w);
         }
+        if(numberOfItems == 0)
+        {
         Spawn();
-        
+        }
 
     }
 
     // Spawn a new Item until the limit is reached
     private void Spawn()
     {
- 
-        instantiateObject(new Vector3(1, 2, 0));
-        instantiateObject(new Vector3(0, 2, 0));
-        instantiateObject(new Vector3(2, 2, 0));
+        //horizontal
+        instantiateObject(new Vector3(0, 2, 0), new Quaternion(0,0, 0,0));
+        instantiateObject(new Vector3(0.8f, 2, 0), new Quaternion(0,0,0,0));
+        instantiateObject(new Vector3(1.6f, 2, 0), new Quaternion(0, 0, 0, 0));
+        //vertical
+        instantiateObject(new Vector3(-1.3f, 1.2f, 0), new Quaternion(1, 1, 0, 0)); 
+        instantiateObject(new Vector3(-1.3f, 2f, 0), new Quaternion(1, 1, 0, 0));
+        instantiateObject(new Vector3(-1.3f, 2.8f, 0), new Quaternion(1, 1, 0, 0));
     }
-
-    private void instantiateObject(Vector3 position)
+                         
+   
+    private void instantiateObject(Vector3 position, Quaternion rotation)
     {
-        GameObject go = Instantiate(Item, position, spawnPoint.rotation); // spawn the item
+        GameObject go = Instantiate(Item, position, rotation); // spawn the item
         go.transform.parent = parent;
     }
 
@@ -77,6 +85,7 @@ public class InsertItems : MonoBehaviour
             sd = new StoreItems();
 
             sd.appearance = ap; // set appearance
+
 
 
 

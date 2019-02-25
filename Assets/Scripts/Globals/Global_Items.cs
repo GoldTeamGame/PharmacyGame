@@ -18,7 +18,7 @@ public static class Globals_Items
         return storeData;
     }
 
-    public static void setItemss(List<StoreItems> storeDatas, int number)
+    public static void setItems(List<StoreItems> storeDatas, int number)
     {
         storeData = storeDatas;
         currentNumberOfItems = number;

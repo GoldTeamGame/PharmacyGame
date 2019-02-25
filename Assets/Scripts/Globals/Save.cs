@@ -17,6 +17,7 @@ public class Save
     public int g;
     //public static int currentID;
     public List<CustomerData> cd;
+    public List<StoreItems> si;
 
     //public object shots { get; internal set; }
 }
