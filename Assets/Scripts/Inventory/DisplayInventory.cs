@@ -34,8 +34,11 @@ public class DisplayInventory : MonoBehaviour {
 
     public void PlaceFluShot()
     {
-        //scene change to storefront
+        //prepare edit mode
         Globals.inEditMode = true;
+        //scene change to storefront
+        SceneChanger.invToStorefront();
+
         //get transform location from mouse click
         //return to inventory
     }
