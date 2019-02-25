@@ -48,9 +48,11 @@ public static class Globals
     public static int wageC = 19;
     public static string nameC = "Ross";
 
+    public static bool inEditMode = false;
+
     //Flags for unlocked materials from expansions
     public static bool unlockedB = false;
-    public static bool unlockedFluShotStation = false;
+    public static bool unlockedFluShotStation = true; //TESTING
     public static bool unlockedVaccineStation = false;
     public static bool unlockedC = false;
     public static int employeeCap = 1;
