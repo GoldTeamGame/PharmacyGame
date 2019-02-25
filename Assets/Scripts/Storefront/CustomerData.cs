@@ -13,6 +13,8 @@ public class CustomerData
     public string thoughts; // what the customer is currently thinking about
     public string[] desires; // what a customer wants to buy
     public bool isAlive; // does the customer gameObject still exist?
+    public bool isBuying; // is the customer buying something
+    public bool isLeaving; // is the customer leaving the store
 
     public int appearance;
 
