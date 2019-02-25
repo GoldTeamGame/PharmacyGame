@@ -1,6 +1,6 @@
 ﻿// File: CustomerController
-// Version: 1.0.3
-// Last Updated: 2/11/19
+// Version: 1.0.4
+// Last Updated: 2/25/19
 // Authors: Alexander Jacks
 // Description: Tells customer when and where to move
 
@@ -9,17 +9,19 @@ using UnityEngine;
 public class CustomerController : MonoBehaviour
 {
     public float speed;
-    MoveSet ms;
-    Queue<int> moveQ; // 0 = right, 1 = left, 2 = up, 3 = down, 4 = upright, 5 = upleft, 6 = downright, 7 = downleft
-    int limit = 20; // "Desire Capacity"
-    int currentAmount = 0; // Number is increased each move. When currentAmmount reaches limit, reset currentAmount and remove a desire
-    bool isBuying;
-    bool isLeaving;
+    public MoveSet ms;
+    public Queue<int> moveQ; // 0 = right, 1 = left, 2 = up, 3 = down, 4 = upright, 5 = upleft, 6 = downright, 7 = downleft
+    public int limit = 20; // "Desire Capacity"
+    public int currentAmount = 0; // Number is increased each move. When currentAmmount reaches limit, reset currentAmount and remove a desire
+    public bool isBuying;
+    public bool isLeaving;
 
 	void Start ()
     {
         ms = new MoveSet(transform, speed);
         moveQ = new Queue<int>(100);
+        isBuying = GetComponent<Customer>().cd.isBuying;
+        isLeaving = GetComponent<Customer>().cd.isLeaving;
     }
 	
 	// Update is called once per frame
@@ -45,6 +47,8 @@ public class CustomerController : MonoBehaviour
             {
                 isLeaving = true;
                 isBuying = false;
+                GetComponent<Customer>().cd.isLeaving = true;
+                GetComponent<Customer>().cd.isBuying = false;
             }
         }
         else if (isLeaving)
@@ -104,7 +108,9 @@ public class CustomerController : MonoBehaviour
 
     void findExit()
     {
-        if (transform.localPosition.x > ProceduralGenerator.xSpawnPoint)
+        if (Mathf.Abs(transform.localPosition.x - ProceduralGenerator.xSpawnPoint) < 0.3f)
+            transform.localPosition = new Vector3(ProceduralGenerator.xSpawnPoint, transform.localPosition.y, 0);
+        else if (transform.localPosition.x > ProceduralGenerator.xSpawnPoint)
             moveQ.enqueue(1, 1);
         else if (transform.localPosition.x < ProceduralGenerator.xSpawnPoint)
             moveQ.enqueue(0, 1);
@@ -149,7 +155,10 @@ public class CustomerController : MonoBehaviour
 
             // Set isBuying to true when customer has picked up everything they want to purchase
             if (newDesires.Length == 0)
+            {
                 isBuying = true;
+                GetComponent<Customer>().cd.isBuying = true;
+            }
         }
     }
 
