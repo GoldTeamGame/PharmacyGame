@@ -13,7 +13,7 @@ public class Items : MonoBehaviour
     // Generate item Data
     private void Start()
     {
-        InsertItems.generate(ref sd); // pass variables to be handled by ProceduralGenerator
+        InsertItems.generate(ref sd, sd.appearance); // pass variables to be handled by ProceduralGenerator
         GetComponent<SpriteRenderer>().sprite = InsertItems.staticAppearanceList[sd.appearance]; // set item sprite
         transform.localScale = new Vector3(1.25f, 1.25f, 0); // set item sprite size (make it bigger)
     }

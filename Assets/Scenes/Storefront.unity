@@ -4934,7 +4934,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 190795716}
   appearanceList:
-  - {fileID: 21300000, guid: 406c90d8c3926fd48a102327efcd3482, type: 3}
   - {fileID: 21300000, guid: 93cf5f4b87434714bbb8390df4632a54, type: 3}
   - {fileID: 21300000, guid: 97ce01dbbd66a764e8b7949f0006d7f1, type: 3}
   Item: {fileID: 1471418978681758, guid: be0b4b95e6f04414295f8e877752918f, type: 2}

@@ -38,7 +38,7 @@ public class InsertItems : MonoBehaviour
             Vector3 v = new Vector3(Globals_Items.storeData[i].locationX, Globals_Items.storeData[i].locationY, 0);
             instantiateObject(v);
         }
-        InvokeRepeating("Spawn", 0, 5); // start the script and repeat it every spawnTime second
+        Spawn();
         
 
     }
@@ -46,8 +46,10 @@ public class InsertItems : MonoBehaviour
     // Spawn a new Item until the limit is reached
     private void Spawn()
     {
-        if (Globals_Items.storeData.Count < 10)
-            instantiateObject(spawnPoint.position);
+ 
+        instantiateObject(new Vector3(1, 2, 0));
+        instantiateObject(new Vector3(0, 2, 0));
+        instantiateObject(new Vector3(2, 2, 0));
     }
 
     private void instantiateObject(Vector3 position)
@@ -57,7 +59,7 @@ public class InsertItems : MonoBehaviour
     }
 
     // Generate Item data
-    public static void generate(ref StoreItems sd)
+    public static void generate(ref StoreItems sd, int ap)
     {
         // Set cd equal to the last element in ItemData
         // (This if-statement is for the sake of loading in Items that were saved in ItemData)
@@ -74,7 +76,7 @@ public class InsertItems : MonoBehaviour
 
             sd = new StoreItems();
 
-            sd.appearance = Random.Range(0, 2); // set appearance
+            sd.appearance = ap; // set appearance
 
 
 
