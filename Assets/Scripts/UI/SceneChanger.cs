@@ -1,7 +1,7 @@
 ﻿// File: SceneChanger
-// Version: 1.0.3
-// Last Updated: 2/6/19
-// Authors: Alexander Jacks
+// Version: 1.0.4
+// Last Updated: 2/24/19
+// Authors: Alexander Jacks, Dylan Cyphers
 // Description: Has button functions to change scenes
 
 using UnityEngine;
@@ -18,6 +18,7 @@ public class SceneChanger : MonoBehaviour
     // Change from currentScene to scene
     public void changeScene(string scene)
     {
+        Globals.inEditMode = false;
         // Disable hide/show button
         //hideShow.gameObject.SetActive(false);
 
@@ -58,8 +59,9 @@ public class SceneChanger : MonoBehaviour
     }
 
     //called when placing an item from the inventory into the storefront
-    public static void invToStorefront()
+    public void invToStorefront()
     {
+        Globals.inEditMode = true;
         isAtStorefront = true;
         CustomerScreen.isAtCustomerScene = false;
         CustomerScreen.currentCustomer = -1;
