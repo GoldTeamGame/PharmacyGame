@@ -13,6 +13,8 @@ using UnityEngine.UI;
 
 public class DisplayInventory : MonoBehaviour {
 
+    public Sprite[] items;
+    public static Sprite[] staticItems;
     public Text drugAtext;
     public Text drugBtext;
     public Text drugCtext;
@@ -22,29 +24,19 @@ public class DisplayInventory : MonoBehaviour {
 
     public Button fluShotBtn;
 
-    void Start()
+    public Sprite currSprite;
+
+    private void Start()
     {
-        //Globals.unlockedFluShotStation = true;
-        if (Globals.unlockedFluShotStation)
-        {
-
-            fluShotBtn.onClick.AddListener(PlaceFluShot);
-        }
-    }
-
-    public void PlaceFluShot()
-    {
-        //prepare edit mode
-        Globals.inEditMode = true;
-        //scene change to storefront
-        SceneChanger.invToStorefront();
-
-        //get transform location from mouse click
-        //return to inventory
+        staticItems = new Sprite[items.Length];
+        for (int i = 0; i < items.Length; i++)
+            staticItems[i] = items[i];
     }
 
     void Update()
     {
+
+        currSprite = staticItems[0]; //testing
 
         //check to see if you even have the flu shot in your inventory; if so, display it
         if (Globals.unlockedFluShotStation)
