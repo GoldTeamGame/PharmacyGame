@@ -50,13 +50,13 @@ public class InsertItems : MonoBehaviour
     private void Spawn()
     {
         //horizontal
-        instantiateObject(new Vector3(0, 2, 0), new Quaternion(0,0, 0,0));
-        instantiateObject(new Vector3(0.8f, 2, 0), new Quaternion(0,0,0,0));
-        instantiateObject(new Vector3(1.6f, 2, 0), new Quaternion(0, 0, 0, 0));
+        instantiateObject(new Vector3(0, 1.75f, 0), new Quaternion(0,0, 0,0));
+        instantiateObject(new Vector3(0.8f, 1.75f, 0), new Quaternion(0,0,0,0));
+        instantiateObject(new Vector3(1.6f, 1.75f, 0), new Quaternion(0, 0, 0, 0));
         //vertical
-        instantiateObject(new Vector3(-1.3f, 1.2f, 0), new Quaternion(1, 1, 0, 0)); 
-        instantiateObject(new Vector3(-1.3f, 2f, 0), new Quaternion(1, 1, 0, 0));
-        instantiateObject(new Vector3(-1.3f, 2.8f, 0), new Quaternion(1, 1, 0, 0));
+        instantiateObject(new Vector3(-1f, .9f, 0), new Quaternion(1, 1, 0, 0)); 
+        instantiateObject(new Vector3(-1f, 1.7f, 0), new Quaternion(1, 1, 0, 0));
+        instantiateObject(new Vector3(-1f, 2.5f, 0), new Quaternion(1, 1, 0, 0));
     }
                          
    

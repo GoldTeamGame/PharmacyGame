@@ -1,7 +1,7 @@
 ﻿/* 
  * Most Recent Author: Ross
- * Version 1.1
- * Date: 2/25/2019
+ * Version 1.0
+ * Date: 1/28/2019
  * Description: Save object class
  * 
  */
@@ -13,10 +13,11 @@ using UnityEngine;
 public class Save
 {
     public int p;
-    public int g;
 
+    public int g;
     //public static int currentID;
     public List<CustomerData> cd;
+    public List<StoreItems> si;
 
     //public object shots { get; internal set; }
 }

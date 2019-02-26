@@ -87,6 +87,7 @@ public class Game : MonoBehaviour
             Globals.setGold(save.g);
             Globals.setPlatinum(save.p);
             Globals_Customer.setCustomers(save.cd, save.cd.Count);
+            Globals_Items.setItems(save.si, save.si.Count);
             Debug.Log("Game Loaded");
             Unpause();
         }
@@ -105,6 +106,7 @@ public class Game : MonoBehaviour
         save.g = Globals.getGold();
         save.p = Globals.getPlatinum();
         save.cd = Globals_Customer.GetCustomers();
+        save.si = Globals_Items.GetItems();
 
         //return the object to write to the file
         return save;
