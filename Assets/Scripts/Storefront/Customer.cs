@@ -17,7 +17,6 @@ public class Customer : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = ProceduralGenerator.staticAppearanceList[cd.appearance]; // set customer sprite
         transform.localScale = new Vector3(2.25f, 2.25f, 0); // set customer sprite size (make it bigger)
         GetComponent<CustomerController>().speed = cd.speed; // set CustomerController speed
-        Debug.Log(cd.isBuying + " " + cd.isLeaving);
     }
 
     // Dictates a customer's actions

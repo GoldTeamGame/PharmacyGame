@@ -18,7 +18,8 @@ public class CustomerController : MonoBehaviour
 
 	void Start ()
     {
-        ms = new MoveSet(transform, speed);
+        // Instantiate MoveSet using info saved in CustomerData
+        ms = new MoveSet(transform, speed, GetComponent<Customer>().cd.isMoving, GetComponent<Customer>().cd.destLocationX, GetComponent<Customer>().cd.destLocationY);
         moveQ = new Queue<int>(100);
         isBuying = GetComponent<Customer>().cd.isBuying;
         isLeaving = GetComponent<Customer>().cd.isLeaving;
@@ -31,6 +32,11 @@ public class CustomerController : MonoBehaviour
         {
             think();
             ms.setMove(moveQ.peek(), ref moveQ);
+
+            // Save moveLocation and isMoving state into CustomerData
+            gameObject.GetComponent<Customer>().cd.destLocationX = ms.moveLocation.x;
+            gameObject.GetComponent<Customer>().cd.destLocationY = ms.moveLocation.y;
+            gameObject.GetComponent<Customer>().cd.isMoving = ms.isMoving;
         }
         else
             ms.move();
@@ -49,6 +55,7 @@ public class CustomerController : MonoBehaviour
                 isBuying = false;
                 GetComponent<Customer>().cd.isLeaving = true;
                 GetComponent<Customer>().cd.isBuying = false;
+                Globals.setGold(Globals.getGold() + Random.Range(1, 3));
             }
         }
         else if (isLeaving)
