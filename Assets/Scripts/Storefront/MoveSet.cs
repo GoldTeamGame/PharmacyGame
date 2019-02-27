@@ -15,7 +15,7 @@ public class MoveSet
     Tilemap tilemap; // the area the customer can explore
     Transform transform; // the current location of the customer
     public int isMoving; // number that changes depending on the direction customer is moving
-    Vector3 moveLocation; // the location of the next place the customer will move
+    public Vector3 moveLocation; // the location of the next place the customer will move
     float speed; // the speed that a customer moves at
 
     // TODO: Add obsticals into isFilled array
@@ -23,9 +23,10 @@ public class MoveSet
     int yLocation;
     bool[][] isFilled;
     
-    public MoveSet(Transform transform, float speed)
+    public MoveSet(Transform transform, float speed, int isMoving, float xDest, float yDest)
     {
-        isMoving = -1; // set to stationary state
+        this.isMoving = isMoving; // set saved isMoving state
+        moveLocation = new Vector3(xDest, yDest, 0); // Set previous moveLocation
 
         // Set variables
         tilemap = TilemapReference.staticTilemap;

@@ -21,6 +21,10 @@ public class CustomerData
     public float locationX; // x-coordinate
     public float locationY; // y-coordinate
 
+    public int isMoving = -1; // the customers current movement state
+    public float destLocationX = 0; // x-coordinate customer is moving to
+    public float destLocationY = 0; // y-coordinate customer is moving to
+
     public CustomerData(string name, float speed)
     {
         this.name = name;
