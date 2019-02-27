@@ -41,7 +41,7 @@ public class InsertItems : MonoBehaviour
         }
         if(numberOfItems == 0)
         {
-        Spawn();
+            Spawn();
         }
 
     }
@@ -64,7 +64,7 @@ public class InsertItems : MonoBehaviour
     {
         GameObject go = Instantiate(Item, position, rotation); // spawn the item 
         go.transform.parent = parent;
-
+        go.transform.localPosition = position;
     }
 
     // Generate Item data
