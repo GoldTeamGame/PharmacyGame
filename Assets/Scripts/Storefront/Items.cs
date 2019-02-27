@@ -15,15 +15,15 @@ public class Items : MonoBehaviour
     {
         InsertItems.generate(ref sd, sd.appearance); // pass variables to be handled by ProceduralGenerator
         GetComponent<SpriteRenderer>().sprite = InsertItems.staticAppearanceList[sd.appearance]; // set item sprite
-        transform.localScale = new Vector3(.75f, .75f, 0); // set item sprite size (make it bigger)
+        transform.localScale = new Vector3(1f, 1f, 0); // set item sprite size (make it bigger)
     }
 
     // Dictates a item's actions
     private void Update()
     {
         // Save current coordinate position of item in itemData (for save/load purposes)
-        sd.locationX = transform.position.x;
-        sd.locationY = transform.position.y;
+        sd.locationX = transform.localPosition.x;
+        sd.locationY = transform.localPosition.y;
         sd.rotationX = transform.rotation.x;
         sd.rotationY = transform.rotation.y;
         sd.rotationZ = transform.rotation.z;

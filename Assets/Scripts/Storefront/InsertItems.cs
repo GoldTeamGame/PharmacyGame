@@ -41,7 +41,7 @@ public class InsertItems : MonoBehaviour
         }
         if(numberOfItems == 0)
         {
-        Spawn();
+            Spawn();
         }
 
     }
@@ -50,20 +50,21 @@ public class InsertItems : MonoBehaviour
     private void Spawn()
     {
         //horizontal
-        instantiateObject(new Vector3(0, 1.75f, 0), new Quaternion(0,0, 0,0));
-        instantiateObject(new Vector3(0.8f, 1.75f, 0), new Quaternion(0,0,0,0));
-        instantiateObject(new Vector3(1.6f, 1.75f, 0), new Quaternion(0, 0, 0, 0));
+        instantiateObject(new Vector3(0, 1.5f, 0), new Quaternion(0,0, 0,0));
+        instantiateObject(new Vector3(1, 1.5f, 0), new Quaternion(0,0,0,0));
+        instantiateObject(new Vector3(2, 1.5f, 0), new Quaternion(0, 0, 0, 0));
         //vertical
-        instantiateObject(new Vector3(-1f, .9f, 0), new Quaternion(1, 1, 0, 0)); 
-        instantiateObject(new Vector3(-1f, 1.7f, 0), new Quaternion(1, 1, 0, 0));
-        instantiateObject(new Vector3(-1f, 2.5f, 0), new Quaternion(1, 1, 0, 0));
+        instantiateObject(new Vector3(-1, 1, 0), new Quaternion(1, 1, 0, 0)); 
+        instantiateObject(new Vector3(-1, 2, 0), new Quaternion(1, 1, 0, 0));
+        instantiateObject(new Vector3(-1, 3, 0), new Quaternion(1, 1, 0, 0));
     }
                          
    
     private void instantiateObject(Vector3 position, Quaternion rotation)
     {
-        GameObject go = Instantiate(Item, position, rotation); // spawn the item
+        GameObject go = Instantiate(Item, position, rotation); // spawn the item 
         go.transform.parent = parent;
+        go.transform.localPosition = position;
     }
 
     // Generate Item data
