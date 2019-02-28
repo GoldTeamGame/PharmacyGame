@@ -66,6 +66,12 @@ public class MoveSet
             moveLocation = new Vector3(transform.localPosition.x + numberOfMoves * Mathf.RoundToInt(directionX[isMoving]),
             transform.localPosition.y + numberOfMoves * Mathf.RoundToInt(directionY[isMoving]), 0);
         }
+
+        if (cantMove())
+        {
+            isMoving = -1;
+            return;
+        }
     }
 
     // Moves gameObject to destination
@@ -89,5 +95,43 @@ public class MoveSet
     {
         return (moveLocation.x >= tilemap.cellBounds.xMin + 0.5f) && (moveLocation.x <= tilemap.cellBounds.xMax - 0.5f) && 
             (moveLocation.y <= tilemap.cellBounds.yMax) && (moveLocation.y >= tilemap.cellBounds.yMin + 0.5f);
+    }
+
+    // Check if there is an obstacle in the path
+    // If there is, limit move to before obstical
+    // Or change direction if there is no path
+    bool cantMove()
+    {
+        // transform.localposition = P
+        // x = obsticals array
+        // M = moveLocation
+        // t = 
+
+        if (Obsticals.isObstical(moveLocation.x, moveLocation.y))
+            return true;
+
+        float numberOfMoves = 0;
+
+        // Set tracker to player location
+        Vector3 tracker = new Vector3(transform.localPosition.x + numberOfMoves * Mathf.RoundToInt(directionX[isMoving]),
+            transform.localPosition.y + numberOfMoves * Mathf.RoundToInt(directionY[isMoving]), 0);
+
+        while (!tracker.Equals(moveLocation))
+        {
+            numberOfMoves += 0.5f;
+
+            if (!Obsticals.isObstical(transform.localPosition.x + numberOfMoves * Mathf.RoundToInt(directionX[isMoving]), transform.localPosition.y + numberOfMoves * Mathf.RoundToInt(directionY[isMoving])))
+            {
+                tracker = new Vector3(transform.localPosition.x + numberOfMoves * Mathf.RoundToInt(directionX[isMoving]),
+                    transform.localPosition.y + numberOfMoves * Mathf.RoundToInt(directionY[isMoving]), 0);
+            }
+            else
+            {
+                moveLocation = tracker;
+                break;
+            }
+        }
+
+        return tracker.Equals(transform.localPosition);
     }
 }

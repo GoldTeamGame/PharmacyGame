@@ -46,9 +46,11 @@ public class CustomerController : MonoBehaviour
     {
         if (isBuying)
         {
+            // Locate path to counter after finishing cuurent moves
             if (moveQ.isEmpty())
-                findCounter();
+                aStar(0.5f, -0.5f);
 
+            // Change states once counter is reached
             if (moveQ.isEmpty())
             {
                 isLeaving = true;
@@ -60,7 +62,7 @@ public class CustomerController : MonoBehaviour
         }
         else if (isLeaving)
         {
-            findExit();
+            aStar(-1.5f, 6f);
 
             if (moveQ.isEmpty())
                 removeCustomer();
@@ -80,37 +82,40 @@ public class CustomerController : MonoBehaviour
 
     void findCounter()
     {
-        float xPath;
-        float yPath;
+        //float xPath;
+        //float yPath;
 
-        float xDest = 0.5f;
-        float yDest = -0.5f;
+        //float xDest = 0.5f;
+        //float yDest = -0.5f;
 
-        float xCurrent = transform.localPosition.x;
-        float yCurrent = transform.localPosition.y;
+        //float xCurrent = transform.localPosition.x;
+        //float yCurrent = transform.localPosition.y;
 
-        xPath = (xDest - xCurrent) / .5f;
-        yPath = (yDest - yCurrent) / .5f;
+        //xPath = (xDest - xCurrent) / .5f;
+        //yPath = (yDest - yCurrent) / .5f;
 
-        // EX: xPath = 5 & yPath = -13
-        float diagonal = Mathf.Min(Mathf.Abs(xPath), Mathf.Abs(yPath));
+        //// EX: xPath = 5 & yPath = -13
+        //float diagonal = Mathf.Min(Mathf.Abs(xPath), Mathf.Abs(yPath));
 
-        if (xPath > 0)
-            moveQ.enqueue(6, (int) diagonal);
-        else
-            moveQ.enqueue(7, (int) diagonal);
+        //if (xPath > 0)
+        //    moveQ.enqueue(6, (int) diagonal);
+        //else
+        //    moveQ.enqueue(7, (int) diagonal);
 
-        float remaining = Mathf.Abs(Mathf.Abs(xPath) - Mathf.Abs(yPath));
+        //float remaining = Mathf.Abs(Mathf.Abs(xPath) - Mathf.Abs(yPath));
 
-        if (Mathf.Abs(xPath) > Mathf.Abs(yPath))
-        {
-            if (xPath > 0)
-                moveQ.enqueue(0, (int) remaining);
-            else
-                moveQ.enqueue(1, (int) remaining);
-        }
-        else
-            moveQ.enqueue(3, (int) remaining);
+        //if (Mathf.Abs(xPath) > Mathf.Abs(yPath))
+        //{
+        //    if (xPath > 0)
+        //        moveQ.enqueue(0, (int) remaining);
+        //    else
+        //        moveQ.enqueue(1, (int) remaining);
+        //}
+        //else
+        //    moveQ.enqueue(3, (int) remaining);
+
+        //Debug.Log("Going to Buy");
+        aStar(0.5f, -0.5f);
     }
 
     void findExit()
@@ -122,6 +127,68 @@ public class CustomerController : MonoBehaviour
         else if (transform.localPosition.x < ProceduralGenerator.xSpawnPoint)
             moveQ.enqueue(0, 1);
 
+    }
+
+    // Customer will find its way to [x, y]
+    public void aStar(float x, float y)
+    {
+        PriorityQueue pq = new PriorityQueue(1000);
+
+        float currentX = transform.localPosition.x;
+        float currentY = transform.localPosition.y;
+        Move currentMove = new Move(currentX, currentY, findDistance(currentX, currentY, x, y), 0, null);
+
+        // Keep searching for path until destination is found
+        while(currentMove.x != x || currentMove.y != y)
+        {
+            // 0 = right, 1 = left, 2 = up, 3 = down, 4 = upright, 5 = upleft, 6 = downright, 7 = downleft
+            pq.enqueue(new Move(currentX + 0.5f, currentY,        findDistance(currentX + 0.5f, currentY,        x, y), 0, currentMove)); // right
+            pq.enqueue(new Move(currentX + 0.5f, currentY + 0.5f, findDistance(currentX + 0.5f, currentY + 0.5f, x, y), 4, currentMove)); // upright
+            pq.enqueue(new Move(currentX + 0.5f, currentY - 0.5f, findDistance(currentX + 0.5f, currentY - 0.5f, x, y), 6, currentMove)); // downright
+            pq.enqueue(new Move(currentX,        currentY + 0.5f, findDistance(currentX,        currentY + 0.5f, x, y), 2, currentMove)); // up
+            pq.enqueue(new Move(currentX - 0.5f, currentY + 0.5f, findDistance(currentX - 0.5f, currentY + 0.5f, x, y), 5, currentMove)); // upleft
+            pq.enqueue(new Move(currentX,        currentY - 0.5f, findDistance(currentX,        currentY - 0.5f, x, y), 3, currentMove)); // down
+            pq.enqueue(new Move(currentX - 0.5f, currentY,        findDistance(currentX - 0.5f, currentY,        x, y), 1, currentMove)); // left
+            pq.enqueue(new Move(currentX - 0.5f, currentY - 0.5f, findDistance(currentX - 0.5f, currentY - 0.5f, x, y), 7, currentMove)); // downleft
+
+            currentMove = pq.peekAndDequeue();
+            currentX = currentMove.x;
+            currentY = currentMove.y;
+        }
+
+        //currentMove.displayMoves();
+        addMoves(currentMove);
+        //Debug.Break();
+    }
+
+    private void addMoves(Move move)
+    {
+        Stack<Move> moves = new Stack<Move>(100);
+        while(move.previousMove != null)
+        {
+            moves.push(move);
+            move = move.previousMove;
+        }
+
+        int length = moves.size;
+        for (int i = 0; i < length; i++)
+        {
+            moveQ.enqueue(moves.peekAndPop().direction);
+        }
+
+    }
+
+    private float findDistance(float x1, float y1, float x2, float y2)
+    {
+        int row = Obsticals.findY(y1);
+        int column = Obsticals.findX(x1);
+
+        if (row < 0 || column < 0 || row > 13 || column > 14)
+            return 1000; // return large number if move is out of range
+        else if (!Obsticals.isObstical(row, column))
+            return Mathf.Sqrt(Mathf.Pow(x2 - x1, 2) + Mathf.Pow(y2 - y1, 2)); // return distance between points
+        else
+            return 1000; // return large number if move is an obstical
     }
 
     void updateDesire()
