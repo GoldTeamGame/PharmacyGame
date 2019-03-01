@@ -1673,6 +1673,7 @@ GameObject:
   m_Component:
   - component: {fileID: 670421613}
   - component: {fileID: 670421612}
+  - component: {fileID: 670421614}
   m_Layer: 0
   m_Name: ItemManager
   m_TagString: Untagged
@@ -1694,7 +1695,6 @@ MonoBehaviour:
   parent: {fileID: 597789906}
   appearanceList:
   - {fileID: 21300000, guid: 93cf5f4b87434714bbb8390df4632a54, type: 3}
-  Item: {fileID: 1471418978681758, guid: be0b4b95e6f04414295f8e877752918f, type: 2}
   spawnPoint: {fileID: 1048913997}
   sprite: {fileID: 0}
 --- !u!4 &670421613
@@ -1710,6 +1710,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &670421614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 670421611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0da3e648f1023e4a8fbeed588272516, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 597789906}
+  item:
+  - {fileID: 1213580808870044, guid: e6f0736a780374f4fb693775e422a29c, type: 2}
 --- !u!1 &694203037
 GameObject:
   m_ObjectHideFlags: 0
@@ -2769,6 +2783,7 @@ GameObject:
   - component: {fileID: 829439699}
   - component: {fileID: 829439698}
   - component: {fileID: 829439697}
+  - component: {fileID: 829439700}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2860,6 +2875,17 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 10
   m_TargetDisplay: 0
+--- !u!114 &829439700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 829439695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c416b4fd4bfe11449a31bce45ab43491, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &941770011
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ public class InsertItems : MonoBehaviour
     public Transform parent;
     public Sprite[] appearanceList; // contains sprites passed in from unity editor
     public static Sprite[] staticAppearanceList; // Static version of appearanceList which can be used in static functions
-    public GameObject Item; // object being spawned
+    //public GameObject Item; // object being spawned
     public Transform spawnPoint; // location the object will be spawned at
     public SpriteRenderer sprite; // the sprite that represents the Item (will be overwritten)
     public static float xSpawnPoint; // the x-coordinate of the spawn point
@@ -37,32 +37,27 @@ public class InsertItems : MonoBehaviour
         {
             Vector3 v = new Vector3(Globals_Items.storeData[i].locationX, Globals_Items.storeData[i].locationY, 0);
             Quaternion w = new Quaternion(Globals_Items.storeData[i].rotationX, Globals_Items.storeData[i].rotationY, Globals_Items.storeData[i].rotationZ, Globals_Items.storeData[i].rotationW);
-            instantiateObject(v, w);
+            //instantiateObject(v, w);
         }
-        if(numberOfItems == 0)
-        {
-            Spawn();
-        }
-
     }
 
     // Spawn a new Item until the limit is reached
-    private void Spawn()
-    {
-        //horizontal
-        //instantiateObject(new Vector3(0, 1.5f, 0), new Quaternion(0,0, 0,0));
-        instantiateObject(new Vector3(1, 1.5f, 0), new Quaternion(0,0,0,0));
-        instantiateObject(new Vector3(2, 1.5f, 0), new Quaternion(0, 0, 0, 0));
-        //vertical
-        instantiateObject(new Vector3(-1, 1, 0), new Quaternion(1, 1, 0, 0)); 
-        instantiateObject(new Vector3(-1, 2, 0), new Quaternion(1, 1, 0, 0));
-        instantiateObject(new Vector3(-1, 3, 0), new Quaternion(1, 1, 0, 0));
-    }
+    //private void Spawn()
+    //{
+    //    //horizontal
+    //    //instantiateObject(new Vector3(0, 1.5f, 0), new Quaternion(0,0, 0,0));
+    //    instantiateObject(new Vector3(1, 1.5f, 0), new Quaternion(0,0,0,0));
+    //    //instantiateObject(new Vector3(2, 1.5f, 0), new Quaternion(0, 0, 0, 0));
+    //    //vertical
+    //    //instantiateObject(new Vector3(-1, 1, 0), new Quaternion(1, 1, 0, 0)); 
+    //    //instantiateObject(new Vector3(-1, 2, 0), new Quaternion(1, 1, 0, 0));
+    //    //instantiateObject(new Vector3(-1, 3, 0), new Quaternion(1, 1, 0, 0));
+    //}
                          
    
-    private void instantiateObject(Vector3 position, Quaternion rotation)
+    public static void instantiateObject(GameObject item, Transform parent, Vector3 position, Quaternion rotation)
     {
-        GameObject go = Instantiate(Item, position, rotation); // spawn the item 
+        GameObject go = Instantiate(item, position, rotation); // spawn the item 
         go.transform.parent = parent;
         go.transform.localPosition = position;
     }

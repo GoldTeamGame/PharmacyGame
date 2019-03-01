@@ -10,6 +10,7 @@ using System.Collections.Generic;
 [System.Serializable]
 public class StoreItems
 {
+    public string name;
     public int appearance;
 
     public float locationX; // x-coordinate

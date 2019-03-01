@@ -10,8 +10,7 @@ public static class Globals_Items
 {
     public static int numberOfItems = 0;
     public static int currentNumberOfItems;
-    public static List<StoreItems> storeData; // holds the customer's data (customer attributes)
-
+    public static List<StoreItems> storeData; // holds the item data (item attributes)
 
     public static List<StoreItems> GetItems()
     {
