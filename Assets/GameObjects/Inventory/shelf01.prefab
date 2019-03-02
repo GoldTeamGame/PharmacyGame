@@ -73,8 +73,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 072261e6c6bcac94f9b414f5c4a78b27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 2
-  height: 3
+  width: 3
+  height: 2
   rowOffset: -1
   columnOffset: -1
 --- !u!212 &212946935224783870

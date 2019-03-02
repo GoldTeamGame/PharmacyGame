@@ -1,24 +1,28 @@
 ﻿// File: Obsticals
-// Version: 1.0.2
-// Last Updated: 2/28/19
+// Version: 1.0.3
+// Last Updated: 3/2/19
 // Authors: Alexander Jacks
 // Description: Stores all objects in storefront in a bool array. Allows customers to "see" obsticals and avoid them.
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
-public class Obsticals : MonoBehaviour {
-
+public class Obsticals : MonoBehaviour
+{
+    public Tilemap tilemap;
     public static bool[][] obstical;
+    public static int numberOfRows;
+    public static int numberOfColumns;
 
     // Use this for initialization
     void Start ()
     {
-        obstical = new bool[14][];
+        // 15 x 14
+        obstical = new bool[tilemap.cellBounds.size.y * 2][];
         for (int i = 0; i < obstical.Length; i++)
-            obstical[i] = new bool[15];
+            obstical[i] = new bool[tilemap.cellBounds.size.x * 2 - 1];
 
+        Debug.Log(obstical[0].Length + " " + obstical.Length);
         //addObstical(1f, 1.5f, 3, 2, -1, -1);
         
     }
@@ -30,11 +34,16 @@ public class Obsticals : MonoBehaviour {
     public static void addObstical(float x, float y, int width, int height, int rowOffset, int columnOffset)
     {
         // Convert x and y to obstical array locations
-        int row = findY(y) + rowOffset;
-        int column = findX(x) + columnOffset;
+        int row = yToRow(y) + rowOffset;
+        int column = xToColumn(x) + columnOffset;
 
         int heightLocation = row + height;
         int widthLocation = column + width;
+
+        if (row < 0)
+            row = 0;
+        if (column < 0)
+            column = 0;
 
         for (int i = row; i < heightLocation && i < obstical.Length; i++)
         {
@@ -44,14 +53,14 @@ public class Obsticals : MonoBehaviour {
         }
     }
 
-    public static bool isObstical(float locationX, float locationY)
+    public static bool isObstical(float x, float y)
     {
-        int x = findX(locationX);
-        int y = findY(locationY);
+        int column = xToColumn(x);
+        int row = yToRow(y);
 
         //Debug.Log("Location: " + locationY + " " + locationX);
         //Debug.Log("Array: " + y + " " + x);
-        return obstical[y][x];
+        return obstical[row][column];
     }
 
     public static bool isObstical(int row, int column)
@@ -59,12 +68,12 @@ public class Obsticals : MonoBehaviour {
         return obstical[row][column];
     }
 
-    public static int findX(float locationX)
+    public static int xToColumn(float locationX)
     {
         return Mathf.Abs((int)((locationX + 3.5) / 0.5));
     }
 
-    public static int findY(float locationY)
+    public static int yToRow(float locationY)
     {
         return Mathf.Abs((int)((locationY - 6) / 0.5));
     }
@@ -76,6 +85,6 @@ public class Obsticals : MonoBehaviour {
         for (int i = 0; i < obstical.Length; i++)
             Debug.Log(i + ": " + obstical[i][0] + " " + obstical[i][1] + " " + obstical[i][2] + " " + obstical[i][3] + " " + obstical[i][4]
                  + " " + obstical[i][5] + " " + obstical[i][6] + " " + obstical[i][7] + " " + obstical[i][8] + " " + obstical[i][9]
-                  + " " + obstical[i][10] + " " + obstical[i][11] + " " + obstical[i][12] + " " + obstical[i][13]);
+                  + " " + obstical[i][10] + " " + obstical[i][11] + " " + obstical[i][12] + " " + obstical[i][13] + " " + obstical[i][14]);
     }
 }

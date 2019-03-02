@@ -122,8 +122,8 @@ public class CustomerController : MonoBehaviour
         // Set first move
         float currentX = transform.localPosition.x; // x-coordinate of customers current location
         float currentY = transform.localPosition.y; // y-coordinate of customers current location
-        int row = Obsticals.findY(currentY); // convert y to row value
-        int column = Obsticals.findX(currentX); // convert x to column value
+        int row = Obsticals.yToRow(currentY); // convert y to row value
+        int column = Obsticals.xToColumn(currentX); // convert x to column value
         Move currentMove = new Move(currentX, currentY, 0, findDistance(currentX, currentY, x, y, row, column), 0, null);
 
         // Keep searching for path until destination is found
@@ -158,8 +158,8 @@ public class CustomerController : MonoBehaviour
 
         // Obtain row and column values
         // (translate coordinate positions to array positions)
-        int row = Obsticals.findY(y);
-        int column = Obsticals.findX(x);
+        int row = Obsticals.yToRow(y);
+        int column = Obsticals.xToColumn(x);
 
         // Check is move is within the bounds of the tilemap
         if (isInBounds(row, column))

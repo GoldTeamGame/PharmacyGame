@@ -1,6 +1,6 @@
 ﻿// File: CoordinateTracker
-// Version: 1.0.1
-// Last Updated: 2/28/19
+// Version: 1.0.2
+// Last Updated: 3/1/19
 // Authors: Alexander Jacks
 // Description: Figures out where mouse/finger click/tap occured on the tilemap (place script on tilemap)
 

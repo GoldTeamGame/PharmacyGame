@@ -1,7 +1,7 @@
 ﻿// File: InsertItems
-// Version: 1.0
-// Last Updated: 2/21/19
-// Authors: Ross Burnworth
+// Version: 1.0.6
+// Last Updated: 3/1/19
+// Authors: Ross Burnworth, Alexander Jacks
 // Description: Spawns items into game world
 
 using UnityEngine;
@@ -10,35 +10,30 @@ using System.Collections.Generic;
 public class InsertItems : MonoBehaviour
 {
     public Transform parent;
-    public Sprite[] appearanceList; // contains sprites passed in from unity editor
-    public static Sprite[] staticAppearanceList; // Static version of appearanceList which can be used in static functions
-    //public GameObject Item; // object being spawned
-    public Transform spawnPoint; // location the object will be spawned at
-    public SpriteRenderer sprite; // the sprite that represents the Item (will be overwritten)
-    public static float xSpawnPoint; // the x-coordinate of the spawn point
+    public GameObject[] itemList; // contains item prefabs passed in from unity editor
+    public static GameObject[] staticItemList; // Static version of itemList which can be used in static functions
 
     // Use this for initialization
     void Start()
     {
-        xSpawnPoint = spawnPoint.localPosition.x;
 
         // Instantiate ItemData list if none currently exists
         if (Globals_Items.storeData == null)
             Globals_Items.storeData = new List<StoreItems>();
 
         // Copy non-static appearanceList into staticAppearanceList
-        staticAppearanceList = new Sprite[appearanceList.Length];
-        for (int i = 0; i < appearanceList.Length; i++)
-            staticAppearanceList[i] = appearanceList[i];
+        staticItemList = new GameObject[itemList.Length];
+        for (int i = 0; i < itemList.Length; i++)
+            staticItemList[i] = itemList[i];
 
-        // Spawn all Items currently in ItemData into the game world
-        int numberOfItems = Globals_Items.storeData.Count;
-        for (int i = 0; i < numberOfItems; i++)
-        {
-            Vector3 v = new Vector3(Globals_Items.storeData[i].locationX, Globals_Items.storeData[i].locationY, 0);
-            Quaternion w = new Quaternion(Globals_Items.storeData[i].rotationX, Globals_Items.storeData[i].rotationY, Globals_Items.storeData[i].rotationZ, Globals_Items.storeData[i].rotationW);
-            //instantiateObject(v, w);
-        }
+        //    // Spawn all Items currently in ItemData into the game world
+        //    int numberOfItems = Globals_Items.storeData.Count;
+        //    for (int i = 0; i < numberOfItems; i++)
+        //    {
+        //        Vector3 v = new Vector3(Globals_Items.storeData[i].locationX, Globals_Items.storeData[i].locationY, 0);
+        //        Quaternion w = new Quaternion(Globals_Items.storeData[i].rotationX, Globals_Items.storeData[i].rotationY, Globals_Items.storeData[i].rotationZ, Globals_Items.storeData[i].rotationW);
+        //        //instantiateObject(v, w);
+        //    }
     }
 
     // Spawn a new Item until the limit is reached
@@ -53,13 +48,15 @@ public class InsertItems : MonoBehaviour
     //    //instantiateObject(new Vector3(-1, 2, 0), new Quaternion(1, 1, 0, 0));
     //    //instantiateObject(new Vector3(-1, 3, 0), new Quaternion(1, 1, 0, 0));
     //}
-                         
-   
-    public static void instantiateObject(GameObject item, Transform parent, Vector3 position, Quaternion rotation)
+
+
+    public static GameObject instantiateObject(GameObject item, Transform parent, Vector3 position, Quaternion rotation)
     {
         GameObject go = Instantiate(item, position, rotation); // spawn the item 
         go.transform.parent = parent;
         go.transform.localPosition = position;
+        go.transform.localScale = new Vector3(1f, 1f, 0);
+        return go;
     }
 
     // Generate Item data

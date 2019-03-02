@@ -14,6 +14,8 @@ public class SceneChanger : MonoBehaviour
     public static bool isAtStorefront = true; // True if focus is on storefront scene
     public Button back; // Button used to return to storefront scene
     //public Button hideShow; // Button used to hide menu interface
+    public GameObject mainPanel;
+    public GameObject inventoryPanel;
 
     // Change from currentScene to scene
     public void changeScene(string scene)
@@ -48,27 +50,34 @@ public class SceneChanger : MonoBehaviour
     // Return focus to storefront scene
     public void backToStorefront()
     {
-        isAtStorefront = true; // reset boolean to true
-        CustomerScreen.isAtCustomerScene = false;
-        CustomerScreen.currentCustomer = -1;
+        if (currentScene.Equals("Inventory"))
+        {
+            inventoryPanel.SetActive(false);
+            mainPanel.SetActive(true);
+            back.gameObject.SetActive(false);
+        }
+        else
+        {
+            isAtStorefront = true; // reset boolean to true
+            CustomerScreen.isAtCustomerScene = false;
+            CustomerScreen.currentCustomer = -1;
 
-        SceneManager.UnloadSceneAsync(currentScene); // unload currentScene
-        
-        //hideShow.gameObject.SetActive(true); // re-activate hide/show button
-        back.gameObject.SetActive(false); // de-activate backToStorefront button
+            SceneManager.UnloadSceneAsync(currentScene); // unload currentScene
+
+            //hideShow.gameObject.SetActive(true); // re-activate hide/show button
+            back.gameObject.SetActive(false); // de-activate backToStorefront button
+        }
     }
 
     //called when placing an item from the inventory into the storefront
     public void invToStorefront()
     {
-        Globals.inEditMode = true;
+        //Globals.inEditMode = true;
         isAtStorefront = true;
-        CustomerScreen.isAtCustomerScene = false;
-        CustomerScreen.currentCustomer = -1;
 
         SceneManager.UnloadSceneAsync("Inventory"); // unload currentScene
-
-        //hideShow.gameObject.SetActive(true); // re-activate hide/show button
+        mainPanel.gameObject.SetActive(false);
+        inventoryPanel.gameObject.SetActive(true);
 
         //back.gameObject.SetActive(false); // de-activate backToStorefront button
     }

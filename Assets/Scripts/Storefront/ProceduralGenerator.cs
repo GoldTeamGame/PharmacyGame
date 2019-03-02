@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 public class ProceduralGenerator : MonoBehaviour
 {
-    public Transform parent;
+    public Transform parent; // The container that the customer will be spawned into
     public Sprite[] appearanceList; // contains sprites passed in from unity editor
     public static Sprite[] staticAppearanceList; // Static version of appearanceList which can be used in static functions
     public GameObject customer; // object being spawned

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4703432088336552}
   - component: {fileID: 212182099666685742}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: flushot01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

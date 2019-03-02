@@ -376,6 +376,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 389883699}
+        m_MethodName: place
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1137710557247274, guid: dead97f02b136d649a12d4962f6f6cda,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 389883695}
         m_MethodName: invToStorefront
         m_Mode: 1
