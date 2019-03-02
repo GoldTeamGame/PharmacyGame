@@ -17,12 +17,17 @@ public class ItemPlacer : MonoBehaviour
     {
 	    if (isPlacing)
         {
-            Debug.Log(item[0].name);
-            Debug.Log("Placing");
-            InsertItems.instantiateObject(PlaceItem.staticItem, parent, new Vector3(1, 1.5f, 0), new Quaternion(1, 1, 0, 0));
-            Obsticals.addObstical(1, 1.5f, PlaceItem.staticItem.GetComponent<ItemData>().width, PlaceItem.staticItem.GetComponent<ItemData>().height, PlaceItem.staticItem.GetComponent<ItemData>().rowOffset, PlaceItem.staticItem.GetComponent<ItemData>().columnOffset);
-            Obsticals.displayAllObsticals();
-            isPlacing = false;
+            //Debug.Log(item[0].name);
+            //Debug.Log("Placing");
+            //Vector3 tile;
+            if (Input.GetMouseButtonDown(0))
+            {
+                Vector3 tile = CoordinateTracker.getMousePosition();
+                InsertItems.instantiateObject(PlaceItem.staticItem, parent, tile, new Quaternion(1, 1, 0, 0));
+                Obsticals.addObstical(tile.x, tile.y, PlaceItem.staticItem.GetComponent<ItemData>().width, PlaceItem.staticItem.GetComponent<ItemData>().height, PlaceItem.staticItem.GetComponent<ItemData>().rowOffset, PlaceItem.staticItem.GetComponent<ItemData>().columnOffset);
+                Obsticals.displayAllObsticals();
+            }
+            //isPlacing = false;
         }
 	}
 }

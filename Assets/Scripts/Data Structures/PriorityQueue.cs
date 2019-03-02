@@ -4,7 +4,9 @@
 // Authors: Alexander Jacks
 // Description: Queue that pushes items with higher goodness values to the front
 
-public class PriorityQueue
+using UnityEngine;
+
+public class PriorityQueue : MonoBehaviour
 {
     Move[] q; // holds elements
     public int size; // current size of queue
@@ -32,6 +34,11 @@ public class PriorityQueue
             size = i;
         }
 
+        if (size + 1 >= q.Length)
+        {
+            Debug.Log(displayAll());
+            Debug.Break();
+        }
         q[size++] = element;
 
         // Push newly added item up if it has a better (lower) goodness value

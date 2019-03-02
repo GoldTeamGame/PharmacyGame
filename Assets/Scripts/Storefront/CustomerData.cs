@@ -1,6 +1,6 @@
 ﻿// File: CustomerData
-// Version: 1.0.2
-// Last Updated: 2/6/19
+// Version: 1.0.3
+// Last Updated: 3/1/19
 // Authors: Alexander Jacks
 // Description: Contains all a customers information
 
@@ -15,6 +15,7 @@ public class CustomerData
     public bool isAlive; // does the customer gameObject still exist?
     public bool isBuying; // is the customer buying something
     public bool isLeaving; // is the customer leaving the store
+    public bool isFinding; // is the customer finding something
 
     public int appearance;
 

@@ -12,17 +12,20 @@ public class Move
 {
     public float x;
     public float y;
+    public float distanceTraveled;
     public float goodness;
     public int direction;
     public Move previousMove;
 
-    public Move(float x, float y, float goodness, int direction, Move previousMove)
+    public Move(float x, float y, float distanceTraveled, float goodness, int direction, Move previousMove)
     {
         this.x = x;
         this.y = y;
-        this.goodness = goodness;
+        this.distanceTraveled = distanceTraveled;
+        this.goodness = (goodness + distanceTraveled);
         this.direction = direction;
         this.previousMove = previousMove;
+        
     }
 
     public void displayMoves()
