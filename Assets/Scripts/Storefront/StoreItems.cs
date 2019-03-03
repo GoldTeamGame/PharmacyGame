@@ -1,11 +1,8 @@
 ﻿// File: StoreItems
-// Version: 1.0
-// Last Updated: 2/21/19
-// Authors: Ross Burnworth
+// Version: 1.0.2
+// Last Updated: 3/1/19
+// Authors: Ross Burnworth, Alexander Jacks
 // Description: Contains all a StoreItem information
-
-using UnityEngine;
-using System.Collections.Generic;
 
 [System.Serializable]
 public class StoreItems
@@ -15,19 +12,13 @@ public class StoreItems
 
     public float locationX; // x-coordinate
     public float locationY; // y-coordinate
-    public float rotationX;
-    public float rotationY;
     public float rotationZ;
-    public float rotationW;
 
-    public StoreItems( float locationX, float locationY, float rotateX, float rotateY,float rotateZ, float rotateW)
+    public StoreItems( float locationX, float locationY, float rotationZ)
     {
         this.locationX = locationX;
         this.locationY = locationY;
-        this.rotationX = rotateX;
-        this.rotationY = rotateY;
-        this.rotationZ = rotateZ;
-        this.rotationW = rotateW;
+        this.rotationZ = rotationZ;
 
     }
     public StoreItems()

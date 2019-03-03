@@ -29,7 +29,7 @@ public class ItemPlacer : MonoBehaviour
                 {
                     tile = mouse;
                     Destroy(current);
-                    current = InsertItems.instantiateObject(PlaceItem.staticItem, parent, tile, new Quaternion(0, 0, 0, 0));
+                    current = InsertItems.instantiateObject(PlaceItem.staticItem, parent, tile);
                     current.transform.eulerAngles = new Vector3(0, 0, state * -90);
                 }
             }
@@ -53,7 +53,7 @@ public class ItemPlacer : MonoBehaviour
             state++;
             if (state > 3)
                 state = 0;
-            current = InsertItems.instantiateObject(PlaceItem.staticItem, parent, current.transform.localPosition, new Quaternion(0, 0, 0, 0));
+            current = InsertItems.instantiateObject(PlaceItem.staticItem, parent, current.transform.localPosition);
             current.transform.eulerAngles = new Vector3(0, 0, state * -90);
         }
     }

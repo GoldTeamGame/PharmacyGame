@@ -24,9 +24,6 @@ public class Items : MonoBehaviour
         // Save current coordinate position of item in itemData (for save/load purposes)
         sd.locationX = transform.localPosition.x;
         sd.locationY = transform.localPosition.y;
-        sd.rotationX = transform.rotation.x;
-        sd.rotationY = transform.rotation.y;
         sd.rotationZ = transform.rotation.z;
-        sd.rotationW = transform.rotation.w;
     }
 }
