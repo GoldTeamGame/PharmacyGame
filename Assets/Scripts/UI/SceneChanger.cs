@@ -16,7 +16,17 @@ public class SceneChanger : MonoBehaviour
     //public Button hideShow; // Button used to hide menu interface
     public GameObject mainPanel;
     public GameObject inventoryPanel;
+    public static GameObject staticMainPanel;
+    public static GameObject staticInventoryPanel;
 
+    public void Start()
+    {
+        if (currentScene.Equals("Storefront"))
+        {
+            staticMainPanel = mainPanel;
+            staticInventoryPanel = inventoryPanel;
+        }
+    }
     // Change from currentScene to scene
     public void changeScene(string scene)
     {
@@ -50,12 +60,17 @@ public class SceneChanger : MonoBehaviour
     // Return focus to storefront scene
     public void backToStorefront()
     {
-        if (currentScene.Equals("Inventory"))
+        // Return from Inventory placement back to normal storefront
+        if (currentScene.Equals("Inventory") && ItemPlacer.isPlacing)
         {
-            inventoryPanel.SetActive(false);
-            mainPanel.SetActive(true);
+            ItemPlacer.isPlacing = false;
+            if (ItemPlacer.current != null)
+                ItemPlacer.delete();
+            staticInventoryPanel.SetActive(false);
+            staticMainPanel.SetActive(true);
             back.gameObject.SetActive(false);
         }
+        // Or unload a scene
         else
         {
             isAtStorefront = true; // reset boolean to true
@@ -73,12 +88,12 @@ public class SceneChanger : MonoBehaviour
     public void invToStorefront()
     {
         //Globals.inEditMode = true;
-        isAtStorefront = true;
+        isAtStorefront = true; 
+        SceneManager.UnloadSceneAsync("Inventory"); // unload inventory scene
+        ItemPlacer.state = 0;
 
-        SceneManager.UnloadSceneAsync("Inventory"); // unload currentScene
-        mainPanel.gameObject.SetActive(false);
-        inventoryPanel.gameObject.SetActive(true);
-
-        //back.gameObject.SetActive(false); // de-activate backToStorefront button
+        // Replace main bottom panel with the inventory placement panel
+        staticMainPanel.SetActive(false);
+        staticInventoryPanel.SetActive(true);
     }
 }

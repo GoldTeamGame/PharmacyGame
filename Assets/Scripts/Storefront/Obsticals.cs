@@ -22,7 +22,6 @@ public class Obsticals : MonoBehaviour
         for (int i = 0; i < obstical.Length; i++)
             obstical[i] = new bool[tilemap.cellBounds.size.x * 2 - 1];
 
-        Debug.Log(obstical[0].Length + " " + obstical.Length);
         //addObstical(1f, 1.5f, 3, 2, -1, -1);
         
     }
@@ -68,14 +67,41 @@ public class Obsticals : MonoBehaviour
         return obstical[row][column];
     }
 
+    // Converts x to a 2D array column index
+    // Returns -1 if coordinate is less than minimum value (-3.5)
     public static int xToColumn(float locationX)
     {
+        if (locationX < -3.5f)
+            return -1;
+
         return Mathf.Abs((int)((locationX + 3.5) / 0.5));
     }
 
+    // Converts y to a 2D array row index
+    // Returns -1 if coordinate is greater than maximum value (6)
     public static int yToRow(float locationY)
     {
+        if (locationY > 6)
+            return -1;
+
         return Mathf.Abs((int)((locationY - 6) / 0.5));
+    }
+
+    // Returns true if the row/column is within the bounds of the 2D array
+    // (2D array size is based on the tilemap size)
+    public static bool isInBounds(int row, int column)
+    {
+        return !(row < 0 || column < 0 || row > 13 || column > 14);
+    }
+
+    // Returns true if the row/column is within the bounds of the 2D array
+    // (2D array size is based on the tilemap size)
+    public static bool isInBounds(Vector3 coordinate)
+    {
+        int row = yToRow(coordinate.y);
+        int column = xToColumn(coordinate.x);
+
+        return !(row < 0 || column < 0 || row > 13 || column > 14);
     }
 
     // Show text visualization of obsticals in bool array

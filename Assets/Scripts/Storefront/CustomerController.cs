@@ -162,7 +162,7 @@ public class CustomerController : MonoBehaviour
         int column = Obsticals.xToColumn(x);
 
         // Check is move is within the bounds of the tilemap
-        if (isInBounds(row, column))
+        if (Obsticals.isInBounds(row, column))
         {
             // Prepare side/diagonal Distances
             // (Used for the A* heuristic. Diagonal travel is more costly than side travel)
@@ -216,13 +216,6 @@ public class CustomerController : MonoBehaviour
             return 1000; // return large number if obstical is found
         else
             return Mathf.Sqrt(Mathf.Pow(x2 - x1, 2) + Mathf.Pow(y2 - y1, 2)); // return distance between points
-    }
-
-    // Returns true if the row/column is within the bounds of the 2D array
-    // (2D array size is based on the tilemap size)
-    private bool isInBounds(int row, int column)
-    {
-        return !(row < 0 || column < 0 || row > 13 || column > 14);
     }
 
     // Handles a customers desires
