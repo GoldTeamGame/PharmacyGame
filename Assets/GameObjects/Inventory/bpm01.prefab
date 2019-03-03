@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4703432088336552}
   - component: {fileID: 212182099666685742}
   - component: {fileID: 114223482492054868}
-  - component: {fileID: 114857247418502892}
   m_Layer: 5
   m_Name: bpm01
   m_TagString: Untagged
@@ -35,7 +34,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1137710557247274}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -185.64, y: 479, z: 138}
   m_LocalScale: {x: 141.20209, y: 142.24751, z: 1.5296367}
   m_Children: []
@@ -53,30 +52,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69b455157bab242e5a5ed314bb78c271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sd:
+  s:
     name: 
-    appearance: 0
     locationX: 0
     locationY: 0
-    rotationX: 0
-    rotationY: 0
     rotationZ: 0
-    rotationW: 0
---- !u!114 &114857247418502892
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1137710557247274}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 072261e6c6bcac94f9b414f5c4a78b27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  width: 3
-  height: 2
-  rowOffset: -1
-  columnOffset: -1
+    width: 3
+    height: 2
+    rowOffset: -1
+    columnOffset: -1
 --- !u!212 &212182099666685742
 SpriteRenderer:
   m_ObjectHideFlags: 1

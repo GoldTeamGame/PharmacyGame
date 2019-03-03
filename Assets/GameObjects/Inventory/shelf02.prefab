@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4329673554415912}
   - component: {fileID: 212700118140817380}
   - component: {fileID: 114948660754724706}
-  - component: {fileID: 114024043393816592}
   m_Layer: 0
   m_Name: shelf02
   m_TagString: Untagged
@@ -42,26 +41,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114024043393816592
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1252037299120032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 072261e6c6bcac94f9b414f5c4a78b27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  width: 0100000003000000
-  height: 0300000001000000
-  rowOffset: -1
-  columnOffset: -1
-  appearance:
-  - {fileID: 21300000, guid: f3efe6fd4cdbb5a4baf8ea132b123ac4, type: 3}
-  - {fileID: 21300000, guid: bdc4cba515446324ab2ce31b8e668122, type: 3}
-  - {fileID: 21300000, guid: c2f50ec84cea270478c683bc14842e2d, type: 3}
-  - {fileID: 21300000, guid: ee3ec4a5bfe2bbf44a1d6be25ab85ed3, type: 3}
 --- !u!114 &114948660754724706
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -73,15 +52,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69b455157bab242e5a5ed314bb78c271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sd:
+  s:
     name: 
-    appearance: 0
     locationX: 0
     locationY: 0
-    rotationX: 0
-    rotationY: 0
     rotationZ: 0
-    rotationW: 0
+    width: 0
+    height: 0
+    rowOffset: 0
+    columnOffset: 0
 --- !u!212 &212700118140817380
 SpriteRenderer:
   m_ObjectHideFlags: 1

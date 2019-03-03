@@ -8,21 +8,29 @@
 public class StoreItems
 {
     public string name;
-    public int appearance;
 
     public float locationX; // x-coordinate
     public float locationY; // y-coordinate
-    public float rotationZ;
+    public float rotationZ; // rotation (divisble by 90)
 
-    public StoreItems( float locationX, float locationY, float rotationZ)
-    {
-        this.locationX = locationX;
-        this.locationY = locationY;
-        this.rotationZ = rotationZ;
+    /*      -------OFFSET-----
+     * Explaination: Used for correcting where setting the obstical should start at in the obstical array.
+     *      If rowOffset equals -1, it will shift the object up by 1. If columnOffset equals -1, it will shift the object left by 1.
+     * 
+     * Text Representation Examples: 0's are no obstical and 1's represent object. Object width equals 2 and height = 1. Object exists within a 4x4 obstical array.
+     * 
+     * rowOffset = 0, columnOffset = 0  *   rowOffset = -1, columnOffset = 0    *   rowOffset = 1, columnOffset = -1 
+     *                                  *                                       *
+     * |  0  |  0  |  0  |  0  |        *    |  0  |  1  |  1  |  0  |          *   |  0  |  0  |  0  |  0  |
+     * |  0  |  1  |  1  |  0  |        *    |  0  |  0  |  0  |  0  |          *   |  0  |  0  |  0  |  0  |
+     * |  0  |  0  |  0  |  0  |        *    |  0  |  0  |  0  |  0  |          *   |  1  |  1  |  0  |  0  |
+     * |  0  |  0  |  0  |  0  |        *    |  0  |  0  |  0  |  0  |          *   |  0  |  0  |  0  |  0  |
+     */
 
-    }
-    public StoreItems()
-    {
-
-    }
+    // These 4 variables must be hardcoded and tailored to each individual item
+    //      to account for the item's sprite's shape
+    public int width; // width of object (used for obstical detection)
+    public int height; // height of object (used for obstical detection)
+    public int rowOffset; // shift left with - and right with +
+    public int columnOffset; // shift up with - and down with +
 }

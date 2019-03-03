@@ -18,12 +18,12 @@ public class Obsticals : MonoBehaviour
     void Start ()
     {
         // 15 x 14
-        obstical = new bool[tilemap.cellBounds.size.y * 2][];
-        for (int i = 0; i < obstical.Length; i++)
-            obstical[i] = new bool[tilemap.cellBounds.size.x * 2 - 1];
-
-        //addObstical(1f, 1.5f, 3, 2, -1, -1);
-        
+        if (obstical == null)
+        {
+            obstical = new bool[tilemap.cellBounds.size.y * 2][];
+            for (int i = 0; i < obstical.Length; i++)
+                obstical[i] = new bool[tilemap.cellBounds.size.x * 2 - 1];
+        }
     }
 
     // Add Object to obstical array. 

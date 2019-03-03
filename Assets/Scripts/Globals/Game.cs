@@ -88,6 +88,7 @@ public class Game : MonoBehaviour
             Globals.setPlatinum(save.p);
             Globals_Customer.setCustomers(save.cd, save.cd.Count);
             Globals_Items.setItems(save.si, save.si.Count);
+            Obsticals.obstical = save.obstical;
             Debug.Log("Game Loaded");
             Unpause();
         }
@@ -107,6 +108,7 @@ public class Game : MonoBehaviour
         save.p = Globals.getPlatinum();
         save.cd = Globals_Customer.GetCustomers();
         save.si = Globals_Items.GetItems();
+        save.obstical = Obsticals.obstical;
 
         //return the object to write to the file
         return save;

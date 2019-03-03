@@ -11,10 +11,10 @@ public class PlaceItem : MonoBehaviour {
 
     public static GameObject staticItem = null;
 
+    // Set staticItem as item so that object can be accessed from ItemPlacer
     public void place(GameObject item)
     {
         staticItem = item;
-        ItemPlacer.isPlacing = true;
-        Debug.Log(name);
+        ItemPlacer.isPlacing = true; // Go into ItemPlacer mode
     }
 }

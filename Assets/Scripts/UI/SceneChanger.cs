@@ -90,7 +90,7 @@ public class SceneChanger : MonoBehaviour
         //Globals.inEditMode = true;
         isAtStorefront = true; 
         SceneManager.UnloadSceneAsync("Inventory"); // unload inventory scene
-        ItemPlacer.state = 0;
+        ItemPlacer.rotationState = 0;
 
         // Replace main bottom panel with the inventory placement panel
         staticMainPanel.SetActive(false);

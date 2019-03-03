@@ -3412,7 +3412,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 597789906}
-  itemList: []
+  itemList:
+  - {fileID: 1137710557247274, guid: dead97f02b136d649a12d4962f6f6cda, type: 2}
+  - {fileID: 1213580808870044, guid: e6f0736a780374f4fb693775e422a29c, type: 2}
 --- !u!4 &670421613
 Transform:
   m_ObjectHideFlags: 0

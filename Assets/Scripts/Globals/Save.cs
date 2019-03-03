@@ -19,5 +19,6 @@ public class Save
     public List<CustomerData> cd;
     public List<StoreItems> si;
 
+    public bool[][] obstical;
     //public object shots { get; internal set; }
 }
