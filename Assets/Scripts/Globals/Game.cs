@@ -16,6 +16,7 @@ using UnityEngine.UI;
 public class Game : MonoBehaviour
 {
     private bool isPaused = false;
+    private string path = "/pharmagamesave.save";
 
     private void Awake()
     {
@@ -70,7 +71,7 @@ public class Game : MonoBehaviour
         Save save = CreateSaveGameObject();
         BinaryFormatter bf = new BinaryFormatter();
         //write out to device with save file
-        FileStream file = File.Create(Application.persistentDataPath + "/gamesave.save");
+        FileStream file = File.Create(Application.persistentDataPath + path);
         //add save object to file
         bf.Serialize(file, save);
         file.Close();
@@ -81,10 +82,10 @@ public class Game : MonoBehaviour
     {
         //check if file exists
         //if so, read file and set global varables
-        if (File.Exists(Application.persistentDataPath + "/gamesave.save"))
+        if (File.Exists(Application.persistentDataPath + path))
         {
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/gamesave.save", FileMode.Open);
+            FileStream file = File.Open(Application.persistentDataPath + path, FileMode.Open);
             Save save = (Save)bf.Deserialize(file);
 
             //set globals from save object
