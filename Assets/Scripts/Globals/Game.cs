@@ -26,6 +26,10 @@ public class Game : MonoBehaviour
     {
         SaveGame();
     }
+    private void OnApplicationPause(bool pause)
+    {
+        SaveGame();
+    }
 
     //not used yet but might when go to monthly report
     public void Pause()
