@@ -37,6 +37,8 @@ public class CustomerController : MonoBehaviour
             think();
             ms.setMove(moveQ.peek(), ref moveQ);
 
+            updateDesire(ms.distance);
+
             // Save moveLocation and isMoving state into CustomerData
             gameObject.GetComponent<Customer>().cd.destLocationX = ms.moveLocation.x;
             gameObject.GetComponent<Customer>().cd.destLocationY = ms.moveLocation.y;
@@ -92,9 +94,6 @@ public class CustomerController : MonoBehaviour
         // Move in a random direction and update desires if not buying or leaving
         else
         {
-            // Update Desires
-            updateDesire();
-
             // Set direction and distance
             int direction = Random.Range(0, 7);
             int distance = Random.Range(1, 10);
@@ -219,9 +218,9 @@ public class CustomerController : MonoBehaviour
     }
 
     // Handles a customers desires
-    void updateDesire()
+    void updateDesire(int distance)
     {
-        currentAmount += Random.Range(3, 5); // add random value to currentAmount
+        currentAmount += distance; // add distance traveled to currentAmount
 
         // When currentAmount reaches limit, reset currentAmount and remove a desire
         if (!isBuying && !isLeaving && currentAmount >= limit)

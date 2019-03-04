@@ -17,11 +17,7 @@ public class MoveSet
     public int isMoving; // number that changes depending on the direction customer is moving
     public Vector3 moveLocation; // the location of the next place the customer will move
     float speed; // the speed that a customer moves at
-
-    // TODO: Add obsticals into isFilled array
-    int xLocation;
-    int yLocation;
-    bool[][] isFilled;
+    public int distance; // how far the move took the customer
     
     public MoveSet(Transform transform, float speed, int isMoving, float xDest, float yDest)
     {
@@ -35,10 +31,6 @@ public class MoveSet
 
         int sizeX = tilemap.cellBounds.size.x - 1;
         int sizeY = tilemap.cellBounds.size.y;
-
-        isFilled = new bool[sizeY][];
-        for (int i = 0; i < sizeY; i++)
-            isFilled[i] = new bool[sizeX];
     }
 
     // Determines destination
@@ -72,6 +64,8 @@ public class MoveSet
             isMoving = -1;
             return;
         }
+
+        distance = (int)(numberOfMoves * 2); // set how far customer moved
     }
 
     // Moves gameObject to destination

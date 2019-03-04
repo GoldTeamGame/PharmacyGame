@@ -77,15 +77,38 @@ public class ProceduralGenerator : MonoBehaviour
             cd.appearance = Random.Range(0, 9); // set appearance
             cd.mood = Random.Range(0, 6); // set a random mood
 
-            // Set desires (currently hardcoded)
-            cd.desires = new string[3];
-            cd.desires[0] = "Cough Medicine";
-            cd.desires[1] = "Bleach";
-            cd.desires[2] = "Anthrax";
+            // Set desires
+            generateDesires(ref cd);
 
             Globals_Customer.customerData.Add(cd); // add cd to Globals list
         }
 
         CustomerScreen.updateList(-1); // update CustomerScreen button list
+    }
+
+    private static void generateDesires(ref CustomerData cd)
+    {
+        int maxNumberOfDesires = 3;
+        int numberOfDesires = Random.Range(1, maxNumberOfDesires);
+
+        cd.desires = new string[numberOfDesires];
+
+        // HARDCODED UNTIL PROGRESS WITH DRUGS IS MADE
+        if (numberOfDesires == 1)
+        {
+            cd.desires[0] = "Ventolin";
+        }
+        else if (numberOfDesires == 2)
+        {
+            cd.desires[0] = "Ventolin";
+            cd.desires[1] = "Vyvnase";
+        }
+        else if (numberOfDesires == 3)
+        {
+            cd.desires[0] = "Ventolin";
+            cd.desires[1] = "Vyvnase";
+            cd.desires[2] = "Lyrica";
+        }
+            
     }
 }
