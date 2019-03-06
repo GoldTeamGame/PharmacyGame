@@ -1,7 +1,7 @@
 ﻿/* 
  * Most Recent Author: Dylan Cyphers
- * Version 1.0
- * Date: 1/28/2019
+ * Version 1.1
+ * Date: 3/6/2019
  * Description: Displays the inventory items alongside their amount. The items displayed are both drugs and employees.
  * 
  */
@@ -23,8 +23,26 @@ public class DisplayInventory : MonoBehaviour {
     public Text employeeCtext;
 
     public Button fluShotBtn;
+    public Button shelfBtn;
+    public Button vacBtn;
+
 
     public Sprite currSprite;
+
+
+    /* The selector [0,2] is the int used to designate which parts of the scrollbar are displayed
+    *  0: Stock
+    *  1: Staff
+    *  2: Fixtures
+    */
+    public int selector;
+
+    public Button[] tabButtons;
+
+    public void SetSelector(int sel)
+    {
+        selector = sel;
+    }
 
     private void Start()
     {
@@ -36,9 +54,53 @@ public class DisplayInventory : MonoBehaviour {
     void Update()
     {
 
+        //Testing Limited Display
+        //Reminder: 0 === Stock
+        if(selector == 0)
+        {
+            drugAtext.gameObject.SetActive(true);
+            drugBtext.gameObject.SetActive(true);
+            drugCtext.gameObject.SetActive(true);
+            employeeAtext.gameObject.SetActive(false);
+            employeeBtext.gameObject.SetActive(false);
+            employeeCtext.gameObject.SetActive(false);
+            fluShotBtn.gameObject.SetActive(false);
+            shelfBtn.gameObject.SetActive(false);
+            vacBtn.gameObject.SetActive(false);
+        }
+        //Reminder: 1 === Staff
+        else if (selector == 1)
+        {
+            drugAtext.gameObject.SetActive(false);
+            drugBtext.gameObject.SetActive(false);
+            drugCtext.gameObject.SetActive(false);
+            employeeAtext.gameObject.SetActive(true);
+            employeeBtext.gameObject.SetActive(true);
+            employeeCtext.gameObject.SetActive(true);
+            fluShotBtn.gameObject.SetActive(false);
+            shelfBtn.gameObject.SetActive(false);
+            vacBtn.gameObject.SetActive(false);
+        }
+        //Reminder: 2 === Fixtures
+        else if (selector == 2)
+        {
+            drugAtext.gameObject.SetActive(false);
+            drugBtext.gameObject.SetActive(false);
+            drugCtext.gameObject.SetActive(false);
+            employeeAtext.gameObject.SetActive(false);
+            employeeBtext.gameObject.SetActive(false);
+            employeeCtext.gameObject.SetActive(false);
+            fluShotBtn.gameObject.SetActive(true);
+            shelfBtn.gameObject.SetActive(true);
+            vacBtn.gameObject.SetActive(true);
+        }
+
+
         currSprite = staticItems[0]; //testing
 
+
         //check to see if you even have the flu shot in your inventory; if so, display it
+        /*
         if (Globals.unlockedFluShotStation)
         {
             fluShotBtn.gameObject.SetActive(true);
@@ -47,7 +109,7 @@ public class DisplayInventory : MonoBehaviour {
         {
             fluShotBtn.gameObject.SetActive(false);
         }
-
+        */
         drugAtext.text = Globals.medicationA + ": " + Globals.drugA.ToString() + " Units";
         drugBtext.text = Globals.medicationB + ": " + Globals.drugB.ToString() + " Units";
         drugCtext.text = Globals.medicationC + ": " + Globals.drugC.ToString() + " Units";
