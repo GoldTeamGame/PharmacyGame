@@ -6,7 +6,9 @@ using UnityEngine.EventSystems;
 public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
 
 	public static GameObject itemBeingDragged;
+	public Canvas myCanvas;
 	Vector3 startPosition;
+	Vector2 pos;
 
 	#region IBeginDragHandler implementation
 
@@ -20,7 +22,8 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 	#region IDragHandler implementation
 
 	public void OnDrag(PointerEventData eventData){
-		transform.position = Input.mousePosition;
+		RectTransformUtility.ScreenPointToLocalPointInRectangle(myCanvas.transform as RectTransform, Input.mousePosition, myCanvas.worldCamera, out pos);
+        transform.position = myCanvas.transform.TransformPoint(pos);
 	}
 	
 	#endregion
