@@ -3415,6 +3415,8 @@ MonoBehaviour:
   itemList:
   - {fileID: 1137710557247274, guid: dead97f02b136d649a12d4962f6f6cda, type: 2}
   - {fileID: 1213580808870044, guid: e6f0736a780374f4fb693775e422a29c, type: 2}
+  - {fileID: 1235203366824124, guid: ae50368acd699444c89482f8ccb13bce, type: 2}
+  - {fileID: 1835956932672560, guid: 44cfa7f40fd80e14284a5dabeac66952, type: 2}
 --- !u!4 &670421613
 Transform:
   m_ObjectHideFlags: 0
@@ -3440,10 +3442,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 597789906}
-  item:
-  - {fileID: 1213580808870044, guid: e6f0736a780374f4fb693775e422a29c, type: 2}
-  - {fileID: 1137710557247274, guid: dead97f02b136d649a12d4962f6f6cda, type: 2}
-  - {fileID: 1252037299120032, guid: cb4829f6c869cf84daec69bded35f21d, type: 2}
 --- !u!114 &670421615
 MonoBehaviour:
   m_ObjectHideFlags: 0
