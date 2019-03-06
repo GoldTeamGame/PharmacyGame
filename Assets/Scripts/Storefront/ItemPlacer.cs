@@ -25,7 +25,7 @@ public class ItemPlacer : MonoBehaviour
                 Vector3 mouse = CoordinateTracker.getMousePosition(); // Get tile selected
 
                 // Place item in tile if selected tile is within the parent
-                if (Obsticals.isInBounds(mouse))
+                if (Obsticals.isInBounds(mouse) && !Obsticals.isObstical(mouse.x, mouse.y))
                 {
                     tile = mouse; // set tile
 
@@ -45,12 +45,16 @@ public class ItemPlacer : MonoBehaviour
     {
         // Store items obstical data into the obsticals array
         StoreItems s = current.GetComponent<Items>().s; // grab item data script from gameObject
-        Obsticals.addObstical(tile.x, tile.y, s.width, s.height, s.rowOffset, s.columnOffset); // Add item to obstical array
-        InsertItems.generate(current, s); // add s to Globals_Items.storeData
 
-        //Obsticals.displayAllObsticals(); // Debug: display obstical array
+        if (!Obsticals.willAddBlock(tile.x, tile.y, s.width, s.height, s.rowOffset, s.columnOffset))
+        {
+            Obsticals.addObstical(tile.x, tile.y, s.width, s.height, s.rowOffset, s.columnOffset); // Add item to obstical array
+            InsertItems.generate(current, s); // add s to Globals_Items.storeData
 
-        current = null; // reset to null
+            //Obsticals.displayAllObsticals(); // Debug: display obstical array
+
+            current = null; // reset to null
+        }
     }
 
     // Button Function
