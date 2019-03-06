@@ -101,7 +101,10 @@ public class Obsticals : MonoBehaviour
         int row = yToRow(coordinate.y);
         int column = xToColumn(coordinate.x);
 
-        return !(row < 0 || column < 0 || row > 13 || column > 14);
+        if (coordinate.x == -1.5f && coordinate.y == 5.5)
+            return false;
+
+        return !(row < 0 || column < 0 || row > 11 || column > 14);
     }
 
     // Show text visualization of obsticals in bool array
