@@ -22,8 +22,11 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 	#region IDragHandler implementation
 
 	public void OnDrag(PointerEventData eventData){
-		RectTransformUtility.ScreenPointToLocalPointInRectangle(myCanvas.transform as RectTransform, Input.mousePosition, myCanvas.worldCamera, out pos);
-        transform.position = myCanvas.transform.TransformPoint(pos);
+		float x = transform.InverseTransformPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition)).x;
+        float y = transform.InverseTransformPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition)).y;
+		Vector3 test = new Vector3(x,y);
+		//RectTransformUtility.ScreenPointToLocalPointInRectangle(myCanvas.transform as RectTransform, Input.mousePosition, myCanvas.worldCamera, out pos);
+        transform.position = myCanvas.transform.TransformPoint(test);
 	}
 	
 	#endregion
