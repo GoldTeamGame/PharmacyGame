@@ -110,6 +110,7 @@ public class Obsticals : MonoBehaviour
     // Checks if adding object will prevent customer from getting from entrance to counter
     public static bool willAddBlock(float x, float y, int width, int height, int rowOffset, int columnOffset)
     {
+        // Copy obstical array into new array
         bool[][] tempObsticals = new bool[obstical.Length][];
         for (int i = 0; i < tempObsticals.Length; i++)
         {
@@ -118,10 +119,13 @@ public class Obsticals : MonoBehaviour
                 tempObsticals[i][j] = obstical[i][j];
         }
 
+        // Add obstical to obstical array
         addObstical(x, y, width, height, rowOffset, columnOffset);
 
+        // Plan a move from entrance to counter
         bool isBlocked = CustomerController.aStar(-1.5f, 6f, 0.5f, -0.5f);
 
+        // Reset obstical array
         obstical = tempObsticals;
 
         return isBlocked;
