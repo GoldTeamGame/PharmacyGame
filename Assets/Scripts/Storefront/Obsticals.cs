@@ -107,6 +107,30 @@ public class Obsticals : MonoBehaviour
         return !(row < 0 || column < 0 || row > 11 || column > 14);
     }
 
+    // Checks if adding object will prevent customer from getting from entrance to counter
+    public static bool willAddBlock(float x, float y, int width, int height, int rowOffset, int columnOffset)
+    {
+        // Copy obstical array into new array
+        bool[][] tempObsticals = new bool[obstical.Length][];
+        for (int i = 0; i < tempObsticals.Length; i++)
+        {
+            tempObsticals[i] = new bool[obstical[0].Length];
+            for (int j = 0; j < tempObsticals[0].Length; j++)
+                tempObsticals[i][j] = obstical[i][j];
+        }
+
+        // Add obstical to obstical array
+        addObstical(x, y, width, height, rowOffset, columnOffset);
+
+        // Plan a move from entrance to counter
+        bool isBlocked = CustomerController.aStar(-1.5f, 6f, 0.5f, -0.5f);
+
+        // Reset obstical array
+        obstical = tempObsticals;
+
+        return isBlocked;
+    }
+
     // Show text visualization of obsticals in bool array
     public static void displayAllObsticals()
     {

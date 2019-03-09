@@ -105,7 +105,7 @@ public class CustomerController : MonoBehaviour
     // Customer will find its way to [x, y]
     public void aStar(float x, float y)
     {
-        pq = new PriorityQueue(10000); // reset priority queue
+        PriorityQueue pq = new PriorityQueue(10000); // reset priority queue
 
         // Generate a 2D float array to prevent duplicate entries into the queue
         float[][] check = new float[14][];
@@ -130,14 +130,14 @@ public class CustomerController : MonoBehaviour
         {
             // Enqueue every movement direction
             // 0 = right, 1 = left, 2 = up, 3 = down, 4 = upright, 5 = upleft, 6 = downright, 7 = downleft
-            checkMove(currentMove, 0.5f,    0,      x, y, 0, ref check); // right
-            checkMove(currentMove, 0.5f,    0.5f,   x, y, 4, ref check); // upright
-            checkMove(currentMove, 0.5f,    -0.5f,  x, y, 6, ref check); // downright
-            checkMove(currentMove, 0,       0.5f,   x, y, 2, ref check); // up
-            checkMove(currentMove, -0.5f,   0.5f,   x, y, 5, ref check); // upleft
-            checkMove(currentMove, 0, -     0.5f,   x, y, 3, ref check); // down
-            checkMove(currentMove, -0.5f,   0,      x, y, 1, ref check); // left
-            checkMove(currentMove, -0.5f,   -0.5f,  x, y, 7, ref check); // downleft
+            checkMove(ref pq, currentMove, 0.5f,    0,      x, y, 0, ref check); // right
+            checkMove(ref pq, currentMove, 0.5f,    0.5f,   x, y, 4, ref check); // upright
+            checkMove(ref pq, currentMove, 0.5f,    -0.5f,  x, y, 6, ref check); // downright
+            checkMove(ref pq, currentMove, 0,       0.5f,   x, y, 2, ref check); // up
+            checkMove(ref pq, currentMove, -0.5f,   0.5f,   x, y, 5, ref check); // upleft
+            checkMove(ref pq, currentMove, 0, -     0.5f,   x, y, 3, ref check); // down
+            checkMove(ref pq, currentMove, -0.5f,   0,      x, y, 1, ref check); // left
+            checkMove(ref pq, currentMove, -0.5f,   -0.5f,  x, y, 7, ref check); // downleft
 
             currentMove = pq.peekAndDequeue(); // Set the first item in the queue as the currentMove
         }
@@ -147,9 +147,49 @@ public class CustomerController : MonoBehaviour
         //Debug.Break();
     }
 
+    // Check if a path does not exists between [x1, y1] and [x2, y2]
+    public static bool aStar(float x1, float y1, float x2, float y2)
+    {
+        PriorityQueue pq = new PriorityQueue(10000); // reset priority queue
+
+        // Generate a 2D float array to prevent duplicate entries into the queue
+        float[][] check = new float[14][];
+        for (int i = 0; i < check.Length; i++)
+        {
+            check[i] = new float[15];
+            for (int j = 0; j < check[0].Length; j++)
+            {
+                check[i][j] = 1000;
+            }
+        }
+        
+        int row = Obsticals.yToRow(y1); // convert y to row value
+        int column = Obsticals.xToColumn(x1); // convert x to column value
+        Move currentMove = new Move(x1, y1, 0, findDistance(x1, y1, x2, y2, row, column), 0, null);
+
+        // Keep searching for path until destination is found
+        while (currentMove != null && currentMove.goodness < 1000 && (currentMove.x != x2 || currentMove.y != y2))
+        {
+            // Enqueue every movement direction
+            // 0 = right, 1 = left, 2 = up, 3 = down, 4 = upright, 5 = upleft, 6 = downright, 7 = downleft
+            checkMove(ref pq, currentMove, 0.5f, 0, x2, y2, 0, ref check); // right
+            checkMove(ref pq, currentMove, 0.5f, 0.5f, x2, y2, 4, ref check); // upright
+            checkMove(ref pq, currentMove, 0.5f, -0.5f, x2, y2, 6, ref check); // downright
+            checkMove(ref pq, currentMove, 0, 0.5f, x2, y2, 2, ref check); // up
+            checkMove(ref pq, currentMove, -0.5f, 0.5f, x2, y2, 5, ref check); // upleft
+            checkMove(ref pq, currentMove, 0, -0.5f, x2, y2, 3, ref check); // down
+            checkMove(ref pq, currentMove, -0.5f, 0, x2, y2, 1, ref check); // left
+            checkMove(ref pq, currentMove, -0.5f, -0.5f, x2, y2, 7, ref check); // downleft
+
+            currentMove = pq.peekAndDequeue(); // Set the first item in the queue as the currentMove
+        }
+
+        return currentMove == null || currentMove.goodness >= 1000;
+    }
+
     // (USED FOR A*)
     // Checks to see if a move is valid and then places it into the priority queue
-    private void checkMove(Move move, float xShift, float yShift, float xDest, float yDest, int direction, ref float[][] check)
+    private static void checkMove(ref PriorityQueue pq, Move move, float xShift, float yShift, float xDest, float yDest, int direction, ref float[][] check)
     {
         // Calculate what x and y will be after the move
         float x = move.x + xShift;
@@ -209,7 +249,7 @@ public class CustomerController : MonoBehaviour
 
     // Find the distance between 2 coordinates
     // returns 1000 (or some large number) if the object at the location is an obstical
-    private float findDistance(float x1, float y1, float x2, float y2, int row, int column)
+    private static float findDistance(float x1, float y1, float x2, float y2, int row, int column)
     {
         if (Obsticals.isObstical(row, column))
             return 1000; // return large number if obstical is found
