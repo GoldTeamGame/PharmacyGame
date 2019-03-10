@@ -31,13 +31,27 @@ public class CustomerController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        // If customer is not moving, then customer thinks of what it wants to do
-        if (ms.isMoving == -1)
+        // isMoving == -2 means the customer must reset its path because an object was placed in the store.
+        if (GetComponent<Customer>().cd.isMoving == -2)
         {
-            think();
-            ms.setMove(moveQ.peek(), ref moveQ);
+            moveQ.reset(); // Remove everything from queue
+            ms.findNearestLocation(transform.localPosition.x, transform.localPosition.y, ref moveQ);
+            gameObject.GetComponent<Customer>().cd.isMoving = ms.isMoving;
+            gameObject.GetComponent<Customer>().cd.destLocationX = ms.moveLocation.x;
+            gameObject.GetComponent<Customer>().cd.destLocationY = ms.moveLocation.y;
+            //Debug.Break();
 
-            updateDesire(ms.distance);
+            // TODO Find single direction to move in and set the isMoving to that direction
+            isFinding = false;
+            GetComponent<Customer>().cd.isFinding = false;
+        }
+        // If customer is not moving, then customer thinks of what it wants to do
+        else if (ms.isMoving == -1)
+        {
+            think(); // Find a random direction to move in
+            ms.setMove(moveQ.peek(), ref moveQ); // Determine if move can be made (trim the move if neccesary)
+
+            updateDesire(ms.distance); // Periodically remove desire
 
             // Save moveLocation and isMoving state into CustomerData
             gameObject.GetComponent<Customer>().cd.destLocationX = ms.moveLocation.x;
@@ -301,6 +315,13 @@ public class CustomerController : MonoBehaviour
                 GetComponent<Customer>().cd.isBuying = true;
             }
         }
+    }
+
+    public static void repath()
+    {
+        int numberOfCustomers = Globals_Customer.customerData.Count;
+        for (int i = 0; i < numberOfCustomers; i++)
+            Globals_Customer.customerData[i].isMoving = -2;
     }
 
     // Removes the customer from the CustomerData List and the CustomerScreen Button List

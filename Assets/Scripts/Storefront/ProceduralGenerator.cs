@@ -71,7 +71,8 @@ public class ProceduralGenerator : MonoBehaviour
         else
         {
             string name = Globals_Customer.name[Random.Range(0, Globals_Customer.name.Length)]; // generate a random name
-            float speed = Random.Range(0.5f, 1f); // generate a random speed
+            float speed = .4f;
+                //Random.Range(0.4f, 0.6f); // generate a random speed
             
             cd = new CustomerData(name, speed); // instantiate cd with name and speed
             cd.appearance = Random.Range(0, 9); // set appearance

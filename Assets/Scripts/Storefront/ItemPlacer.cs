@@ -50,6 +50,7 @@ public class ItemPlacer : MonoBehaviour
         {
             Obsticals.addObstical(tile.x, tile.y, s.width, s.height, s.rowOffset, s.columnOffset); // Add item to obstical array
             InsertItems.generate(current, s); // add s to Globals_Items.storeData
+            CustomerController.repath();
 
             //Obsticals.displayAllObsticals(); // Debug: display obstical array
 

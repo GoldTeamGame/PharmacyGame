@@ -77,6 +77,12 @@ public class Queue<T>
         return head >= size;
     }
 
+    public void reset()
+    {
+        head = 0;
+        size = 0;
+    }
+
     public string displayAll()
     {
         string elements = "";
