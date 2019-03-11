@@ -1,6 +1,6 @@
 ﻿// File: Obsticals
-// Version: 1.0.3
-// Last Updated: 3/2/19
+// Version: 1.0.5
+// Last Updated: 3/11/19
 // Authors: Alexander Jacks
 // Description: Stores all objects in storefront in a bool array. Allows customers to "see" obsticals and avoid them.
 

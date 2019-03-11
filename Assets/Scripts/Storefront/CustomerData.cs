@@ -1,6 +1,6 @@
 ﻿// File: CustomerData
-// Version: 1.0.3
-// Last Updated: 3/1/19
+// Version: 1.0.4
+// Last Updated: 3/11/19
 // Authors: Alexander Jacks
 // Description: Contains all a customers information
 
@@ -25,6 +25,9 @@ public class CustomerData
     public int isMoving = -1; // the customers current movement state
     public float destLocationX = 0; // x-coordinate customer is moving to
     public float destLocationY = 0; // y-coordinate customer is moving to
+
+    public float pLocationX = 0; // FOR DEBUGGING: Shows x-location 
+    public float pLocationY = 0; // FOR DEBUGGING: Shows y-location
 
     public CustomerData(string name, float speed)
     {

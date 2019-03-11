@@ -1,6 +1,6 @@
 ﻿// File: MoveSet
-// Version: 1.0.2
-// Last Updated: 2/11/19
+// Version: 1.0.4
+// Last Updated: 3/11/19
 // Authors: Alexander Jacks
 // Description: Contains basic movement directions for customer
 
@@ -76,7 +76,7 @@ public class MoveSet
     public void move()
     {
         // Set customer movement state to stationary if it reached its location.
-        if (Vector3.Distance(moveLocation, transform.localPosition) <= 0.10f)
+        if (Vector3.Distance(moveLocation, transform.localPosition) <= 0.1f)
         {
             isMoving = -1; // set to stationary
             transform.localPosition = moveLocation; // set customer position to moveLocation to keep customer on track
@@ -115,22 +115,24 @@ public class MoveSet
     public Vector3 finishMove()
     {
         Vector3 m = transform.localPosition;
+        float x = Mathf.Round(m.x * 2) / 2;
+        float y = Mathf.Round(m.y * 2) / 2;
         float right = Mathf.Ceil(m.x * 2) / 2;
         float left = Mathf.Floor(m.x * 2) / 2;
         float up = Mathf.Ceil(m.y * 2) / 2;
         float down = Mathf.Floor(m.y * 2) / 2;
         // Right
         if (isMoving == 0)
-            return new Vector3(right, m.y, 0);
+            return new Vector3(right, y, 0);
         // Left
         else if (isMoving == 1)
-            return new Vector3(left, m.y, 0);
+            return new Vector3(left, y, 0);
         // Up
         else if (isMoving == 2)
-            return new Vector3(m.x, up, 0);
+            return new Vector3(x, up, 0);
         // Down
         else if (isMoving == 3)
-            return new Vector3(m.x, down, 0);
+            return new Vector3(x, down, 0);
         // Upright
         else if (isMoving == 4)
             return new Vector3(right, up, 0);
@@ -150,32 +152,41 @@ public class MoveSet
 
     private int findDirection()
     {
-    //      private static float[] directionX = { 1, -1, 0, 0, 1, -1, 1, -1 }; // values that help set moveLocation
-    //      private static float[] directionY = { 0, 0, 1, -1, .95f, .95f, -.95f, -.95f }; // values that help set moveLocation
+        // Must adjust precision to prevent location errors (Sometimes localPosition might have a trailing 0.00001, an error caused by unity.
+        //      so if moveLocation.x is 0.5, but localPosition.x is 0.50001, then the function will detect the move as being some sort of left move
+        //      instead of being just an up or down move.
+        int transitionX = (int)(transform.localPosition.x * 1000);
+        int transitionY = (int)(transform.localPosition.y * 1000);
+        float x = transitionX / 1000f;
+        float y = transitionY / 1000f;
+
+        // Calculate difference of moveLocation - localPosition (adjust the values so that they are always positive)
+        float differenceX = (3.5f + moveLocation.x) - (3.5f + x);
+        float differenceY = (0.5f + moveLocation.y) - (0.5f + y);
 
         // Right
-        if ((3.5f + moveLocation.x) - (3.5 + transform.localPosition.x) > 0 && (0.5f + moveLocation.y) - (0.5f + transform.localPosition.y) == 0)
+        if (differenceX > 0 && differenceY == 0)
             return 0;
         // Left
-        if ((3.5f + moveLocation.x) - (3.5 + transform.localPosition.x) < 0 && (0.5f + moveLocation.y) - (0.5f + transform.localPosition.y) == 0)
+        if (differenceX < 0 && differenceY == 0)
             return 1;
         // Up
-        if ((3.5f + moveLocation.x) - (3.5 + transform.localPosition.x) == 0 && (0.5f + moveLocation.y) - (0.5f + transform.localPosition.y) > 0)
+        if (differenceX == 0 && differenceY > 0)
             return 2;
         // Down
-        if ((3.5f + moveLocation.x) - (3.5 + transform.localPosition.x) == 0 && (0.5f + moveLocation.y) - (0.5f + transform.localPosition.y) < 0)
+        if (differenceX == 0 && differenceY < 0)
             return 3;
         // Upright
-        if ((3.5f + moveLocation.x) - (3.5 + transform.localPosition.x) > 0 && (0.5f + moveLocation.y) - (0.5f + transform.localPosition.y) > 0)
+        if (differenceX > 0 && differenceY > 0)
             return 4;
         // Upleft
-        if ((3.5f + moveLocation.x) - (3.5 + transform.localPosition.x) < 0 && (0.5f + moveLocation.y) - (0.5f + transform.localPosition.y) > 0)
+        if (differenceX < 0 && differenceY > 0)
             return 5;
         // Downright
-        if ((3.5f + moveLocation.x) - (3.5 + transform.localPosition.x) > 0 && (0.5f + moveLocation.y) - (0.5f + transform.localPosition.y) < 0)
+        if (differenceX > 0 && differenceY < 0)
             return 6;
         // Downleft
-        if ((3.5f + moveLocation.x) - (3.5 + transform.localPosition.x) < 0 && (0.5f + moveLocation.y) - (0.5f + transform.localPosition.y) < 0)
+        if (differenceX < 0 && differenceY < 0)
             return 7;
         return -1;
     }

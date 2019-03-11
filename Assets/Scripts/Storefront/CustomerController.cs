@@ -1,6 +1,6 @@
 ﻿// File: CustomerController
-// Version: 1.0.4
-// Last Updated: 2/25/19
+// Version: 1.0.8
+// Last Updated: 3/11/19
 // Authors: Alexander Jacks
 // Description: Tells customer when and where to move
 
@@ -35,20 +35,34 @@ public class CustomerController : MonoBehaviour
         if (GetComponent<Customer>().cd.isMoving == -2)
         {
             moveQ.reset(); // Remove everything from queue
+
+            GetComponent<Customer>().cd.pLocationX = transform.localPosition.x;
+            GetComponent<Customer>().cd.pLocationY = transform.localPosition.y;
+
+            if (isInObstical(transform.localPosition))
+                teleport();
+
             ms.findNearestLocation(transform.localPosition.x, transform.localPosition.y, ref moveQ);
             gameObject.GetComponent<Customer>().cd.isMoving = ms.isMoving;
             gameObject.GetComponent<Customer>().cd.destLocationX = ms.moveLocation.x;
             gameObject.GetComponent<Customer>().cd.destLocationY = ms.moveLocation.y;
-            //Debug.Break();
 
-            // TODO Find single direction to move in and set the isMoving to that direction
+            if (isTrapped(ms.moveLocation))
+            {
+                teleport();
+                GetComponent<Customer>().cd.isMoving = -2;
+            }
+            //Debug.Break();
+            
             isFinding = false;
             GetComponent<Customer>().cd.isFinding = false;
         }
         // If customer is not moving, then customer thinks of what it wants to do
         else if (ms.isMoving == -1)
         {
-            think(); // Find a random direction to move in
+            if (moveQ.isEmpty())
+                think(); // Think of where to move
+
             ms.setMove(moveQ.peek(), ref moveQ); // Determine if move can be made (trim the move if neccesary)
 
             updateDesire(ms.distance); // Periodically remove desire
@@ -60,6 +74,83 @@ public class CustomerController : MonoBehaviour
         }
         else
             ms.move();
+    }
+
+    // Check if the customer is inside of a fixture
+    private bool isInObstical(Vector3 location)
+    {
+        float x = Mathf.Round(location.x * 2) / 2;
+        float y = Mathf.Round(location.y * 2) / 2;
+
+        return Obsticals.isObstical(x, y);
+    }
+
+    // Check if the customer is isolated between fixtures
+    private bool isTrapped(Vector3 location)
+    {
+        return aStar(location.x, location.y, -1.5f, 6);
+    }
+
+    // Teleport the customer to a nearby "safe spot"
+    private void teleport()
+    {
+        // Find nearest x and y location divisible by 0.5
+        float x = Mathf.Round(transform.localPosition.x * 2) / 2;
+        float y = Mathf.Round(transform.localPosition.y * 2) / 2;
+        int jumpAmount = 1; // number of tiles away from customer
+        float tileSize = 0.5f; // width/height of tile
+
+        Vector3 newLocation = Vector3.zero;
+
+        // Continue looking for a safe location
+        while (jumpAmount < 50)
+        {
+            float jump = jumpAmount * tileSize; // calculate distance of jump
+
+            newLocation = new Vector3(x + jump, y); // check right
+            if (Obsticals.isInBounds(newLocation) && !isTrapped(newLocation) && !isInObstical(newLocation))
+                break;
+
+            newLocation = new Vector3(x - jump, y); // check left
+            if (Obsticals.isInBounds(newLocation) && !isTrapped(newLocation) && !isInObstical(newLocation))
+                break;
+
+            newLocation = new Vector3(x, y + jump); // check up
+            if (Obsticals.isInBounds(newLocation) && !isTrapped(newLocation) && !isInObstical(newLocation))
+                break;
+
+            newLocation = new Vector3(x, y - jump); // check down
+            if (Obsticals.isInBounds(newLocation) && !isTrapped(newLocation) && !isInObstical(newLocation))
+                break;
+
+            newLocation = new Vector3(x + jump, y + jump); // check right-up
+            if (Obsticals.isInBounds(newLocation) && !isTrapped(newLocation) && !isInObstical(newLocation))
+                break;
+
+            newLocation = new Vector3(x - jump, y + jump); // check left-up
+            if (Obsticals.isInBounds(newLocation) && !isTrapped(newLocation) && !isInObstical(newLocation))
+                break;
+
+            newLocation = new Vector3(x - jump, y - jump); // check left-down
+            if (Obsticals.isInBounds(newLocation) && !isTrapped(newLocation) && !isInObstical(newLocation))
+                break;
+
+            newLocation = new Vector3(x + jump, y - jump); // check right-down
+            if (Obsticals.isInBounds(newLocation) && !isTrapped(newLocation) && !isInObstical(newLocation))
+                break;
+
+            jumpAmount++;
+
+        }
+        
+        // Report if teleport doesnt work and teleport customer to entrance
+        if (jumpAmount == 50)
+        {
+            Debug.Log("Teleport Error");
+            transform.localPosition = new Vector3(-1.5f, 6f);
+        }
+
+        transform.localPosition = newLocation; // teleport customer to safe location
     }
 
     // Customer sets its move according to its current state
@@ -77,7 +168,7 @@ public class CustomerController : MonoBehaviour
             }
 
             // Change states once counter is reached
-            if (moveQ.isEmpty() && isFinding)
+            if (moveQ.isEmpty() && isFinding && transform.localPosition.Equals(new Vector3(0.5f, -0.5f)))
             {
                 isLeaving = true;
                 isBuying = false;
@@ -87,6 +178,8 @@ public class CustomerController : MonoBehaviour
                 isFinding = false;
                 GetComponent<Customer>().cd.isFinding = isFinding;
             }
+            else
+                isFinding = false; // reset isFinding to false if customer hasnt found the destination
         }
         // Find the exit if the customer is ready to leave
         else if (isLeaving)
@@ -98,12 +191,15 @@ public class CustomerController : MonoBehaviour
                 GetComponent<Customer>().cd.isFinding = isFinding;
             }
 
-            if (moveQ.isEmpty())
+            // Remove customer once they reach the exit
+            if (moveQ.isEmpty() && transform.localPosition.Equals(new Vector3(-1.5f, 6f)))
             {
                 removeCustomer();
                 isFinding = false;
                 GetComponent<Customer>().cd.isFinding = isFinding;
             }
+            else
+                isFinding = false; // reset isFinding to false if customer hasnt found the destination
         }
         // Move in a random direction and update desires if not buying or leaving
         else
