@@ -15,5 +15,4 @@ public class Toolbox
         int transition = (int)(num * modifier);
         return transition / modifier;
     }
-	
 }

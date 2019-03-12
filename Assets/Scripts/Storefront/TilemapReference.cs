@@ -9,16 +9,23 @@ using UnityEngine.Tilemaps;
 
 public class TilemapReference : MonoBehaviour
 {
-    public Tilemap tilemap;
-    public static Tilemap staticTilemap;
-    public static float xMin;
-    public static float yMin;
-    public static float xAdjust;
-    public static float yAdjust;
+    public Tilemap[] tilemap;
+    public static Tilemap[] staticTilemap;
+    public static float[] xAdjust;
+    public static float[] yAdjust;
 
     // Use this for initialization
     void Start()
     {
-        staticTilemap = tilemap;
+        staticTilemap = new Tilemap[tilemap.Length];
+        xAdjust = new float[tilemap.Length];
+        yAdjust = new float[tilemap.Length];
+
+        for (int i = 0; i < tilemap.Length; i++)
+        {
+            staticTilemap[i] = tilemap[i];
+            xAdjust[i] = Mathf.Abs(tilemap[i].cellBounds.xMin + TileCalculator.TILE_DIMENSIONS);
+            yAdjust[i] = Mathf.Abs(tilemap[i].cellBounds.yMin + TileCalculator.TILE_DIMENSIONS);
+        }
     }
 }

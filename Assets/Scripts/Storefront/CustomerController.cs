@@ -95,8 +95,10 @@ public class CustomerController : MonoBehaviour
     private void teleport()
     {
         // Find nearest x and y location divisible by 0.5
+        // This will be used as the origin point
         float x = Mathf.Round(transform.localPosition.x * 2) / 2;
         float y = Mathf.Round(transform.localPosition.y * 2) / 2;
+
         int jumpAmount = 1; // number of tiles away from customer
         float tileSize = 0.5f; // width/height of tile
 
@@ -140,7 +142,6 @@ public class CustomerController : MonoBehaviour
                 break;
 
             jumpAmount++;
-
         }
         
         // Report if teleport doesnt work and teleport customer to entrance
@@ -234,20 +235,21 @@ public class CustomerController : MonoBehaviour
         int row = Obsticals.yToRow(currentY); // convert y to row value
         int column = Obsticals.xToColumn(currentX); // convert x to column value
         Move currentMove = new Move(currentX, currentY, 0, findDistance(currentX, currentY, x, y, row, column), 0, null);
+        float md = TileCalculator.TILE_DIMENSIONS; // (Move distance) used to make code prettier
 
         // Keep searching for path until destination is found
-        while(currentMove != null && (currentMove.x != x || currentMove.y != y))
+        while (currentMove != null && (currentMove.x != x || currentMove.y != y))
         {
             // Enqueue every movement direction
             // 0 = right, 1 = left, 2 = up, 3 = down, 4 = upright, 5 = upleft, 6 = downright, 7 = downleft
-            checkMove(ref pq, currentMove, 0.5f,    0,      x, y, 0, ref check); // right
-            checkMove(ref pq, currentMove, 0.5f,    0.5f,   x, y, 4, ref check); // upright
-            checkMove(ref pq, currentMove, 0.5f,    -0.5f,  x, y, 6, ref check); // downright
-            checkMove(ref pq, currentMove, 0,       0.5f,   x, y, 2, ref check); // up
-            checkMove(ref pq, currentMove, -0.5f,   0.5f,   x, y, 5, ref check); // upleft
-            checkMove(ref pq, currentMove, 0, -     0.5f,   x, y, 3, ref check); // down
-            checkMove(ref pq, currentMove, -0.5f,   0,      x, y, 1, ref check); // left
-            checkMove(ref pq, currentMove, -0.5f,   -0.5f,  x, y, 7, ref check); // downleft
+            checkMove(ref pq, currentMove,  md,   0, x, y, 0, ref check); // right
+            checkMove(ref pq, currentMove,  md,  md, x, y, 4, ref check); // right-up
+            checkMove(ref pq, currentMove,  md, -md, x, y, 6, ref check); // right-down
+            checkMove(ref pq, currentMove,   0,  md, x, y, 2, ref check); // up
+            checkMove(ref pq, currentMove, -md,  md, x, y, 5, ref check); // left-up
+            checkMove(ref pq, currentMove,   0, -md, x, y, 3, ref check); // down
+            checkMove(ref pq, currentMove, -md,   0, x, y, 1, ref check); // left
+            checkMove(ref pq, currentMove, -md, -md, x, y, 7, ref check); // left-down
 
             currentMove = pq.peekAndDequeue(); // Set the first item in the queue as the currentMove
         }
@@ -276,20 +278,21 @@ public class CustomerController : MonoBehaviour
         int row = Obsticals.yToRow(y1); // convert y to row value
         int column = Obsticals.xToColumn(x1); // convert x to column value
         Move currentMove = new Move(x1, y1, 0, findDistance(x1, y1, x2, y2, row, column), 0, null);
+        float md = TileCalculator.TILE_DIMENSIONS; // (Move distance) used to make code prettier
 
         // Keep searching for path until destination is found
         while (currentMove != null && currentMove.goodness < 1000 && (currentMove.x != x2 || currentMove.y != y2))
         {
             // Enqueue every movement direction
             // 0 = right, 1 = left, 2 = up, 3 = down, 4 = upright, 5 = upleft, 6 = downright, 7 = downleft
-            checkMove(ref pq, currentMove, 0.5f, 0, x2, y2, 0, ref check); // right
-            checkMove(ref pq, currentMove, 0.5f, 0.5f, x2, y2, 4, ref check); // upright
-            checkMove(ref pq, currentMove, 0.5f, -0.5f, x2, y2, 6, ref check); // downright
-            checkMove(ref pq, currentMove, 0, 0.5f, x2, y2, 2, ref check); // up
-            checkMove(ref pq, currentMove, -0.5f, 0.5f, x2, y2, 5, ref check); // upleft
-            checkMove(ref pq, currentMove, 0, -0.5f, x2, y2, 3, ref check); // down
-            checkMove(ref pq, currentMove, -0.5f, 0, x2, y2, 1, ref check); // left
-            checkMove(ref pq, currentMove, -0.5f, -0.5f, x2, y2, 7, ref check); // downleft
+            checkMove(ref pq, currentMove,  md,   0, x2, y2, 0, ref check); // right
+            checkMove(ref pq, currentMove,  md,  md, x2, y2, 4, ref check); // right-up
+            checkMove(ref pq, currentMove,  md, -md, x2, y2, 6, ref check); // right-down
+            checkMove(ref pq, currentMove,   0,  md, x2, y2, 2, ref check); // up
+            checkMove(ref pq, currentMove, -md,  md, x2, y2, 5, ref check); // left-up
+            checkMove(ref pq, currentMove,   0, -md, x2, y2, 3, ref check); // down
+            checkMove(ref pq, currentMove, -md,   0, x2, y2, 1, ref check); // left
+            checkMove(ref pq, currentMove, -md, -md, x2, y2, 7, ref check); // left-down
 
             currentMove = pq.peekAndDequeue(); // Set the first item in the queue as the currentMove
         }

@@ -8,8 +8,8 @@ using UnityEngine;
 
 public class TileCalculator : MonoBehaviour {
 
-    public const float tileDimensions = 0.5f;
-    public static float modifier = 1.0f / tileDimensions;
+    public const float TILE_DIMENSIONS = 0.5f;
+    public static float modifier = 1.0f / TILE_DIMENSIONS;
 
     public static float nearestCoordinate(float f)
     {
