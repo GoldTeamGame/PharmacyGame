@@ -76,7 +76,7 @@ public class MoveSet
     public void move()
     {
         // Set customer movement state to stationary if it reached its location.
-        if (Vector3.Distance(moveLocation, transform.localPosition) <= 0.1f)
+        if (Vector3.Distance(moveLocation, transform.localPosition) <= 0.06f)
         {
             isMoving = -1; // set to stationary
             transform.localPosition = moveLocation; // set customer position to moveLocation to keep customer on track
@@ -96,7 +96,7 @@ public class MoveSet
     {
         // Figure out the direction the customer was traveling
         isMoving = findDirection();
-
+        
         // Simulate move
         Vector3 move = finishMove();
 
@@ -114,40 +114,43 @@ public class MoveSet
     // Complete a single unit of movement in whatever direction customer was initially going in
     public Vector3 finishMove()
     {
-        Vector3 m = transform.localPosition;
-        float x = Mathf.Round(m.x * 2) / 2;
-        float y = Mathf.Round(m.y * 2) / 2;
-        float right = Mathf.Ceil(m.x * 2) / 2;
-        float left = Mathf.Floor(m.x * 2) / 2;
-        float up = Mathf.Ceil(m.y * 2) / 2;
-        float down = Mathf.Floor(m.y * 2) / 2;
+        Vector3 m = transform.localPosition; // Save current location into m
+
+        // Find 6 values based off of m (current location)
+        float x     = TileCalculator.nearestCoordinate(m.x); // find nearest x-coordinate
+        float y     = TileCalculator.nearestCoordinate(m.y); // find neareest y-coordinate
+        float right = TileCalculator.ceilCoordinate(m.x);    // find what current x-coordinate will be after moving to the right
+        float left  = TileCalculator.floorCoordinate(m.x);   // find what current x-coordinate will be after moving to the left
+        float up    = TileCalculator.ceilCoordinate(m.y);    // find what current y-coordinate will be after moving up
+        float down  = TileCalculator.floorCoordinate(m.y);   // find what current y-coordinate will be after moving down
+        
         // Right
         if (isMoving == 0)
             return new Vector3(right, y, 0);
         // Left
-        else if (isMoving == 1)
+        if (isMoving == 1)
             return new Vector3(left, y, 0);
         // Up
-        else if (isMoving == 2)
+        if (isMoving == 2)
             return new Vector3(x, up, 0);
         // Down
-        else if (isMoving == 3)
+        if (isMoving == 3)
             return new Vector3(x, down, 0);
-        // Upright
-        else if (isMoving == 4)
+        // Right-Up
+        if (isMoving == 4)
             return new Vector3(right, up, 0);
-        // Upleft
-        else if (isMoving == 5)
+        // Left-Up
+        if (isMoving == 5)
             return new Vector3(left, up, 0);
-        // Downright
-        else if (isMoving == 6)
+        // Right-Down
+        if (isMoving == 6)
             return new Vector3(right, down, 0);
-        // Downleft
-        else if (isMoving == 7)
+        // Left-Down
+        if (isMoving == 7)
             return new Vector3(left, down, 0);
-        // Find closest tile
-        else
-            return new Vector3(Mathf.Round(transform.localPosition.x * 2) / 2, Mathf.Round(transform.localPosition.y * 2) / 2, 0); // Move to nearest tile
+
+        // Find closest tile if isMoving is none of the above
+        return new Vector3(x, y, 0);
     }
 
     private int findDirection()
@@ -155,14 +158,16 @@ public class MoveSet
         // Must adjust precision to prevent location errors (Sometimes localPosition might have a trailing 0.00001, an error caused by unity.
         //      so if moveLocation.x is 0.5, but localPosition.x is 0.50001, then the function will detect the move as being some sort of left move
         //      instead of being just an up or down move.
-        int transitionX = (int)(transform.localPosition.x * 1000);
-        int transitionY = (int)(transform.localPosition.y * 1000);
-        float x = transitionX / 1000f;
-        float y = transitionY / 1000f;
+        float x = Toolbox.precisionConversion(transform.localPosition.x, 3);
+        float y = Toolbox.precisionConversion(transform.localPosition.y, 3);
+
+        float xAdjust = Mathf.Abs(tilemap.cellBounds.xMin + 0.5f);
+        float yAdjust = Mathf.Abs(tilemap.cellBounds.yMin + 0.5f);
+        Debug.Log(xAdjust + " " + yAdjust);
 
         // Calculate difference of moveLocation - localPosition (adjust the values so that they are always positive)
-        float differenceX = (3.5f + moveLocation.x) - (3.5f + x);
-        float differenceY = (0.5f + moveLocation.y) - (0.5f + y);
+        float differenceX = (xAdjust + moveLocation.x) - (xAdjust + x);
+        float differenceY = (yAdjust + moveLocation.y) - (yAdjust + y);
 
         // Right
         if (differenceX > 0 && differenceY == 0)
