@@ -3,6 +3,7 @@
 // Last Updated: 3/11/19
 // Authors: Alexander Jacks
 // Description: Stores all objects in storefront in a bool array. Allows customers to "see" obsticals and avoid them.
+//          Also includes checking if locations are within allowed boundaries of the tilemap
 
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -100,11 +101,8 @@ public class Obsticals : MonoBehaviour
     {
         int row = yToRow(coordinate.y);
         int column = xToColumn(coordinate.x);
-
-        if (coordinate.x == -1.5f && coordinate.y == 5.5)
-            return false;
-
-        return !(row < 0 || column < 0 || row > 11 || column > 14);
+        
+        return !(row < 0 || column < 0 || row > 13 || column > 14);
     }
 
     // Checks if adding object will prevent customer from getting from entrance to counter

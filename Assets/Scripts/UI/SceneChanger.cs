@@ -96,4 +96,16 @@ public class SceneChanger : MonoBehaviour
         staticMainPanel.SetActive(false);
         staticInventoryPanel.SetActive(true);
     }
+
+    public void storefrontToInv()
+    {
+        isAtStorefront = false;
+        SceneManager.LoadScene("Inventory", LoadSceneMode.Additive);
+
+        ItemPlacer.isPlacing = false;
+        if (ItemPlacer.current != null)
+            ItemPlacer.delete();
+        staticMainPanel.SetActive(true);
+        staticInventoryPanel.SetActive(false);
+    }
 }

@@ -14,6 +14,7 @@ public class ItemPlacer : MonoBehaviour
     public Transform parent; // container that item will be placed in
     public static GameObject current; // current gameObject being manipulated
     public static Vector3 tile; // The current selected tile
+    public bool isPlaceable = false;
 
 	// Update is called once per frame
 	void Update ()
@@ -38,10 +39,17 @@ public class ItemPlacer : MonoBehaviour
                     StoreItems s = current.GetComponent<Items>().s; // grab item data script from gameObject
 
                     // Determine color of item depending on if it is in a valid spot or not
-                    if (!Obsticals.willAddBlock(tile.x, tile.y, s.width, s.height, s.rowOffset, s.columnOffset))
+                    if (!Obsticals.willAddBlock(tile.x, tile.y, s.width, s.height, s.rowOffset, s.columnOffset) &&
+                        !(mouse.x == -1.5f && mouse.y == 5.5) && Obsticals.yToRow(mouse.y) <= 11)
+                    {
                         current.GetComponent<SpriteRenderer>().color = PlaceItem.color[1];
+                        isPlaceable = true;
+                    }
                     else
+                    {
                         current.GetComponent<SpriteRenderer>().color = PlaceItem.color[2];
+                        isPlaceable = false;
+                    }
                 }
             }
         }
@@ -55,7 +63,7 @@ public class ItemPlacer : MonoBehaviour
         // Store items obstical data into the obsticals array
         StoreItems s = current.GetComponent<Items>().s; // grab item data script from gameObject
 
-        if (!Obsticals.willAddBlock(tile.x, tile.y, s.width, s.height, s.rowOffset, s.columnOffset))
+        if (isPlaceable)
         {
             Obsticals.addObstical(tile.x, tile.y, s.width, s.height, s.rowOffset, s.columnOffset); // Add item to obstical array
             current.GetComponent<SpriteRenderer>().color = PlaceItem.color[0]; // Set color back to original
@@ -65,20 +73,23 @@ public class ItemPlacer : MonoBehaviour
             //Obsticals.displayAllObsticals(); // Debug: display obstical array
 
             current = null; // reset to null
+            isPlaceable = false;
         }
     }
 
     // Button Function
     // Rotates item clockwise
-    public void rotate()
+    public void rotate(int direction)
     {
         // Do nothing if item hasn't been placed yet
         if (current != null)
         {
             // Cycle through rotationState
-            rotationState++;
+            rotationState += direction;
             if (rotationState > 3)
                 rotationState = 0;
+            if (rotationState < 0)
+                rotationState = 3;
 
             // Rotate object 90 degrees
             current.transform.eulerAngles = new Vector3(0, 0, rotationState * -90);
