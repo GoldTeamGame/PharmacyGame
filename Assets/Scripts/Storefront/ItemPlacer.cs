@@ -1,6 +1,6 @@
 ﻿// File: ItemPlacer
-// Version 1.0.3
-// Last Updated: 3/6/19
+// Version 1.0.4
+// Last Updated: 3/11/19
 // Authors: Alexander Jacks
 // Description: Handles placing items once an item is selected from the inventory
 
@@ -20,6 +20,7 @@ public class ItemPlacer : MonoBehaviour
     {
 	    if (isPlacing)
         {
+
             if (Input.GetMouseButtonDown(0))
             {
                 Vector3 mouse = CoordinateTracker.getMousePosition(); // Get tile selected
@@ -33,6 +34,14 @@ public class ItemPlacer : MonoBehaviour
                     Destroy(current);
                     current = InsertItems.instantiateObject(PlaceItem.staticItem, parent, tile);
                     current.transform.eulerAngles = new Vector3(0, 0, rotationState * -90); // Set rotation
+
+                    StoreItems s = current.GetComponent<Items>().s; // grab item data script from gameObject
+
+                    // Determine color of item depending on if it is in a valid spot or not
+                    if (!Obsticals.willAddBlock(tile.x, tile.y, s.width, s.height, s.rowOffset, s.columnOffset))
+                        current.GetComponent<SpriteRenderer>().color = PlaceItem.color[1];
+                    else
+                        current.GetComponent<SpriteRenderer>().color = PlaceItem.color[2];
                 }
             }
         }
@@ -49,6 +58,7 @@ public class ItemPlacer : MonoBehaviour
         if (!Obsticals.willAddBlock(tile.x, tile.y, s.width, s.height, s.rowOffset, s.columnOffset))
         {
             Obsticals.addObstical(tile.x, tile.y, s.width, s.height, s.rowOffset, s.columnOffset); // Add item to obstical array
+            current.GetComponent<SpriteRenderer>().color = PlaceItem.color[0]; // Set color back to original
             InsertItems.generate(current, s); // add s to Globals_Items.storeData
             CustomerController.repath();
 
