@@ -20,6 +20,8 @@ public class InsertItems : MonoBehaviour
         if (Globals_Items.storeData == null)
             Globals_Items.storeData = new List<StoreItems>();
 
+        Globals_Items.objects = new List<GameObject>(); // must create gameObject list every time
+
         // Copy non-static appearanceList into staticAppearanceList
         staticItemList = new GameObject[itemList.Length];
         for (int i = 0; i < itemList.Length; i++)
@@ -35,7 +37,10 @@ public class InsertItems : MonoBehaviour
             GameObject go = null;
             for (int j = 0; j < staticItemList.Length; j++)
                 if (Globals_Items.storeData[i].name.Equals(staticItemList[j].name))
+                {
                     go = staticItemList[j];
+                    break;
+                }
 
             // Instantiate game object if it was found in the list
             if (go != null)
@@ -62,6 +67,7 @@ public class InsertItems : MonoBehaviour
         go.transform.parent = parent;
         go.transform.localPosition = position;
         go.transform.localScale = new Vector3(1f, 1f, 0);
+
         return go;
     }
 
@@ -73,6 +79,7 @@ public class InsertItems : MonoBehaviour
         s.locationY = item.transform.localPosition.y;
         s.rotationZ = item.transform.eulerAngles.z;
 
+        Globals_Items.objects.Add(item);
         Globals_Items.storeData.Add(s); // add cd to Globals list
     }
 }

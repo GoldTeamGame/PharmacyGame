@@ -61,9 +61,10 @@ public class SceneChanger : MonoBehaviour
     public void backToStorefront()
     {
         // Return from Inventory placement back to normal storefront
-        if (currentScene.Equals("Inventory") && ItemPlacer.isPlacing)
+        if (ItemPlacer.isPlacing || ItemPlacer.isSelecting)
         {
             ItemPlacer.isPlacing = false;
+            ItemPlacer.isSelecting = false;
             if (ItemPlacer.current != null)
                 ItemPlacer.delete();
             staticInventoryPanel.SetActive(false);
@@ -103,6 +104,7 @@ public class SceneChanger : MonoBehaviour
         SceneManager.LoadScene("Inventory", LoadSceneMode.Additive);
 
         ItemPlacer.isPlacing = false;
+        ItemPlacer.isSelecting = false;
         if (ItemPlacer.current != null)
             ItemPlacer.delete();
         staticMainPanel.SetActive(true);

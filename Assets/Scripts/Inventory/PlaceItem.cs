@@ -11,14 +11,22 @@ public class PlaceItem : MonoBehaviour {
 
     public static GameObject staticItem = null;
     public static Color[] color = new Color[3]; // 0 = original, 1 = transparent, 2 = invalid
+    public static bool isExisting = false;
 
     // Set staticItem as item so that object can be accessed from ItemPlacer
     public void place(GameObject item)
+    {
+        setColors(item);
+        ItemPlacer.isPlacing = true; // Go into ItemPlacer mode
+        ItemPlacer.isPlaced = false;
+        isExisting = false;
+    }
+
+    public static void setColors(GameObject item)
     {
         staticItem = item;
         color[0] = staticItem.GetComponent<SpriteRenderer>().color;
         color[1] = new Color(color[0].r, color[0].g, color[0].b, 0.5f);
         color[2] = new Color(1, 0, 0);
-        ItemPlacer.isPlacing = true; // Go into ItemPlacer mode
     }
 }

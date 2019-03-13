@@ -3436,6 +3436,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 597789906}
   isPlaceable: 0
+  button:
+  - {fileID: 184863443}
+  - {fileID: 1554950059}
+  - {fileID: 1597096516}
+  - {fileID: 1797243815}
 --- !u!114 &670421615
 MonoBehaviour:
   m_ObjectHideFlags: 0

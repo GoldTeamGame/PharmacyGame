@@ -129,6 +129,24 @@ public class Obsticals : MonoBehaviour
         return isBlocked;
     }
 
+    public static void removeObstical(int index)
+    {
+        //Obsticals.addObstical(tile.x, tile.y, s.width, s.height, s.rowOffset, s.columnOffset); // Add item to obstical array
+        for (int i = 0; i < obstical.Length; i++)
+            for (int j = 0; j < obstical[0].Length; j++)
+                obstical[i][j] = false;
+
+        int numberOfItems = Globals_Items.storeData.Count;
+        for (int i = 0; i < numberOfItems; i++)
+        {
+            if (i != index)
+            {
+                StoreItems s = Globals_Items.storeData[i];
+                addObstical(s.locationX, s.locationY, s.width, s.height, s.rowOffset, s.columnOffset);
+            }
+        }
+    }
+
     // Show text visualization of obsticals in bool array
     public static void displayAllObsticals()
     {

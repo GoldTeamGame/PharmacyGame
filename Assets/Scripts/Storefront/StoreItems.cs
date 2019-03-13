@@ -33,4 +33,9 @@ public class StoreItems
     public int height; // height of object (used for obstical detection)
     public int rowOffset; // shift left with - and right with +
     public int columnOffset; // shift up with - and down with +
+
+    public bool isItem(float x, float y)
+    {
+        return (locationX == x && locationY == y);
+    }
 }
