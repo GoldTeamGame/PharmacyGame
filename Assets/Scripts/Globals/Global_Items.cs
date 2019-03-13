@@ -1,6 +1,6 @@
 ﻿// File: Globals_Items
-// Version: 1.0
-// Last Updated: 2/21/19
+// Version: 1.0.2
+// Last Updated: 3/12/19
 // Authors: Ross Burnworth
 // Description: Contains Global variables and functions relevent to items
 

@@ -1,6 +1,6 @@
 ﻿// File: InsertItems
-// Version: 1.0.7
-// Last Updated: 3/2/19
+// Version: 1.0.8
+// Last Updated: 3/13/19
 // Authors: Ross Burnworth, Alexander Jacks
 // Description: Spawns items into game world
 

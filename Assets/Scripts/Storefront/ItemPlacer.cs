@@ -1,6 +1,6 @@
 ﻿// File: ItemPlacer
-// Version 1.0.4
-// Last Updated: 3/11/19
+// Version 1.0.5
+// Last Updated: 3/13/19
 // Authors: Alexander Jacks
 // Description: Handles placing items once an item is selected from the inventory
 

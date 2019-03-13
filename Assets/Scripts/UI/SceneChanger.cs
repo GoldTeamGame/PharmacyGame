@@ -1,6 +1,6 @@
 ﻿// File: SceneChanger
-// Version: 1.0.4
-// Last Updated: 2/24/19
+// Version: 1.0.5
+// Last Updated: 3/13/19
 // Authors: Alexander Jacks, Dylan Cyphers
 // Description: Has button functions to change scenes
 
@@ -18,6 +18,9 @@ public class SceneChanger : MonoBehaviour
     public GameObject inventoryPanel;
     public static GameObject staticMainPanel;
     public static GameObject staticInventoryPanel;
+    private GameObject currentButton;
+    private Color originalColor;
+
 
     public void Start()
     {
@@ -33,6 +36,15 @@ public class SceneChanger : MonoBehaviour
         Globals.inEditMode = false;
         // Disable hide/show button
         //hideShow.gameObject.SetActive(false);
+
+        // If a button is already selected, then reset its color before continuing
+        if (currentButton != null)
+            currentButton.GetComponent<Image>().color = originalColor;
+
+        // Set current button, save its color, and then set its new color
+        currentButton = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+        originalColor = currentButton.GetComponent<Image>().color;
+        currentButton.GetComponent<Image>().color = new Color(0.8f, 0.8f, 0.8f);
 
         // Enable back button
         back.gameObject.SetActive(true);
@@ -82,6 +94,9 @@ public class SceneChanger : MonoBehaviour
             //hideShow.gameObject.SetActive(true); // re-activate hide/show button
             back.gameObject.SetActive(false); // de-activate backToStorefront button
         }
+
+        currentButton.GetComponent<Image>().color = originalColor;
+        currentButton = null;
     }
 
     //called when placing an item from the inventory into the storefront

@@ -1,6 +1,6 @@
 ﻿// File: PlaceItem
-// Version: 1.0.2
-// Last Updated: 3/11/19
+// Version: 1.0.3
+// Last Updated: 3/13/19
 // Authors: Alexander Jacks
 // Description: Script placed on an inventory button which sends 
 //      player to storefront to place the item corresponding to the button
