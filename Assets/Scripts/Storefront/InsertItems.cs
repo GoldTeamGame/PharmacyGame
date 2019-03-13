@@ -58,6 +58,8 @@ public class InsertItems : MonoBehaviour
         go.transform.localPosition = position;
         go.transform.localScale = new Vector3(1f, 1f, 0);
         go.transform.eulerAngles = new Vector3(0, 0, rotation);
+
+        Globals_Items.objects.Add(go);
     }
 
     // Instantiate and return game object

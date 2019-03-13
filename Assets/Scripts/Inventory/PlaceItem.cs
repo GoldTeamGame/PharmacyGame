@@ -11,15 +11,14 @@ public class PlaceItem : MonoBehaviour {
 
     public static GameObject staticItem = null;
     public static Color[] color = new Color[3]; // 0 = original, 1 = transparent, 2 = invalid
-    public static bool isExisting = false;
+    public static bool needsPlacing;
 
     // Set staticItem as item so that object can be accessed from ItemPlacer
     public void place(GameObject item)
     {
         setColors(item);
         ItemPlacer.isPlacing = true; // Go into ItemPlacer mode
-        ItemPlacer.isPlaced = false;
-        isExisting = false;
+        needsPlacing = true;
     }
 
     public static void setColors(GameObject item)

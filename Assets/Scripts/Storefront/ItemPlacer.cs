@@ -9,24 +9,36 @@ using UnityEngine.UI;
 
 public class ItemPlacer : MonoBehaviour
 {
-    public static bool isPlacing = false; // start as not placing item
-    public static bool isSelecting = false; // start as not selecting item
+    public static bool isPlacing = false; // state is true when player is trying to place an item on storefront
+    public static bool isValidPlacement = false; // state is true when item is in a valid location to be placed
+    public static bool isSelecting = false; // state is true when the player can select an item
+
     public static int rotationState = 0; // (0 = normal, -90 = down, -180 = left, -270 = up)
 
     public Transform parent; // container that item will be placed in
     public static GameObject current; // current gameObject being manipulated
-    public static Vector3 tile; // The current selected tile
-    public bool isPlaceable = false;
-    public static bool isPlaced = false;
-
-    public Button[] button;
+    public Vector3 tile; // The current selected tile
+    
+    public Button[] button; // Holds all buttons on the inventory UI
 
 	// Update is called once per frame
 	void Update ()
     {
 	    if (isPlacing)
         {
+            // Spawn item at entrance (space is guarrenteed to be available)
+            if (PlaceItem.needsPlacing)
+            {
+                current = InsertItems.instantiateObject(PlaceItem.staticItem, parent, new Vector3(-1.5f, 5.5f)); // spawn item at entrance
+                current.transform.eulerAngles = new Vector3(0, 0, rotationState * -90); // Set rotation
+                current.GetComponent<SpriteRenderer>().color = PlaceItem.color[2]; // set color to invalid
+                isValidPlacement = false; // set placement state to false
+                PlaceItem.needsPlacing = false; // item has been spawned, so this if-statement will not be accessed until a new
+                                                // item is selected from inventory list 
+            }
+
             setButtonState(true);
+
             if (Input.GetMouseButtonDown(0))
             {
                 Vector3 mouse = CoordinateTracker.getMousePosition(); // Get tile selected
@@ -36,18 +48,8 @@ public class ItemPlacer : MonoBehaviour
                 {
                     tile = mouse; // set tile
 
-                    // Spawn item or update its position
-                    if (isPlaced)
-                    {
-                        current.transform.localPosition = tile;
-                    }
-                    //Destroy(current);
-                    else
-                    {
-                        current = InsertItems.instantiateObject(PlaceItem.staticItem, parent, tile);
-                        current.transform.eulerAngles = new Vector3(0, 0, rotationState * -90); // Set rotation
-                        isPlaced = true;
-                    }
+                    // Move gameObject to location
+                    current.transform.localPosition = tile;
 
                     StoreItems s = current.GetComponent<Items>().s; // grab item data script from gameObject
 
@@ -56,12 +58,12 @@ public class ItemPlacer : MonoBehaviour
                         !(mouse.x == -1.5f && mouse.y == 5.5) && Obsticals.yToRow(mouse.y) <= 11)
                     {
                         current.GetComponent<SpriteRenderer>().color = PlaceItem.color[1];
-                        isPlaceable = true;
+                        isValidPlacement = true;
                     }
                     else
                     {
                         current.GetComponent<SpriteRenderer>().color = PlaceItem.color[2];
-                        isPlaceable = false;
+                        isValidPlacement = false;
                     }
                 }
             }
@@ -87,20 +89,23 @@ public class ItemPlacer : MonoBehaviour
                         }
                     }
 
+                    // "Select" the object if an item was selected
+                    // (Index will remain -1 no item was selected)
                     if (index > -1)
                     {
-                        Debug.Log(index);
-                        current = Globals_Items.objects[index].gameObject;
+                        current = Globals_Items.objects[index].gameObject; // Set current to selected gameObject
+
+                        // Remove gameObject and data from lists and obstical array
                         Obsticals.removeObstical(index);
                         Globals_Items.storeData.RemoveAt(index);
                         Globals_Items.objects.RemoveAt(index);
-                        PlaceItem.setColors(current);
-                        CustomerController.repath();
-                        current.GetComponent<SpriteRenderer>().color = PlaceItem.color[1];
-                        isPlaceable = true;
-                        isPlacing = true;
-                        isSelecting = false;
-                        isPlaced = true;
+
+                        CustomerController.repath(); // tell customers to plan new paths now that an obstical has been removed
+
+                        PlaceItem.setColors(current); // set the color array values for current
+                        current.GetComponent<SpriteRenderer>().color = PlaceItem.color[1]; // set current color state to transparent
+
+                        setInteractionState(true, false); // change state to "Placing"
                     }
                 }
             }
@@ -115,11 +120,11 @@ public class ItemPlacer : MonoBehaviour
         // Store items obstical data into the obsticals array
         StoreItems s = current.GetComponent<Items>().s; // grab item data script from gameObject
 
-        if (isPlaceable)
+        if (isValidPlacement)
         {
             setButtonState(false);
             current.GetComponent<SpriteRenderer>().color = PlaceItem.color[0]; // Set color back to original
-            Obsticals.addObstical(tile.x, tile.y, s.width, s.height, s.rowOffset, s.columnOffset); // Add item to obstical array
+            Obsticals.addObstical(current.transform.localPosition.x, current.transform.localPosition.y, s.width, s.height, s.rowOffset, s.columnOffset); // Add item to obstical array
 
             InsertItems.generate(current, s); // add s to Globals_Items.storeData
 
@@ -128,12 +133,9 @@ public class ItemPlacer : MonoBehaviour
             //Obsticals.displayAllObsticals(); // Debug: display obstical array
 
             current = null; // reset to null
-            isPlaceable = false;
-            isPlacing = false;
             PlaceItem.staticItem = null;
-            isSelecting = true;
-            isPlaced = false;
-            PlaceItem.isExisting = true;
+
+            setInteractionState(false, true); // Change state to "Selecting"
         }
     }
 
@@ -156,6 +158,8 @@ public class ItemPlacer : MonoBehaviour
         }
     }
 
+    // Activate buttons when set to true
+    // De-activates buttons when set to false
     private void setButtonState(bool state)
     {
         float transparency = (state) ? 1 : 0.5f;
@@ -167,7 +171,30 @@ public class ItemPlacer : MonoBehaviour
             button[i].enabled = state;
         }
     }
+
+    // True, False = "Placement" State (Player can move item around in storefront)
+    // False, True = "Selecting" State (Player can pick item up in storefront)
+    // False, False = "null" state (Interaction with storefront is no longer permitted)
+    public static void setInteractionState(bool placementState, bool selectionState)
+    {
+        isPlacing = placementState;
+        isValidPlacement = placementState;
+        
+        isSelecting = selectionState;
+    }
     
+    public void removeItem()
+    {
+        Destroy(current); // remove gameObject from storefront
+
+        // Set current selected object to null
+        current = null;
+        PlaceItem.staticItem = null;
+
+        setInteractionState(false, true); // change state to "Selecting"
+        setButtonState(false); // deactivate buttons
+    }
+
     // Destroy gameObject
     public static void delete()
     {

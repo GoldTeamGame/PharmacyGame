@@ -46,17 +46,17 @@ public class Obsticals : MonoBehaviour
             column = 0;
 
         for (int i = row; i < heightLocation && i < obstical.Length; i++)
-        {
-            obstical[i][column] = true;
             for (int j = column; j < widthLocation && j < obstical[0].Length; j++)
                 obstical[i][j] = true;
-        }
     }
 
     public static bool isObstical(float x, float y)
     {
         int column = xToColumn(x);
         int row = yToRow(y);
+
+        if (row >= obstical.Length || row < 0 || column >= obstical[0].Length || column < 0)
+            return true;
 
         //Debug.Log("Location: " + locationY + " " + locationX);
         //Debug.Log("Array: " + y + " " + x);
@@ -65,6 +65,9 @@ public class Obsticals : MonoBehaviour
 
     public static bool isObstical(int row, int column)
     {
+        if (row >= obstical.Length || row < 0 || column >= obstical[0].Length || column < 0)
+            return true;
+
         return obstical[row][column];
     }
 

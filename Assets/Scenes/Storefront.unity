@@ -3435,7 +3435,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 597789906}
-  isPlaceable: 0
+  tile: {x: 0, y: 0, z: 0}
   button:
   - {fileID: 184863443}
   - {fileID: 1554950059}
@@ -9840,7 +9840,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 670421614}
-        m_MethodName: delete
+        m_MethodName: removeItem
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

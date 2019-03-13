@@ -52,7 +52,7 @@ public class ProceduralGenerator : MonoBehaviour
 
     private void instantiateObject(Vector3 position)
     {
-        GameObject go = Instantiate(customer, position, spawnPoint.rotation, parent); // spawn the customer
+        Instantiate(customer, position, spawnPoint.rotation, parent); // spawn the customer
     }
 
     // Generate customer data

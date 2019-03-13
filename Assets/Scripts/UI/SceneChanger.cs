@@ -63,8 +63,7 @@ public class SceneChanger : MonoBehaviour
         // Return from Inventory placement back to normal storefront
         if (ItemPlacer.isPlacing || ItemPlacer.isSelecting)
         {
-            ItemPlacer.isPlacing = false;
-            ItemPlacer.isSelecting = false;
+            ItemPlacer.setInteractionState(false, false); // Set to "null" state
             if (ItemPlacer.current != null)
                 ItemPlacer.delete();
             staticInventoryPanel.SetActive(false);
@@ -92,6 +91,10 @@ public class SceneChanger : MonoBehaviour
         isAtStorefront = true; 
         SceneManager.UnloadSceneAsync("Inventory"); // unload inventory scene
         ItemPlacer.rotationState = 0;
+
+        // If staticItem is null, that means player will enter inventory placement mode in its "Selection" state
+        if (PlaceItem.staticItem == null)
+            ItemPlacer.setInteractionState(false, true);
 
         // Replace main bottom panel with the inventory placement panel
         staticMainPanel.SetActive(false);
