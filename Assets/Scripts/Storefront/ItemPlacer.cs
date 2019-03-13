@@ -70,6 +70,7 @@ public class ItemPlacer : MonoBehaviour
         }
         else if (isSelecting)
         {
+            setButtonState(false);
             if (Input.GetMouseButtonDown(0))
             {
                 Vector3 mouse = CoordinateTracker.getMousePosition(); // Get tile selected
