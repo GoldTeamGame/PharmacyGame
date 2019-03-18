@@ -1,6 +1,6 @@
 ﻿/* 
  * Most Recent Author: Dylan Cyphers
- * Version 1.1
+ * Version 1.2
  * Date: 3/6/2019
  * Description: Displays the inventory items alongside their amount. The items displayed are both drugs and employees.
  * 
@@ -90,9 +90,15 @@ public class DisplayInventory : MonoBehaviour {
             employeeAtext.gameObject.SetActive(false);
             employeeBtext.gameObject.SetActive(false);
             employeeCtext.gameObject.SetActive(false);
-            fluShotBtn.gameObject.SetActive(true);
+            if (Globals.unlockedFluShotStation)
+            {
+                fluShotBtn.gameObject.SetActive(true);
+            }
             shelfBtn.gameObject.SetActive(true);
-            vacBtn.gameObject.SetActive(true);
+            if (Globals.unlockedVaccineStation)
+            {
+                vacBtn.gameObject.SetActive(true);
+            }
         }
 
 

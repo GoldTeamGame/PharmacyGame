@@ -934,7 +934,7 @@ GameObject:
   - component: {fileID: 637508948}
   - component: {fileID: 637508951}
   m_Layer: 5
-  m_Name: Item_Set_B_Button
+  m_Name: Vitamins_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1572,7 +1572,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Merchandise Set B: 10p'
+  m_Text: 'Vitamins: 10p'
 --- !u!222 &992584582
 CanvasRenderer:
   m_ObjectHideFlags: 0

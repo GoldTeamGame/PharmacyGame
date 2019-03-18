@@ -1,6 +1,6 @@
 ﻿/* 
  * Most Recent Author: Dylan Cyphers
- * Version 1.3.3
+ * Version 1.3.4
  * Date: 2/24/2019
  * Description: Game Controller script to handle flags and data used across the entire game. Allows for scene-to-scene communication.
  * 
@@ -30,6 +30,9 @@ public static class Globals
     public static int priceC = 10;
     public static string medicationC = "Lyrica";
 
+    //Vitamin resource for shelf mechanic. No functionality as of now. 
+    public static int vitamins = 0; 
+
     /* Hypothetical organization for adding drugD, E, F... Would push drugs made in a form into these data structures
     public const int NUM_DRUGS = 3;
     public static string[] all_drugs = new string[NUM_DRUGS];
@@ -51,8 +54,8 @@ public static class Globals
     public static bool inEditMode = false;
 
     //Flags for unlocked materials from expansions
-    public static bool unlockedB = false;
-    public static bool unlockedFluShotStation = true; //TESTING
+    public static bool unlockedVitamins = false;
+    public static bool unlockedFluShotStation = false; //TESTING
     public static bool unlockedVaccineStation = false;
     public static bool unlockedC = false;
     public static int employeeCap = 1;
@@ -60,7 +63,7 @@ public static class Globals
     public static bool storeC = false;
 
     //Costs for expansions
-    public static int platB = 10;
+    public static int platVit = 10;
     public static int platFlu = 5;
     public static int platVac = 10;
     public static int platC = 15;
