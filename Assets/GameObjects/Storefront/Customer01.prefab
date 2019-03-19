@@ -18,10 +18,11 @@ GameObject:
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4822457899976336}
+  - component: {fileID: 224640339343289420}
   - component: {fileID: 212013543056412776}
   - component: {fileID: 114835760831164816}
   - component: {fileID: 114603309364088832}
+  - component: {fileID: 61606095869731464}
   m_Layer: 0
   m_Name: Customer01
   m_TagString: Untagged
@@ -29,19 +30,31 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4822457899976336
-Transform:
+--- !u!61 &61606095869731464
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1909597689119352}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.37, y: -2.85, z: -0.10546875}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.35, y: 0.6}
+    newSize: {x: 0.35, y: 0.6}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.35, y: 0.6}
+  m_EdgeRadius: 0
 --- !u!114 &114603309364088832
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -53,6 +66,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc0fc55d36b64ec4984bc1ae5d4d9809, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
+  limit: 20
+  currentAmount: 0
+  isBuying: 0
+  isLeaving: 0
+  isFinding: 0
 --- !u!114 &114835760831164816
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -64,6 +83,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4ea5f9043d0ce4faead24c2c3cde7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cd:
+    name: 
+    speed: 0
+    mood: 0
+    thoughts: 
+    desires: []
+    isAlive: 0
+    isBuying: 0
+    isLeaving: 0
+    isFinding: 0
+    appearance: 0
+    locationX: 0
+    locationY: 0
+    isMoving: 0
+    destLocationX: 0
+    destLocationY: 0
+    pLocationX: 0
+    pLocationY: 0
 --- !u!212 &212013543056412776
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -110,3 +147,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!224 &224640339343289420
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1909597689119352}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -11.37, y: -2.85}
+  m_SizeDelta: {x: 0.35, y: 0.6}
+  m_Pivot: {x: 0.5, y: 0.5}

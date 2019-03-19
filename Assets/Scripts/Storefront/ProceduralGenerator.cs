@@ -90,7 +90,7 @@ public class ProceduralGenerator : MonoBehaviour
     private static void generateDesires(ref CustomerData cd)
     {
         int maxNumberOfDesires = 3;
-        int numberOfDesires = Random.Range(1, maxNumberOfDesires);
+        int numberOfDesires = Random.Range(1, maxNumberOfDesires + 1);
 
         cd.desires = new string[numberOfDesires];
 

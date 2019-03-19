@@ -21,71 +21,71 @@ public class TabController : MonoBehaviour {
 
     private int iTabSelected = 0;
 
-    private void OnGUI()
-    {
-        GUILayout.BeginVertical();
-        {
-            GUILayout.Space(40); //go below the gold/plat bar
-            GUILayout.BeginHorizontal();
-            {
-                if (GUILayout.Toggle(iTabSelected == 0, "Stock", EditorStyles.toolbarButton))
-                {
-                    iTabSelected = 0;
-                }
+    //private void OnGUI()
+    //{
+    //    GUILayout.BeginVertical();
+    //    {
+    //        GUILayout.Space(40); //go below the gold/plat bar
+    //        GUILayout.BeginHorizontal();
+    //        {
+    //            if (GUILayout.Toggle(iTabSelected == 0, "Stock", EditorStyles.toolbarButton))
+    //            {
+    //                iTabSelected = 0;
+    //            }
 
-                if (GUILayout.Toggle(iTabSelected == 1, "Employees", EditorStyles.toolbarButton))
-                {
-                    iTabSelected = 1;
-                }
+    //            if (GUILayout.Toggle(iTabSelected == 1, "Employees", EditorStyles.toolbarButton))
+    //            {
+    //                iTabSelected = 1;
+    //            }
 
-                if (GUILayout.Toggle(iTabSelected == 2, "Structures", EditorStyles.toolbarButton))
-                {
-                    iTabSelected = 2;
-                }
-            }
-            GUILayout.EndHorizontal();
+    //            if (GUILayout.Toggle(iTabSelected == 2, "Structures", EditorStyles.toolbarButton))
+    //            {
+    //                iTabSelected = 2;
+    //            }
+    //        }
+    //        GUILayout.EndHorizontal();
 
-            DoGUI(iTabSelected);
-        }
-    }
+    //        DoGUI(iTabSelected);
+    //    }
+    //}
 
-    private void DoGUI(int iTabSelected)
-    {
-        if(iTabSelected == 0) //0 = Stock
-        {
-            GUILayout.Space(10);
-            GUILayout.BeginVertical();
-            {
-                GUILayout.Button("Stock.Label1");
-                GUILayout.Button("Stock.Label2");
-                /*
-                 * Add scrollbar
-                 * Call Display Inventory? OR
-                 * Loop 0 .. All Drugs
-                 * Add label to the scrollbar
-                 */
-            }
-            GUILayout.EndVertical();
-        }
+    //private void DoGUI(int iTabSelected)
+    //{
+    //    if(iTabSelected == 0) //0 = Stock
+    //    {
+    //        GUILayout.Space(10);
+    //        GUILayout.BeginVertical();
+    //        {
+    //            GUILayout.Button("Stock.Label1");
+    //            GUILayout.Button("Stock.Label2");
+    //            /*
+    //             * Add scrollbar
+    //             * Call Display Inventory? OR
+    //             * Loop 0 .. All Drugs
+    //             * Add label to the scrollbar
+    //             */
+    //        }
+    //        GUILayout.EndVertical();
+    //    }
 
-        if (iTabSelected == 1) //1 = Employees
-        {
-            GUILayout.Space(10);
-            GUILayout.BeginVertical();
-            {
-                //loop to add employees
-            }
-            GUILayout.EndVertical();
-        }
+    //    if (iTabSelected == 1) //1 = Employees
+    //    {
+    //        GUILayout.Space(10);
+    //        GUILayout.BeginVertical();
+    //        {
+    //            //loop to add employees
+    //        }
+    //        GUILayout.EndVertical();
+    //    }
 
-        if (iTabSelected == 2) //2 = Structures
-        {
-            GUILayout.Space(10);
-            GUILayout.BeginVertical();
-            {
-                //loop to add structures
-            }
-            GUILayout.EndVertical();
-        }
-    }
+    //    if (iTabSelected == 2) //2 = Structures
+    //    {
+    //        GUILayout.Space(10);
+    //        GUILayout.BeginVertical();
+    //        {
+    //            //loop to add structures
+    //        }
+    //        GUILayout.EndVertical();
+    //    }
+    //}
 }

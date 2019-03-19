@@ -17,6 +17,7 @@ public class CustomerController : MonoBehaviour
     public bool isBuying;
     public bool isLeaving;
     public bool isFinding;
+    public int wallet = 0;
 
 	void Start ()
     {
@@ -175,7 +176,8 @@ public class CustomerController : MonoBehaviour
                 isBuying = false;
                 GetComponent<Customer>().cd.isLeaving = true;
                 GetComponent<Customer>().cd.isBuying = false;
-                Globals.setGold(Globals.getGold() + Random.Range(1, 3));
+                Globals.setGold(Globals.getGold() + wallet);
+                wallet = 0;
                 isFinding = false;
                 GetComponent<Customer>().cd.isFinding = isFinding;
             }
@@ -388,6 +390,24 @@ public class CustomerController : MonoBehaviour
                 // Copy desires into newDesires
                 for (int i = 0; i < newDesires.Length; i++)
                     newDesires[i] = cd.desires[i];
+
+                Debug.Log(cd.desires[cd.desires.Length - 1]);
+                if (cd.desires[cd.desires.Length - 1].Equals(Globals.medicationA) && Globals.drugA > 0)
+                {
+                    Globals.drugA -= 1;
+                    wallet += Globals.priceA + (Globals.priceA / 2);
+                }
+                else if (cd.desires[cd.desires.Length - 1].Equals(Globals.medicationB) && Globals.drugB > 0)
+                {
+                    Globals.drugB -= 1;
+                    wallet += Globals.priceB + (Globals.priceB / 2);
+                }
+                else if (cd.desires[cd.desires.Length - 1].Equals(Globals.medicationC) && Globals.drugC > 0)
+                {
+                    Globals.drugC -= 1;
+                    wallet += Globals.priceC + (Globals.priceC / 2);
+                }
+
 
                 // Replaced desires currently in customerData with newDesires
                 GetComponent<Customer>().cd.desires = newDesires;

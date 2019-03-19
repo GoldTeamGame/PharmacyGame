@@ -15,7 +15,7 @@ public static class Globals
 {
 
     //Player currencies
-    public static int playerGold;
+    public static int playerGold = 50;
     public static int playerPlatinum;
 
     //Player inventory of drugs (in "units") and price (in gold)
@@ -29,6 +29,9 @@ public static class Globals
     public static int drugC = 0;
     public static int priceC = 10;
     public static string medicationC = "Lyrica";
+    public static int vitaminA = 0;
+    public static int vitaminAPrice = 2;
+    public static string vitaminAName = "Vitamin A";
 
     //Vitamin resource for shelf mechanic. No functionality as of now. 
     public static int vitamins = 0; 
