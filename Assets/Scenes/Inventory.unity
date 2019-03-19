@@ -367,6 +367,81 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 158305515}
   m_CullTransparentMesh: 0
+--- !u!1 &178785526
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 178785527}
+  - component: {fileID: 178785528}
+  - component: {fileID: 178785529}
+  m_Layer: 5
+  m_Name: VitaminA
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &178785527
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 178785526}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -8325}
+  m_LocalScale: {x: 0.6549, y: 0.65027493, z: 60.47187}
+  m_Children: []
+  m_Father: {fileID: 2138150610}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 380, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &178785528
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 178785526}
+  m_CullTransparentMesh: 0
+--- !u!114 &178785529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 178785526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 45
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 4
+    m_MaxSize: 65
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Vitamin A
 --- !u!1 &303783153
 GameObject:
   m_ObjectHideFlags: 0
@@ -1371,7 +1446,7 @@ RectTransform:
   m_LocalScale: {x: 0.6549001, y: 0.65027493, z: 60.47187}
   m_Children: []
   m_Father: {fileID: 2138150610}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1446,7 +1521,7 @@ RectTransform:
   m_LocalScale: {x: 0.6549001, y: 0.65027493, z: 60.47187}
   m_Children: []
   m_Father: {fileID: 2138150610}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1529,7 +1604,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 995819741}
   m_Direction: 2
   m_Value: 0.99999994
-  m_Size: 0.56
+  m_Size: 0.5034862
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2094,6 +2169,7 @@ MonoBehaviour:
   drugAtext: {fileID: 1445169704}
   drugBtext: {fileID: 303783154}
   drugCtext: {fileID: 357924443}
+  vitaminAtext: {fileID: 178785529}
   employeeAtext: {fileID: 867711641}
   employeeBtext: {fileID: 2145714591}
   employeeCtext: {fileID: 847686121}
@@ -3163,6 +3239,7 @@ RectTransform:
   - {fileID: 1445169703}
   - {fileID: 303783156}
   - {fileID: 357924445}
+  - {fileID: 178785527}
   - {fileID: 867711643}
   - {fileID: 2145714593}
   - {fileID: 847686123}
@@ -3311,7 +3388,7 @@ RectTransform:
   m_LocalScale: {x: 0.6549001, y: 0.65027493, z: 60.47187}
   m_Children: []
   m_Father: {fileID: 2138150610}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

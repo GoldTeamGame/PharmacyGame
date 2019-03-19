@@ -7,6 +7,7 @@ public class ShelfPanel : MonoBehaviour
 {
     public GameObject drugPanel;
     GameObject selectedButton;
+    public Sprite sprite;
 
     private void Update()
     {
@@ -15,6 +16,7 @@ public class ShelfPanel : MonoBehaviour
             selectedButton.GetComponentInChildren<Text>().text = DrugSelectPanel.selectedDrug;
             DrugSelectPanel.selectedDrug = "";
             selectedButton = null;
+            ShowGameObject.selectedObject.GetComponent<SpriteRenderer>().sprite = sprite;
         }
     }
     public void remove(GameObject go)

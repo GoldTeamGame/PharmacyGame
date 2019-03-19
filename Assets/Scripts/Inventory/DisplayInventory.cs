@@ -18,6 +18,7 @@ public class DisplayInventory : MonoBehaviour {
     public Text drugAtext;
     public Text drugBtext;
     public Text drugCtext;
+    public Text vitaminAtext;
     public Text employeeAtext;
     public Text employeeBtext;
     public Text employeeCtext;
@@ -61,6 +62,7 @@ public class DisplayInventory : MonoBehaviour {
             drugAtext.gameObject.SetActive(true);
             drugBtext.gameObject.SetActive(true);
             drugCtext.gameObject.SetActive(true);
+            vitaminAtext.gameObject.SetActive(true);
             employeeAtext.gameObject.SetActive(false);
             employeeBtext.gameObject.SetActive(false);
             employeeCtext.gameObject.SetActive(false);
@@ -74,6 +76,7 @@ public class DisplayInventory : MonoBehaviour {
             drugAtext.gameObject.SetActive(false);
             drugBtext.gameObject.SetActive(false);
             drugCtext.gameObject.SetActive(false);
+            vitaminAtext.gameObject.SetActive(false);
             employeeAtext.gameObject.SetActive(true);
             employeeBtext.gameObject.SetActive(true);
             employeeCtext.gameObject.SetActive(true);
@@ -87,6 +90,7 @@ public class DisplayInventory : MonoBehaviour {
             drugAtext.gameObject.SetActive(false);
             drugBtext.gameObject.SetActive(false);
             drugCtext.gameObject.SetActive(false);
+            vitaminAtext.gameObject.SetActive(false);
             employeeAtext.gameObject.SetActive(false);
             employeeBtext.gameObject.SetActive(false);
             employeeCtext.gameObject.SetActive(false);
@@ -119,6 +123,7 @@ public class DisplayInventory : MonoBehaviour {
         drugAtext.text = Globals.medicationA + ": " + Globals.drugA.ToString() + " Units";
         drugBtext.text = Globals.medicationB + ": " + Globals.drugB.ToString() + " Units";
         drugCtext.text = Globals.medicationC + ": " + Globals.drugC.ToString() + " Units";
+        vitaminAtext.text = Globals.vitaminAName + ": " + Globals.vitaminA + " Units";
         if (Globals.hiredA)
         {
             employeeAtext.text = Globals.nameA + ": " + Globals.wageA.ToString() + "g/hr";
