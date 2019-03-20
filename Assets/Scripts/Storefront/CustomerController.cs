@@ -392,20 +392,20 @@ public class CustomerController : MonoBehaviour
                     newDesires[i] = cd.desires[i];
 
                 Debug.Log(cd.desires[cd.desires.Length - 1]);
-                if (cd.desires[cd.desires.Length - 1].Equals(Globals.medicationA) && Globals.drugA > 0)
+                if (cd.desires[cd.desires.Length - 1].Equals(Globals.drugList[0].name) && Globals.drugList[0].amount > 0)
                 {
-                    Globals.drugA -= 1;
-                    wallet += Globals.priceA + (Globals.priceA / 2);
+                    Globals.drugList[0].amount -= 1;
+                    wallet += Globals.drugList[0].price + (Globals.drugList[0].price / 2);
                 }
-                else if (cd.desires[cd.desires.Length - 1].Equals(Globals.medicationB) && Globals.drugB > 0)
+                else if (cd.desires[cd.desires.Length - 1].Equals(Globals.drugList[1].name) && Globals.drugList[1].amount > 0)
                 {
-                    Globals.drugB -= 1;
-                    wallet += Globals.priceB + (Globals.priceB / 2);
+                    Globals.drugList[1].amount -= 1;
+                    wallet += Globals.drugList[1].price + (Globals.drugList[1].price / 2);
                 }
-                else if (cd.desires[cd.desires.Length - 1].Equals(Globals.medicationC) && Globals.drugC > 0)
+                else if (cd.desires[cd.desires.Length - 1].Equals(Globals.drugList[2].name) && Globals.drugList[2].amount > 0)
                 {
-                    Globals.drugC -= 1;
-                    wallet += Globals.priceC + (Globals.priceC / 2);
+                    Globals.drugList[2].amount -= 1;
+                    wallet += Globals.drugList[2].price + (Globals.drugList[2].price / 2);
                 }
 
 

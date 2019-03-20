@@ -41,7 +41,7 @@ public class Game : MonoBehaviour
     //not used yet but might when go to monthly report
     public void Unpause()
     {
-      
+
         isPaused = false;
     }
 
@@ -82,6 +82,9 @@ public class Game : MonoBehaviour
     {
         //check if file exists
         //if so, read file and set global varables
+        Globals.generateDrugList(null);
+        Globals.generateOverCounterList(null);
+        Globals.generateEmployeeList(null);
         if (File.Exists(Application.persistentDataPath + path))
         {
             BinaryFormatter bf = new BinaryFormatter();
@@ -94,6 +97,9 @@ public class Game : MonoBehaviour
             Globals_Customer.setCustomers(save.cd, save.cd.Count);
             Globals_Items.setItems(save.si, save.si.Count);
             Obsticals.obstical = save.obstical;
+            Globals.generateDrugList(save.drugList);
+            Globals.generateOverCounterList(save.overCounterList);
+            Globals.generateEmployeeList(save.employeeList);
             Debug.Log("Game Loaded");
             Unpause();
         }
@@ -114,6 +120,9 @@ public class Game : MonoBehaviour
         save.cd = Globals_Customer.GetCustomers();
         save.si = Globals_Items.GetItems();
         save.obstical = Obsticals.obstical;
+        save.drugList = Globals.drugList;
+        save.overCounterList = Globals.overCounterList;
+        save.employeeList = Globals.employeeList;
 
         //return the object to write to the file
         return save;

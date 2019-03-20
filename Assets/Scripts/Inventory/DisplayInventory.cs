@@ -109,15 +109,15 @@ public class DisplayInventory : MonoBehaviour {
         currSprite = staticItems[0]; //testing
 
 
-        
-        drugAtext.text = Globals.medicationA + ": " + Globals.drugA.ToString() + " Units";
-        drugBtext.text = Globals.medicationB + ": " + Globals.drugB.ToString() + " Units";
-        drugCtext.text = Globals.medicationC + ": " + Globals.drugC.ToString() + " Units";
-        vitaminAtext.text = Globals.vitaminAName + ": " + Globals.vitaminA + " Units";
 
-        employeeAtext.text = Globals.nameA + ": " + Globals.wageA.ToString() + "Gold/Hour";
-        employeeBtext.text = Globals.nameB + ": " + Globals.wageB.ToString() + "Gold/Hour";
-        employeeCtext.text = Globals.nameC + ": " + Globals.wageC.ToString() + "Gold/Hour";
+        drugAtext.text = Globals.drugList[0].name + ": " + Globals.drugList[0].amount + " Units";
+        drugBtext.text = Globals.drugList[1].name + ": " + Globals.drugList[1].amount + " Units";
+        drugCtext.text = Globals.drugList[2].name + ": " + Globals.drugList[2].amount + " Units";
+        vitaminAtext.text = Globals.overCounterList[0].name + ": " + Globals.overCounterList[0].amount + " Units";
+
+        employeeAtext.text = Globals.employeeList[0].name + ": " + Globals.employeeList[0].wage + "g/hr";
+        employeeBtext.text = Globals.employeeList[1].name + ": " + Globals.employeeList[1].wage + "g/hr";
+        employeeCtext.text = Globals.employeeList[2].name + ": " + Globals.employeeList[2].wage + "g/hr";
 
     }
 }

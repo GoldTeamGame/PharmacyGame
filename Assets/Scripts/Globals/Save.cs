@@ -20,5 +20,9 @@ public class Save
     public List<StoreItems> si;
 
     public bool[][] obstical;
+
+    public List<Drug> drugList;
+    public List<Drug> overCounterList;
+    public List<Employee> employeeList;
     //public object shots { get; internal set; }
 }

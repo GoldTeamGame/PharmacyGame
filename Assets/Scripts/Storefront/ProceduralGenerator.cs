@@ -102,12 +102,12 @@ public class ProceduralGenerator : MonoBehaviour
         else if (numberOfDesires == 2)
         {
             cd.desires[0] = "Ventolin";
-            cd.desires[1] = "Vyvnase";
+            cd.desires[1] = "Vyvanse";
         }
         else if (numberOfDesires == 3)
         {
             cd.desires[0] = "Ventolin";
-            cd.desires[1] = "Vyvnase";
+            cd.desires[1] = "Vyvanse";
             cd.desires[2] = "Lyrica";
         }
             

@@ -70,24 +70,24 @@ public class DisplayShop : MonoBehaviour {
 
         
 
-        drugAtext.text = Globals.medicationA + ": " + Globals.priceA.ToString() + " Gold/Unit";
-        drugBtext.text = Globals.medicationB + ": " + Globals.priceB.ToString() + " Gold/Unit";
-        drugCtext.text = Globals.medicationC + ": " + Globals.priceC.ToString() + " Gold/Unit";
-        vitaminAtext.text = Globals.vitaminAName + ": " + Globals.vitaminAPrice.ToString() + " Gold/Unit";
+        drugAtext.text = Globals.drugList[0].name + ": " + Globals.drugList[0].price + " Gold/Unit";
+        drugBtext.text = Globals.drugList[1].name + ": " + Globals.drugList[1].price + " Gold/Unit";
+        drugCtext.text = Globals.drugList[2].name + ": " + Globals.drugList[2].price + " Gold/Unit";
+        vitaminAtext.text = Globals.overCounterList[0].name + ": " + Globals.overCounterList[0].price + " Gold/Unit";
 
-        if(!Globals.hiredA)
+        if(!Globals.employeeList[0].isUnlocked)
         {
-            employeeAtext.text = Globals.nameA + ": " + Globals.wageA.ToString() + " Gold/Hour";
-
-        }
-        if(!Globals.hiredB)
-        {
-            employeeBtext.text = Globals.nameB + ": " + Globals.wageB.ToString() + " Gold/Hour";
+            employeeAtext.text = Globals.employeeList[0].name + ": " + Globals.employeeList[0].wage + " Gold/Hour";
 
         }
-        if(!Globals.hiredC)
+        if(!Globals.employeeList[1].isUnlocked)
         {
-            employeeCtext.text = Globals.nameC + ": " + Globals.wageC.ToString() + " Gold/Hour";
+            employeeBtext.text = Globals.employeeList[1].name + ": " + Globals.employeeList[1].wage + " Gold/Hour";
+
+        }
+        if(!Globals.employeeList[2].isUnlocked)
+        {
+            employeeCtext.text = Globals.employeeList[2].name + ": " + Globals.employeeList[2].wage + " Gold/Hour";
         }
     }
 }

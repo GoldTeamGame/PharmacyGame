@@ -13,28 +13,97 @@ using UnityEngine.UI;
 
 public static class Globals
 {
-
     //Player currencies
     public static int playerGold = 50;
     public static int playerPlatinum;
 
     //Player inventory of drugs (in "units") and price (in gold)
     //Consider making a struct for drugs that have fields: amount, price, and name
-    public static int drugA = 0;
-    public static int priceA = 5;
-    public static string medicationA = "Ventolin";
-    public static int drugB = 0;
-    public static int priceB = 7;
-    public static string medicationB = "Vyvanse";
-    public static int drugC = 0;
-    public static int priceC = 10;
-    public static string medicationC = "Lyrica";
-    public static int vitaminA = 0;
-    public static int vitaminAPrice = 2;
-    public static string vitaminAName = "Vitamin A";
+    public static List<Drug> drugList;
+    public static List<Drug> overCounterList;
+    public static List<Employee> employeeList;
+
+    public static void generateDrugList(List<Drug> list)
+    {
+        drugList = new List<Drug>();
+
+        drugList.Add(new Drug("Ventolin", 5));
+        drugList.Add(new Drug("Vyvanse", 7));
+        drugList.Add(new Drug("Lyrica", 10));
+
+        if (list != null)
+            setAmount(drugList, list);
+    }
+
+    public static void generateOverCounterList(List<Drug> list)
+    {
+        overCounterList = new List<Drug>();
+
+        overCounterList.Add(new Drug("Vitamin A", 2));
+        overCounterList.Add(new Drug("Vitamin B", 2));
+        overCounterList.Add(new Drug("Vitamin C", 2));
+
+        if (list != null)
+            setAmount(overCounterList, list);
+    }
+
+    public static void generateEmployeeList(List<Employee> list)
+    {
+        employeeList = new List<Employee>();
+
+        employeeList.Add(new Employee("Jon", 15));
+        employeeList.Add(new Employee("Ross", 19));
+        employeeList.Add(new Employee("Alex", 22));
+
+        if (list != null)
+            setHired(employeeList, list);
+    }
+
+    public static void setAmount(List<Drug> list1, List<Drug> list2)
+    {
+        for (int i = 0; i < list2.Count; i++)
+            list1[i].amount = list2[i].amount;
+    }
+
+    public static void setHired(List<Employee> list1, List<Employee> list2)
+    {
+        for (int i = 0; i < list2.Count; i++)
+        {
+            list1[i].isUnlocked = list2[i].isUnlocked;
+        }
+    }
+
+    public static Drug findDrug(string name, List<Drug> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+            if (list[i].name.Equals(name))
+                return list[i];
+        return null;
+    }
+
+    public static Employee findEmployee(string name)
+    {
+        for (int i = 0; i < employeeList.Count; i++)
+            if (employeeList[i].name.Equals(name))
+                return employeeList[i];
+        return null;
+    }
+
+    //public static int drugA = 0;
+    //public static int priceA = 5;
+    //public static string medicationA = "Ventolin";
+    //public static int drugB = 0;
+    //public static int priceB = 7;
+    //public static string medicationB = "Vyvanse";
+    //public static int drugC = 0;
+    //public static int priceC = 10;
+    //public static string medicationC = "Lyrica";
+    //public static int vitaminA = 0;
+    //public static int vitaminAPrice = 2;
+    //public static string vitaminAName = "Vitamin A";
 
     //Vitamin resource for shelf mechanic. No functionality as of now. 
-    public static int vitamins = 0; 
+    public static int vitamins = 0;
 
     /* Hypothetical organization for adding drugD, E, F... Would push drugs made in a form into these data structures
     public const int NUM_DRUGS = 3;
@@ -44,15 +113,15 @@ public static class Globals
     */
 
     //Player inventory of workers (in per "hour")
-    public static bool hiredA = false;
-    public static int wageA = 15;
-    public static string nameA = "Jon";
-    public static bool hiredB = false;
-    public static int wageB = 22;
-    public static string nameB = "Alex";
-    public static bool hiredC = false;
-    public static int wageC = 19;
-    public static string nameC = "Ross";
+    //public static bool hiredA = false;
+    //public static int wageA = 15;
+    //public static string nameA = "Jon";
+    //public static bool hiredB = false;
+    //public static int wageB = 22;
+    //public static string nameB = "Alex";
+    //public static bool hiredC = false;
+    //public static int wageC = 19;
+    //public static string nameC = "Ross";
 
     public static bool inEditMode = false;
 
@@ -89,5 +158,35 @@ public static class Globals
     public static void setPlatinum(int platinum)
     {
         playerPlatinum = platinum;
+    }
+}
+
+[System.Serializable]
+public class Drug
+{
+    public string name;
+    public int amount;
+    public int price;
+
+    public Drug(string name, int price)
+    {
+        this.name = name;
+        this.price = price;
+        amount = 0;
+    }
+}
+
+[System.Serializable]
+public class Employee
+{
+    public string name;
+    public bool isUnlocked;
+    public int wage;
+
+    public Employee(string name, int wage)
+    {
+        this.name = name;
+        this.wage = wage;
+        isUnlocked = false;
     }
 }
