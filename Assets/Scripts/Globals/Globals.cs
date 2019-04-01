@@ -27,9 +27,9 @@ public static class Globals
     {
         drugList = new List<Drug>();
 
-        drugList.Add(new Drug("Ventolin", 5));
-        drugList.Add(new Drug("Vyvanse", 7));
-        drugList.Add(new Drug("Lyrica", 10));
+        drugList.Add(new Drug("Ventolin", 5, 60));
+        drugList.Add(new Drug("Vyvanse", 7, 40));
+        drugList.Add(new Drug("Lyrica", 10, 25));
 
         if (list != null)
             setAmount(drugList, list);
@@ -39,9 +39,9 @@ public static class Globals
     {
         overCounterList = new List<Drug>();
 
-        overCounterList.Add(new Drug("Vitamin A", 2));
-        overCounterList.Add(new Drug("Vitamin B", 2));
-        overCounterList.Add(new Drug("Vitamin C", 2));
+        overCounterList.Add(new Drug("Vitamin A", 2, 85));
+        overCounterList.Add(new Drug("Vitamin B", 2, 85));
+        overCounterList.Add(new Drug("Vitamin C", 2, 85));
 
         if (list != null)
             setAmount(overCounterList, list);
@@ -167,11 +167,13 @@ public class Drug
     public string name;
     public int amount;
     public int price;
+    public int chance; // chance that customer will want to look for drug (scaled from 1-100)
 
-    public Drug(string name, int price)
+    public Drug(string name, int price, int chance)
     {
         this.name = name;
         this.price = price;
+        this.chance = chance;
         amount = 0;
     }
 }

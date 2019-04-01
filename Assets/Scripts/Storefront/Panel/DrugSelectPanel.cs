@@ -8,13 +8,7 @@ public class DrugSelectPanel : MonoBehaviour {
 
     public void remove(GameObject go)
     {
-        if (ShowGameObject.clicks == 1)
-        {
-            go.SetActive(false);
-            ShowGameObject.clicks = 0;
-        }
-        else
-            ShowGameObject.clicks++;
+        go.SetActive(false);
     }
 
     public void selectDrug(string s)

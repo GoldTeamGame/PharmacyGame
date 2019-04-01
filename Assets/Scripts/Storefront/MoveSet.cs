@@ -97,9 +97,14 @@ public class MoveSet
     {
         // Figure out the direction the customer was traveling
         isMoving = findDirection();
-        
+        Vector3 move = Toolbox.zero;
+        int count = 0;
         // Simulate move
-        Vector3 move = finishMove();
+        do
+        {
+            move = finishMove();
+            count++;
+        } while (move.Equals(Toolbox.zero) && !Obsticals.isObstical(move.x, move.y) && count < 8);
 
         // Set move location if there isnt an obstical
         if (!Obsticals.isObstical(move.x, move.y))
@@ -155,6 +160,7 @@ public class MoveSet
     // Complete a single unit of movement in whatever direction customer was initially going in
     private Vector3 finishMove()
     {
+        Vector3 finishingMove;
         Vector3 m = transform.localPosition; // Save current location into m
 
         // Find 6 values based off of m (current location)
@@ -164,31 +170,103 @@ public class MoveSet
         float left  = TileCalculator.floorCoordinate(m.x);   // find what current x-coordinate will be after moving to the left
         float up    = TileCalculator.ceilCoordinate(m.y);    // find what current y-coordinate will be after moving up
         float down  = TileCalculator.floorCoordinate(m.y);   // find what current y-coordinate will be after moving down
-        
+
         // Right
         if (isMoving == 0)
-            return new Vector3(right, y, 0);
+        {
+            finishingMove = new Vector3(right, y, 0);
+            if (Obsticals.isInBounds(finishingMove) && !Obsticals.isObstical(finishingMove.x, finishingMove.y))
+                return finishingMove;
+            else
+            {
+                isMoving++;
+                return Toolbox.zero;
+            }
+        }
         // Left
         if (isMoving == 1)
-            return new Vector3(left, y, 0);
+        {
+            finishingMove = new Vector3(left, y, 0);
+            if (Obsticals.isInBounds(finishingMove) && !Obsticals.isObstical(finishingMove.x, finishingMove.y))
+                return finishingMove;
+            else
+            {
+                isMoving++;
+                return Toolbox.zero;
+            }
+        }
         // Up
         if (isMoving == 2)
-            return new Vector3(x, up, 0);
+        {
+            finishingMove = new Vector3(x, up, 0);
+            if (Obsticals.isInBounds(finishingMove) && !Obsticals.isObstical(finishingMove.x, finishingMove.y))
+                return finishingMove;
+            else
+            {
+                isMoving++;
+                return Toolbox.zero;
+            }
+        }
         // Down
         if (isMoving == 3)
-            return new Vector3(x, down, 0);
+        {
+            finishingMove = new Vector3(x, down, 0);
+            if (Obsticals.isInBounds(finishingMove) && !Obsticals.isObstical(finishingMove.x, finishingMove.y))
+                return finishingMove;
+            else
+            {
+                isMoving++;
+                return Toolbox.zero;
+            }
+        }
         // Right-Up
         if (isMoving == 4)
-            return new Vector3(right, up, 0);
+        {
+            finishingMove = new Vector3(right, up, 0);
+            if (Obsticals.isInBounds(finishingMove) && !Obsticals.isObstical(finishingMove.x, finishingMove.y))
+                return finishingMove;
+            else
+            {
+                isMoving++;
+                return Toolbox.zero;
+            }
+        }
         // Left-Up
         if (isMoving == 5)
-            return new Vector3(left, up, 0);
+        {
+            finishingMove = new Vector3(left, up, 0);
+            if (Obsticals.isInBounds(finishingMove) && !Obsticals.isObstical(finishingMove.x, finishingMove.y))
+                return finishingMove;
+            else
+            {
+                isMoving++;
+                return Toolbox.zero;
+            }
+        }
         // Right-Down
         if (isMoving == 6)
-            return new Vector3(right, down, 0);
+        {
+            finishingMove = new Vector3(right, down, 0);
+            if (Obsticals.isInBounds(finishingMove) && !Obsticals.isObstical(finishingMove.x, finishingMove.y))
+                return finishingMove;
+            else
+            {
+                isMoving++;
+                return Toolbox.zero;
+            }
+        }
         // Left-Down
         if (isMoving == 7)
-            return new Vector3(left, down, 0);
+        {
+            finishingMove = new Vector3(left, down, 0);
+            if (Obsticals.isInBounds(finishingMove) && !Obsticals.isObstical(finishingMove.x, finishingMove.y))
+                return finishingMove;
+            else
+            {
+                isMoving = 0;
+                return Toolbox.zero;
+            }
+        }
 
         // Find closest tile if isMoving is none of the above
         return new Vector3(x, y, 0);

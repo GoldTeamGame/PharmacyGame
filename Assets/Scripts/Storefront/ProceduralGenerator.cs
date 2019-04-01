@@ -87,29 +87,38 @@ public class ProceduralGenerator : MonoBehaviour
         CustomerScreen.updateList(-1); // update CustomerScreen button list
     }
 
+    // Randomly generate desires based on drugs
     private static void generateDesires(ref CustomerData cd)
     {
-        int maxNumberOfDesires = 3;
-        int numberOfDesires = Random.Range(1, maxNumberOfDesires + 1);
+        // Create random number of desires (max of 4 for over the counter drugs and max of 3 for prescription)
+        cd.numberOfDesires = Random.Range(1, 5);
+        cd.numberOfPrescriptionDesires = Random.Range(1, 4);
 
-        cd.desires = new string[numberOfDesires];
+        // Limit the number of desires if there are more desires than there are drugs
+        if (cd.numberOfDesires > Globals.overCounterList.Count)
+            cd.numberOfDesires = Globals.overCounterList.Count;
+        if (cd.numberOfPrescriptionDesires > Globals.drugList.Count)
+            cd.numberOfPrescriptionDesires = Globals.drugList.Count;
 
-        // HARDCODED UNTIL PROGRESS WITH DRUGS IS MADE
-        if (numberOfDesires == 1)
-        {
-            cd.desires[0] = "Ventolin";
-        }
-        else if (numberOfDesires == 2)
-        {
-            cd.desires[0] = "Ventolin";
-            cd.desires[1] = "Vyvanse";
-        }
-        else if (numberOfDesires == 3)
-        {
-            cd.desires[0] = "Ventolin";
-            cd.desires[1] = "Vyvanse";
-            cd.desires[2] = "Lyrica";
-        }
-            
+        // Begin randomly setting desires
+        cd.desires = new string[cd.numberOfDesires];
+        cd.prescriptionDesires = new string[cd.numberOfPrescriptionDesires];
+        int desireCount = 0;
+
+        for (int i = 0; i < Globals.overCounterList.Count && desireCount < cd.desires.Length; i++)
+            if (Toolbox.randomBool(Globals.overCounterList[i].chance))
+                cd.desires[desireCount++] = Globals.overCounterList[i].name;
+
+        if (desireCount < cd.numberOfDesires)
+            cd.numberOfDesires = desireCount;
+        cd.desiresRemaining = cd.numberOfDesires;
+
+        desireCount = 0;
+        for (int i = 0; i < Globals.drugList.Count && desireCount < cd.numberOfPrescriptionDesires; i++)
+            if (Toolbox.randomBool(Globals.drugList[i].chance))
+                cd.prescriptionDesires[desireCount++] = Globals.drugList[i].name;
+
+        if (desireCount < cd.numberOfPrescriptionDesires)
+            cd.numberOfPrescriptionDesires = desireCount;
     }
 }

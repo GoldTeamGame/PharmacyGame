@@ -208,17 +208,20 @@ public class CustomerController : MonoBehaviour
         else
         {
             // Set direction and distance
-            int direction = Random.Range(0, 7);
-            int distance = Random.Range(1, 10);
+            //int direction = Random.Range(0, 7);
+            //int distance = Random.Range(1, 10);
+            float x = Random.Range(0, 10);
+            float y = Random.Range(0, 10);
 
-            moveQ.enqueue(direction, distance);
+            aStar(x, y);
+            //moveQ.enqueue(direction, distance);
         }
     }
 
     // Customer will find its way to [x, y]
     public void aStar(float x, float y)
     {
-        PriorityQueue pq = new PriorityQueue(10000); // reset priority queue
+        PriorityQueue pq = new PriorityQueue(1000); // reset priority queue
 
         // Generate a 2D float array to prevent duplicate entries into the queue
         float[][] check = new float[14][];
@@ -238,7 +241,7 @@ public class CustomerController : MonoBehaviour
         int column = Obsticals.xToColumn(currentX); // convert x to column value
         Move currentMove = new Move(currentX, currentY, 0, findDistance(currentX, currentY, x, y, row, column), 0, null);
         float md = TileCalculator.TILE_DIMENSIONS; // (Move distance) used to make code prettier
-
+        int max = 0;
         // Keep searching for path until destination is found
         while (currentMove != null && (currentMove.x != x || currentMove.y != y))
         {
@@ -253,9 +256,11 @@ public class CustomerController : MonoBehaviour
             checkMove(ref pq, currentMove, -md,   0, x, y, 1, ref check); // left
             checkMove(ref pq, currentMove, -md, -md, x, y, 7, ref check); // left-down
 
+            max = Mathf.Max(max, pq.size);
             currentMove = pq.peekAndDequeue(); // Set the first item in the queue as the currentMove
         }
 
+        Debug.Log(max);
         addMoves(currentMove); // Add moves to movement queue
         //currentMove.displayMoves();
         //Debug.Break();
@@ -264,7 +269,7 @@ public class CustomerController : MonoBehaviour
     // Check if a path does not exists between [x1, y1] and [x2, y2]
     public static bool aStar(float x1, float y1, float x2, float y2)
     {
-        PriorityQueue pq = new PriorityQueue(10000); // reset priority queue
+        PriorityQueue pq = new PriorityQueue(1000); // reset priority queue
 
         // Generate a 2D float array to prevent duplicate entries into the queue
         float[][] check = new float[14][];
@@ -323,19 +328,26 @@ public class CustomerController : MonoBehaviour
             float sideDistance = move.distanceTraveled + 0.15f;
             float diagonalDistance = move.distanceTraveled + 0.25f;
 
-            // If direction is greater than 3, then a diagonal move is being made
-            // Only add move to queue if the distanceTraveled is smaller than what is in the check array
-            // (If distanceTraveled is larger than what is in the check array, then that means a better path to that spot already exists)
-            if (direction > 3 && diagonalDistance < check[row][column])
+            // Distance between current position and destination
+            float distance = findDistance(x, y, xDest, yDest, row, column);
+
+            // If distance >= 1000, the move is invalid, so don't continue to add it to the queue
+            if (distance < 1000)
             {
-                pq.enqueue(new Move(x, y, move.distanceTraveled + .25f, findDistance(x, y, xDest, yDest, row, column), direction, move));
-                check[row][column] = diagonalDistance;
-            }
-            // If direction is less than or equal to 3, then a side move is being made (up/down/left/right)
-            else if (direction <= 3 && sideDistance < check[row][column])
-            {
-                pq.enqueue(new Move(x, y, move.distanceTraveled + .15f, findDistance(x, y, xDest, yDest, row, column), direction, move));
-                check[row][column] = sideDistance;
+                // If direction is greater than 3, then a diagonal move is being made
+                // Only add move to queue if the distanceTraveled is smaller than what is in the check array
+                // (If distanceTraveled is larger than what is in the check array, then that means a better path to that spot already exists)
+                if (direction > 3 && diagonalDistance < check[row][column])
+                {
+                    pq.enqueue(new Move(x, y, move.distanceTraveled + .25f, distance, direction, move));
+                    check[row][column] = diagonalDistance;
+                }
+                // If direction is less than or equal to 3, then a side move is being made (up/down/left/right)
+                else if (direction <= 3 && sideDistance < check[row][column])
+                {
+                    pq.enqueue(new Move(x, y, move.distanceTraveled + .15f, distance, direction, move));
+                    check[row][column] = sideDistance;
+                }
             }
         }
     }
@@ -382,53 +394,42 @@ public class CustomerController : MonoBehaviour
         {
             currentAmount = 0; // reset currentAmount
             CustomerData cd = GetComponent<Customer>().cd; // grab customerData from Customer Script
-            string[] newDesires = new string[cd.desires.Length - 1]; // Create new desires list
 
-            // Update desires if length of new list is greater than 0
-            if (cd.desires.Length >= 0)
+            // Update desires customer found something
+            if (cd.desiresRemaining > 0)
             {
-                // Copy desires into newDesires
-                for (int i = 0; i < newDesires.Length; i++)
-                    newDesires[i] = cd.desires[i];
+                cd.desiresRemaining--;
 
-                Debug.Log(cd.desires[cd.desires.Length - 1]);
-                if (cd.desires[cd.desires.Length - 1].Equals(Globals.drugList[0].name) && Globals.drugList[0].amount > 0)
+                Drug d = Globals.findDrug(cd.desires[cd.desiresRemaining], Globals.overCounterList);
+
+                if (d != null)
                 {
-                    Globals.drugList[0].amount -= 1;
-                    wallet += Globals.drugList[0].price + (Globals.drugList[0].price / 2);
-                }
-                else if (cd.desires[cd.desires.Length - 1].Equals(Globals.drugList[1].name) && Globals.drugList[1].amount > 0)
-                {
-                    Globals.drugList[1].amount -= 1;
-                    wallet += Globals.drugList[1].price + (Globals.drugList[1].price / 2);
-                }
-                else if (cd.desires[cd.desires.Length - 1].Equals(Globals.drugList[2].name) && Globals.drugList[2].amount > 0)
-                {
-                    Globals.drugList[2].amount -= 1;
-                    wallet += Globals.drugList[2].price + (Globals.drugList[2].price / 2);
-                }
+                    if (d.amount > 0)
+                    {
+                        d.amount -= 1;
+                        wallet += d.price + (d.price / 2);
+                    }
 
+                    cd.desires[cd.desiresRemaining] = Toolbox.StrikeThrough(cd.desires[cd.desiresRemaining]);
 
-                // Replaced desires currently in customerData with newDesires
-                GetComponent<Customer>().cd.desires = newDesires;
+                    // Update desires in the customer information screen if the scene is open
+                    if (CustomerScreen.isAtCustomerScene)
+                    {
+                        // Find the index of the customer being updated
+                        int numberOfCustomers = Globals_Customer.customerData.Count;
+                        int index = -2;
+                        for (int i = 0; i < numberOfCustomers; i++)
+                            if (cd.Equals(Globals_Customer.customerData[i]))
+                                index = i;
 
-                // Update desires in the customer information screen if the scene is open
-                if (CustomerScreen.isAtCustomerScene)
-                {
-                    // Find the index of the customer being updated
-                    int numberOfCustomers = Globals_Customer.customerData.Count;
-                    int index = -2;
-                    for (int i = 0; i < numberOfCustomers; i++)
-                        if (cd.Equals(Globals_Customer.customerData[i]))
-                            index = i;
-
-                    if (CustomerScreen.currentCustomer == index)
-                        CustomerScreen.listDesires(newDesires);
+                        if (CustomerScreen.currentCustomer == index)
+                            CustomerScreen.listDesires(cd);
+                    }
                 }
             }
 
             // Set isBuying to true when customer has picked up everything they want to purchase
-            if (newDesires.Length == 0)
+            if (cd.desiresRemaining == 0)
             {
                 isBuying = true;
                 GetComponent<Customer>().cd.isBuying = true;

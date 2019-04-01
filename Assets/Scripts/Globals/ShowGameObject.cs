@@ -5,8 +5,7 @@ using UnityEngine;
 public class ShowGameObject : MonoBehaviour {
 
     public static GameObject selectedObject;
-    public static int clicks = 0;
-    private void OnMouseDown()
+    private void OnMouseUp()
     {
         if (!(ItemPlacer.isPlacing || ItemPlacer.isSelecting) && SceneChanger.isAtStorefront)
         {

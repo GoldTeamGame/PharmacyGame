@@ -110,17 +110,19 @@ public class CustomerScreen : MonoBehaviour
             staticPanel.GetComponentsInChildren<Text>()[3].text = Globals_Customer.customerData[index].thoughts; // set current thoughts
 
             // List desires
-            listDesires(Globals_Customer.customerData[index].desires);
+            listDesires(Globals_Customer.customerData[index]);
         }
     }
 
     // Sets the desires list on the customer info panel
-    public static void listDesires(string[] desires)
+    public static void listDesires(CustomerData cd)
     {
         // Fill string with desires
         string listOfDesires = "";
-        for (int i = 0; i < desires.Length; i++)
-            listOfDesires += desires[i] + "\n";
+        for (int i = 0; i < cd.numberOfDesires; i++)
+            listOfDesires += cd.desires[i] + "\n";
+        for (int i = 0; i < cd.numberOfPrescriptionDesires; i++)
+            listOfDesires += cd.prescriptionDesires[i] + "\n";
 
         staticPanel.GetComponentsInChildren<Text>()[5].text = listOfDesires; // set desires
     }

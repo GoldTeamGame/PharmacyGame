@@ -12,6 +12,10 @@ public class CustomerData
     public int mood; // how happy a customer is
     public string thoughts; // what the customer is currently thinking about
     public string[] desires; // what a customer wants to buy
+    public string[] prescriptionDesires; // prescriptions the customer wants to buy
+    public int numberOfDesires; // number of desires
+    public int desiresRemaining;
+    public int numberOfPrescriptionDesires; // number of prescriptionDesires
     public bool isAlive; // does the customer gameObject still exist?
     public bool isBuying; // is the customer buying something
     public bool isLeaving; // is the customer leaving the store
