@@ -1,7 +1,7 @@
 ﻿/* 
  * Most Recent Author: Dylan Cyphers
- * Version 1.3.4
- * Date: 2/24/2019
+ * Version 1.4
+ * Date: 4/1/2019
  * Description: Game Controller script to handle flags and data used across the entire game. Allows for scene-to-scene communication.
  * 
  */
@@ -27,9 +27,9 @@ public static class Globals
     {
         drugList = new List<Drug>();
 
-        drugList.Add(new Drug("Ventolin", 5, 60));
-        drugList.Add(new Drug("Vyvanse", 7, 40));
-        drugList.Add(new Drug("Lyrica", 10, 25));
+        drugList.Add(new Drug("Ventolin", 5, 60, "Treats bronchospasms"));
+        drugList.Add(new Drug("Vyvanse", 7, 40, "Treats ADHD"));
+        drugList.Add(new Drug("Lyrica", 10, 25, "Muscle Pain"));
 
         if (list != null)
             setAmount(drugList, list);
@@ -39,9 +39,9 @@ public static class Globals
     {
         overCounterList = new List<Drug>();
 
-        overCounterList.Add(new Drug("Vitamin A", 2, 85));
-        overCounterList.Add(new Drug("Vitamin B", 2, 85));
-        overCounterList.Add(new Drug("Vitamin C", 2, 85));
+        overCounterList.Add(new Drug("Vitamin A", 2, 85, "Supplement for Vitamin A"));
+        overCounterList.Add(new Drug("Vitamin B", 2, 85, "Supplement for Vitamin B"));
+        overCounterList.Add(new Drug("Vitamin C", 2, 85, "Supplement for Vitamin C"));
 
         if (list != null)
             setAmount(overCounterList, list);
@@ -168,13 +168,15 @@ public class Drug
     public int amount;
     public int price;
     public int chance; // chance that customer will want to look for drug (scaled from 1-100)
+    public string description;
 
-    public Drug(string name, int price, int chance)
+    public Drug(string name, int price, int chance, string description)
     {
         this.name = name;
         this.price = price;
         this.chance = chance;
         amount = 0;
+        this.description = description;
     }
 }
 

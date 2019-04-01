@@ -2411,6 +2411,7 @@ GameObject:
   - component: {fileID: 1554161967}
   - component: {fileID: 1554161966}
   - component: {fileID: 1554161965}
+  - component: {fileID: 1554161969}
   - component: {fileID: 1554161968}
   m_Layer: 5
   m_Name: DrugA_Button
@@ -2535,6 +2536,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ba96a58d10d436418ba75ac732a708a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1554161969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1554161963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2721417c26bc9cc4580de72e99a42aa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPressed: 0
 --- !u!1 &1564606344
 GameObject:
   m_ObjectHideFlags: 0
@@ -3133,6 +3146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f894be767a4524390d14d5be931b9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPressed: 0
 --- !u!1 &2080749674
 GameObject:
   m_ObjectHideFlags: 0

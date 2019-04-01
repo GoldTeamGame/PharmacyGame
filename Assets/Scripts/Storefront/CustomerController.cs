@@ -260,7 +260,7 @@ public class CustomerController : MonoBehaviour
             currentMove = pq.peekAndDequeue(); // Set the first item in the queue as the currentMove
         }
 
-        Debug.Log(max);
+        //Debug.Log(max);
         addMoves(currentMove); // Add moves to movement queue
         //currentMove.displayMoves();
         //Debug.Break();
