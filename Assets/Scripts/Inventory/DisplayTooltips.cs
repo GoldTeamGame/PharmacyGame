@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEditor;
 
 public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
@@ -66,6 +67,7 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
                 buyState = false;
                 //show tooltip
                 Debug.Log(d.name + ": " + d.description);
+                EditorUtility.DisplayDialog("test title", "test message", "test ok");
             }
         }
     }
