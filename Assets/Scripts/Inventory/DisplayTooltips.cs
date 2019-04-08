@@ -14,7 +14,7 @@ using UnityEngine.EventSystems;
 
 public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    
+
     public float time;
 
     public bool buyState;
@@ -22,11 +22,14 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     public Drug d;
 
+    public GameObject thePanel;
+    public Text theText;
+
     public void OnPointerDown(PointerEventData eventData)
     {
         time = 0;
         buyState = true;
-        tooltipState = false;        
+        tooltipState = false;
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -35,6 +38,7 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         {
             //hide tooltip
             Debug.Log("hiding tooltip");
+            thePanel.SetActive(false);
         }
         else
         {
@@ -55,27 +59,8 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         d = Globals.findDrug(slice[0], Globals.drugList);
     }
 
-    
     void Update()
     {
-        if (buyState) 
-        {
-            time++;
-            if (time > 120)
-            {
-                tooltipState = true;
-                buyState = false;
-                //show tooltip
-                string theTooltip = d.name + ": " + d.description;
-                Debug.Log(d.name + ": " + d.description);
-                
-            }
-        }
-    }
-
-    void OnGUI()
-    {
-        
         if (buyState)
         {
             time++;
@@ -86,14 +71,8 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
                 //show tooltip
                 string theTooltip = d.name + ": " + d.description;
                 Debug.Log(d.name + ": " + d.description);
-                theTooltip = "I'M THE TOOLTIP";
-                //Camera _camera = Camera.main;
-                GUI.contentColor = Color.black;
-                var position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
-                position.z = 0;
-                var textSize = GUI.skin.label.CalcSize(new GUIContent(theTooltip));
-                GUI.Label(new Rect(position.x, Screen.height - position.y, textSize.x, textSize.y), theTooltip);
-                //(-65, -70)
+                theText.text = theTooltip;
+                thePanel.SetActive(true);
             }
         }
     }
