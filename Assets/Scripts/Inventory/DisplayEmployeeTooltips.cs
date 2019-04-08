@@ -1,8 +1,8 @@
 ﻿/* 
  * Most Recent Author: Dylan Cyphers
- * Version 1.2
+ * Version 1.0
  * Date: 4/8/2019
- * Description: Handles a tooltip description when the purchase button is held down for drugs
+ * Description: Handles a tooltip description when the purchase button is held down for employees
  * 
  */
 
@@ -12,7 +12,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class DisplayEmployeeTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
 
     public float time;
@@ -20,7 +20,7 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     public bool buyState;
     public bool tooltipState;
 
-    public Drug d;
+    public Employee e;
 
     public GameObject thePanel;
     public Text theText;
@@ -43,7 +43,7 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         else
         {
             //buy item
-            BuyItem.buyDrug(d.name);
+            BuyItem.hire(e.name);
         }
 
         tooltipState = false;
@@ -54,9 +54,10 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     void Start()
     {
-        string drugNamePlusExtra = gameObject.GetComponentInChildren<Text>().text;
-        string[] slice = drugNamePlusExtra.Split(':');
-        d = Globals.findDrug(slice[0], Globals.drugList);
+        string employeeNamePlusExtra = gameObject.GetComponentInChildren<Text>().text;
+        employeeNamePlusExtra = employeeNamePlusExtra.Substring(5);
+        string[] slice = employeeNamePlusExtra.Split(':');;
+        e = Globals.findEmployee(slice[0]);
     }
 
     void Update()
@@ -69,8 +70,8 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
                 tooltipState = true;
                 buyState = false;
                 //show tooltip
-                string theTooltip = d.name + ": " + d.description;
-                Debug.Log(d.name + ": " + d.description);
+                string theTooltip = e.name + ": " + e.description;
+                Debug.Log(e.name + ": " + e.description);
                 theText.text = theTooltip;
                 thePanel.SetActive(true);
             }

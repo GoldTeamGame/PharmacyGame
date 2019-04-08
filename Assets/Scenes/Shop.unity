@@ -667,6 +667,7 @@ GameObject:
   - component: {fileID: 514414315}
   - component: {fileID: 514414314}
   - component: {fileID: 514414313}
+  - component: {fileID: 514414317}
   - component: {fileID: 514414316}
   m_Layer: 5
   m_Name: EmployeeB_Button
@@ -791,6 +792,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99b0ad0ff6be3d94a89a449773207179, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &514414317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 514414311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d352f5b714e515409da9920158b0ae5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 0
+  buyState: 0
+  tooltipState: 0
+  e:
+    name: 
+    isUnlocked: 0
+    wage: 0
+    description: 
+  thePanel: {fileID: 365082171}
+  theText: {fileID: 1797842015}
 --- !u!1 &735166140
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,6 +1052,7 @@ GameObject:
   - component: {fileID: 849398008}
   - component: {fileID: 849398007}
   - component: {fileID: 849398006}
+  - component: {fileID: 849398010}
   - component: {fileID: 849398009}
   m_Layer: 5
   m_Name: EmployeeA_Button
@@ -1154,6 +1177,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4b3f23b370e61b41b9a91c2fe4248a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &849398010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 849398004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d352f5b714e515409da9920158b0ae5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 0
+  buyState: 0
+  tooltipState: 0
+  e:
+    name: 
+    isUnlocked: 0
+    wage: 0
+    description: 
+  thePanel: {fileID: 365082171}
+  theText: {fileID: 1797842015}
 --- !u!1 &884130713
 GameObject:
   m_ObjectHideFlags: 0
@@ -1280,6 +1324,7 @@ GameObject:
   - component: {fileID: 896005436}
   - component: {fileID: 896005435}
   - component: {fileID: 896005434}
+  - component: {fileID: 896005438}
   - component: {fileID: 896005437}
   m_Layer: 5
   m_Name: DrugC_Button
@@ -1404,6 +1449,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d775c2e919fd524ebbae4bf068d051d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &896005438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 896005432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2721417c26bc9cc4580de72e99a42aa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 0
+  buyState: 0
+  tooltipState: 0
+  d:
+    name: 
+    amount: 0
+    price: 0
+    chance: 0
+    description: 
+  thePanel: {fileID: 365082171}
+  theText: {fileID: 1797842015}
 --- !u!1 &939960252
 GameObject:
   m_ObjectHideFlags: 0
@@ -1862,6 +1929,7 @@ GameObject:
   - component: {fileID: 1337394807}
   - component: {fileID: 1337394806}
   - component: {fileID: 1337394805}
+  - component: {fileID: 1337394809}
   - component: {fileID: 1337394808}
   m_Layer: 5
   m_Name: EmployeeC_Button
@@ -1986,6 +2054,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a4416218e561184e9604f10dbda2d20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1337394809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1337394803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d352f5b714e515409da9920158b0ae5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 0
+  buyState: 0
+  tooltipState: 0
+  e:
+    name: 
+    isUnlocked: 0
+    wage: 0
+    description: 
+  thePanel: {fileID: 365082171}
+  theText: {fileID: 1797842015}
 --- !u!1 &1338641295
 GameObject:
   m_ObjectHideFlags: 0
@@ -2270,6 +2359,7 @@ GameObject:
   - component: {fileID: 1518848476}
   - component: {fileID: 1518848475}
   - component: {fileID: 1518848474}
+  - component: {fileID: 1518848478}
   - component: {fileID: 1518848477}
   m_Layer: 5
   m_Name: DrugB_Button
@@ -2394,6 +2484,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b647e102d320e4b972d8d2947979e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1518848478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1518848472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2721417c26bc9cc4580de72e99a42aa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 0
+  buyState: 0
+  tooltipState: 0
+  d:
+    name: 
+    amount: 0
+    price: 0
+    chance: 0
+    description: 
+  thePanel: {fileID: 365082171}
+  theText: {fileID: 1797842015}
 --- !u!1 &1554161963
 GameObject:
   m_ObjectHideFlags: 0
@@ -3100,7 +3212,6 @@ GameObject:
   - component: {fileID: 2021118426}
   - component: {fileID: 2021118430}
   - component: {fileID: 2021118431}
-  - component: {fileID: 2021118432}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3163,7 +3274,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 11
   m_TargetDisplay: 0
 --- !u!224 &2021118429
 RectTransform:
@@ -3227,28 +3338,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f894be767a4524390d14d5be931b9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2021118432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2021118425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2721417c26bc9cc4580de72e99a42aa5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  time: 0
-  buyState: 0
-  tooltipState: 0
-  d:
-    name: 
-    amount: 0
-    price: 0
-    chance: 0
-    description: 
-  thePanel: {fileID: 0}
-  theText: {fileID: 0}
 --- !u!1 &2080749674
 GameObject:
   m_ObjectHideFlags: 0

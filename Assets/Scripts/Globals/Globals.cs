@@ -1,7 +1,7 @@
 ﻿/* 
  * Most Recent Author: Dylan Cyphers
- * Version 1.4
- * Date: 4/1/2019
+ * Version 1.5
+ * Date: 4/8/2019
  * Description: Game Controller script to handle flags and data used across the entire game. Allows for scene-to-scene communication.
  * 
  */
@@ -29,7 +29,7 @@ public static class Globals
 
         drugList.Add(new Drug("Ventolin", 5, 60, "Treats bronchospasms"));
         drugList.Add(new Drug("Vyvanse", 7, 40, "Treats ADHD"));
-        drugList.Add(new Drug("Lyrica", 10, 25, "Muscle Pain"));
+        drugList.Add(new Drug("Lyrica", 10, 25, "Treats muscle pain"));
 
         if (list != null)
             setAmount(drugList, list);
@@ -51,9 +51,9 @@ public static class Globals
     {
         employeeList = new List<Employee>();
 
-        employeeList.Add(new Employee("Jon", 15));
-        employeeList.Add(new Employee("Ross", 19));
-        employeeList.Add(new Employee("Alex", 22));
+        employeeList.Add(new Employee("Jon", 15, "Works at his own pace"));
+        employeeList.Add(new Employee("Ross", 19, "Standard skilled employee"));
+        employeeList.Add(new Employee("Alex", 22, "Hard working and reliable"));
 
         if (list != null)
             setHired(employeeList, list);
@@ -186,11 +186,13 @@ public class Employee
     public string name;
     public bool isUnlocked;
     public int wage;
+    public string description;
 
-    public Employee(string name, int wage)
+    public Employee(string name, int wage, string description)
     {
         this.name = name;
         this.wage = wage;
         isUnlocked = false;
+        this.description = description;
     }
 }

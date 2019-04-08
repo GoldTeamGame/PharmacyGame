@@ -1,7 +1,7 @@
 ﻿/* 
  * Most Recent Author: Dylan Cyphers
- * Version 1.1
- * Date: 4/1/2019
+ * Version 1.2
+ * Date: 4/8/2019
  * Description: Handles buying each drug or employee. 
  * 
  */
@@ -25,7 +25,7 @@ public class BuyItem : MonoBehaviour {
         }
     }
 
-    public void buyOverCounter(string name)
+    public static void buyOverCounter(string name)
     {
         Drug d = Globals.findDrug(name, Globals.overCounterList);
 
@@ -37,7 +37,7 @@ public class BuyItem : MonoBehaviour {
         }
     }
 
-    public void hire(string name)
+    public static void hire(string name)
     {
         Employee e = Globals.findEmployee(name);
 
