@@ -210,8 +210,8 @@ public class CustomerController : MonoBehaviour
             // Set direction and distance
             //int direction = Random.Range(0, 7);
             //int distance = Random.Range(1, 10);
-            float x = Random.Range(0, 10);
-            float y = Random.Range(0, 10);
+            float x = Mathf.Round(Random.Range(-3.5f, 3.5f) * 2) / 2;
+            float y = Mathf.Round(Random.Range(-0.5f, 6) * 2) / 2;
 
             aStar(x, y);
             //moveQ.enqueue(direction, distance);
@@ -259,8 +259,7 @@ public class CustomerController : MonoBehaviour
             max = Mathf.Max(max, pq.size);
             currentMove = pq.peekAndDequeue(); // Set the first item in the queue as the currentMove
         }
-
-        Debug.Log(max);
+        
         addMoves(currentMove); // Add moves to movement queue
         //currentMove.displayMoves();
         //Debug.Break();
