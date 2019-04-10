@@ -1,7 +1,7 @@
 ﻿// File: CustomerController
-// Version: 1.0.8
-// Last Updated: 3/11/19
-// Authors: Alexander Jacks
+// Version: 1.1
+// Last Updated: 4/10/19
+// Authors: Alexander Jacks, Dylan Cyphers
 // Description: Tells customer when and where to move
 
 using UnityEngine;
@@ -177,6 +177,7 @@ public class CustomerController : MonoBehaviour
                 GetComponent<Customer>().cd.isLeaving = true;
                 GetComponent<Customer>().cd.isBuying = false;
                 Globals.setGold(Globals.getGold() + wallet);
+                Globals.monthlyGold += wallet;
                 wallet = 0;
                 isFinding = false;
                 GetComponent<Customer>().cd.isFinding = isFinding;

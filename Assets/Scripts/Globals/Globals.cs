@@ -16,6 +16,7 @@ public static class Globals
     //Player currencies
     public static int playerGold = 50;
     public static int playerPlatinum;
+    public static int monthlyGold;
 
     //Player inventory of drugs (in "units") and price (in gold)
     //Consider making a struct for drugs that have fields: amount, price, and name
