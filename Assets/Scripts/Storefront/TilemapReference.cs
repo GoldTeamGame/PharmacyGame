@@ -15,7 +15,7 @@ public class TilemapReference : MonoBehaviour
     public static float[] yAdjust;
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         staticTilemap = new Tilemap[tilemap.Length];
         xAdjust = new float[tilemap.Length];

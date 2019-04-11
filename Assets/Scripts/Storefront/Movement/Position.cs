@@ -1,6 +1,7 @@
 ﻿// File: Position
 // Description: Simply holds an x and y coordinate
 
+[System.Serializable]
 public class Position
 {
     public float x;

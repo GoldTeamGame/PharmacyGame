@@ -7,6 +7,7 @@
 [System.Serializable]
 public class CustomerData
 {
+
     public string name; // name of customer
     public float speed; // speed that customer moves
     public int mood; // how happy a customer is
@@ -26,9 +27,7 @@ public class CustomerData
     public float locationX; // x-coordinate
     public float locationY; // y-coordinate
 
-    public int isMoving = -1; // the customers current movement state
-    public float destLocationX = 0; // x-coordinate customer is moving to
-    public float destLocationY = 0; // y-coordinate customer is moving to
+    public Path path;
 
     public float pLocationX = 0; // FOR DEBUGGING: Shows x-location 
     public float pLocationY = 0; // FOR DEBUGGING: Shows y-location

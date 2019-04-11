@@ -14,9 +14,9 @@ public class Obsticals : MonoBehaviour
     public static bool[][] obstical;
     public static int numberOfRows;
     public static int numberOfColumns;
-
+    
     // Use this for initialization
-    void Start ()
+    void Awake()
     {
         // 15 x 14
         if (obstical == null)
@@ -124,7 +124,8 @@ public class Obsticals : MonoBehaviour
         addObstical(x, y, width, height, rowOffset, columnOffset);
 
         // Plan a move from entrance to counter
-        bool isBlocked = CustomerController.aStar(-1.5f, 6f, 0.5f, -0.5f);
+        Path path = new Path(0.5f, -0.5f);
+        bool isBlocked = !Astar.findPath(ref path, -1.5f, 6f, 0.5f, -0.5f);
 
         // Reset obstical array
         obstical = tempObsticals;

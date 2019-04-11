@@ -101,7 +101,8 @@ public class ItemPlacer : MonoBehaviour
                         Globals_Items.storeData.RemoveAt(index);
                         Globals_Items.objects.RemoveAt(index);
 
-                        CustomerController.repath(); // tell customers to plan new paths now that an obstical has been removed
+                        //TestMovement.repath(-2);
+                        CustomerController.repath(-2); // tell customers to plan new paths now that an obstical has been removed
 
                         PlaceItem.setColors(current); // set the color array values for current
                         current.GetComponent<SpriteRenderer>().color = PlaceItem.color[1]; // set current color state to transparent
@@ -129,7 +130,8 @@ public class ItemPlacer : MonoBehaviour
 
             InsertItems.generate(current, s); // add s to Globals_Items.storeData
 
-            CustomerController.repath();
+            //TestMovement.repath(-1);
+            CustomerController.repath(-1);
 
             //Obsticals.displayAllObsticals(); // Debug: display obstical array
 

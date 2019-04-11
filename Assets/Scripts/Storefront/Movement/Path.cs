@@ -1,16 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class Path : MonoBehaviour
+[System.Serializable]
+public class Path
 {
-    List<Node> path;
+    public List<Node> path;
+    public Position destination;
+    public int currentNode;
+    public int isMoving;
 
-    public Path()
+    public Path(float x, float y)
     {
         path = new List<Node>();
+        destination = new Position(x, y);
     }
 
+    public Node current()
+    {
+        if (currentNode < path.Count)
+            return path[currentNode];
+        else
+            return null;
+    }
+
+    // Returns distance remaining to destination
+    public int getDistance()
+    {
+        return path.Count - currentNode;
+    }
     public void Add(Node node)
     {
         path.Add(node);
@@ -19,7 +36,7 @@ public class Path : MonoBehaviour
     public bool isObsticalInPath()
     {
         for (int i = 0; i < path.Count; i++)
-            if (path[i].isObstical)
+            if (Obsticals.isObstical(path[i].position.x, path[i].position.y))
                 return true;
         return false;
     }

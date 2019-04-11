@@ -4,6 +4,7 @@
 // Authors: Alexander Jacks
 // Description: Holds a coordinate point and a goodness value (Used for A*)
 
+[System.Serializable]
 public class Move
 {
     public float x; // x-coordinate of move

@@ -7,7 +7,15 @@ public class Astar : MonoBehaviour
     // Check if a path does not exists between [x1, y1] and [x2, y2]
     public static bool findPath(ref Path path, float x1, float y1, float x2, float y2)
     {
-        path = new Path();
+        Node previousNode = null;
+        if (path != null && path.current() != null && path.current().previous != null)
+            previousNode = path.current().previous;
+
+        path = new Path(x2, y2);
+
+        if (previousNode != null)
+            path.path[0].previous = previousNode;
+
         PriorityQueue pq = new PriorityQueue(1000); // Instantiate Priority Queue
 
         // Generate a 2D float array to prevent duplicate entries into the queue
@@ -23,7 +31,7 @@ public class Astar : MonoBehaviour
 
         int row = Obsticals.yToRow(y1); // convert y to row value
         int column = Obsticals.xToColumn(x1); // convert x to column value
-        Node node = new Node(new Position(row, column), findDistance(x1, y1, x2, y2, row, column));
+        Node node = new Node(new Position(x1, y1), findDistance(x1, y1, x2, y2, row, column));
         path.Add(node);
         //Move currentMove = new Move(x1, y1, 0, findDistance(x1, y1, x2, y2, row, column), 0, null);
         float md = TileCalculator.TILE_DIMENSIONS; // (Move distance) used to make code prettier
@@ -33,28 +41,30 @@ public class Astar : MonoBehaviour
         {
             // Enqueue every movement direction
             // 0 = right, 1 = left, 2 = up, 3 = down, 4 = upright, 5 = upleft, 6 = downright, 7 = downleft
-            checkMove(ref pq, node, md, 0, x2, y2, 0, ref check); // right
-            checkMove(ref pq, node, md, md, x2, y2, 4, ref check); // right-up
-            checkMove(ref pq, node, md, -md, x2, y2, 6, ref check); // right-down
-            checkMove(ref pq, node, 0, md, x2, y2, 2, ref check); // up
-            checkMove(ref pq, node, -md, md, x2, y2, 5, ref check); // left-up
-            checkMove(ref pq, node, 0, -md, x2, y2, 3, ref check); // down
-            checkMove(ref pq, node, -md, 0, x2, y2, 1, ref check); // left
-            checkMove(ref pq, node, -md, -md, x2, y2, 7, ref check); // left-down
+            checkMove(ref pq, node,  md,   0, x2, y2, node.distanceTraveled + .15f, 0, ref check); // right
+            checkMove(ref pq, node, -md,   0, x2, y2, node.distanceTraveled + .15f, 1, ref check); // left
+            checkMove(ref pq, node,   0,  md, x2, y2, node.distanceTraveled + .15f, 2, ref check); // up
+            checkMove(ref pq, node,   0, -md, x2, y2, node.distanceTraveled + .15f, 3, ref check); // down
+            checkMove(ref pq, node,  md,  md, x2, y2, node.distanceTraveled + .25f, 4, ref check); // right-up
+            checkMove(ref pq, node, -md,  md, x2, y2, node.distanceTraveled + .25f, 5, ref check); // left-up
+            checkMove(ref pq, node,  md, -md, x2, y2, node.distanceTraveled + .25f, 6, ref check); // right-down
+            checkMove(ref pq, node, -md, -md, x2, y2, node.distanceTraveled + .25f, 7, ref check); // left-down
 
             node = pq.peekAndDequeue(); // Set the first item in the queue as the currentMove
         }
 
-        return node == null || node.goodness >= 1000;
+        addMoves(ref path, node);
+        
+        return node != null && node.position.x == x2 && node.position.y == y2;
     }
 
     // (USED FOR A*)
     // Checks to see if a move is valid and then places it into the priority queue
-    private static void checkMove(ref PriorityQueue pq, Node node, float xShift, float yShift, float xDest, float yDest, int direction, ref float[][] check)
+    private static void checkMove(ref PriorityQueue pq, Node node, float xShift, float yShift, float xDest, float yDest, float distanceTraveled, int direction, ref float[][] check)
     {
         // Calculate what x and y will be after the move
-        float x = node.x + xShift;
-        float y = node.y + yShift;
+        float x = node.position.x + xShift;
+        float y = node.position.y + yShift;
 
         // Obtain row and column values
         // (translate coordinate positions to array positions)
@@ -64,11 +74,6 @@ public class Astar : MonoBehaviour
         // Check is move is within the bounds of the tilemap
         if (Obsticals.isInBounds(row, column))
         {
-            // Prepare side/diagonal Distances
-            // (Used for the A* heuristic. Diagonal travel is more costly than side travel)
-            float sideDistance = node.distanceTraveled + 0.15f;
-            float diagonalDistance = node.distanceTraveled + 0.25f;
-
             // Distance between current position and destination
             float distance = findDistance(x, y, xDest, yDest, row, column);
 
@@ -78,16 +83,10 @@ public class Astar : MonoBehaviour
                 // If direction is greater than 3, then a diagonal move is being made
                 // Only add move to queue if the distanceTraveled is smaller than what is in the check array
                 // (If distanceTraveled is larger than what is in the check array, then that means a better path to that spot already exists)
-                if (direction > 3 && diagonalDistance < check[row][column])
+                if (distanceTraveled < check[row][column])
                 {
-                    pq.enqueue(new Move(x, y, node.distanceTraveled + .25f, distance, direction, node));
-                    check[row][column] = diagonalDistance;
-                }
-                // If direction is less than or equal to 3, then a side move is being made (up/down/left/right)
-                else if (direction <= 3 && sideDistance < check[row][column])
-                {
-                    pq.enqueue(new Move(x, y, node.distanceTraveled + .15f, distance, direction, node));
-                    check[row][column] = sideDistance;
+                    pq.enqueue(new Node(new Position(x, y), node, distance, distanceTraveled, direction));
+                    check[row][column] = distanceTraveled;
                 }
             }
         }
@@ -96,22 +95,22 @@ public class Astar : MonoBehaviour
     // move holds a coordinate location as well as every previous move that took to reach the current move
     // Because this is in reverse order, the function adds all moves to a stack
     // so that all moves can be added to the movement queue
-    private void addMoves(Move move)
+    private static void addMoves(ref Path path, Node node)
     {
-        Stack<Move> moves = new Stack<Move>(100); // instantiate stack
+        Stack<Node> nodes = new Stack<Node>(100); // instantiate stack
 
         // Continue adding moves to stack until there are no moves remaining
-        while (move != null && move.previousMove != null)
+        while (node != null && node.previous != null)
         {
-            moves.push(move);
-            move = move.previousMove;
+            nodes.push(node);
+            node = node.previous;
         }
 
         // Enqueue all moves in the stack
-        int length = moves.size;
+        int length = nodes.size;
         for (int i = 0; i < length; i++)
         {
-            moveQ.enqueue(moves.peekAndPop().direction);
+            path.Add(nodes.peekAndPop());
         }
     }
 

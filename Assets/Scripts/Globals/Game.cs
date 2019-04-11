@@ -94,7 +94,7 @@ public class Game : MonoBehaviour
             //set globals from save object
             Globals.setGold(save.g);
             Globals.setPlatinum(save.p);
-            Globals_Customer.setCustomers(save.cd, save.cd.Count);
+            //Globals_Customer.setCustomers(save.cd, save.cd.Count);
             Globals_Items.setItems(save.si, save.si.Count);
             Obsticals.obstical = save.obstical;
             Globals.generateDrugList(save.drugList);
@@ -117,7 +117,7 @@ public class Game : MonoBehaviour
         //save globals, eventualy can change to a void setVarables fuction
         save.g = Globals.getGold();
         save.p = Globals.getPlatinum();
-        save.cd = Globals_Customer.GetCustomers();
+        //save.cd = Globals_Customer.GetCustomers();
         save.si = Globals_Items.GetItems();
         save.obstical = Obsticals.obstical;
         save.drugList = Globals.drugList;
