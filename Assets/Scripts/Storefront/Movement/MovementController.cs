@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestMovement : MonoBehaviour
+public class MovementController : MonoBehaviour
 {
     private static float[] directionX = { 1, -1, 0, 0, 1, -1, 1, -1 }; // values that help set moveLocation
     private static float[] directionY = { 0, 0, 1, -1, 0.95f, 0.95f, -0.95f, -0.95f }; // values that help set moveLocation
 
     static Path path; // The path the customer must take
-    Vector3 moveLocation; // The node the customer currently wants to reach
-    Vector3 moveDirection; // The direction customer moves in
+    public Vector3 moveLocation; // The node the customer currently wants to reach
+    public Vector3 moveDirection; // The direction customer moves in
     public float speed; // The speed at which the customer moves
     public Position destination; // The final destination of the path
 
@@ -57,6 +57,7 @@ public class TestMovement : MonoBehaviour
         {
             transform.localPosition = moveLocation; // Set position to moveLocation
             path.moveState = 0; // Change moveState
+            path.currentNode++; // finish move by moving to the next node
         }
         // Move Customer
         else
@@ -73,7 +74,6 @@ public class TestMovement : MonoBehaviour
         // Only set move if nodes are available
         if (path.currentNode < path.path.Count)
         {
-            path.currentNode++; // Switch to next Node
             Debug.Log("Move Set: " + path.getCurrentNode().position.ToString());
             moveLocation = new Vector3(path.getCurrentNode().position.x, path.getCurrentNode().position.y); // Set moveLocation
             moveDirection = new Vector3(directionX[path.getCurrentNode().direction], directionY[path.getCurrentNode().direction]) * speed;

@@ -8168,10 +8168,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab6af51f752c3a48846e99f4b4cd448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveLocation: {x: 0, y: 0, z: 0}
+  moveDirection: {x: 0, y: 0, z: 0}
   speed: 0.01
   destination:
-    x: -1.5
-    y: 6
+    x: 0.2
+    y: 2
 --- !u!1 &1323052638
 GameObject:
   m_ObjectHideFlags: 0
@@ -13009,12 +13011,12 @@ Prefab:
     - target: {fileID: 224640339343289420, guid: 48ab7656256affd40814199fa745fa7c,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -3.5
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 224640339343289420, guid: 48ab7656256affd40814199fa745fa7c,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -0.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224640339343289420, guid: 48ab7656256affd40814199fa745fa7c,
         type: 2}

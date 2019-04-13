@@ -11,6 +11,7 @@ public class CustomerController : MonoBehaviour
     private static float[] directionX = { 1, -1, 0, 0, 1, -1, 1, -1 }; // values that help set moveLocation
     private static float[] directionY = { 0, 0, 1, -1, 0.95f, 0.95f, -0.95f, -0.95f }; // values that help set moveLocation
 
+    MovementController mc;
     Path path;
     Vector3 moveLocation;
     int direction;
