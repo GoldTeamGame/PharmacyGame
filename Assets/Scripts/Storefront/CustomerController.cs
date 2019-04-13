@@ -46,74 +46,34 @@ public class CustomerController : MonoBehaviour
 	void Update ()
     {
         // If player has picked item up
-        if (path.isMoving == -2)
+        if (path.moveState == -2)
         {
             // Only repath if customer is a significant distance away
             if (path.getDistance() > 12)
                 Astar.findPath(ref path, moveLocation.x, moveLocation.y, path.destination.x, path.destination.y);
 
-            path.isMoving = 1; // continue moving
+            path.moveState = 1; // continue moving
         }
         // If player has placed item down
-        else if (path.isMoving == -1)
+        else if (path.moveState == -1)
         {
             if (isInObstical(transform.localPosition))
                 teleport();
 
-            path.isMoving = 0;
+            path.moveState = 0;
             checkPath();
         }
         // Set move to next node in path when 
-        else if (path.isMoving == 0)
+        else if (path.moveState == 0)
         {
             if (path.currentNode == path.path.Count)
                 think();
             setMove();
+
+            GetComponent<Customer>().cd.path = path;
         }
         else
             move(); // perform move
-
-        //// isMoving == -2 means the customer must reset its path because an object was placed in the store.
-        //if (GetComponent<Customer>().cd.isMoving == -2)
-        //{
-        //    moveQ.reset(); // Remove everything from queue
-
-        //    GetComponent<Customer>().cd.pLocationX = transform.localPosition.x;
-        //    GetComponent<Customer>().cd.pLocationY = transform.localPosition.y;
-
-        //    if (isInObstical(transform.localPosition))
-        //        teleport();
-
-        //    ms.findNearestLocation(transform.localPosition.x, transform.localPosition.y, ref moveQ);
-        //    gameObject.GetComponent<Customer>().cd.isMoving = ms.isMoving;
-        //    gameObject.GetComponent<Customer>().cd.destLocationX = ms.moveLocation.x;
-        //    gameObject.GetComponent<Customer>().cd.destLocationY = ms.moveLocation.y;
-
-        //    if (isTrapped(ms.moveLocation))
-        //    {
-        //        teleport();
-        //        GetComponent<Customer>().cd.isMoving = -2;
-        //    }
-        //    //Debug.Break();
-            
-        //    isFinding = false;
-        //    GetComponent<Customer>().cd.isFinding = false;
-        //}
-        //// If customer is not moving, then customer thinks of what it wants to do
-        //else if (path.isMoving == 0)
-        //{
-        //    setMove();
-
-        //    updateDesire(4); // Periodically remove desire
-
-        //    // Save moveLocation and isMoving state into CustomerData
-        //    gameObject.GetComponent<Customer>().cd.destLocationX = moveLocation.x;
-        //    gameObject.GetComponent<Customer>().cd.destLocationY = moveLocation.y;
-        //    gameObject.GetComponent<Customer>().cd.isMoving = path.isMoving;
-        //    gameObject.GetComponent<Customer>().cd.direction = direction;
-        //}
-        //else
-        //    move();
     }
 
     // Customer sets its move according to its current state
@@ -168,51 +128,34 @@ public class CustomerController : MonoBehaviour
         // Move in a random direction and update desires if not buying or leaving
         else
         {
-            // Set direction and distance
-            //int direction = Random.Range(0, 7);
-            //int distance = Random.Range(1, 10);
-
             // Continue generating random path until a valid path is found
             bool doesPathExist = false;
-
+            int count = 0;
             do
             {
                 float x = Mathf.Round(Random.Range(-3.5f, 3.5f) * 2) / 2;
                 float y = Mathf.Round(Random.Range(-0.5f, 6) * 2) / 2;
-                doesPathExist = Astar.findPath(ref path, transform.localPosition.x, transform.localPosition.y, x, y);
-            } while (!doesPathExist) ;
+                if (isInObstical(transform.localPosition))
+                {
+                    Node currentNode = path.getCurrentNode();
+                    if (currentNode != null && currentNode.previous != null)
+                        transform.localPosition = createVector(path.getCurrentNode().previous.position);
+                }
+                else
+                    doesPathExist = Astar.findPath(ref path, transform.localPosition.x, transform.localPosition.y, x, y);
+            } while (!doesPathExist && count++ < 20);
 
+            if (count == 20)
+                teleportOutOfTrap();
+            int o = 4;
             //moveQ.enqueue(direction, distance);
         }
     }
-
-    //// Move customer
-    //// It detects when the move should finish and finishes it
-    //private void move()
-    //{
-    //    if (Vector3.Distance(moveLocation, transform.localPosition) <= 0.06f)
-    //    {
-    //        transform.localPosition = moveLocation;
-    //        path.currentNode++;
-    //        path.isMoving = 0;
-    //    }
-    //    else
-    //    {
-    //        Vector3 move = new Vector3(directionX[direction], directionY[direction], 0) * Time.deltaTime * 0.5f;
-    //        transform.Translate(move);
-    //    }
-    //}
-
-    //// Set move to the next location.
-    //private void setMove()
-    //{
-    //    if (path.currentNode < path.path.Count)
-    //    {
-    //        moveLocation = new Vector3(path.current().position.x, path.current().position.y);
-    //        direction = path.current().direction;
-    //        path.isMoving = 1;
-    //    }
-    //}
+    
+    private Vector3 createVector(Position p)
+    {
+        return new Vector3(p.x, p.y);
+    }
 
     // Check if the customer is inside of a fixture
     private bool isInObstical(Vector3 location)
@@ -222,83 +165,14 @@ public class CustomerController : MonoBehaviour
 
         return Obsticals.isObstical(x, y);
     }
-
-    // Check if the customer is isolated between fixtures
-    //private bool isTrapped(Vector3 location)
-    //{
-    //    return Astar.findPath(ref path, location.x, location.y, -1.5f, 6);
-    //}
-
-    // Teleport the customer to a nearby "safe spot"
-    //private void teleport()
-    //{
-    //    // Find nearest x and y location divisible by 0.5
-    //    // This will be used as the origin point
-    //    float x = Mathf.Round(transform.localPosition.x * 2) / 2;
-    //    float y = Mathf.Round(transform.localPosition.y * 2) / 2;
-
-    //    int jumpAmount = 1; // number of tiles away from customer
-    //    float tileSize = 0.5f; // width/height of tile
-
-    //    Vector3 newLocation = Vector3.zero;
-
-    //    // Continue looking for a safe location
-    //    while (jumpAmount < 50)
-    //    {
-    //        float jump = jumpAmount * tileSize; // calculate distance of jump
-
-    //        newLocation = new Vector3(x + jump, y); // check right
-    //        if (Obsticals.isInBounds(newLocation) && !isTrapped(newLocation) && !isInObstical(newLocation))
-    //            break;
-
-    //        newLocation = new Vector3(x - jump, y); // check left
-    //        if (Obsticals.isInBounds(newLocation) && !isTrapped(newLocation) && !isInObstical(newLocation))
-    //            break;
-
-    //        newLocation = new Vector3(x, y + jump); // check up
-    //        if (Obsticals.isInBounds(newLocation) && !isTrapped(newLocation) && !isInObstical(newLocation))
-    //            break;
-
-    //        newLocation = new Vector3(x, y - jump); // check down
-    //        if (Obsticals.isInBounds(newLocation) && !isTrapped(newLocation) && !isInObstical(newLocation))
-    //            break;
-
-    //        newLocation = new Vector3(x + jump, y + jump); // check right-up
-    //        if (Obsticals.isInBounds(newLocation) && !isTrapped(newLocation) && !isInObstical(newLocation))
-    //            break;
-
-    //        newLocation = new Vector3(x - jump, y + jump); // check left-up
-    //        if (Obsticals.isInBounds(newLocation) && !isTrapped(newLocation) && !isInObstical(newLocation))
-    //            break;
-
-    //        newLocation = new Vector3(x - jump, y - jump); // check left-down
-    //        if (Obsticals.isInBounds(newLocation) && !isTrapped(newLocation) && !isInObstical(newLocation))
-    //            break;
-
-    //        newLocation = new Vector3(x + jump, y - jump); // check right-down
-    //        if (Obsticals.isInBounds(newLocation) && !isTrapped(newLocation) && !isInObstical(newLocation))
-    //            break;
-
-    //        jumpAmount++;
-    //    }
-
-    //    // Report if teleport doesnt work and teleport customer to entrance
-    //    if (jumpAmount == 50)
-    //    {
-    //        Debug.Log("Teleport Error");
-    //        transform.localPosition = new Vector3(-1.5f, 6f);
-    //    }
-
-    //    transform.localPosition = newLocation; // teleport customer to safe location
-    //}
-
+    
     private void move()
     {
         if (Vector3.Distance(moveLocation, transform.localPosition) <= 0.06f)
         {
             transform.localPosition = moveLocation;
             path.currentNode++;
-            path.isMoving = 0;
+            path.moveState = 0;
         }
         else
         {
@@ -311,9 +185,9 @@ public class CustomerController : MonoBehaviour
     {
         if (path.currentNode < path.path.Count)
         {
-            moveLocation = new Vector3(path.current().position.x, path.current().position.y);
-            direction = path.current().direction;
-            path.isMoving = 1;
+            moveLocation = new Vector3(path.getCurrentNode().position.x, path.getCurrentNode().position.y);
+            direction = path.getCurrentNode().direction;
+            path.moveState = 1;
         }
     }
 
@@ -343,7 +217,7 @@ public class CustomerController : MonoBehaviour
             // So teleport customer back a space
             if (count == 0)
             {
-                Position position = path.current().previous.position; // find previous position to teleport back to
+                Position position = path.getCurrentNode().previous.position; // find previous position to teleport back to
 
                 // If previous location exists
                 if (position != null)
@@ -364,10 +238,10 @@ public class CustomerController : MonoBehaviour
             }
             else
             {
-                Position position = path.current().position;
+                Position position = path.getCurrentNode().position;
                 moveLocation = new Vector3(position.x, position.y);
                 doesPathExist = Astar.findPath(ref path, moveLocation.x, moveLocation.y, path.destination.x, path.destination.y);
-                path.isMoving = 1;
+                path.moveState = 1;
             }
 
             if (!doesPathExist)
@@ -383,7 +257,7 @@ public class CustomerController : MonoBehaviour
             {
                 transform.localPosition = new Vector3(path.path[i].position.x, path.path[i].position.y);
                 path.currentNode = i;
-                path.isMoving = 0;
+                path.moveState = 0;
                 break;
             }
     }
@@ -453,7 +327,7 @@ public class CustomerController : MonoBehaviour
 
     private bool isTrapped(Vector3 location)
     {
-        return !Astar.findPath(ref path, location.x, location.y, path.destination.x, path.destination.y);
+        return !Astar.findPath(ref path, location.x, location.y, -1.5f, 6);
     }
 
     // Handles a customers desires
@@ -513,7 +387,7 @@ public class CustomerController : MonoBehaviour
     {
         int numberOfCustomers = Globals_Customer.customerData.Count;
         for (int i = 0; i < numberOfCustomers; i++)
-            Globals_Customer.customerData[i].path.isMoving = state;
+            Globals_Customer.customerData[i].path.moveState = state;
     }
 
     // Removes the customer from the CustomerData List and the CustomerScreen Button List

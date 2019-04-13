@@ -7,77 +7,86 @@ public class TestMovement : MonoBehaviour
     private static float[] directionX = { 1, -1, 0, 0, 1, -1, 1, -1 }; // values that help set moveLocation
     private static float[] directionY = { 0, 0, 1, -1, 0.95f, 0.95f, -0.95f, -0.95f }; // values that help set moveLocation
 
-    static Path path;
-    Vector3 moveLocation;
-    int direction;
+    static Path path; // The path the customer must take
+    Vector3 moveLocation; // The node the customer currently wants to reach
+    Vector3 moveDirection; // The direction customer moves in
+    public float speed; // The speed at which the customer moves
+    public Position destination; // The final destination of the path
 
     private void Start()
     {
-        Astar.findPath(ref path, transform.localPosition.x, transform.localPosition.y, -2, 4.5f);
-        path.currentNode = 0;
-        moveLocation = new Vector3(path.current().position.x, path.current().position.y);
-        direction = path.current().direction;
+        if (path == null)
+            path = new Path(destination.x, destination.y);
+        Astar.findPath(ref path, transform.localPosition.x, transform.localPosition.y, destination.x, destination.y);
     }
 
     // Update is called once per frame
     void Update ()
     {
         // If player has picked item up
-        if (path.isMoving == -2)
+        if (path.moveState == -2)
         {
             // Only repath if customer is a significant distance away
             if (path.getDistance() > 12)
                 Astar.findPath(ref path, moveLocation.x, moveLocation.y, path.destination.x, path.destination.y);
 
-            path.isMoving = 1; // continue moving
+            path.moveState = 1; // continue moving
         }
         // If player has placed item down
-        else if (path.isMoving == -1)
+        else if (path.moveState == -1)
         {
+            // Teleport customer if object was placed on top of it
             if (isInObstical(transform.localPosition))
                 teleport();
-            
-            path.isMoving = 0;
-            checkPath();
+            // Or repath if obstical is placed in path of customer
+            else
+                checkPath();
         }
         // Set move to next node in path when 
-        else if (path.isMoving == 0)
+        else if (path.moveState == 0)
             setMove();
         else
             move(); // perform move
 	}
 
+    // Perform Movement
     private void move()
     {
+        // Finish Move
         if (Vector3.Distance(moveLocation, transform.localPosition) <= 0.06f)
         {
-            transform.localPosition = moveLocation;
-            path.currentNode++;
-            path.isMoving = 0;
+            transform.localPosition = moveLocation; // Set position to moveLocation
+            path.moveState = 0; // Change moveState
         }
+        // Move Customer
         else
         {
-            Vector3 move = new Vector3(directionX[direction], directionY[direction], 0) * Time.deltaTime * 0.2f;
-            transform.Translate(move);
+            //Vector3 move = new Vector3(directionX[path.currentDirection], directionY[path.currentDirection], 0) * Time.deltaTime * speed;
+
+            transform.Translate(moveDirection);
         }
     }
 
+    // Set the currentNode as the new move destination
     private void setMove()
     {
+        // Only set move if nodes are available
         if (path.currentNode < path.path.Count)
         {
-            moveLocation = new Vector3(path.current().position.x, path.current().position.y);
-            direction = path.current().direction;
-            path.isMoving = 1;
+            path.currentNode++; // Switch to next Node
+            Debug.Log("Move Set: " + path.getCurrentNode().position.ToString());
+            moveLocation = new Vector3(path.getCurrentNode().position.x, path.getCurrentNode().position.y); // Set moveLocation
+            moveDirection = new Vector3(directionX[path.getCurrentNode().direction], directionY[path.getCurrentNode().direction]) * speed;
+            path.moveState = 1; // Set moveState to moving
         }
     }
 
-    //// state == -2 is for when player picks an item up
-    //// state == -1 is for when player places an item down
-    //public static void repath(int state)
-    //{
-    //    path.isMoving = state;
-    //}
+    // state == -2 is for when player picks an item up
+    // state == -1 is for when player places an item down
+    public static void repath(int state)
+    {
+        path.moveState = state;
+    }
 
     // Check if the customer is inside of a fixture
     private bool isInObstical(Vector3 location)
@@ -88,62 +97,46 @@ public class TestMovement : MonoBehaviour
         return Obsticals.isObstical(x, y);
     }
 
-    private bool isBlocked(ref int count)
-    {
-        bool isObsticalInPath = false;
-
-        for (int i = path.currentNode; i < path.path.Count && !isObsticalInPath; i++, count++)
-        {
-            Position p = path.path[i].position;
-            isObsticalInPath = Obsticals.isObstical(p.x, p.y);
-        }
-
-        return isObsticalInPath;
-    }
-
+    // Check to see if the path needs to be updated and update it
     private void checkPath()
     {
         // Figure out if there is an obstical in the path
-        int count = 0;
-        bool isObsticalInPath = isBlocked(ref count);
+        bool isObsticalInPath = path.isObsticalInPath();
 
+        // Change Paths if there is an obstical
         if (isObsticalInPath)
         {
-            bool doesPathExist = true;
-            // If count is 0, then obstical is directly in front of the customer's path
-            // So teleport customer back a space
-            if (count == 0)
+            Position position = path.getCurrentNode().position; // Get position of node being traveled to
+
+            // position is the location directly in front of the customer.
+            // If it is an obstical, then teleport back a step and then repath
+            if (Obsticals.isObstical(position.x, position.y))
             {
-                Position position = path.current().previous.position; // find previous position to teleport back to
+                position = path.getCurrentNode().previous.position;
+                transform.localPosition = moveLocation = createVector(position);
+            }
 
-                // If previous location exists
-                if (position != null)
-                {
-                    transform.localPosition = new Vector3(position.x, position.y); // teleport to position
-                    moveLocation = transform.localPosition; // reset moveLocation
-                }
+            bool doesPathExist = Astar.findPath(ref path, position.x, position.y, path.destination.x, path.destination.y); // find new path
 
-                // Find new path from moveLocation
-                doesPathExist = Astar.findPath(ref path, moveLocation.x, moveLocation.y, path.destination.x, path.destination.y);
-
-                // If previous location did not exist before, it will exist now
-                if (position == null)
-                {
-                    position = path.path[0].previous.position; // find previous position to teleport back to
-                    transform.localPosition = new Vector3(position.x, position.y); // teleport to position
-                }
+            // If path does not exist, then the customer is trapped, so teleport the customer out
+            if (!doesPathExist)
+            {
+                teleportOutOfTrap();
+                path.moveState = 0;
             }
             else
             {
-                Position position = path.current().position;
-                moveLocation = new Vector3(position.x, position.y);
-                doesPathExist = Astar.findPath(ref path, moveLocation.x, moveLocation.y, path.destination.x, path.destination.y);
-                path.isMoving = 1;
+                moveLocation = createVector(path.getCurrentNode().position);
+                path.moveState = 1;
             }
-
-            if (!doesPathExist)
-                teleportOutOfTrap();
         }
+        else
+            path.moveState = 1;
+    }
+
+    private static Vector3 createVector(Position position)
+    {
+        return new Vector3(position.x, position.y);
     }
 
     // Teleport the customer to a nearby "safe spot"
@@ -154,7 +147,7 @@ public class TestMovement : MonoBehaviour
             {
                 transform.localPosition = new Vector3(path.path[i].position.x, path.path[i].position.y);
                 path.currentNode = i;
-                path.isMoving = 0;
+                path.moveState = 0;
                 break;
             }
     }

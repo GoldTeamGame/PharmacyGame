@@ -12,4 +12,10 @@ public class Position
         this.x = x;
         this.y = y;
     }
+
+    // Report x and y coordinates
+    public override string ToString()
+    {
+        return "(" + x + ", " + y + ")";
+    }
 }

@@ -7,7 +7,8 @@ public class Path
     public List<Node> path;
     public Position destination;
     public int currentNode;
-    public int isMoving;
+    public int currentDirection;
+    public int moveState;
 
     public Path(float x, float y)
     {
@@ -15,7 +16,7 @@ public class Path
         destination = new Position(x, y);
     }
 
-    public Node current()
+    public Node getCurrentNode()
     {
         if (currentNode < path.Count)
             return path[currentNode];

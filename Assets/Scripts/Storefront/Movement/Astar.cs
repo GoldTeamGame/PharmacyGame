@@ -7,14 +7,7 @@ public class Astar : MonoBehaviour
     // Check if a path does not exists between [x1, y1] and [x2, y2]
     public static bool findPath(ref Path path, float x1, float y1, float x2, float y2)
     {
-        Node previousNode = null;
-        if (path != null && path.current() != null && path.current().previous != null)
-            previousNode = path.current().previous;
-
-        path = new Path(x2, y2);
-
-        if (previousNode != null)
-            path.path[0].previous = previousNode;
+        Path newPath = new Path(x2, y2);
 
         PriorityQueue pq = new PriorityQueue(1000); // Instantiate Priority Queue
 
@@ -32,7 +25,7 @@ public class Astar : MonoBehaviour
         int row = Obsticals.yToRow(y1); // convert y to row value
         int column = Obsticals.xToColumn(x1); // convert x to column value
         Node node = new Node(new Position(x1, y1), findDistance(x1, y1, x2, y2, row, column));
-        path.Add(node);
+        newPath.Add(node);
         //Move currentMove = new Move(x1, y1, 0, findDistance(x1, y1, x2, y2, row, column), 0, null);
         float md = TileCalculator.TILE_DIMENSIONS; // (Move distance) used to make code prettier
 
@@ -53,9 +46,15 @@ public class Astar : MonoBehaviour
             node = pq.peekAndDequeue(); // Set the first item in the queue as the currentMove
         }
 
-        addMoves(ref path, node);
+        addMoves(ref newPath, node);
         
-        return node != null && node.position.x == x2 && node.position.y == y2;
+        bool doesPathExist = node != null && node.position.x == x2 && node.position.y == y2;
+
+        // Replace old path with new path if path exists
+        if (doesPathExist)
+            path = newPath;
+        
+        return doesPathExist;
     }
 
     // (USED FOR A*)
