@@ -19,12 +19,14 @@ public class CustomerController : MonoBehaviour
     public bool isLeaving;
     public bool isFinding;
     public int wallet = 0;
+    public int attempts = 0;
 
 	void Start ()
     {
         List<CustomerData> p = Globals_Customer.customerData;
         GetComponent<MovementController>().path = GetComponent<Customer>().cd.path;
         mc = GetComponent<MovementController>();
+        currentAmount = GetComponent<Customer>().cd.currentAmount;
         if (mc == null)
         {
             mc = new MovementController();
@@ -48,12 +50,12 @@ public class CustomerController : MonoBehaviour
     {
         if (mc.path.currentNode == mc.path.path.Count)
         {
-            think();
+            think(); // Find a path to a location
         }
         else
         {
-            mc.performMove();
-            setMovementController();
+            mc.performMove(); // Move to a node
+            setMovementController(); // Update data
         }
     }
 
@@ -63,12 +65,14 @@ public class CustomerController : MonoBehaviour
         // Find the counter if the customer is ready to buy
         if (isBuying)
         {
+            // Find path to counter
             if (transform.localPosition.x != 0.5f && transform.localPosition.y != -0.5f)
             {
                 mc.setPath(transform.localPosition.x, transform.localPosition.y, 0.5f, -0.5f);
                 setMovementController();
                 saveLocation();
             }
+            // Reached counter, now pay and change state to leaving
             else
             {
                 isLeaving = true;
@@ -81,6 +85,7 @@ public class CustomerController : MonoBehaviour
         // Find the exit if the customer is ready to leave
         else if (isLeaving)
         {
+            // Find the exit
             if (transform.localPosition.x != -1.5f && transform.localPosition.y != 6)
             {
                 mc.setPath(transform.localPosition.x, transform.localPosition.y, -1.5f, 6f);
@@ -96,6 +101,7 @@ public class CustomerController : MonoBehaviour
         // Move in a random direction and update desires if not buying or leaving
         else
         {
+            // Change state to buying when currentAmount reaches limit
             if (currentAmount > limit)
             {
                 isBuying = true;
@@ -106,7 +112,8 @@ public class CustomerController : MonoBehaviour
                 mc.setRandomPath();
                 setMovementController();
                 saveLocation();
-                currentAmount += mc.path.getDistance();
+                updateDesire(mc.path.getDistance());
+                GetComponent<Customer>().cd.currentAmount = currentAmount;
             }
         }
     }
@@ -116,35 +123,50 @@ public class CustomerController : MonoBehaviour
         return new Vector3(p.x, p.y);
     }
 
+    private void buyItems()
+    {
+
+    }
     
     // Handles a customers desires
+    // Only deals with Over the Counter drugs
+    // Customer will walk around "picking items up off the shelves"
+    //      - Each time they find an item, their mood will increase and the item will be crossed off the list
+    //      - If the customer cannot find the item, they will move on to another item
+    //      - If the only item(s) left on their list are items they cannot find, they will go to buy the items they can and their mood will drop for every item they could not find
     void updateDesire(int distance)
     {
         currentAmount += distance; // add distance traveled to currentAmount
 
-        // When currentAmount reaches limit, reset currentAmount and remove a desire
+        // When currentAmount reaches limit, update desires
         if (!isBuying && !isLeaving && currentAmount >= limit)
         {
             currentAmount = 0; // reset currentAmount
             CustomerData cd = GetComponent<Customer>().cd; // grab customerData from Customer Script
 
-            // Update desires customer found something
+            // Update desire if customer found something
             if (cd.desiresRemaining > 0)
             {
-                cd.desiresRemaining--;
+                if (cd.lookingFor >= cd.desires.Length)
+                    cd.lookingFor = 0;
 
-                Drug d = Globals.findDrug(cd.desires[cd.desiresRemaining], Globals.overCounterList);
+                Drug d = cd.desires.getCurrentDrug();
 
                 if (d != null)
                 {
                     if (d.amount > 0)
                     {
+                        cd.desiresRemaining--;
                         d.amount -= 1;
                         wallet += d.price + (d.price / 2);
+                        cd.desires[cd.desiresRemaining] = Toolbox.StrikeThrough(cd.desires[cd.desiresRemaining]);
                     }
+                    else
+                    {
+                        // Decrease mood
 
-                    cd.desires[cd.desiresRemaining] = Toolbox.StrikeThrough(cd.desires[cd.desiresRemaining]);
-
+                        
+                    }
                     // Update desires in the customer information screen if the scene is open
                     if (CustomerScreen.isAtCustomerScene)
                     {

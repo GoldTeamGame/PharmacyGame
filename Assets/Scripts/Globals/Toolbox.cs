@@ -20,6 +20,7 @@ public class Toolbox
 
     // https://stackoverflow.com/questions/16543751/unity3d-font-with-strikethrough
     // Credit to Tim Maytom
+    // Creates a strikethrough version of string s
     public static string StrikeThrough(string s)
     {
         if (s != null)

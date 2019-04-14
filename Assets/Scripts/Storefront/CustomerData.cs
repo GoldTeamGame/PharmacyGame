@@ -12,15 +12,18 @@ public class CustomerData
     public float speed; // speed that customer moves
     public int mood; // how happy a customer is
     public string thoughts; // what the customer is currently thinking about
-    public string[] desires; // what a customer wants to buy
-    public string[] prescriptionDesires; // prescriptions the customer wants to buy
-    public int numberOfDesires; // number of desires
-    public int desiresRemaining;
-    public int numberOfPrescriptionDesires; // number of prescriptionDesires
+    public Desires desires;
+    //public string[] desires; // what a customer wants to buy
+    //public string[] prescriptionDesires; // prescriptions the customer wants to buy
+    //public int numberOfDesires; // number of desires
+    //public int desiresRemaining;
+    //public int numberOfPrescriptionDesires; // number of prescriptionDesires
+    //public int lookingFor; // The drug currently being looked for
     public bool isAlive; // does the customer gameObject still exist?
     public bool isBuying; // is the customer buying something
     public bool isLeaving; // is the customer leaving the store
     public bool isFinding; // is the customer finding something
+    public int currentAmount; // keeps track of when customer desire should be updated
 
     public int appearance;
 
