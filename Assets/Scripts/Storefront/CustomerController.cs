@@ -12,51 +12,23 @@ public class CustomerController : MonoBehaviour
     private static float[] directionX = { 1, -1, 0, 0, 1, -1, 1, -1 }; // values that help set moveLocation
     private static float[] directionY = { 0, 0, 1, -1, 0.95f, 0.95f, -0.95f, -0.95f }; // values that help set moveLocation
 
+    public CustomerData cd;
     public MovementController mc;
     public int limit = 20; // "Desire Capacity"
     public int currentAmount = 0; // Number is increased each move. When currentAmmount reaches limit, reset currentAmount and remove a desire
     public bool isBuying;
     public bool isLeaving;
     public bool isFinding;
-    public int wallet = 0;
-    public int attempts = 0;
+    public int cart = 0;
 
     void Start()
     {
+        cd = GetComponent<Customer>().cd;
         List<CustomerData> p = Globals_Customer.customerData;
         GetComponent<MovementController>().path = GetComponent<Customer>().cd.path;
         mc = GetComponent<MovementController>();
         currentAmount = GetComponent<Customer>().cd.currentAmount;
         if (mc == null)
-        {
-            mc = new MovementController();
-        }
-
-        if (mc.path == null)
-            mc.path = new Path(-1.5f, 6);
-        else
-            mc.path.moveState = 0;
-
-        setMovementController();
-        mc.speed = GetComponent<Customer>().cd.speed;
-
-        isBuying = GetComponent<Customer>().cd.isBuying;
-        isLeaving = GetComponent<Customer>().cd.isLeaving;
-        isFinding = GetComponent<Customer>().cd.isFinding;
-    }
-	
-	// Update is called once per frame
-	void Update ()
-    {
-        if (mc.path.currentNode == mc.path.path.Count)
-        {
-            think(); // Find a path to a location
-        }
-        else
-        {
-            mc.performMove(); // Move to a node
-            setMovementController(); // Update data
-        }
         {
             mc = new MovementController();
         }
@@ -86,7 +58,6 @@ public class CustomerController : MonoBehaviour
             mc.performMove(); // Move to a node
             setMovementController(); // Update data
         }
->>>>>>> merge
     }
 
     // Customer sets its move according to its current state
@@ -105,11 +76,12 @@ public class CustomerController : MonoBehaviour
             // Reached counter, now pay and change state to leaving
             else
             {
+                buyItems();
                 isLeaving = true;
                 isBuying = false;
                 GetComponent<Customer>().cd.isLeaving = true;
                 GetComponent<Customer>().cd.isBuying = false;
-                Globals.setGold(Globals.getGold() + wallet);
+                Globals.setGold(Globals.getGold() + cart);
             }
         }
         // Find the exit if the customer is ready to leave
@@ -132,7 +104,7 @@ public class CustomerController : MonoBehaviour
         else
         {
             // Change state to buying when currentAmount reaches limit
-            if (currentAmount > limit)
+            if (currentAmount > limit || cd.desires.overCounter.Length == 0)
             {
                 isBuying = true;
                 GetComponent<Customer>().cd.isBuying = true;
@@ -147,9 +119,7 @@ public class CustomerController : MonoBehaviour
             }
         }
     }
-    
 
->>>>>>> merge
     private Vector3 createVector(Position p)
     {
         return new Vector3(p.x, p.y);
@@ -157,9 +127,18 @@ public class CustomerController : MonoBehaviour
 
     private void buyItems()
     {
-
+        for (int i = 0; i < cd.desires.overCounter.Length; i++)
+        {
+            if (cd.desires.overCounter[i].hasPickedUp)
+                cart += cd.desires.overCounter[i].drug.price + (cd.desires.overCounter[i].drug.price / 2);
+        }
+        for (int i = 0; i < cd.desires.prescription.Length; i++)
+        {
+            if (cd.desires.prescription[i].hasPickedUp)
+                cart += cd.desires.prescription[i].drug.price + (cd.desires.prescription[i].drug.price / 2);
+        }
     }
-    
+
     // Handles a customers desires
     // Only deals with Over the Counter drugs
     // Customer will walk around "picking items up off the shelves"
@@ -175,52 +154,57 @@ public class CustomerController : MonoBehaviour
         {
             currentAmount = 0; // reset currentAmount
             CustomerData cd = GetComponent<Customer>().cd; // grab customerData from Customer Script
+            Drug d = cd.desires.getCurrentDrug();
 
-            // Update desire if customer found something
-            if (cd.desiresRemaining > 0)
+            if (d != null)
             {
-                if (cd.lookingFor >= cd.desires.Length)
-                    cd.lookingFor = 0;
-
-                Drug d = cd.desires.getCurrentDrug();
-
-                if (d != null)
+                if (d.isUnlocked && d.amount > 0)
                 {
-                    if (d.amount > 0)
-                    {
-                        cd.desiresRemaining--;
-                        d.amount -= 1;
-                        wallet += d.price + (d.price / 2);
-                        cd.desires[cd.desiresRemaining] = Toolbox.StrikeThrough(cd.desires[cd.desiresRemaining]);
-                    }
-                    else
-                    {
-                        // Decrease mood
+                    cd.desires.desiresRemaining--;
+                    d.amount--;
+                    cd.desires.overCounter[cd.desires.currentDrug].hasPickedUp = true;
+                    d.name = Toolbox.StrikeThrough(d.name);
+                    cd.desires.willBuy = true;
+                }
+                else
+                {
+                    // Decrease mood
 
-                        
->>>>>>> merge
-                    }
-                    // Update desires in the customer information screen if the scene is open
-                    if (CustomerScreen.isAtCustomerScene)
-                    {
-                        // Find the index of the customer being updated
-                        int numberOfCustomers = Globals_Customer.customerData.Count;
-                        int index = -2;
-                        for (int i = 0; i < numberOfCustomers; i++)
-                            if (cd.Equals(Globals_Customer.customerData[i]))
-                                index = i;
+                    if (++cd.desires.overCounter[cd.desires.currentDrug].attempts == 2)
+                        cd.desires.desiresRemaining--;
+                    cd.desires.currentDrug++;
 
-                        if (CustomerScreen.currentCustomer == index)
-                            CustomerScreen.listDesires(cd);
-                    }
+                    
+
+                }
+                // Update desires in the customer information screen if the scene is open
+                if (CustomerScreen.isAtCustomerScene)
+                {
+                    // Find the index of the customer being updated
+                    int numberOfCustomers = Globals_Customer.customerData.Count;
+                    int index = -2;
+                    for (int i = 0; i < numberOfCustomers; i++)
+                        if (cd.Equals(Globals_Customer.customerData[i]))
+                            index = i;
+
+                    if (CustomerScreen.currentCustomer == index)
+                        CustomerScreen.listDesires(cd);
                 }
             }
 
             // Set isBuying to true when customer has picked up everything they want to purchase
-            if (cd.desiresRemaining == 0)
+            if (cd.desires.desiresRemaining == 0)
             {
-                isBuying = true;
-                GetComponent<Customer>().cd.isBuying = true;
+                if (cd.desires.willBuy || cd.desires.prescription.Length > 0)
+                {
+                    isBuying = true;
+                    GetComponent<Customer>().cd.isBuying = true;
+                }
+                else
+                {
+                    isLeaving = true;
+                    GetComponent<Customer>().cd.isLeaving = true;
+                }
             }
         }
     }

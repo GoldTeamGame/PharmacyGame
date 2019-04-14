@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+[System.Serializable]
 public class Desires
 {
     public CartItem[] overCounter;
@@ -9,19 +10,15 @@ public class Desires
 
     public int desiresRemaining; // number of overCounter desires remaining
     public int currentDrug; // current drug being looked for
+    public bool willBuy;
 
-    public Desires()
+    public Desires(int overCounterSize, int prescriptionSize)
     {
         // Create empty over the counter desire array of random size
-        overCounter = new CartItem[Random.Range(0, 4)];
+        overCounter = new CartItem[overCounterSize];
         desiresRemaining = overCounter.Length;
 
-        // Create empty prescription desire array of random size
-        // (if overCounter was length of 0, then minimum prescription size must be 1)
-        if (overCounter.Length > 0)
-            prescription = new CartItem[Random.Range(0, 4)];
-        else
-            prescription = new CartItem[Random.Range(1, 4)];
+        prescription = new CartItem[prescriptionSize];
 
         // Fill arrays with drugs
         generateArray(ref overCounter, Globals.overCounterList);
@@ -32,9 +29,27 @@ public class Desires
     // First checks if drug is available, continues to cycle through array until a valid drug is found
     public Drug getCurrentDrug()
     {
+        // Check to see if there IS a current drug
         if (desiresRemaining > 0)
         {
-            desiresRemaining--;
+            // count helps cycle through the entire list only once
+            int count = 0;
+
+            // Find index of a drug that has not been picked up
+            while (count < overCounter.Length)
+            {
+                if (currentDrug >= overCounter.Length)
+                    currentDrug = 0;
+
+                // Stop when a drug that has not been picked up has been found
+                if (!overCounter[currentDrug].hasPickedUp)
+                    break;
+                else
+                    currentDrug++;
+
+                count++;
+            }
+
             return overCounter[currentDrug].drug;
         }
         else

@@ -81,7 +81,17 @@ public class ProceduralGenerator : MonoBehaviour
             cd.mood = Random.Range(0, 6); // set a random mood
 
             // Set desires
-            cd.desires = new Desires();
+            int overCounterSize = Toolbox.random(0, 3); // 0-3 overcounter drugs
+            int prescriptionSize;
+
+            // If overcounter amount is 0, then number of prescription drugs must be at least 1
+            // (or the customer would have no reason to be in the store)
+            if (overCounterSize > 0)
+                prescriptionSize = Toolbox.random(0, 3);
+            else
+                prescriptionSize = Toolbox.random(1, 3);
+
+            cd.desires = new Desires(overCounterSize, prescriptionSize);
 
             Globals_Customer.customerData.Add(cd); // add cd to Globals list
         }
