@@ -1,6 +1,6 @@
 ﻿// File: CustomerController
-// Version: 1.0.8
-// Last Updated: 3/11/19
+// Version: 2.0.1
+// Last Updated: 4/13/19
 // Authors: Alexander Jacks
 // Description: Tells customer when and where to move
 
@@ -13,13 +13,6 @@ public class CustomerController : MonoBehaviour
     private static float[] directionY = { 0, 0, 1, -1, 0.95f, 0.95f, -0.95f, -0.95f }; // values that help set moveLocation
 
     public MovementController mc;
-    //Path path;
-    //Vector3 moveLocation;
-    //int direction;
-    //PriorityQueue pq;
-    //public float speed;
-    //public MoveSet ms;
-    //public Queue<int> moveQ; // 0 = right, 1 = left, 2 = up, 3 = down, 4 = upright, 5 = upleft, 6 = downright, 7 = downleft
     public int limit = 20; // "Desire Capacity"
     public int currentAmount = 0; // Number is increased each move. When currentAmmount reaches limit, reset currentAmount and remove a desire
     public bool isBuying;
@@ -29,10 +22,6 @@ public class CustomerController : MonoBehaviour
 
 	void Start ()
     {
-        // Instantiate MoveSet using info saved in CustomerData
-        //ms = new MoveSet(transform, speed, GetComponent<Customer>().cd.isMoving, GetComponent<Customer>().cd.destLocationX, GetComponent<Customer>().cd.destLocationY);
-        //moveQ = new Queue<int>(100);
-        //path = GetComponent<Customer>().cd.path;
         List<CustomerData> p = Globals_Customer.customerData;
         GetComponent<MovementController>().path = GetComponent<Customer>().cd.path;
         mc = GetComponent<MovementController>();
@@ -60,7 +49,6 @@ public class CustomerController : MonoBehaviour
         if (mc.path.currentNode == mc.path.path.Count)
         {
             think();
-            
         }
         else
         {
@@ -75,59 +63,51 @@ public class CustomerController : MonoBehaviour
         // Find the counter if the customer is ready to buy
         if (isBuying)
         {
-            // Locate path to counter after finishing cuurent moves
-            if (!isFinding)
+            if (transform.localPosition.x != 0.5f && transform.localPosition.y != -0.5f)
             {
                 mc.setPath(transform.localPosition.x, transform.localPosition.y, 0.5f, -0.5f);
                 setMovementController();
                 saveLocation();
-                isFinding = true;
-                GetComponent<Customer>().cd.isFinding = isFinding;
             }
-
-            // Change states once counter is reached
-            if (isFinding && transform.localPosition.Equals(new Vector3(0.5f, -0.5f)))
+            else
             {
                 isLeaving = true;
                 isBuying = false;
                 GetComponent<Customer>().cd.isLeaving = true;
                 GetComponent<Customer>().cd.isBuying = false;
                 Globals.setGold(Globals.getGold() + wallet);
-                wallet = 0;
-                isFinding = false;
-                GetComponent<Customer>().cd.isFinding = isFinding;
             }
-            else
-                isFinding = false; // reset isFinding to false if customer hasnt found the destination
         }
         // Find the exit if the customer is ready to leave
         else if (isLeaving)
         {
-            if (!isFinding)
+            if (transform.localPosition.x != -1.5f && transform.localPosition.y != 6)
             {
                 mc.setPath(transform.localPosition.x, transform.localPosition.y, -1.5f, 6f);
                 setMovementController();
                 saveLocation();
-                isFinding = true;
-                GetComponent<Customer>().cd.isFinding = isFinding;
             }
-
             // Remove customer once they reach the exit
-            if (transform.localPosition.Equals(new Vector3(-1.5f, 6f)))
+            else
             {
                 removeCustomer();
-                isFinding = false;
-                GetComponent<Customer>().cd.isFinding = isFinding;
             }
-            else
-                isFinding = false; // reset isFinding to false if customer hasnt found the destination
         }
         // Move in a random direction and update desires if not buying or leaving
         else
         {
-            mc.setRandomPath();
-            setMovementController();
-            saveLocation();
+            if (currentAmount > limit)
+            {
+                isBuying = true;
+                GetComponent<Customer>().cd.isBuying = true;
+            }
+            else
+            {
+                mc.setRandomPath();
+                setMovementController();
+                saveLocation();
+                currentAmount += mc.path.getDistance();
+            }
         }
     }
     

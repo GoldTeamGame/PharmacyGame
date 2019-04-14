@@ -1,5 +1,5 @@
 ﻿// File: Customer
-// Version: 1.0.6
+// Version: 1.1.1
 // Last Updated: 2/11/19
 // Authors: Alexander Jacks
 // Description: GameObject script for customer
