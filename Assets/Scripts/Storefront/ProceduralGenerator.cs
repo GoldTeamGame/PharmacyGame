@@ -36,7 +36,7 @@ public class ProceduralGenerator : MonoBehaviour
         int numberOfCustomers = Globals_Customer.customerData.Count;
         for (int i = 0; i < numberOfCustomers; i++)
         {
-            Vector3 v = new Vector3(Globals_Customer.customerData[i].locationX, Globals_Customer.customerData[i].locationY, 0);
+            Vector3 v = new Vector3(Globals_Customer.customerData[i].path.getCurrentNode().position.x, Globals_Customer.customerData[i].path.getCurrentNode().position.y, 0);
             instantiateObject(v);
         }
 
@@ -47,12 +47,13 @@ public class ProceduralGenerator : MonoBehaviour
     private void Spawn()
     {
         if (Globals_Customer.customerData.Count < Globals_Customer.LIMIT)
-            instantiateObject(spawnPoint.position);
+            instantiateObject(spawnPoint.localPosition);
     }
 
     private void instantiateObject(Vector3 position)
     {
-        Instantiate(customer, position, spawnPoint.rotation, parent); // spawn the customer
+        GameObject go = Instantiate(customer, position, spawnPoint.rotation, parent); // spawn the customer
+        go.transform.localPosition = position;
     }
 
     // Generate customer data
@@ -71,7 +72,7 @@ public class ProceduralGenerator : MonoBehaviour
         else
         {
             string name = Globals_Customer.name[Random.Range(0, Globals_Customer.name.Length)]; // generate a random name
-            float speed = .4f;
+            float speed = .005f;
                 //Random.Range(0.4f, 0.6f); // generate a random speed
             
             cd = new CustomerData(name, speed); // instantiate cd with name and speed

@@ -7,21 +7,39 @@ public class MovementController : MonoBehaviour
     private static float[] directionX = { 1, -1, 0, 0, 1, -1, 1, -1 }; // values that help set moveLocation
     private static float[] directionY = { 0, 0, 1, -1, 0.95f, 0.95f, -0.95f, -0.95f }; // values that help set moveLocation
 
-    static Path path; // The path the customer must take
+    public Path path; // The path the customer must take
     public Vector3 moveLocation; // The node the customer currently wants to reach
     public Vector3 moveDirection; // The direction customer moves in
     public float speed; // The speed at which the customer moves
-    public Position destination; // The final destination of the path
+    
 
-    private void Start()
+    public MovementController()
     {
-        if (path == null)
-            path = new Path(destination.x, destination.y);
-        Astar.findPath(ref path, transform.localPosition.x, transform.localPosition.y, destination.x, destination.y);
+        path = new Path(-1.5f, 6);
     }
 
+    public void setPath(float x1, float y1, float x2, float y2)
+    {
+        Astar.findPath(ref path, x1, y1, x2, y2);
+    }
+
+    public void setRandomPath()
+    {
+        // Continue generating random path until a valid path is found
+        bool doesPathExist = false;
+        int count = 0;
+        do
+        {
+            float x = Mathf.Round(Random.Range(-3.5f, 3.5f) * 2) / 2;
+            float y = Mathf.Round(Random.Range(-0.5f, 6) * 2) / 2;
+            doesPathExist = Astar.findPath(ref path, transform.localPosition.x, transform.localPosition.y, x, y);
+        } while (!doesPathExist && count++ < 20);
+
+        if (count == 20)
+            teleportOutOfTrap();
+    }
     // Update is called once per frame
-    void Update ()
+    public void performMove()
     {
         // If player has picked item up
         if (path.moveState == -2)
@@ -83,10 +101,10 @@ public class MovementController : MonoBehaviour
 
     // state == -2 is for when player picks an item up
     // state == -1 is for when player places an item down
-    public static void repath(int state)
-    {
-        path.moveState = state;
-    }
+    //public static void repath(int state)
+    //{
+    //    path.moveState = state;
+    //}
 
     // Check if the customer is inside of a fixture
     private bool isInObstical(Vector3 location)
@@ -114,6 +132,11 @@ public class MovementController : MonoBehaviour
             {
                 position = path.getCurrentNode().previous.position;
                 transform.localPosition = moveLocation = createVector(position);
+            }
+            if (Obsticals.isObstical(path.destination.x, path.destination.y))
+            {
+                path.destination.x = position.x;
+                path.destination.y = position.y;
             }
 
             bool doesPathExist = Astar.findPath(ref path, position.x, position.y, path.destination.x, path.destination.y); // find new path
