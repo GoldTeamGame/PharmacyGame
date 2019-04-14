@@ -9,9 +9,12 @@ using UnityEngine;
 
 public class CustomerController : MonoBehaviour
 {
+<<<<<<< HEAD
     private static float[] directionX = { 1, -1, 0, 0, 1, -1, 1, -1 }; // values that help set moveLocation
     private static float[] directionY = { 0, 0, 1, -1, 0.95f, 0.95f, -0.95f, -0.95f }; // values that help set moveLocation
 
+=======
+>>>>>>> merge
     public MovementController mc;
     public int limit = 20; // "Desire Capacity"
     public int currentAmount = 0; // Number is increased each move. When currentAmmount reaches limit, reset currentAmount and remove a desire
@@ -28,6 +31,7 @@ public class CustomerController : MonoBehaviour
         mc = GetComponent<MovementController>();
         currentAmount = GetComponent<Customer>().cd.currentAmount;
         if (mc == null)
+<<<<<<< HEAD
         {
             mc = new MovementController();
         }
@@ -57,6 +61,7 @@ public class CustomerController : MonoBehaviour
             mc.performMove(); // Move to a node
             setMovementController(); // Update data
         }
+=======
         {
             mc = new MovementController();
         }
@@ -147,7 +152,9 @@ public class CustomerController : MonoBehaviour
             }
         }
     }
+<<<<<<< HEAD
     
+=======
 
 >>>>>>> merge
     private Vector3 createVector(Position p)
@@ -170,6 +177,7 @@ public class CustomerController : MonoBehaviour
     {
         currentAmount += distance; // add distance traveled to currentAmount
 
+<<<<<<< HEAD
         // When currentAmount reaches limit, update desires
         if (!isBuying && !isLeaving && currentAmount >= limit)
         {
@@ -198,7 +206,6 @@ public class CustomerController : MonoBehaviour
                         // Decrease mood
 
                         
->>>>>>> merge
                     }
                     // Update desires in the customer information screen if the scene is open
                     if (CustomerScreen.isAtCustomerScene)
@@ -223,6 +230,60 @@ public class CustomerController : MonoBehaviour
                 GetComponent<Customer>().cd.isBuying = true;
             }
         }
+=======
+        //// When currentAmount reaches limit, update desires
+        //if (!isBuying && !isLeaving && currentAmount >= limit)
+        //{
+        //    currentAmount = 0; // reset currentAmount
+        //    CustomerData cd = GetComponent<Customer>().cd; // grab customerData from Customer Script
+
+        //    // Update desire if customer found something
+        //    if (cd.desiresRemaining > 0)
+        //    {
+        //        if (cd.lookingFor >= cd.desires.Length)
+        //            cd.lookingFor = 0;
+
+        //        Drug d = cd.desires.getCurrentDrug();
+
+        //        if (d != null)
+        //        {
+        //            if (d.amount > 0)
+        //            {
+        //                cd.desiresRemaining--;
+        //                d.amount -= 1;
+        //                wallet += d.price + (d.price / 2);
+        //                cd.desires[cd.desiresRemaining] = Toolbox.StrikeThrough(cd.desires[cd.desiresRemaining]);
+        //            }
+        //            else
+        //            {
+        //                // Decrease mood
+
+
+        //            }
+        //            // Update desires in the customer information screen if the scene is open
+        //            if (CustomerScreen.isAtCustomerScene)
+        //            {
+        //                // Find the index of the customer being updated
+        //                int numberOfCustomers = Globals_Customer.customerData.Count;
+        //                int index = -2;
+        //                for (int i = 0; i < numberOfCustomers; i++)
+        //                    if (cd.Equals(Globals_Customer.customerData[i]))
+        //                        index = i;
+
+        //                if (CustomerScreen.currentCustomer == index)
+        //                    CustomerScreen.listDesires(cd);
+        //            }
+        //        }
+        //    }
+
+        //    // Set isBuying to true when customer has picked up everything they want to purchase
+        //    if (cd.desiresRemaining == 0)
+        //    {
+        //        isBuying = true;
+        //        GetComponent<Customer>().cd.isBuying = true;
+        //    }
+        //}
+>>>>>>> merge
     }
 
     public static void repath(int state)
