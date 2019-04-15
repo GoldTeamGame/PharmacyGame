@@ -28,7 +28,8 @@ public class UnlockVitamins : MonoBehaviour
         int cost = Globals.platVit;
         if(Globals.playerPlatinum >= cost)
         {
-            Globals.unlockedVitamins = true;
+            Globals.overCounterList[1].isUnlocked = true;
+            Globals.overCounterList[2].isUnlocked = true;
         }
     }
 }

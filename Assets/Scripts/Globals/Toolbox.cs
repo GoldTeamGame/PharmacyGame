@@ -47,4 +47,9 @@ public class Toolbox
 
         return randomNumber <= chance;
     }
+
+    public static int random(int num1, int num2)
+    {
+        return Random.Range(num1, num2 + 1);
+    }
 }

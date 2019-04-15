@@ -82,6 +82,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   s:
     name: 
+    drug: []
+    amount: 
     locationX: 0
     locationY: 0
     rotationZ: 0

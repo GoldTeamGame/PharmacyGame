@@ -1,16 +1,42 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿// File: ShowGameObject
+// Author: Alexander Jacks
+// Version: 1.0.1
+// Description: Script that goes on the shelf prefab. When the prefab is clicked, it will open the shelf menu
+//                  and set the static gameobject as selected
+
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShowGameObject : MonoBehaviour {
 
-    public static GameObject selectedObject;
+    public static StoreItems si;
+    public static GameObject selectedObject; // the shelf currently being viewed (can be accessed from anywhere)
+    public static GameObject[] button;
+
+
+    // Function that fires when a shelf is clicked
     private void OnMouseUp()
     {
+        // Perform action if the game is not in the itemplacing state
         if (!(ItemPlacer.isPlacing || ItemPlacer.isSelecting) && SceneChanger.isAtStorefront)
         {
+            // Get StoreItems component from gameobject
+            si = GetComponent<Items>().s;
+
+            // Get the 2 buttons from the ShelfPanel
+            button = new GameObject[2];
+            button[0] = ObjectReference.staticGo.transform.GetChild(1).gameObject; // get first button on shelf panel
+            button[0].transform.GetChild(1).GetComponent<Text>().text = "" + si.amount[0]; // set amount on first shelf panel
+            button[1] = ObjectReference.staticGo.transform.GetChild(2).gameObject; // get second button on shelf panel
+            button[1].transform.GetChild(1).GetComponent<Text>().text = "" + si.amount[1]; // set amount on second shelf panel
+
+            // Set the text of the buttons according to the drug information stored in StoreItems variable
+            button[0].GetComponentInChildren<Text>().text = si.drug[0]; // set name of first button
+            button[1].GetComponentInChildren<Text>().text = si.drug[1]; // set name of second button
+
+            // Show the ShelfPanel
             ObjectReference.staticGo.SetActive(true);
-            selectedObject = gameObject;
+            selectedObject = gameObject; // set selectedObject
         }
     }
 }
