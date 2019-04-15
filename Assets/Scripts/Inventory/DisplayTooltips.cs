@@ -43,7 +43,7 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         else
         {
             //buy item
-            BuyItem.buyDrug(d.name);
+            BuyItem.buyPrescription(d.name);
         }
 
         tooltipState = false;

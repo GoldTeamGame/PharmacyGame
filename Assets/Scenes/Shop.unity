@@ -735,7 +735,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2021118431}
-        m_MethodName: hire
+        m_MethodName: _hire
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1120,7 +1120,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2021118431}
-        m_MethodName: hire
+        m_MethodName: _hire
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1392,7 +1392,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2021118431}
-        m_MethodName: buyDrug
+        m_MethodName: _buyPrescription
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1469,6 +1469,7 @@ MonoBehaviour:
     price: 0
     chance: 0
     description: 
+    isUnlocked: 0
   thePanel: {fileID: 365082171}
   theText: {fileID: 1797842015}
 --- !u!1 &939960252
@@ -2091,7 +2092,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2021118431}
-        m_MethodName: hire
+        m_MethodName: _hire
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2246,7 +2247,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2021118431}
-        m_MethodName: buyOverCounter
+        m_MethodName: _buyOverCounter
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2521,7 +2522,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2021118431}
-        m_MethodName: buyDrug
+        m_MethodName: _buyPrescription
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2598,6 +2599,7 @@ MonoBehaviour:
     price: 0
     chance: 0
     description: 
+    isUnlocked: 0
   thePanel: {fileID: 365082171}
   theText: {fileID: 1797842015}
 --- !u!1 &1554161963
@@ -2679,7 +2681,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2021118431}
-        m_MethodName: buyDrug
+        m_MethodName: _buyPrescription
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2756,6 +2758,7 @@ MonoBehaviour:
     price: 0
     chance: 0
     description: 
+    isUnlocked: 0
   thePanel: {fileID: 365082171}
   theText: {fileID: 1797842015}
 --- !u!1 &1564606344

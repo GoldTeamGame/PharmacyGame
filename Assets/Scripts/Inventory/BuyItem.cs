@@ -12,12 +12,27 @@ using UnityEngine;
 
 public class BuyItem : MonoBehaviour {
 
-    public static void buyDrug(string name)
+    public void _buyPrescription(string name)
+    {
+        buyPrescription(name);
+    }
+
+    public void _buyOverCounter(string name)
+    {
+        buyOverCounter(name);
+    }
+
+    public void _hire(string name)
+    {
+        hire(name);
+    }
+
+    public static void buyPrescription(string name)
     {
         Drug d = Globals.findDrug(name, Globals.drugList);
 
         int price = d.price;
-        if (Globals.playerGold >= price)
+        if (d.isUnlocked && Globals.playerGold >= price)
         {
             d.amount += 1; //buy 1 unit
             Globals.playerGold -= price; //at its respective cost
@@ -30,7 +45,7 @@ public class BuyItem : MonoBehaviour {
         Drug d = Globals.findDrug(name, Globals.overCounterList);
 
         int price = d.price;
-        if (Globals.playerGold >= price)
+        if (d.isUnlocked && Globals.playerGold >= price)
         {
             d.amount += 1; 
             Globals.playerGold -= price;

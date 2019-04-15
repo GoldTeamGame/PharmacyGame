@@ -833,8 +833,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -6.9601746, y: -18.44}
-  m_SizeDelta: {x: -59.7, y: -63.683}
+  m_AnchoredPosition: {x: -6.9601746, y: -22.9}
+  m_SizeDelta: {x: -59.7, y: -72.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &121903150
 MonoBehaviour:
@@ -1418,7 +1418,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1709188328}
         m_MethodName: increment
         m_Mode: 3
         m_Arguments:
@@ -2175,7 +2175,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1709188328}
         m_MethodName: decrement
         m_Mode: 3
         m_Arguments:
@@ -2283,7 +2283,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1229276589}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4006,41 +4006,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 119244618}
   m_GameObject: {fileID: 629139103}
   m_CullTransparentMesh: 0
---- !u!1 &634764216
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 1705982941244086, guid: 74805a5c9caf3944c9df6fa366a6afb8,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 634764217}
-  m_Layer: 0
-  m_Name: Missing Prefab (Dummy)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &634764217
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 224064679381405942, guid: 74805a5c9caf3944c9df6fa366a6afb8,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 634764216}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2001084460}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &636335230
 GameObject:
   m_ObjectHideFlags: 0
@@ -4281,7 +4246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2e3bfa5c32654241b70834c4551ed68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  go: {fileID: 0}
+  go: {fileID: 1804275150}
 --- !u!1 &684529190
 GameObject:
   m_ObjectHideFlags: 0
@@ -5456,14 +5421,13 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 2001084460}
+  m_Children: []
   m_Father: {fileID: 121903149}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -0.000030517578, y: -0.000015258789}
+  m_AnchoredPosition: {x: -0.000030517578, y: -0.000010249722}
   m_SizeDelta: {x: 308.62, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &754954971
@@ -5479,7 +5443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 1082416660}
-  b: {fileID: 0}
+  b: {fileID: 114804005465698410, guid: 1b50311273801494f8d75d9d2f2703c6, type: 2}
   selectedButton: {fileID: 1725872570594776, guid: a6e98eca7d37ef64885c845316d0179d,
     type: 2}
 --- !u!114 &754954972
@@ -6396,7 +6360,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 829439695}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5190d731b3aca7643be28a68377bf235, type: 3}
   m_Name: 
@@ -6785,7 +6749,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1709188328}
         m_MethodName: showDrugs
         m_Mode: 3
         m_Arguments:
@@ -11709,7 +11673,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1709188328}
         m_MethodName: increment
         m_Mode: 3
         m_Arguments:
@@ -12032,7 +11996,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ec7ff43441d13849878d73ec699f595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drugPanel: {fileID: 0}
+  drugPanel: {fileID: 1082416660}
   sprite: {fileID: 21300000, guid: 1bfdafc37e7e7704495cb4d18cbda374, type: 3}
 --- !u!1 &1712374889
 GameObject:
@@ -12721,7 +12685,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1804275151
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12761,7 +12725,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 1709188328}
           m_MethodName: remove
           m_Mode: 2
           m_Arguments:
@@ -13195,7 +13159,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1709188328}
         m_MethodName: showDrugs
         m_Mode: 3
         m_Arguments:
@@ -13366,37 +13330,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1933662071}
   m_CullTransparentMesh: 0
---- !u!1 &2001084459
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 1410548762926832, guid: 74805a5c9caf3944c9df6fa366a6afb8,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2001084460}
-  m_Layer: 0
-  m_Name: Missing Prefab
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2001084460
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 4068452568756124, guid: 74805a5c9caf3944c9df6fa366a6afb8,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2001084459}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 634764217}
-  m_Father: {fileID: 754954970}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2018009606
 GameObject:
   m_ObjectHideFlags: 0
@@ -13670,7 +13603,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1709188328}
         m_MethodName: decrement
         m_Mode: 3
         m_Arguments:
