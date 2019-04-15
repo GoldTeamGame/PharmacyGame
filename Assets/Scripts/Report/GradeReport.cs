@@ -13,6 +13,9 @@ using UnityEngine.UI;
 
 public class GradeReport : MonoBehaviour {
 
+    /*
+    Reminder on potential fields:
+
     //Assets
     public Text AnswerGold;
     public Text AnswerInventory;
@@ -34,15 +37,52 @@ public class GradeReport : MonoBehaviour {
     public Text AnswerCapital; //Embellish
     public Text AnswerRetained; //Embellish
     public Text AnswerEquity; //Embellish
+    */
 
-    
+    //Caution: Currently setting size of these to 3 in the inspector (only tracking answers and amounts for Assets
 
-    //Caution: Add a submit button to report screen.
+    public Text[] answers;
+    public Text[] amounts;
 
+    //Caution: Add a submit button to report screen
     public void Grade()
     {
         //reward for each correct
         Globals.setPlatinum(Globals.getPlatinum() + 10);
+    }
+
+    public void PopPrev()
+    {
+        FillArrays(answers, amounts, Globals.month);
+    }
+
+    public void FillArrays(Text[] myAnswers, Text[] myAmounts, int month)
+    {
+        month--;
+        //fill in answers
+        string[] myStringAnswers = TextToString(myAnswers);
+        Globals.answers[month] = new string[myAnswers.Length];
+        for(int i = 0; i < answers.Length; i++)
+        {
+            Globals.answers[month][i] = myStringAnswers[i];
+        }
+        //fill in amounts
+        string[] myStringAmounts = TextToString(myAmounts);
+        Globals.amounts[month] = new string[myAmounts.Length];
+        for(int i = 0; i < amounts.Length; i++)
+        {
+            Globals.amounts[month][i] = myStringAmounts[i];
+        }
+    }
+
+    public string[] TextToString(Text[] myText)
+    {
+        string[] myStrings = new string[myText.Length];
+        for(int i = 0; i < myText.Length; i++)
+        {
+            myStrings[i] = myText[i].text;
+        }
+        return myStrings;
     }
 
 }

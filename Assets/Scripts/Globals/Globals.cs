@@ -179,6 +179,9 @@ public static class Globals
         return (globalTime - loadTime) % timePerMonth;
     }
 
+    public static string[][] answers = new string[12][];
+    public static string[][] amounts = new string[12][];
+
 }
 
 [System.Serializable]
@@ -216,5 +219,20 @@ public class Employee
         this.wage = wage;
         isUnlocked = false;
         this.description = description;
+    }
+}
+
+[System.Serializable]
+public class ReportData
+{
+    //int month;
+    public static string[][] answers;
+    public static string[][] amounts;
+
+    public ReportData()
+    {
+        answers = new string[12][];
+        amounts = new string[7][];
+
     }
 }
