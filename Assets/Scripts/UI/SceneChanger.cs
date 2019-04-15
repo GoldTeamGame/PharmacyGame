@@ -1,6 +1,6 @@
 ﻿// File: SceneChanger
-// Version: 1.0.5
-// Last Updated: 3/13/19
+// Version: 1.1
+// Last Updated: 4/11/19
 // Authors: Alexander Jacks, Dylan Cyphers
 // Description: Has button functions to change scenes
 
@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 public class SceneChanger : MonoBehaviour
 {
-    public string currentScene; // Keeps track of which scene is currently being viewed
+    public static string currentScene; // Keeps track of which scene is currently being viewed
     public static bool isAtStorefront = true; // True if focus is on storefront scene
     public Button back; // Button used to return to storefront scene
     //public Button hideShow; // Button used to hide menu interface
@@ -24,11 +24,11 @@ public class SceneChanger : MonoBehaviour
 
     public void Start()
     {
-        if (currentScene.Equals("Storefront"))
+        if (mainPanel != null && inventoryPanel != null)
         {
             staticMainPanel = mainPanel;
             staticInventoryPanel = inventoryPanel;
-        }
+        } 
     }
     // Change from currentScene to scene
     public void changeScene(string scene)
@@ -103,7 +103,7 @@ public class SceneChanger : MonoBehaviour
     public void invToStorefront()
     {
         //Globals.inEditMode = true;
-        isAtStorefront = true; 
+        isAtStorefront = true;
         SceneManager.UnloadSceneAsync("Inventory"); // unload inventory scene
         ItemPlacer.rotationState = 0;
 
@@ -127,5 +127,47 @@ public class SceneChanger : MonoBehaviour
             ItemPlacer.delete();
         staticMainPanel.SetActive(true);
         staticInventoryPanel.SetActive(false);
+    }
+
+    //assumes on storefront for now
+    //perhaps button from storefront becomes available when next month begins (pause when button becomes setactive(true)?
+    public void storeToReport(Button myButton)
+    {
+        currentScene = "Report";
+        isAtStorefront = false;       
+        staticMainPanel.SetActive(false);
+        GameObject myPanel = myButton.transform.parent.gameObject;
+        myPanel.gameObject.SetActive(false);
+        SceneManager.LoadScene("Report", LoadSceneMode.Additive);
+    }
+
+    public void reportToStore()
+    {
+        
+
+        isAtStorefront = true;
+        
+        staticMainPanel.SetActive(true);
+        Globals.loadTime = Globals.globalTime;
+        
+
+        Globals.sem = false;
+        SceneManager.UnloadSceneAsync("Report");
+        
+    }
+
+    public static void forceToStore(GameObject reportPanel)
+    {
+        staticInventoryPanel.SetActive(false);
+        ItemPlacer.isPlacing = false;
+        ItemPlacer.isSelecting = false;
+        if (ItemPlacer.current != null)
+            ItemPlacer.delete();
+        isAtStorefront = true;
+        staticMainPanel.SetActive(false);
+        reportPanel.SetActive(true);
+        
+        if(currentScene != "Storefront")
+            SceneManager.UnloadSceneAsync(currentScene);
     }
 }

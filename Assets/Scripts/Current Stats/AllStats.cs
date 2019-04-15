@@ -1,7 +1,7 @@
 ﻿/* 
  * Most Recent Author: Dylan Cyphers
- * Version 1.0
- * Date: 4/10/2019
+ * Version 1.1
+ * Date: 4/11/2019
  * Description: Handles updating the current statistics screen
  * 
  */
@@ -18,7 +18,7 @@ public class AllStats : MonoBehaviour {
     public Text sumSalText;
 
     //Sums up your stock that has yet to be purchased by a customer at the end of the month
-    public int SumInventory()
+    public static int SumInventory()
     {
         int sum = 0;
         for(int i = 0; i < Globals.drugList.Count; i++)
@@ -29,7 +29,7 @@ public class AllStats : MonoBehaviour {
     }
 
     //checks to see if you own a service; if you do, add the cost
-    public int SumEquipment()
+    public static int SumEquipment()
     {
         int sum = 0;
         if(Globals.unlockedFluShotStation)
@@ -45,7 +45,7 @@ public class AllStats : MonoBehaviour {
 
     
     //the wage of each employee is considered their monthly cost
-    public int SumSalaries()
+    public static int SumSalaries()
     {
         int sum = 0;
         for(int i = 0; i < Globals.employeeList.Count; i++)

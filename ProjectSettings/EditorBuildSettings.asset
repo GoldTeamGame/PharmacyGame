@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WorldMap.unity
     guid: bc0988ff3b261634aad0d5b647c56355
+  - enabled: 1
+    path: Assets/Scenes/Report.unity
+    guid: 7eed74092d6116342a116dbed6c2ce61
   m_configObjects: {}
