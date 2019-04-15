@@ -92,10 +92,51 @@ public class ProceduralGenerator : MonoBehaviour
                 prescriptionSize = Toolbox.random(1, 3);
 
             cd.desires = new Desires(overCounterSize, prescriptionSize);
+            generateArray(ref cd.desires.overCounter, Globals.overCounterList, false);
+            generateArray(ref cd.desires.prescription, Globals.drugList, true);
+
+            if (cd.desires.overCounter.Length > 0)
+                cd.thoughts = "Looking For: " + cd.desires.overCounter[0].drug.name;
+            else
+                cd.thoughts = "Going to pick up prescriptions";
 
             Globals_Customer.customerData.Add(cd); // add cd to Globals list
         }
 
         CustomerScreen.updateList(-1); // update CustomerScreen button list
+    }
+
+    // Fill array with drugs
+    public static void generateArray(ref CartItem[] array, List<Drug> drugList, bool isPrescription)
+    {
+        int desireCount = 0; // current number of desires in array
+
+        // Continue filling array while there are remaining available drugs
+        // and while there is still remaining space in the array
+        for (int i = 0; i < drugList.Count && desireCount < array.Length; i++)
+            // Add drug to array if it passes the check
+            // Customers may have over counter drugs on their list of desires that havent been unlocked yet,
+            //      but as for prescription drugs, they will ONLY have it on their list if the player has it unlocked
+            // (A person would not go to a store to pick up a prescription without first knowing it the store has the drug)
+            // Of course, it is still possible that the store has none of the prescribed drug in stock, in which case, the customer will not be able to buy it,
+            //      but it would still show up on their list of desires.
+            if (Toolbox.randomBool(drugList[i].chance) || (isPrescription && drugList[i].isUnlocked))
+                array[desireCount++] = new CartItem(drugList[i]);
+
+        // If no desires were added, but the array length is 1, then forcefully add item to list
+        if (desireCount == 0 && array.Length == 1)
+        {
+            array[0] = new CartItem(drugList[0]);
+            desireCount++;
+        }
+
+        // If desire count is less than size of array, refactor array to match size of desire count
+        if (desireCount < array.Length)
+        {
+            CartItem[] temp = new CartItem[desireCount];
+            for (int i = 0; i < desireCount; i++)
+                temp[i] = array[i];
+            array = temp;
+        }
     }
 }

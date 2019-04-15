@@ -69,6 +69,7 @@ public class CustomerController : MonoBehaviour
             // Find path to counter
             if (transform.localPosition.x != 0.5f && transform.localPosition.y != -0.5f)
             {
+                cd.thoughts = "Going to Pharmacist Counter";
                 mc.setPath(transform.localPosition.x, transform.localPosition.y, 0.5f, -0.5f);
                 setMovementController();
                 saveLocation();
@@ -90,6 +91,7 @@ public class CustomerController : MonoBehaviour
             // Find the exit
             if (transform.localPosition.x != -1.5f && transform.localPosition.y != 6)
             {
+                cd.thoughts = "Leaving Store";
                 mc.setPath(transform.localPosition.x, transform.localPosition.y, -1.5f, 6f);
                 setMovementController();
                 saveLocation();
@@ -164,18 +166,18 @@ public class CustomerController : MonoBehaviour
                     d.amount--;
                     cd.desires.overCounter[cd.desires.currentDrug].hasPickedUp = true;
                     d.name = Toolbox.StrikeThrough(d.name);
-                    cd.desires.willBuy = true;
+                    cd.desires.willBuyOverCounter = true;
                 }
                 else
                 {
                     // Decrease mood
-
-                    if (++cd.desires.overCounter[cd.desires.currentDrug].attempts == 2)
+                    if (++cd.desires.overCounter[cd.desires.currentDrug].attempts >= 2)
                         cd.desires.desiresRemaining--;
                     cd.desires.currentDrug++;
 
-                    
-
+                    d = cd.desires.getCurrentDrug();
+                    if (d != null)
+                        cd.thoughts = "Looking For: " + cd.desires.getCurrentDrug().name;
                 }
                 // Update desires in the customer information screen if the scene is open
                 if (CustomerScreen.isAtCustomerScene)
@@ -195,7 +197,7 @@ public class CustomerController : MonoBehaviour
             // Set isBuying to true when customer has picked up everything they want to purchase
             if (cd.desires.desiresRemaining == 0)
             {
-                if (cd.desires.willBuy || cd.desires.prescription.Length > 0)
+                if (cd.desires.willBuyOverCounter || cd.desires.prescription.Length > 0)
                 {
                     isBuying = true;
                     GetComponent<Customer>().cd.isBuying = true;

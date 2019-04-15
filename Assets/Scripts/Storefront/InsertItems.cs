@@ -44,20 +44,22 @@ public class InsertItems : MonoBehaviour
 
             // Instantiate game object if it was found in the list
             if (go != null)
-                instantiateObject(go, parent, v, Globals_Items.storeData[i].rotationZ);
+                instantiateObject(go, parent, v, Globals_Items.storeData[i]);
             else
                 Debug.Log("ERROR: Item is not in staticItemList");
         }
     }
 
     // Instantiate game object
-    public static void instantiateObject(GameObject item, Transform parent, Vector3 position, float rotation)
+    public static void instantiateObject(GameObject item, Transform parent, Vector3 position, StoreItems si)
     {
         GameObject go = Instantiate(item); // spawn the item 
         go.transform.parent = parent;
         go.transform.localPosition = position;
         go.transform.localScale = new Vector3(1f, 1f, 0);
-        go.transform.eulerAngles = new Vector3(0, 0, rotation);
+        go.transform.eulerAngles = new Vector3(0, 0, si.rotationZ);
+
+        go.GetComponent<Items>().s = si;
 
         Globals_Items.objects.Add(go);
     }
@@ -80,6 +82,9 @@ public class InsertItems : MonoBehaviour
         s.locationX = item.transform.localPosition.x;
         s.locationY = item.transform.localPosition.y;
         s.rotationZ = item.transform.eulerAngles.z;
+        s.drug = new string[2];
+        s.drug[0] = s.drug[1] = "Assign Drug";
+        s.amount = new int[2];
 
         Globals_Items.objects.Add(item);
         Globals_Items.storeData.Add(s); // add cd to Globals list

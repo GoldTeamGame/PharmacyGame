@@ -92,7 +92,7 @@ public class MovementController : MonoBehaviour
         // Only set move if nodes are available
         if (path.currentNode < path.path.Count)
         {
-            Debug.Log("Move Set: " + path.getCurrentNode().position.ToString());
+            //Debug.Log("Move Set: " + path.getCurrentNode().position.ToString());
             moveLocation = new Vector3(path.getCurrentNode().position.x, path.getCurrentNode().position.y); // Set moveLocation
             moveDirection = new Vector3(directionX[path.getCurrentNode().direction], directionY[path.getCurrentNode().direction]) * speed;
             path.moveState = 1; // Set moveState to moving

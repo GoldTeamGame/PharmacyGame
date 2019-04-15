@@ -4,10 +4,15 @@
 // Authors: Ross Burnworth, Alexander Jacks
 // Description: Contains all a StoreItem information
 
+using System.Collections.Generic;
+
 [System.Serializable]
 public class StoreItems
 {
     public string name;
+
+    public string[] drug; // The drug on the shelf
+    public int[] amount; // The amount of drugs on the shelf
 
     public float locationX; // x-coordinate
     public float locationY; // y-coordinate

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class CartItem : MonoBehaviour
+public class CartItem
 {
     public Drug drug;
     public int attempts;

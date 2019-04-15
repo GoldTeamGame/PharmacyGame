@@ -10,7 +10,7 @@ public class Desires
 
     public int desiresRemaining; // number of overCounter desires remaining
     public int currentDrug; // current drug being looked for
-    public bool willBuy;
+    public bool willBuyOverCounter;
 
     public Desires(int overCounterSize, int prescriptionSize)
     {
@@ -21,8 +21,8 @@ public class Desires
         prescription = new CartItem[prescriptionSize];
 
         // Fill arrays with drugs
-        generateArray(ref overCounter, Globals.overCounterList);
-        generateArray(ref prescription, Globals.drugList);
+        //generateArray(ref overCounter, Globals.overCounterList);
+        //generateArray(ref prescription, Globals.drugList);
     }
 
     // Returns the next over the counter drug from overCounter array
@@ -50,38 +50,12 @@ public class Desires
                 count++;
             }
 
+            if (currentDrug == overCounter.Length)
+                return null;
+
             return overCounter[currentDrug].drug;
         }
         else
             return null;
-    }
-
-    // Fill array with drugs
-    private void generateArray(ref CartItem[] array, List<Drug> drugList)
-    {
-        int desireCount = 0; // current number of desires in array
-
-        // Continue filling array while there are remaining available drugs
-        // and while there is still remaining space in the array
-        for (int i = 0; i < drugList.Count && desireCount < array.Length; i++)
-            // Add drug to array if it passes the check
-            if (Toolbox.randomBool(drugList[i].chance))
-                array[desireCount++] = new CartItem(drugList[i]);
-
-        // If no desires were added, but the array length is 1, then forcefully add item to list
-        if (desireCount == 0 && array.Length == 1)
-        {
-            array[0] = new CartItem(drugList[0]);
-            desireCount++;
-        }
-
-        // If desire count is less than size of array, refactor array to match size of desire count
-        if (desireCount < array.Length)
-        {
-            CartItem[] temp = new CartItem[desireCount];
-            for (int i = 0; i < desireCount; i++)
-                temp[i] = array[i];
-            array = temp;
-        }
     }
 }
