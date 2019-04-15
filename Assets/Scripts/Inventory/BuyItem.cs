@@ -54,7 +54,7 @@ public class BuyItem : MonoBehaviour {
 
     public static void hire(string name)
     {
-        Employee e = Globals.findEmployee(name);
+        Pharmacist e = Globals_Pharmacist.findPharmacist(name);
 
         if (!e.isUnlocked)
         {

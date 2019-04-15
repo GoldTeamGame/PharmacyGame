@@ -2,15 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pharmacist : MonoBehaviour {
+[System.Serializable]
+public class Pharmacist
+{
+    public string name; // name of pharmacist
+    public int appearance; // sprite appearance index
+    public int wage; // pharmacist upkeep
+    public string description; // pharmacist info
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public int currentState; // what the pharmacist is currently doing
+    public int counter; // which counter the pharmacist is assigned to
+    public bool isUnlocked; // determines if the pharmacist is unlocked
+
+    public Pharmacist(string name, int wage, string description, int appearance)
+    {
+        this.name = name;
+        this.wage = wage;
+        this.description = description;
+        this.appearance = appearance;
+
+        currentState = -1; // idle state
+        counter = -1; // not assigned to counter
+        isUnlocked = false; // not unlocked
+    }
 }

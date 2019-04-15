@@ -4,21 +4,27 @@ using UnityEngine;
 
 public class PharmacistCounter
 {
-    public GameObject assignedPharmacist;
-    public int numberOfCustomers; // number of customers in line
-    public Position checkoutZone; // location of checkout zone
-    public Position lineStartZone; // location of line start zone
-    public Position employeeStartZone; // location of employee starting zone
-    public Position computerZone; // location of computer zone
-    public Position shelfZone; // location of shelf zone
+    // [0] - start
+    // [1] - computer
+    // [2] - shelf
+    public Position[] pharmacistZone; // positions relative to pharmacistState
+    public Position checkout; // Where customer can checkout
+    public Position lineStart; // Where the customer enters the line
+    public int numberInLine; // number of customers currently in line
+    //public bool isUnlocked; // determines if the PharmacistCounter exists
 
-
-    public void generatePositions(Position p)
+    // Generates all positions based on the passed in position
+    // Constructor is only called on a new game
+    public PharmacistCounter(Position p)
     {
-        employeeStartZone = p;
-        checkoutZone = new Position(p.x, p.y + 1.5f);
-        lineStartZone = new Position(p.x + 1.5f, p.y + 1.5f);
-        computerZone = new Position(p.x - 1, p.y - 0.5f);
-        shelfZone = new Position(p.x, p.y - 1);
+        pharmacistZone = new Position[3];
+        pharmacistZone[0] = p;
+        pharmacistZone[1] = new Position(p.x - 1, p.y - 0.5f);
+        pharmacistZone[2] = new Position(p.x, p.y - 1);
+
+        checkout = new Position(p.x, p.y + 1.5f);
+        lineStart = new Position(p.x + 1.5f, p.y + 1.5f);
+
+        numberInLine = 0;
     }
 }

@@ -48,11 +48,11 @@ public class AllStats : MonoBehaviour {
     public static int SumSalaries()
     {
         int sum = 0;
-        for(int i = 0; i < Globals.employeeList.Count; i++)
+        for(int i = 0; i < Globals_Pharmacist.pharmacistList.Count; i++)
         {
-            if(Globals.employeeList[i].isUnlocked)
+            if(Globals_Pharmacist.pharmacistList[i].isUnlocked)
             {
-                sum += Globals.employeeList[i].wage;
+                sum += Globals_Pharmacist.pharmacistList[i].wage;
             }
         }
         return sum;

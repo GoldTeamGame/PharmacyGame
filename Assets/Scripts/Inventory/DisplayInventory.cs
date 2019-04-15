@@ -115,9 +115,9 @@ public class DisplayInventory : MonoBehaviour {
         drugCtext.text = Globals.drugList[2].name + ": " + Globals.drugList[2].amount + " Units";
         vitaminAtext.text = Globals.overCounterList[0].name + ": " + Globals.overCounterList[0].amount + " Units";
 
-        employeeAtext.text = Globals.employeeList[0].name + ": " + Globals.employeeList[0].wage + "g/hr";
-        employeeBtext.text = Globals.employeeList[1].name + ": " + Globals.employeeList[1].wage + "g/hr";
-        employeeCtext.text = Globals.employeeList[2].name + ": " + Globals.employeeList[2].wage + "g/hr";
+        employeeAtext.text = Globals_Pharmacist.pharmacistList[0].name + ": " + Globals_Pharmacist.pharmacistList[0].wage + "g/hr";
+        employeeBtext.text = Globals_Pharmacist.pharmacistList[1].name + ": " + Globals_Pharmacist.pharmacistList[1].wage + "g/hr";
+        employeeCtext.text = Globals_Pharmacist.pharmacistList[2].name + ": " + Globals_Pharmacist.pharmacistList[2].wage + "g/hr";
 
     }
 }

@@ -20,7 +20,7 @@ public class DisplayEmployeeTooltips : MonoBehaviour, IPointerDownHandler, IPoin
     public bool buyState;
     public bool tooltipState;
 
-    public Employee e;
+    public Pharmacist e;
 
     public GameObject thePanel;
     public Text theText;
@@ -57,7 +57,7 @@ public class DisplayEmployeeTooltips : MonoBehaviour, IPointerDownHandler, IPoin
         string employeeNamePlusExtra = gameObject.GetComponentInChildren<Text>().text;
         employeeNamePlusExtra = employeeNamePlusExtra.Substring(5);
         string[] slice = employeeNamePlusExtra.Split(':');;
-        e = Globals.findEmployee(slice[0]);
+        e = Globals_Pharmacist.findPharmacist(slice[0]);
     }
 
     void Update()

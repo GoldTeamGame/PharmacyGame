@@ -22,7 +22,6 @@ public static class Globals
     //Consider making a struct for drugs that have fields: amount, price, and name
     public static List<Drug> drugList;
     public static List<Drug> overCounterList;
-    public static List<Employee> employeeList;
 
     public static void generateDrugList(List<Drug> list)
     {
@@ -47,26 +46,14 @@ public static class Globals
         if (list != null)
             setAmount(overCounterList, list);
     }
-
-    public static void generateEmployeeList(List<Employee> list)
-    {
-        employeeList = new List<Employee>();
-
-        employeeList.Add(new Employee("Jon", 15, "Works at his own pace"));
-        employeeList.Add(new Employee("Ross", 19, "Standard skilled employee"));
-        employeeList.Add(new Employee("Alex", 22, "Hard working and reliable"));
-
-        if (list != null)
-            setHired(employeeList, list);
-    }
-
+    
     public static void setAmount(List<Drug> list1, List<Drug> list2)
     {
         for (int i = 0; i < list2.Count; i++)
             list1[i].amount = list2[i].amount;
     }
 
-    public static void setHired(List<Employee> list1, List<Employee> list2)
+    public static void setHired(List<Pharmacist> list1, List<Pharmacist> list2)
     {
         for (int i = 0; i < list2.Count; i++)
         {
@@ -82,13 +69,7 @@ public static class Globals
         return null;
     }
 
-    public static Employee findEmployee(string name)
-    {
-        for (int i = 0; i < employeeList.Count; i++)
-            if (employeeList[i].name.Equals(name))
-                return employeeList[i];
-        return null;
-    }
+    
 
     //public static int drugA = 0;
     //public static int priceA = 5;
@@ -199,22 +180,5 @@ public class Drug
         amount = 0;
         this.description = description;
         this.isUnlocked = isUnlocked;
-    }
-}
-
-[System.Serializable]
-public class Employee
-{
-    public string name;
-    public bool isUnlocked;
-    public int wage;
-    public string description;
-
-    public Employee(string name, int wage, string description)
-    {
-        this.name = name;
-        this.wage = wage;
-        isUnlocked = false;
-        this.description = description;
     }
 }

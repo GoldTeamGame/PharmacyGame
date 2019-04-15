@@ -75,19 +75,19 @@ public class DisplayShop : MonoBehaviour {
         drugCtext.text = Globals.drugList[2].name + ": " + Globals.drugList[2].price + " Gold/Unit";
         vitaminAtext.text = Globals.overCounterList[0].name + ": " + Globals.overCounterList[0].price + " Gold/Unit";
 
-        if(!Globals.employeeList[0].isUnlocked)
+        if(!Globals_Pharmacist.pharmacistList[0].isUnlocked)
         {
-            employeeAtext.text = Globals.employeeList[0].name + ": " + Globals.employeeList[0].wage + " Gold/Hour";
+            employeeAtext.text = Globals_Pharmacist.pharmacistList[0].name + ": " + Globals_Pharmacist.pharmacistList[0].wage + " Gold/Hour";
 
         }
-        if(!Globals.employeeList[1].isUnlocked)
+        if(!Globals_Pharmacist.pharmacistList[1].isUnlocked)
         {
-            employeeBtext.text = Globals.employeeList[1].name + ": " + Globals.employeeList[1].wage + " Gold/Hour";
+            employeeBtext.text = Globals_Pharmacist.pharmacistList[1].name + ": " + Globals_Pharmacist.pharmacistList[1].wage + " Gold/Hour";
 
         }
-        if(!Globals.employeeList[2].isUnlocked)
+        if(!Globals_Pharmacist.pharmacistList[2].isUnlocked)
         {
-            employeeCtext.text = Globals.employeeList[2].name + ": " + Globals.employeeList[2].wage + " Gold/Hour";
+            employeeCtext.text = Globals_Pharmacist.pharmacistList[2].name + ": " + Globals_Pharmacist.pharmacistList[2].wage + " Gold/Hour";
         }
     }
 }

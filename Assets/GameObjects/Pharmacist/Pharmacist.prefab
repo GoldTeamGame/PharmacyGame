@@ -20,10 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 224640339343289420}
   - component: {fileID: 212013543056412776}
-  - component: {fileID: 114835760831164816}
-  - component: {fileID: 114603309364088832}
   - component: {fileID: 61606095869731464}
-  - component: {fileID: 114606343342693732}
+  - component: {fileID: 114855618129606776}
   m_Layer: 0
   m_Name: Pharmacist
   m_TagString: Untagged
@@ -56,7 +54,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.35, y: 0.6}
   m_EdgeRadius: 0
---- !u!114 &114603309364088832
+--- !u!114 &114855618129606776
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -64,107 +62,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1909597689119352}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc0fc55d36b64ec4984bc1ae5d4d9809, type: 3}
+  m_Script: {fileID: 11500000, guid: 65cc7f16a629fee4d8e00387dae921d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cd:
+  p:
     name: 
-    speed: 0
-    mood: 0
-    thoughts: 
-    desires:
-      overCounter: []
-      prescription: []
-      desiresRemaining: 0
-      currentDrug: 0
-      willBuyOverCounter: 0
-    isAlive: 0
-    isBuying: 0
-    isLeaving: 0
-    isFinding: 0
-    currentAmount: 0
     appearance: 0
-    locationX: 0
-    locationY: 0
-    path:
-      path: []
-      destination:
-        x: 0
-        y: 0
-      currentNode: 0
-      currentDirection: 0
-      moveState: 0
-    pLocationX: 0
-    pLocationY: 0
+    wage: 0
+    description: 
+    currentState: 0
+    counter: 0
+    isUnlocked: 0
   mc: {fileID: 0}
-  limit: 20
-  currentAmount: 0
-  isBuying: 0
-  isLeaving: 0
-  isFinding: 0
-  cart: 0
---- !u!114 &114606343342693732
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1909597689119352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aab6af51f752c3a48846e99f4b4cd448, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  path:
-    path: []
-    destination:
-      x: -1.5
-      y: 6
-    currentNode: 0
-    currentDirection: 0
-    moveState: 0
-  moveLocation: {x: 0, y: 0, z: 0}
-  moveDirection: {x: 0, y: 0, z: 0}
-  speed: 0
---- !u!114 &114835760831164816
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1909597689119352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe4ea5f9043d0ce4faead24c2c3cde7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cd:
-    name: 
-    speed: 0
-    mood: 0
-    thoughts: 
-    desires:
-      overCounter: []
-      prescription: []
-      desiresRemaining: 0
-      currentDrug: 0
-      willBuyOverCounter: 0
-    isAlive: 0
-    isBuying: 0
-    isLeaving: 0
-    isFinding: 0
-    currentAmount: 0
-    appearance: 0
-    locationX: 0
-    locationY: 0
-    path:
-      path: []
-      destination:
-        x: 0
-        y: 0
-      currentNode: 0
-      currentDirection: 0
-      moveState: 0
-    pLocationX: 0
-    pLocationY: 0
 --- !u!212 &212013543056412776
 SpriteRenderer:
   m_ObjectHideFlags: 1

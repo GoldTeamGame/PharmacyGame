@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PharmacistController : MonoBehaviour {
+public class PharmacistController : MonoBehaviour
+{
+    public Pharmacist p;
+    public MovementController mc; // handles movement
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
 		
 	}
 	
@@ -13,4 +17,9 @@ public class PharmacistController : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    void think()
+    {
+
+    }
 }

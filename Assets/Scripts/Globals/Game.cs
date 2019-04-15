@@ -84,7 +84,6 @@ public class Game : MonoBehaviour
         //if so, read file and set global varables
         Globals.generateDrugList(null);
         Globals.generateOverCounterList(null);
-        Globals.generateEmployeeList(null);
         if (File.Exists(Application.persistentDataPath + path))
         {
             BinaryFormatter bf = new BinaryFormatter();
@@ -99,7 +98,6 @@ public class Game : MonoBehaviour
             Obsticals.obstical = save.obstical;
             Globals.generateDrugList(save.drugList);
             Globals.generateOverCounterList(save.overCounterList);
-            Globals.generateEmployeeList(save.employeeList);
             Debug.Log("Game Loaded");
             Unpause();
         }
@@ -122,7 +120,7 @@ public class Game : MonoBehaviour
         save.obstical = Obsticals.obstical;
         save.drugList = Globals.drugList;
         save.overCounterList = Globals.overCounterList;
-        save.employeeList = Globals.employeeList;
+        save.employeeList = Globals_Pharmacist.pharmacistList;
 
         //return the object to write to the file
         return save;
