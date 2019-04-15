@@ -21,6 +21,7 @@ public class ProceduralGenerator : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        Globals.setPlatinum(50);
         xSpawnPoint = spawnPoint.localPosition.x;
 
         // Instantiate customerData list if none currently exists
@@ -36,7 +37,7 @@ public class ProceduralGenerator : MonoBehaviour
         int numberOfCustomers = Globals_Customer.customerData.Count;
         for (int i = 0; i < numberOfCustomers; i++)
         {
-            Vector3 v = new Vector3(Globals_Customer.customerData[i].locationX, Globals_Customer.customerData[i].locationY, 0);
+            Vector3 v = new Vector3(Globals_Customer.customerData[i].path.getCurrentNode().position.x, Globals_Customer.customerData[i].path.getCurrentNode().position.y, 0);
             instantiateObject(v);
         }
 
@@ -47,12 +48,13 @@ public class ProceduralGenerator : MonoBehaviour
     private void Spawn()
     {
         if (Globals_Customer.customerData.Count < Globals_Customer.LIMIT)
-            instantiateObject(spawnPoint.position);
+            instantiateObject(spawnPoint.localPosition);
     }
 
     private void instantiateObject(Vector3 position)
     {
-        Instantiate(customer, position, spawnPoint.rotation, parent); // spawn the customer
+        GameObject go = Instantiate(customer, position, spawnPoint.rotation, parent); // spawn the customer
+        go.transform.localPosition = position;
     }
 
     // Generate customer data
@@ -71,7 +73,7 @@ public class ProceduralGenerator : MonoBehaviour
         else
         {
             string name = Globals_Customer.name[Random.Range(0, Globals_Customer.name.Length)]; // generate a random name
-            float speed = .4f;
+            float speed = .009f;
                 //Random.Range(0.4f, 0.6f); // generate a random speed
             
             cd = new CustomerData(name, speed); // instantiate cd with name and speed
@@ -79,7 +81,24 @@ public class ProceduralGenerator : MonoBehaviour
             cd.mood = Random.Range(0, 6); // set a random mood
 
             // Set desires
-            generateDesires(ref cd);
+            int overCounterSize = Toolbox.random(0, 3); // 0-3 overcounter drugs
+            int prescriptionSize;
+
+            // If overcounter amount is 0, then number of prescription drugs must be at least 1
+            // (or the customer would have no reason to be in the store)
+            if (overCounterSize > 0)
+                prescriptionSize = Toolbox.random(0, 3);
+            else
+                prescriptionSize = Toolbox.random(1, 3);
+
+            cd.desires = new Desires(overCounterSize, prescriptionSize);
+            generateArray(ref cd.desires.overCounter, Globals.overCounterList, false);
+            generateArray(ref cd.desires.prescription, Globals.drugList, true);
+
+            if (cd.desires.overCounter.Length > 0)
+                cd.thoughts = "Looking For: " + cd.desires.overCounter[0].drug.name;
+            else
+                cd.thoughts = "Going to pick up prescriptions";
 
             Globals_Customer.customerData.Add(cd); // add cd to Globals list
         }
@@ -87,38 +106,37 @@ public class ProceduralGenerator : MonoBehaviour
         CustomerScreen.updateList(-1); // update CustomerScreen button list
     }
 
-    // Randomly generate desires based on drugs
-    private static void generateDesires(ref CustomerData cd)
+    // Fill array with drugs
+    public static void generateArray(ref CartItem[] array, List<Drug> drugList, bool isPrescription)
     {
-        // Create random number of desires (max of 4 for over the counter drugs and max of 3 for prescription)
-        cd.numberOfDesires = Random.Range(1, 5);
-        cd.numberOfPrescriptionDesires = Random.Range(1, 4);
+        int desireCount = 0; // current number of desires in array
 
-        // Limit the number of desires if there are more desires than there are drugs
-        if (cd.numberOfDesires > Globals.overCounterList.Count)
-            cd.numberOfDesires = Globals.overCounterList.Count;
-        if (cd.numberOfPrescriptionDesires > Globals.drugList.Count)
-            cd.numberOfPrescriptionDesires = Globals.drugList.Count;
+        // Continue filling array while there are remaining available drugs
+        // and while there is still remaining space in the array
+        for (int i = 0; i < drugList.Count && desireCount < array.Length; i++)
+            // Add drug to array if it passes the check
+            // Customers may have over counter drugs on their list of desires that havent been unlocked yet,
+            //      but as for prescription drugs, they will ONLY have it on their list if the player has it unlocked
+            // (A person would not go to a store to pick up a prescription without first knowing it the store has the drug)
+            // Of course, it is still possible that the store has none of the prescribed drug in stock, in which case, the customer will not be able to buy it,
+            //      but it would still show up on their list of desires.
+            if (Toolbox.randomBool(drugList[i].chance) || (isPrescription && drugList[i].isUnlocked))
+                array[desireCount++] = new CartItem(drugList[i]);
 
-        // Begin randomly setting desires
-        cd.desires = new string[cd.numberOfDesires];
-        cd.prescriptionDesires = new string[cd.numberOfPrescriptionDesires];
-        int desireCount = 0;
+        // If no desires were added, but the array length is 1, then forcefully add item to list
+        if (desireCount == 0 && array.Length == 1)
+        {
+            array[0] = new CartItem(drugList[0]);
+            desireCount++;
+        }
 
-        for (int i = 0; i < Globals.overCounterList.Count && desireCount < cd.desires.Length; i++)
-            if (Toolbox.randomBool(Globals.overCounterList[i].chance))
-                cd.desires[desireCount++] = Globals.overCounterList[i].name;
-
-        if (desireCount < cd.numberOfDesires)
-            cd.numberOfDesires = desireCount;
-        cd.desiresRemaining = cd.numberOfDesires;
-
-        desireCount = 0;
-        for (int i = 0; i < Globals.drugList.Count && desireCount < cd.numberOfPrescriptionDesires; i++)
-            if (Toolbox.randomBool(Globals.drugList[i].chance))
-                cd.prescriptionDesires[desireCount++] = Globals.drugList[i].name;
-
-        if (desireCount < cd.numberOfPrescriptionDesires)
-            cd.numberOfPrescriptionDesires = desireCount;
+        // If desire count is less than size of array, refactor array to match size of desire count
+        if (desireCount < array.Length)
+        {
+            CartItem[] temp = new CartItem[desireCount];
+            for (int i = 0; i < desireCount; i++)
+                temp[i] = array[i];
+            array = temp;
+        }
     }
 }

@@ -6,20 +6,20 @@
 
 public class PriorityQueue
 {
-    Move[] q; // holds elements
+    Node[] q; // holds elements
     public int size; // current size of queue
     public int head; // first element in queue
 
     // Initialize variables
     public PriorityQueue(int size)
     {
-        q = new Move[size];
+        q = new Node[size];
         this.size = 0;
         head = 0;
     }
 
     // Add element to queue
-    public void enqueue(Move element)
+    public void enqueue(Node element)
     {
         if (size + 1 >= q.Length)
         {
@@ -37,7 +37,7 @@ public class PriorityQueue
         int j = size - 1;
         while (j > head && q[j].goodness < q[j-1].goodness)
         {
-            Move temp = q[j];
+            Node temp = q[j];
             q[j] = q[j - 1];
             q[j - 1] = temp;
             j--;
@@ -45,13 +45,13 @@ public class PriorityQueue
     }
 
     // Look at first element in queue
-    public Move peek()
+    public Node peek()
     {
         return q[head];
     }
 
     // Extract first element from queue
-    public Move peekAndDequeue()
+    public Node peekAndDequeue()
     {
         return q[head++];
     }

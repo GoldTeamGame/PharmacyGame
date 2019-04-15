@@ -20,6 +20,7 @@ public class Toolbox
 
     // https://stackoverflow.com/questions/16543751/unity3d-font-with-strikethrough
     // Credit to Tim Maytom
+    // Creates a strikethrough version of string s
     public static string StrikeThrough(string s)
     {
         if (s != null)
@@ -45,5 +46,10 @@ public class Toolbox
         int randomNumber = Random.Range(1, 101);
 
         return randomNumber <= chance;
+    }
+
+    public static int random(int num1, int num2)
+    {
+        return Random.Range(num1, num2 + 1);
     }
 }

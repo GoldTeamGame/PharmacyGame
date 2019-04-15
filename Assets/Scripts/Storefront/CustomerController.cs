@@ -1,158 +1,63 @@
 ﻿// File: CustomerController
-// Version: 1.1
-// Last Updated: 4/10/19
-// Authors: Alexander Jacks, Dylan Cyphers
+// Version: 2.0.1
+// Last Updated: 4/13/19
+// Authors: Alexander Jacks
 // Description: Tells customer when and where to move
 
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CustomerController : MonoBehaviour
 {
-    PriorityQueue pq;
-    public float speed;
-    public MoveSet ms;
-    public Queue<int> moveQ; // 0 = right, 1 = left, 2 = up, 3 = down, 4 = upright, 5 = upleft, 6 = downright, 7 = downleft
+    private static float[] directionX = { 1, -1, 0, 0, 1, -1, 1, -1 }; // values that help set moveLocation
+    private static float[] directionY = { 0, 0, 1, -1, 0.95f, 0.95f, -0.95f, -0.95f }; // values that help set moveLocation
+
+    public CustomerData cd;
+    public MovementController mc;
     public int limit = 20; // "Desire Capacity"
     public int currentAmount = 0; // Number is increased each move. When currentAmmount reaches limit, reset currentAmount and remove a desire
     public bool isBuying;
     public bool isLeaving;
     public bool isFinding;
-    public int wallet = 0;
+    public int cart = 0;
 
-	void Start ()
+    void Start()
     {
-        // Instantiate MoveSet using info saved in CustomerData
-        ms = new MoveSet(transform, speed, GetComponent<Customer>().cd.isMoving, GetComponent<Customer>().cd.destLocationX, GetComponent<Customer>().cd.destLocationY);
-        moveQ = new Queue<int>(100);
+        cd = GetComponent<Customer>().cd;
+        List<CustomerData> p = Globals_Customer.customerData;
+        GetComponent<MovementController>().path = GetComponent<Customer>().cd.path;
+        mc = GetComponent<MovementController>();
+        currentAmount = GetComponent<Customer>().cd.currentAmount;
+        if (mc == null)
+        {
+            mc = new MovementController();
+        }
+
+        if (mc.path == null)
+            mc.path = new Path(-1.5f, 6);
+        else
+            mc.path.moveState = 0;
+
+        setMovementController();
+        mc.speed = GetComponent<Customer>().cd.speed;
+
         isBuying = GetComponent<Customer>().cd.isBuying;
         isLeaving = GetComponent<Customer>().cd.isLeaving;
         isFinding = GetComponent<Customer>().cd.isFinding;
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
-        // isMoving == -2 means the customer must reset its path because an object was placed in the store.
-        if (GetComponent<Customer>().cd.isMoving == -2)
+        if (mc.path.currentNode == mc.path.path.Count)
         {
-            moveQ.reset(); // Remove everything from queue
-
-            GetComponent<Customer>().cd.pLocationX = transform.localPosition.x;
-            GetComponent<Customer>().cd.pLocationY = transform.localPosition.y;
-
-            if (isInObstical(transform.localPosition))
-                teleport();
-
-            ms.findNearestLocation(transform.localPosition.x, transform.localPosition.y, ref moveQ);
-            gameObject.GetComponent<Customer>().cd.isMoving = ms.isMoving;
-            gameObject.GetComponent<Customer>().cd.destLocationX = ms.moveLocation.x;
-            gameObject.GetComponent<Customer>().cd.destLocationY = ms.moveLocation.y;
-
-            if (isTrapped(ms.moveLocation))
-            {
-                teleport();
-                GetComponent<Customer>().cd.isMoving = -2;
-            }
-            //Debug.Break();
-            
-            isFinding = false;
-            GetComponent<Customer>().cd.isFinding = false;
-        }
-        // If customer is not moving, then customer thinks of what it wants to do
-        else if (ms.isMoving == -1)
-        {
-            if (moveQ.isEmpty())
-                think(); // Think of where to move
-
-            ms.setMove(moveQ.peek(), ref moveQ); // Determine if move can be made (trim the move if neccesary)
-
-            updateDesire(ms.distance); // Periodically remove desire
-
-            // Save moveLocation and isMoving state into CustomerData
-            gameObject.GetComponent<Customer>().cd.destLocationX = ms.moveLocation.x;
-            gameObject.GetComponent<Customer>().cd.destLocationY = ms.moveLocation.y;
-            gameObject.GetComponent<Customer>().cd.isMoving = ms.isMoving;
+            think(); // Find a path to a location
         }
         else
-            ms.move();
-    }
-
-    // Check if the customer is inside of a fixture
-    private bool isInObstical(Vector3 location)
-    {
-        float x = Mathf.Round(location.x * 2) / 2;
-        float y = Mathf.Round(location.y * 2) / 2;
-
-        return Obsticals.isObstical(x, y);
-    }
-
-    // Check if the customer is isolated between fixtures
-    private bool isTrapped(Vector3 location)
-    {
-        return aStar(location.x, location.y, -1.5f, 6);
-    }
-
-    // Teleport the customer to a nearby "safe spot"
-    private void teleport()
-    {
-        // Find nearest x and y location divisible by 0.5
-        // This will be used as the origin point
-        float x = Mathf.Round(transform.localPosition.x * 2) / 2;
-        float y = Mathf.Round(transform.localPosition.y * 2) / 2;
-
-        int jumpAmount = 1; // number of tiles away from customer
-        float tileSize = 0.5f; // width/height of tile
-
-        Vector3 newLocation = Vector3.zero;
-
-        // Continue looking for a safe location
-        while (jumpAmount < 50)
         {
-            float jump = jumpAmount * tileSize; // calculate distance of jump
-
-            newLocation = new Vector3(x + jump, y); // check right
-            if (Obsticals.isInBounds(newLocation) && !isTrapped(newLocation) && !isInObstical(newLocation))
-                break;
-
-            newLocation = new Vector3(x - jump, y); // check left
-            if (Obsticals.isInBounds(newLocation) && !isTrapped(newLocation) && !isInObstical(newLocation))
-                break;
-
-            newLocation = new Vector3(x, y + jump); // check up
-            if (Obsticals.isInBounds(newLocation) && !isTrapped(newLocation) && !isInObstical(newLocation))
-                break;
-
-            newLocation = new Vector3(x, y - jump); // check down
-            if (Obsticals.isInBounds(newLocation) && !isTrapped(newLocation) && !isInObstical(newLocation))
-                break;
-
-            newLocation = new Vector3(x + jump, y + jump); // check right-up
-            if (Obsticals.isInBounds(newLocation) && !isTrapped(newLocation) && !isInObstical(newLocation))
-                break;
-
-            newLocation = new Vector3(x - jump, y + jump); // check left-up
-            if (Obsticals.isInBounds(newLocation) && !isTrapped(newLocation) && !isInObstical(newLocation))
-                break;
-
-            newLocation = new Vector3(x - jump, y - jump); // check left-down
-            if (Obsticals.isInBounds(newLocation) && !isTrapped(newLocation) && !isInObstical(newLocation))
-                break;
-
-            newLocation = new Vector3(x + jump, y - jump); // check right-down
-            if (Obsticals.isInBounds(newLocation) && !isTrapped(newLocation) && !isInObstical(newLocation))
-                break;
-
-            jumpAmount++;
+            mc.performMove(); // Move to a node
+            setMovementController(); // Update data
         }
-        
-        // Report if teleport doesnt work and teleport customer to entrance
-        if (jumpAmount == 50)
-        {
-            Debug.Log("Teleport Error");
-            transform.localPosition = new Vector3(-1.5f, 6f);
-        }
-
-        transform.localPosition = newLocation; // teleport customer to safe location
     }
 
     // Customer sets its move according to its current state
@@ -161,288 +66,199 @@ public class CustomerController : MonoBehaviour
         // Find the counter if the customer is ready to buy
         if (isBuying)
         {
-            // Locate path to counter after finishing cuurent moves
-            if (moveQ.isEmpty() && !isFinding)
+            // Find path to counter
+            if (transform.localPosition.x != 0.5f && transform.localPosition.y != -0.5f)
             {
-                aStar(0.5f, -0.5f);
-                isFinding = true;
-                GetComponent<Customer>().cd.isFinding = isFinding;
+                cd.thoughts = "Going to Pharmacist Counter";
+                mc.setPath(transform.localPosition.x, transform.localPosition.y, 0.5f, -0.5f);
+                setMovementController();
+                saveLocation();
             }
-
-            // Change states once counter is reached
-            if (moveQ.isEmpty() && isFinding && transform.localPosition.Equals(new Vector3(0.5f, -0.5f)))
+            // Reached counter, now pay and change state to leaving
+            else
             {
+                buyItems();
                 isLeaving = true;
                 isBuying = false;
                 GetComponent<Customer>().cd.isLeaving = true;
                 GetComponent<Customer>().cd.isBuying = false;
-                Globals.setGold(Globals.getGold() + wallet);
-                Globals.monthlyGold += wallet;
-                wallet = 0;
-                isFinding = false;
-                GetComponent<Customer>().cd.isFinding = isFinding;
+                Globals.setGold(Globals.getGold() + cart);
             }
-            else
-                isFinding = false; // reset isFinding to false if customer hasnt found the destination
         }
         // Find the exit if the customer is ready to leave
         else if (isLeaving)
         {
-            if (!isFinding)
+            // Find the exit
+            if (transform.localPosition.x != -1.5f && transform.localPosition.y != 6)
             {
-                aStar(-1.5f, 6f);
-                isFinding = true;
-                GetComponent<Customer>().cd.isFinding = isFinding;
+                cd.thoughts = "Leaving Store";
+                mc.setPath(transform.localPosition.x, transform.localPosition.y, -1.5f, 6f);
+                setMovementController();
+                saveLocation();
             }
-
             // Remove customer once they reach the exit
-            if (moveQ.isEmpty() && transform.localPosition.Equals(new Vector3(-1.5f, 6f)))
+            else
             {
                 removeCustomer();
-                isFinding = false;
-                GetComponent<Customer>().cd.isFinding = isFinding;
             }
-            else
-                isFinding = false; // reset isFinding to false if customer hasnt found the destination
         }
         // Move in a random direction and update desires if not buying or leaving
         else
         {
-            // Set direction and distance
-            //int direction = Random.Range(0, 7);
-            //int distance = Random.Range(1, 10);
-            float x = Random.Range(0, 10);
-            float y = Random.Range(0, 10);
-
-            aStar(x, y);
-            //moveQ.enqueue(direction, distance);
-        }
-    }
-
-    // Customer will find its way to [x, y]
-    public void aStar(float x, float y)
-    {
-        PriorityQueue pq = new PriorityQueue(1000); // reset priority queue
-
-        // Generate a 2D float array to prevent duplicate entries into the queue
-        float[][] check = new float[14][];
-        for (int i = 0; i < check.Length; i++)
-        {
-            check[i] = new float[15];
-            for (int j = 0; j < check[0].Length; j++)
-            {
-                check[i][j] = 1000;
-            }
-        }
-
-        // Set first move
-        float currentX = transform.localPosition.x; // x-coordinate of customers current location
-        float currentY = transform.localPosition.y; // y-coordinate of customers current location
-        int row = Obsticals.yToRow(currentY); // convert y to row value
-        int column = Obsticals.xToColumn(currentX); // convert x to column value
-        Move currentMove = new Move(currentX, currentY, 0, findDistance(currentX, currentY, x, y, row, column), 0, null);
-        float md = TileCalculator.TILE_DIMENSIONS; // (Move distance) used to make code prettier
-        int max = 0;
-        // Keep searching for path until destination is found
-        while (currentMove != null && (currentMove.x != x || currentMove.y != y))
-        {
-            // Enqueue every movement direction
-            // 0 = right, 1 = left, 2 = up, 3 = down, 4 = upright, 5 = upleft, 6 = downright, 7 = downleft
-            checkMove(ref pq, currentMove,  md,   0, x, y, 0, ref check); // right
-            checkMove(ref pq, currentMove,  md,  md, x, y, 4, ref check); // right-up
-            checkMove(ref pq, currentMove,  md, -md, x, y, 6, ref check); // right-down
-            checkMove(ref pq, currentMove,   0,  md, x, y, 2, ref check); // up
-            checkMove(ref pq, currentMove, -md,  md, x, y, 5, ref check); // left-up
-            checkMove(ref pq, currentMove,   0, -md, x, y, 3, ref check); // down
-            checkMove(ref pq, currentMove, -md,   0, x, y, 1, ref check); // left
-            checkMove(ref pq, currentMove, -md, -md, x, y, 7, ref check); // left-down
-
-            max = Mathf.Max(max, pq.size);
-            currentMove = pq.peekAndDequeue(); // Set the first item in the queue as the currentMove
-        }
-
-        //Debug.Log(max);
-        addMoves(currentMove); // Add moves to movement queue
-        //currentMove.displayMoves();
-        //Debug.Break();
-    }
-
-    // Check if a path does not exists between [x1, y1] and [x2, y2]
-    public static bool aStar(float x1, float y1, float x2, float y2)
-    {
-        PriorityQueue pq = new PriorityQueue(1000); // reset priority queue
-
-        // Generate a 2D float array to prevent duplicate entries into the queue
-        float[][] check = new float[14][];
-        for (int i = 0; i < check.Length; i++)
-        {
-            check[i] = new float[15];
-            for (int j = 0; j < check[0].Length; j++)
-            {
-                check[i][j] = 1000;
-            }
-        }
-        
-        int row = Obsticals.yToRow(y1); // convert y to row value
-        int column = Obsticals.xToColumn(x1); // convert x to column value
-        Move currentMove = new Move(x1, y1, 0, findDistance(x1, y1, x2, y2, row, column), 0, null);
-        float md = TileCalculator.TILE_DIMENSIONS; // (Move distance) used to make code prettier
-
-        // Keep searching for path until destination is found
-        while (currentMove != null && currentMove.goodness < 1000 && (currentMove.x != x2 || currentMove.y != y2))
-        {
-            // Enqueue every movement direction
-            // 0 = right, 1 = left, 2 = up, 3 = down, 4 = upright, 5 = upleft, 6 = downright, 7 = downleft
-            checkMove(ref pq, currentMove,  md,   0, x2, y2, 0, ref check); // right
-            checkMove(ref pq, currentMove,  md,  md, x2, y2, 4, ref check); // right-up
-            checkMove(ref pq, currentMove,  md, -md, x2, y2, 6, ref check); // right-down
-            checkMove(ref pq, currentMove,   0,  md, x2, y2, 2, ref check); // up
-            checkMove(ref pq, currentMove, -md,  md, x2, y2, 5, ref check); // left-up
-            checkMove(ref pq, currentMove,   0, -md, x2, y2, 3, ref check); // down
-            checkMove(ref pq, currentMove, -md,   0, x2, y2, 1, ref check); // left
-            checkMove(ref pq, currentMove, -md, -md, x2, y2, 7, ref check); // left-down
-
-            currentMove = pq.peekAndDequeue(); // Set the first item in the queue as the currentMove
-        }
-
-        return currentMove == null || currentMove.goodness >= 1000;
-    }
-
-    // (USED FOR A*)
-    // Checks to see if a move is valid and then places it into the priority queue
-    private static void checkMove(ref PriorityQueue pq, Move move, float xShift, float yShift, float xDest, float yDest, int direction, ref float[][] check)
-    {
-        // Calculate what x and y will be after the move
-        float x = move.x + xShift;
-        float y = move.y + yShift;
-
-        // Obtain row and column values
-        // (translate coordinate positions to array positions)
-        int row = Obsticals.yToRow(y);
-        int column = Obsticals.xToColumn(x);
-
-        // Check is move is within the bounds of the tilemap
-        if (Obsticals.isInBounds(row, column))
-        {
-            // Prepare side/diagonal Distances
-            // (Used for the A* heuristic. Diagonal travel is more costly than side travel)
-            float sideDistance = move.distanceTraveled + 0.15f;
-            float diagonalDistance = move.distanceTraveled + 0.25f;
-
-            // Distance between current position and destination
-            float distance = findDistance(x, y, xDest, yDest, row, column);
-
-            // If distance >= 1000, the move is invalid, so don't continue to add it to the queue
-            if (distance < 1000)
-            {
-                // If direction is greater than 3, then a diagonal move is being made
-                // Only add move to queue if the distanceTraveled is smaller than what is in the check array
-                // (If distanceTraveled is larger than what is in the check array, then that means a better path to that spot already exists)
-                if (direction > 3 && diagonalDistance < check[row][column])
-                {
-                    pq.enqueue(new Move(x, y, move.distanceTraveled + .25f, distance, direction, move));
-                    check[row][column] = diagonalDistance;
-                }
-                // If direction is less than or equal to 3, then a side move is being made (up/down/left/right)
-                else if (direction <= 3 && sideDistance < check[row][column])
-                {
-                    pq.enqueue(new Move(x, y, move.distanceTraveled + .15f, distance, direction, move));
-                    check[row][column] = sideDistance;
-                }
-            }
-        }
-    }
-
-    // move holds a coordinate location as well as every previous move that took to reach the current move
-    // Because this is in reverse order, the function adds all moves to a stack
-    // so that all moves can be added to the movement queue
-    private void addMoves(Move move)
-    {
-        Stack<Move> moves = new Stack<Move>(100); // instantiate stack
-
-        // Continue adding moves to stack until there are no moves remaining
-        while(move != null && move.previousMove != null)
-        {
-            moves.push(move);
-            move = move.previousMove;
-        }
-
-        // Enqueue all moves in the stack
-        int length = moves.size;
-        for (int i = 0; i < length; i++)
-        {
-            moveQ.enqueue(moves.peekAndPop().direction);
-        }
-    }
-
-    // Find the distance between 2 coordinates
-    // returns 1000 (or some large number) if the object at the location is an obstical
-    private static float findDistance(float x1, float y1, float x2, float y2, int row, int column)
-    {
-        if (Obsticals.isObstical(row, column))
-            return 1000; // return large number if obstical is found
-        else
-            return Mathf.Sqrt(Mathf.Pow(x2 - x1, 2) + Mathf.Pow(y2 - y1, 2)); // return distance between points
-    }
-
-    // Handles a customers desires
-    void updateDesire(int distance)
-    {
-        currentAmount += distance; // add distance traveled to currentAmount
-
-        // When currentAmount reaches limit, reset currentAmount and remove a desire
-        if (!isBuying && !isLeaving && currentAmount >= limit)
-        {
-            currentAmount = 0; // reset currentAmount
-            CustomerData cd = GetComponent<Customer>().cd; // grab customerData from Customer Script
-
-            // Update desires customer found something
-            if (cd.desiresRemaining > 0)
-            {
-                cd.desiresRemaining--;
-
-                Drug d = Globals.findDrug(cd.desires[cd.desiresRemaining], Globals.overCounterList);
-
-                if (d != null)
-                {
-                    if (d.amount > 0)
-                    {
-                        d.amount -= 1;
-                        wallet += d.price + (d.price / 2);
-                    }
-
-                    cd.desires[cd.desiresRemaining] = Toolbox.StrikeThrough(cd.desires[cd.desiresRemaining]);
-
-                    // Update desires in the customer information screen if the scene is open
-                    if (CustomerScreen.isAtCustomerScene)
-                    {
-                        // Find the index of the customer being updated
-                        int numberOfCustomers = Globals_Customer.customerData.Count;
-                        int index = -2;
-                        for (int i = 0; i < numberOfCustomers; i++)
-                            if (cd.Equals(Globals_Customer.customerData[i]))
-                                index = i;
-
-                        if (CustomerScreen.currentCustomer == index)
-                            CustomerScreen.listDesires(cd);
-                    }
-                }
-            }
-
-            // Set isBuying to true when customer has picked up everything they want to purchase
-            if (cd.desiresRemaining == 0)
+            // Change state to buying when currentAmount reaches limit
+            if (currentAmount > limit || cd.desires.overCounter.Length == 0)
             {
                 isBuying = true;
                 GetComponent<Customer>().cd.isBuying = true;
             }
+            else
+            {
+                mc.setRandomPath();
+                setMovementController();
+                saveLocation();
+                updateDesire(mc.path.getDistance());
+                GetComponent<Customer>().cd.currentAmount = currentAmount;
+            }
         }
     }
 
-    public static void repath()
+    private Vector3 createVector(Position p)
+    {
+        return new Vector3(p.x, p.y);
+    }
+
+    private void buyItems()
+    {
+        for (int i = 0; i < cd.desires.overCounter.Length; i++)
+        {
+            if (cd.desires.overCounter[i].hasPickedUp)
+                cart += cd.desires.overCounter[i].drug.price + (cd.desires.overCounter[i].drug.price / 2);
+        }
+        for (int i = 0; i < cd.desires.prescription.Length; i++)
+        {
+            if (cd.desires.prescription[i].drug.amount > 0)
+            {
+                cart += cd.desires.prescription[i].drug.price + (cd.desires.prescription[i].drug.price / 2);
+                cd.desires.prescription[i].drug.amount--;
+            }
+        }
+    }
+
+    // Handles a customers desires
+    // Only deals with Over the Counter drugs
+    // Customer will walk around "picking items up off the shelves"
+    //      - Each time they find an item, their mood will increase and the item will be crossed off the list
+    //      - If the customer cannot find the item, they will move on to another item
+    //      - If the only item(s) left on their list are items they cannot find, they will go to buy the items they can and their mood will drop for every item they could not find
+    void updateDesire(int distance)
+    {
+        currentAmount += distance; // add distance traveled to currentAmount
+
+        // When currentAmount reaches limit, update desires
+        if (!isBuying && !isLeaving && currentAmount >= limit)
+        {
+            currentAmount = 0; // reset currentAmount
+            CustomerData cd = GetComponent<Customer>().cd; // grab customerData from Customer Script
+            Drug d = cd.desires.getCurrentDrug();
+
+            if (d != null)
+            {
+                if (d.isUnlocked && findDrug(d.name))
+                {
+                    cd.desires.desiresRemaining--;
+                    d.amount--;
+                    cd.desires.overCounter[cd.desires.currentDrug].hasPickedUp = true;
+                    //d.name = Toolbox.StrikeThrough(d.name);
+                    cd.desires.willBuyOverCounter = true;
+                }
+                else
+                {
+                    // Decrease mood
+                    if (++cd.desires.overCounter[cd.desires.currentDrug].attempts >= 2)
+                        cd.desires.desiresRemaining--;
+                    cd.desires.currentDrug++;
+
+                    d = cd.desires.getCurrentDrug();
+                    if (d != null)
+                        cd.thoughts = "Looking For: " + cd.desires.getCurrentDrug().name;
+                }
+                // Update desires in the customer information screen if the scene is open
+                if (CustomerScreen.isAtCustomerScene)
+                {
+                    // Find the index of the customer being updated
+                    int numberOfCustomers = Globals_Customer.customerData.Count;
+                    int index = -2;
+                    for (int i = 0; i < numberOfCustomers; i++)
+                        if (cd.Equals(Globals_Customer.customerData[i]))
+                            index = i;
+
+                    if (CustomerScreen.currentCustomer == index)
+                        CustomerScreen.listDesires(cd);
+                }
+            }
+
+            // Set isBuying to true when customer has picked up everything they want to purchase
+            if (cd.desires.desiresRemaining == 0)
+            {
+                if (cd.desires.willBuyOverCounter || cd.desires.prescription.Length > 0)
+                {
+                    isBuying = true;
+                    GetComponent<Customer>().cd.isBuying = true;
+                }
+                else
+                {
+                    isLeaving = true;
+                    GetComponent<Customer>().cd.isLeaving = true;
+                }
+            }
+        }
+    }
+
+    // Attempt to find if "s" is somewhere on the storefront
+    public static bool findDrug(string s)
+    {
+        bool isAvailable = false;
+
+        // Loop through storeData array (each element is a script attatched to a shelf on the storefront)
+        for (int i = 0; i < Globals_Items.storeData.Count; i++)
+        {
+            // Check to see if the first side of the shelf has the drug being queried
+            if (Globals_Items.storeData[i].drug[0].Equals(s))
+            {
+                // Check if the amount of the drug being stored on the shelf is larger than 0
+                isAvailable = Globals_Items.storeData[i].amount[0] > 0;
+
+                // If the drug is available, then decrease the amount on the shelf
+                if (isAvailable)
+                {
+                    Globals_Items.storeData[i].amount[0]--;
+                    break;
+                }
+            }
+            // Check to see if the second side of the shelf has the drug being queried
+            if (Globals_Items.storeData[i].drug[1].Equals(s))
+            {
+                // Check if the amount of the drug being stored on the shelf is larger than 0
+                isAvailable = Globals_Items.storeData[i].amount[1] > 0;
+
+                // If the drug is available, then decrease the amount on the shelf
+                if (isAvailable)
+                {
+                    Globals_Items.storeData[i].amount[1]--;
+                    break;
+                }
+            }
+        }
+        return isAvailable;
+    }
+
+    // Sets state for all customers to tell them an object has been placed or removed from storefront
+    public static void repath(int state)
     {
         int numberOfCustomers = Globals_Customer.customerData.Count;
+        List<CustomerData> ad = Globals_Customer.customerData;
         for (int i = 0; i < numberOfCustomers; i++)
-            Globals_Customer.customerData[i].isMoving = -2;
+            Globals_Customer.customerData[i].path.moveState = state;
     }
 
     // Removes the customer from the CustomerData List and the CustomerScreen Button List
@@ -470,5 +286,19 @@ public class CustomerController : MonoBehaviour
         cd.isAlive = false; // set customer to "dead" allowing its id to be replaced
         Globals_Customer.customerData.Remove(cd); // remove customerData element
         Destroy(gameObject); // remove object from game world
+    }
+
+    private void setMovementController()
+    {
+        GetComponent<MovementController>().path = mc.path;
+        GetComponent<MovementController>().moveDirection = mc.moveDirection;
+        GetComponent<MovementController>().moveLocation = mc.moveLocation;
+        GetComponent<Customer>().cd.path = mc.path;
+    }
+
+    private void saveLocation()
+    {
+        GetComponent<Customer>().cd.locationX = transform.position.x;
+        GetComponent<Customer>().cd.locationY = transform.position.y;
     }
 }

@@ -28,9 +28,9 @@ public static class Globals
     {
         drugList = new List<Drug>();
 
-        drugList.Add(new Drug("Ventolin", 5, 60, "Treats bronchospasms"));
-        drugList.Add(new Drug("Vyvanse", 7, 40, "Treats ADHD"));
-        drugList.Add(new Drug("Lyrica", 10, 25, "Treats muscle pain"));
+        drugList.Add(new Drug("Ventolin", 5, 60, "Treats bronchospasms", true));
+        drugList.Add(new Drug("Vyvanse", 7, 40, "Treats ADHD", true));
+        drugList.Add(new Drug("Lyrica", 10, 25, "Treats muscle pain", true));
 
         if (list != null)
             setAmount(drugList, list);
@@ -40,9 +40,9 @@ public static class Globals
     {
         overCounterList = new List<Drug>();
 
-        overCounterList.Add(new Drug("Vitamin A", 2, 85, "Supplement for Vitamin A"));
-        overCounterList.Add(new Drug("Vitamin B", 2, 85, "Supplement for Vitamin B"));
-        overCounterList.Add(new Drug("Vitamin C", 2, 85, "Supplement for Vitamin C"));
+        overCounterList.Add(new Drug("Vitamin A", 2, 85, "Supplement for Vitamin A", true));
+        overCounterList.Add(new Drug("Vitamin B", 2, 85, "Supplement for Vitamin B", false));
+        overCounterList.Add(new Drug("Vitamin C", 2, 85, "Supplement for Vitamin C", false));
 
         if (list != null)
             setAmount(overCounterList, list);
@@ -189,14 +189,16 @@ public class Drug
     public int price;
     public int chance; // chance that customer will want to look for drug (scaled from 1-100)
     public string description;
+    public bool isUnlocked;
 
-    public Drug(string name, int price, int chance, string description)
+    public Drug(string name, int price, int chance, string description, bool isUnlocked)
     {
         this.name = name;
         this.price = price;
         this.chance = chance;
         amount = 0;
         this.description = description;
+        this.isUnlocked = isUnlocked;
     }
 }
 

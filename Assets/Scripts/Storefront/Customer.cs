@@ -1,5 +1,5 @@
 ﻿// File: Customer
-// Version: 1.0.6
+// Version: 1.1.1
 // Last Updated: 2/11/19
 // Authors: Alexander Jacks
 // Description: GameObject script for customer
@@ -16,14 +16,14 @@ public class Customer : MonoBehaviour
         ProceduralGenerator.generate(ref cd); // pass variables to be handled by ProceduralGenerator
         GetComponent<SpriteRenderer>().sprite = ProceduralGenerator.staticAppearanceList[cd.appearance]; // set customer sprite
         transform.localScale = new Vector3(2f, 2f, 0); // set customer sprite size (make it bigger)
-        GetComponent<CustomerController>().speed = cd.speed; // set CustomerController speed
+        //GetComponent<CustomerController>().speed = cd.speed; // set CustomerController speed
     }
 
     // Dictates a customer's actions
     private void Update()
     {
         // Save current coordinate position of customer in customerData (for save/load purposes)
-        cd.locationX = transform.position.x;
-        cd.locationY = transform.position.y;
+        //cd.locationX = transform.position.x;
+        //cd.locationY = transform.position.y;
     }
 }

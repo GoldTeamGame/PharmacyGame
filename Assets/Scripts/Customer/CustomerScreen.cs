@@ -117,12 +117,13 @@ public class CustomerScreen : MonoBehaviour
     // Sets the desires list on the customer info panel
     public static void listDesires(CustomerData cd)
     {
+        staticPanel.GetComponentsInChildren<Text>()[3].text = cd.thoughts; // set current thoughts
         // Fill string with desires
         string listOfDesires = "";
-        for (int i = 0; i < cd.numberOfDesires; i++)
-            listOfDesires += cd.desires[i] + "\n";
-        for (int i = 0; i < cd.numberOfPrescriptionDesires; i++)
-            listOfDesires += cd.prescriptionDesires[i] + "\n";
+        for (int i = 0; i < cd.desires.overCounter.Length; i++)
+            listOfDesires += cd.desires.overCounter[i].drug.name + "\n";
+        for (int i = 0; i < cd.desires.prescription.Length; i++)
+            listOfDesires += cd.desires.prescription[i].drug.name + "\n";
 
         staticPanel.GetComponentsInChildren<Text>()[5].text = listOfDesires; // set desires
     }
