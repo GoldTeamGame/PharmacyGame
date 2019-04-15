@@ -136,8 +136,11 @@ public class CustomerController : MonoBehaviour
         }
         for (int i = 0; i < cd.desires.prescription.Length; i++)
         {
-            if (cd.desires.prescription[i].hasPickedUp)
+            if (cd.desires.prescription[i].drug.amount > 0)
+            {
                 cart += cd.desires.prescription[i].drug.price + (cd.desires.prescription[i].drug.price / 2);
+                cd.desires.prescription[i].drug.amount--;
+            }
         }
     }
 
@@ -160,12 +163,12 @@ public class CustomerController : MonoBehaviour
 
             if (d != null)
             {
-                if (d.isUnlocked && d.amount > 0)
+                if (d.isUnlocked && findDrug(d.name))
                 {
                     cd.desires.desiresRemaining--;
                     d.amount--;
                     cd.desires.overCounter[cd.desires.currentDrug].hasPickedUp = true;
-                    d.name = Toolbox.StrikeThrough(d.name);
+                    //d.name = Toolbox.StrikeThrough(d.name);
                     cd.desires.willBuyOverCounter = true;
                 }
                 else
@@ -211,6 +214,45 @@ public class CustomerController : MonoBehaviour
         }
     }
 
+    // Attempt to find if "s" is somewhere on the storefront
+    public static bool findDrug(string s)
+    {
+        bool isAvailable = false;
+
+        // Loop through storeData array (each element is a script attatched to a shelf on the storefront)
+        for (int i = 0; i < Globals_Items.storeData.Count; i++)
+        {
+            // Check to see if the first side of the shelf has the drug being queried
+            if (Globals_Items.storeData[i].drug[0].Equals(s))
+            {
+                // Check if the amount of the drug being stored on the shelf is larger than 0
+                isAvailable = Globals_Items.storeData[i].amount[0] > 0;
+
+                // If the drug is available, then decrease the amount on the shelf
+                if (isAvailable)
+                {
+                    Globals_Items.storeData[i].amount[0]--;
+                    break;
+                }
+            }
+            // Check to see if the second side of the shelf has the drug being queried
+            if (Globals_Items.storeData[i].drug[1].Equals(s))
+            {
+                // Check if the amount of the drug being stored on the shelf is larger than 0
+                isAvailable = Globals_Items.storeData[i].amount[1] > 0;
+
+                // If the drug is available, then decrease the amount on the shelf
+                if (isAvailable)
+                {
+                    Globals_Items.storeData[i].amount[1]--;
+                    break;
+                }
+            }
+        }
+        return isAvailable;
+    }
+
+    // Sets state for all customers to tell them an object has been placed or removed from storefront
     public static void repath(int state)
     {
         int numberOfCustomers = Globals_Customer.customerData.Count;
