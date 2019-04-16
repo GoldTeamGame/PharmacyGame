@@ -40,7 +40,7 @@ public class PharmacistGenerator : MonoBehaviour
         {
             // Find position of pharmacist
             Position pos;
-            if (p.currentState == -1)
+            if (p.currentState == -1 || p.currentState > 2)
                 pos = Globals_Pharmacist.pharmacistCounter[p.counter].pharmacistZone[0];
             else
                 pos = Globals_Pharmacist.pharmacistCounter[p.counter].pharmacistZone[p.currentState];

@@ -67,7 +67,7 @@ public class PharmacistController : MonoBehaviour
 
     Position findNextLocation()
     {
-        if (p.currentState == -1)
+        if (p.currentState == -1 || p.currentState > 2)
             return Globals_Pharmacist.pharmacistCounter[p.counter].pharmacistZone[0];
         else
             return Globals_Pharmacist.pharmacistCounter[p.counter].pharmacistZone[p.currentState];

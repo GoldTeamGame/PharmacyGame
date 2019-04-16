@@ -72,7 +72,7 @@ public class CustomerController : MonoBehaviour
             if (!isWaiting)
             {
                 // Find path to start of line
-                if (!isInLine && transform.localPosition.x != Globals_Pharmacist.pharmacistCounter[0].lineStart.x && transform.localPosition.y != Globals_Pharmacist.pharmacistCounter[0].lineStart.y)
+                if (!isInLine && (transform.localPosition.x != Globals_Pharmacist.pharmacistCounter[0].lineStart.x || transform.localPosition.y != Globals_Pharmacist.pharmacistCounter[0].lineStart.y))
                 {
                     cd.thoughts = "Going to Pharmacist Counter";
                     mc.setPath(transform.localPosition.x, transform.localPosition.y, Globals_Pharmacist.pharmacistCounter[0].lineStart.x, Globals_Pharmacist.pharmacistCounter[0].lineStart.y);
