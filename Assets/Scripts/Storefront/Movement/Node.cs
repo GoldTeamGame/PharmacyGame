@@ -19,6 +19,13 @@ public class Node
         this.distance = distance;
     }
 
+    public Node(Position position, float distance, int direction)
+    {
+        this.position = position;
+        this.distance = distance;
+        this.direction = direction;
+    }
+
     public Node(Position position, Node previous, float distance, float distanceTraveled, int direction)
     {
         this.position = position;

@@ -9,7 +9,7 @@ public class PharmacistGenerator : MonoBehaviour
     public Transform parent; // The tilemap transform the pharmacist will belong to
 
 	// Use this for initialization
-	void Awake()
+	void Start()
     {
         // If pharmacistCounter is null, then the game is new,
         // so generate counters and pharmacists and assign an employee to the counter
@@ -43,7 +43,7 @@ public class PharmacistGenerator : MonoBehaviour
             if (p.currentState == -1)
                 pos = Globals_Pharmacist.pharmacistCounter[p.counter].pharmacistZone[0];
             else
-                pos = Globals_Pharmacist.pharmacistCounter[p.counter].pharmacistZone[p.counter];
+                pos = Globals_Pharmacist.pharmacistCounter[p.counter].pharmacistZone[p.currentState];
 
             GameObject go = Instantiate(pharmacist, parent); // instantiate object
             go.transform.localPosition = new Vector3(pos.x, pos.y); // set position

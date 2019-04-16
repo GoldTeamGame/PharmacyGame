@@ -12,15 +12,29 @@ public class MovementController : MonoBehaviour
     public Vector3 moveDirection; // The direction customer moves in
     public float speed; // The speed at which the customer moves
     
-
     public MovementController()
     {
         path = new Path(-1.5f, 6);
     }
 
+    public MovementController(Position p, float speed)
+    {
+        this.speed = speed;
+        path = new Path(p.x, p.y);
+    }
+
     public void setPath(float x1, float y1, float x2, float y2)
     {
         Astar.findPath(ref path, x1, y1, x2, y2);
+    }
+
+    // Set a pre-defined path
+    public void setPath(Node[] node)
+    {
+        path.currentNode = 0;
+        path = new Path(node[node.Length-1].position.x, node[node.Length-1].position.y);
+        for (int i = 0; i < node.Length; i++)
+            path.path.Add(node[i]);
     }
 
     public void setRandomPath()

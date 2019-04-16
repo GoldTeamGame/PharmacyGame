@@ -98,6 +98,7 @@ public class Game : MonoBehaviour
             Obsticals.obstical = save.obstical;
             Globals.generateDrugList(save.drugList);
             Globals.generateOverCounterList(save.overCounterList);
+            Globals_Pharmacist.load(save.pharmacistCounter, save.pharmacistList);
             Debug.Log("Game Loaded");
             Unpause();
         }
@@ -120,7 +121,8 @@ public class Game : MonoBehaviour
         save.obstical = Obsticals.obstical;
         save.drugList = Globals.drugList;
         save.overCounterList = Globals.overCounterList;
-        save.employeeList = Globals_Pharmacist.pharmacistList;
+        save.pharmacistList = Globals_Pharmacist.pharmacistList;
+        save.pharmacistCounter = Globals_Pharmacist.pharmacistCounter;
 
         //return the object to write to the file
         return save;

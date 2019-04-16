@@ -37,7 +37,12 @@ public class ProceduralGenerator : MonoBehaviour
         int numberOfCustomers = Globals_Customer.customerData.Count;
         for (int i = 0; i < numberOfCustomers; i++)
         {
-            Vector3 v = new Vector3(Globals_Customer.customerData[i].path.getCurrentNode().position.x, Globals_Customer.customerData[i].path.getCurrentNode().position.y, 0);
+            Vector3 v;
+            CustomerData o = Globals_Customer.customerData[i];
+            if (!Globals_Customer.customerData[i].isWaiting)
+                v = new Vector3(Globals_Customer.customerData[i].path.getCurrentNode().position.x, Globals_Customer.customerData[i].path.getCurrentNode().position.y, 0);
+            else
+                v = new Vector3(Globals_Customer.customerData[i].locationX, Globals_Customer.customerData[i].locationY);
             instantiateObject(v);
         }
 
@@ -79,7 +84,7 @@ public class ProceduralGenerator : MonoBehaviour
             cd = new CustomerData(name, speed); // instantiate cd with name and speed
             cd.appearance = Random.Range(0, 9); // set appearance
             cd.mood = Random.Range(0, 6); // set a random mood
-
+            cd.positionInLine = -1;
             // Set desires
             int overCounterSize = Toolbox.random(0, 3); // 0-3 overcounter drugs
             int prescriptionSize;

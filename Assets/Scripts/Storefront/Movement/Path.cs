@@ -21,7 +21,7 @@ public class Path
         if (currentNode < path.Count)
             return path[currentNode];
         else
-            return null;
+            return path[path.Count-1]; // return last node
     }
 
     // Returns distance remaining to destination

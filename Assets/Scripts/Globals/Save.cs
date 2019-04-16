@@ -23,6 +23,7 @@ public class Save
 
     public List<Drug> drugList;
     public List<Drug> overCounterList;
-    public List<Pharmacist> employeeList;
+    public List<Pharmacist> pharmacistList;
+    public PharmacistCounter[] pharmacistCounter;
     //public object shots { get; internal set; }
 }

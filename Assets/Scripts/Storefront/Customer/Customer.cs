@@ -23,7 +23,7 @@ public class Customer : MonoBehaviour
     private void Update()
     {
         // Save current coordinate position of customer in customerData (for save/load purposes)
-        //cd.locationX = transform.position.x;
-        //cd.locationY = transform.position.y;
+        cd.locationX = transform.localPosition.x;
+        cd.locationY = transform.localPosition.y;
     }
 }

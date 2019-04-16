@@ -22,8 +22,13 @@ public class CustomerData
     public bool isAlive; // does the customer gameObject still exist?
     public bool isBuying; // is the customer buying something
     public bool isLeaving; // is the customer leaving the store
-    public bool isFinding; // is the customer finding something
+    public bool isWaiting; // is the customer finding something
+    public bool isInLine;
+
+    public int positionInLine;
+    public bool isUpdate; // set to true if the customer needs to update their position in line
     public int currentAmount; // keeps track of when customer desire should be updated
+
 
     public int appearance;
 
