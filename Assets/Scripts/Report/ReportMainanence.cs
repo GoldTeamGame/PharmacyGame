@@ -11,6 +11,12 @@ public class ReportMainanence : MonoBehaviour {
 	public GameObject test;
 	public GameObject screen1;
 	public GameObject screen2;
+	public GameObject screen3;
+	//public GameObject screen4;
+	//public GameObject screen5;
+	//public GameObject screen6;
+	//public GameObject screen7;
+	//public GameObject screen8;
 	
 
 	public void pageLeft(){
@@ -18,11 +24,19 @@ public class ReportMainanence : MonoBehaviour {
 			screen2.SetActive(false);
 			screen1.SetActive(true);
 		}
+		else if(screen3.active){
+			screen3.SetActive(false);
+			screen2.SetActive(true);
+		}
 	}
 	public void pageRight(){
 		if(screen1.active){
 			screen1.SetActive(false);
 			screen2.SetActive(true);
+		}
+		else if(screen2.active){
+			screen2.SetActive(false);
+			screen3.SetActive(true);
 		}
 	}
 
