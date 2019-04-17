@@ -16,6 +16,8 @@ public class SceneChanger : MonoBehaviour
     //public Button hideShow; // Button used to hide menu interface
     public GameObject mainPanel;
     public GameObject inventoryPanel;
+    public GameObject shelfPanel;
+    public GameObject drugListPanel;
     public static GameObject staticMainPanel;
     public static GameObject staticInventoryPanel;
     private GameObject currentButton;
@@ -30,6 +32,7 @@ public class SceneChanger : MonoBehaviour
             staticInventoryPanel = inventoryPanel;
         } 
     }
+
     // Change from currentScene to scene
     public void changeScene(string scene)
     {
@@ -56,6 +59,8 @@ public class SceneChanger : MonoBehaviour
             currentScene = scene;
 
             CustomerScreen.isAtCustomerScene = scene.Equals("Customers");
+            shelfPanel.SetActive(false);
+            drugListPanel.SetActive(false);
             SceneManager.LoadScene(scene, LoadSceneMode.Additive);
         }
         // Or close the current scene and load the new scene
@@ -121,6 +126,8 @@ public class SceneChanger : MonoBehaviour
 
     public void storefrontToInv()
     {
+        shelfPanel.SetActive(false);
+        drugListPanel.SetActive(false);
         isAtStorefront = false;
         SceneManager.LoadScene("Inventory", LoadSceneMode.Additive);
 
@@ -137,6 +144,8 @@ public class SceneChanger : MonoBehaviour
     //perhaps button from storefront becomes available when next month begins (pause when button becomes setactive(true)?
     public void storeToReport(Button myButton)
     {
+        shelfPanel.SetActive(false);
+        drugListPanel.SetActive(false);
         currentScene = "Report";
         isAtStorefront = false;       
         staticMainPanel.SetActive(false);
