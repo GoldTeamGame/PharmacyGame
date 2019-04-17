@@ -37,6 +37,15 @@ public class MovementController : MonoBehaviour
             path.path.Add(node[i]);
     }
 
+    public void setPath(Vector3 location)
+    {
+        path.currentNode = 0;
+        path = new Path(location.x, location.y);
+        path.path.Add(new Node(new Position(location.x, location.y), 0, 1));
+        moveLocation = location;
+        moveDirection = new Vector3(-1, 0) * speed;
+    }
+
     public void setRandomPath()
     {
         // Continue generating random path until a valid path is found

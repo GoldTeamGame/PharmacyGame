@@ -85,7 +85,7 @@ public class CustomerController : MonoBehaviour
                 {
                     cd.positionInLine = Globals_Pharmacist.pharmacistCounter[0].numberInLine++; // increment line number
                     Position pos = new Position(Globals_Pharmacist.pharmacistCounter[0].checkout.x + (cd.positionInLine * 0.1f), Globals_Pharmacist.pharmacistCounter[0].checkout.y);
-                    mc.setPath(transform.localPosition.x, transform.localPosition.y, pos.x, pos.y); // set path
+                    mc.setPath(new Vector3(pos.x, pos.y)); // set path
                     //cd.positionInLine = Globals_Pharmacist.pharmacistCounter[0].numberInLine++; // increment line number
                     isInLine = true; // set isInLine to true (which will trigger the following if-statement after the movement finishes
                     GetComponent<Customer>().cd.isInLine = isInLine;
@@ -112,7 +112,7 @@ public class CustomerController : MonoBehaviour
                 cd.isUpdate = false;
                 GetComponent<Customer>().cd.isUpdate = false;
                 Position pos = new Position(Globals_Pharmacist.pharmacistCounter[0].checkout.x + (cd.positionInLine * 0.1f), Globals_Pharmacist.pharmacistCounter[0].checkout.y);
-                mc.setPath(transform.localPosition.x, transform.localPosition.y, pos.x, pos.y); // set path
+                mc.setPath(new Vector3(pos.x, pos.y)); // set path
                 Globals_Pharmacist.pharmacistCounter[0].isCustomer = true; // Tell pharmacist that a customer is at the counter
             }
         }
