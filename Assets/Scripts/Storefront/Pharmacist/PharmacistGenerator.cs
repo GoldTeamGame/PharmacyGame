@@ -58,10 +58,10 @@ public class PharmacistGenerator : MonoBehaviour
     {
         Globals_Pharmacist.pharmacistList = new List<Pharmacist>();
 
-        Globals_Pharmacist.pharmacistList.Add(new Pharmacist("Dylan", 0, "A dude that works for free", 0));
-        Globals_Pharmacist.pharmacistList.Add(new Pharmacist("Jon", 15, "Works at his own pace", 1));
-        Globals_Pharmacist.pharmacistList.Add(new Pharmacist("Ross", 19, "Standard skilled employee", 2));
-        Globals_Pharmacist.pharmacistList.Add(new Pharmacist("Alex", 22, "Hard working and reliable", 3));
+        Globals_Pharmacist.pharmacistList.Add(new Pharmacist("Dylan", 0, "A dude that works for free", 0, 3, 3, 3, 3, 0.005f, 0));
+        Globals_Pharmacist.pharmacistList.Add(new Pharmacist("Jon", 15, "Works at his own pace", 1, 3, 3, 3, 3, 0.005f, 0));
+        Globals_Pharmacist.pharmacistList.Add(new Pharmacist("Ross", 19, "Standard skilled employee", 2, 3, 3, 3, 3, 0.005f, 0));
+        Globals_Pharmacist.pharmacistList.Add(new Pharmacist("Alex", 22, "Hard working and reliable", 3, 3, 3, 3, 3, 0.005f, 0));
     }
 
     // Generate pharmacist counters on new save
