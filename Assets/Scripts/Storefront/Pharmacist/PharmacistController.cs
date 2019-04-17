@@ -6,12 +6,17 @@ public class PharmacistController : MonoBehaviour
 {
     public Pharmacist p;
     MovementController mc; // handles movement
+    Timer t;
 
 	// Use this for initialization
 	void Start ()
     {
         mc = GetComponent<MovementController>();
+        mc.speed = p.speed;
         mc.path.destination = (findNextLocation());
+        t = new Timer(p.progress);
+        if (p.progress > 0)
+            t.start();
 	}
 	
 	// Update is called once per frame
@@ -23,33 +28,62 @@ public class PharmacistController : MonoBehaviour
             mc.performMove();
     }
 
+    // The AI thinking aspect of the pharmacist
     void think()
     {
+        // If pharmacist is idle and a customer is at the counter, then begin processing transaction
         if (p.currentState == -1 && Globals_Pharmacist.pharmacistCounter[p.counter].isCustomer)
             p.currentState = 0;
+
+        // Process Transaction
         if (p.currentState == 0)
         {
-            mc.setPath(Globals_Pharmacist.pharmacistCounter[p.counter].path[p.currentState]);
-            p.currentState = 1;
+            processTransaction(0, 1);
         }
+
+        //
         else if (p.currentState == 1)
         {
-            mc.setPath(Globals_Pharmacist.pharmacistCounter[p.counter].path[p.currentState]);
-            p.currentState = 2;
-            
+            processTransaction(1, 2);
+
         }
         else if (p.currentState == 2)
         {
-            mc.setPath(Globals_Pharmacist.pharmacistCounter[p.counter].path[p.currentState]);
-            p.currentState = 3;
+            processTransaction(2, 3);
         }
+
+        // Finished processing, communicate with customer and pharmacistCounter line
         else if (p.currentState == 3)
         {
-            p.currentState = -1;
-            updatePositions(p.counter);
-            Globals_Pharmacist.pharmacistCounter[p.counter].isFinished = true;
-            Globals_Pharmacist.pharmacistCounter[p.counter].isCustomer = false;
+            if (p.progress == 0 && !t.getIsActive())
+                t.start();
+            else if (t.getTime() > p.stats[p.currentState])
+            {
+                t.stopAndReset(); // stop and reset timer
+                p.progress = 0; // reset progress
+                p.currentState = -1; // switch state to idle
+                updatePositions(p.counter); // update customer's line positions
+                Globals_Pharmacist.pharmacistCounter[p.counter].isFinished = true; // tell pharmacistCounter that transaction is finished
+                Globals_Pharmacist.pharmacistCounter[p.counter].isCustomer = false; // open up the pharmacistCounter for another customer
+            }
+            else
+                p.progress = t.getTimeInSeconds();
         }
+    }
+
+    private void processTransaction(int index, int next)
+    {
+        if (p.progress == 0 && !t.getIsActive())
+            t.start(); // start timer
+        else if (t.getTime() > p.stats[index])
+        {
+            t.stopAndReset(); // stop and reset timer
+            p.progress = 0; // reset progress
+            mc.setPath(Globals_Pharmacist.pharmacistCounter[p.counter].path[p.currentState]); // move to next location
+            p.currentState = next; // change to next state
+        }
+        else
+            p.progress = t.getTimeInSeconds(); // set progress
     }
 
     private static void updatePositions(int counter)
