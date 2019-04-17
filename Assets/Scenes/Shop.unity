@@ -1501,16 +1501,11 @@ MonoBehaviour:
   time: 0
   buyState: 0
   tooltipState: 0
-  d:
-    name: 
-    amount: 0
-    price: 0
-    chance: 0
-    description: 
-    isUnlocked: 0
   thePanel: {fileID: 365082171}
   theText: {fileID: 1797842015}
-  isPrescription: 1
+  listOfDrugs: []
+  description: 
+  action: 0
 --- !u!1 &939960252
 GameObject:
   m_ObjectHideFlags: 0
@@ -1713,16 +1708,11 @@ MonoBehaviour:
   time: 0
   buyState: 0
   tooltipState: 0
-  d:
-    name: 
-    amount: 0
-    price: 0
-    chance: 0
-    description: 
-    isUnlocked: 0
   thePanel: {fileID: 365082171}
   theText: {fileID: 1797842015}
-  isPrescription: 0
+  listOfDrugs: []
+  description: 
+  action: 1
 --- !u!1 &1021123132
 GameObject:
   m_ObjectHideFlags: 0
@@ -1996,16 +1986,11 @@ MonoBehaviour:
   time: 0
   buyState: 0
   tooltipState: 0
-  d:
-    name: 
-    amount: 0
-    price: 0
-    chance: 0
-    description: 
-    isUnlocked: 0
   thePanel: {fileID: 365082171}
   theText: {fileID: 1797842015}
-  isPrescription: 0
+  listOfDrugs: []
+  description: 
+  action: 1
 --- !u!1 &1145320647
 GameObject:
   m_ObjectHideFlags: 0
@@ -2603,16 +2588,11 @@ MonoBehaviour:
   time: 0
   buyState: 0
   tooltipState: 0
-  d:
-    name: 
-    amount: 0
-    price: 0
-    chance: 0
-    description: 
-    isUnlocked: 0
   thePanel: {fileID: 365082171}
   theText: {fileID: 1797842015}
-  isPrescription: 0
+  listOfDrugs: []
+  description: 
+  action: 1
 --- !u!1 &1383917096
 GameObject:
   m_ObjectHideFlags: 0
@@ -2890,16 +2870,11 @@ MonoBehaviour:
   time: 0
   buyState: 0
   tooltipState: 0
-  d:
-    name: 
-    amount: 0
-    price: 0
-    chance: 0
-    description: 
-    isUnlocked: 0
   thePanel: {fileID: 365082171}
   theText: {fileID: 1797842015}
-  isPrescription: 1
+  listOfDrugs: []
+  description: 
+  action: 0
 --- !u!1 &1554161963
 GameObject:
   m_ObjectHideFlags: 0
@@ -3027,16 +3002,11 @@ MonoBehaviour:
   time: 0
   buyState: 0
   tooltipState: 0
-  d:
-    name: 
-    amount: 0
-    price: 0
-    chance: 0
-    description: 
-    isUnlocked: 0
   thePanel: {fileID: 365082171}
   theText: {fileID: 1797842015}
-  isPrescription: 1
+  listOfDrugs: []
+  description: 
+  action: 0
 --- !u!1 &1564606344
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,26 +25,30 @@ public static class Globals
 
     public static void generateDrugList(List<Drug> list)
     {
-        prescriptionList = new List<Drug>();
-
-        prescriptionList.Add(new Drug("Ventolin", 5, 60, "Treats bronchospasms", true));
-        prescriptionList.Add(new Drug("Vyvanse", 7, 40, "Treats ADHD", true));
-        prescriptionList.Add(new Drug("Lyrica", 10, 25, "Treats muscle pain", true));
-
         if (list != null)
-            setAmount(prescriptionList, list);
+            prescriptionList = list;
+        else
+        {
+            prescriptionList = new List<Drug>();
+
+            prescriptionList.Add(new Drug("Ventolin", 5, 60, "Treats bronchospasms", true));
+            prescriptionList.Add(new Drug("Vyvanse", 7, 40, "Treats ADHD", true));
+            prescriptionList.Add(new Drug("Lyrica", 10, 25, "Treats muscle pain", true));
+        }
     }
 
     public static void generateOverCounterList(List<Drug> list)
     {
-        overCounterList = new List<Drug>();
-
-        overCounterList.Add(new Drug("Vitamin A", 2, 85, "Supplement for Vitamin A", true));
-        overCounterList.Add(new Drug("Vitamin B", 2, 85, "Supplement for Vitamin B", false));
-        overCounterList.Add(new Drug("Vitamin C", 2, 85, "Supplement for Vitamin C", false));
-
         if (list != null)
-            setAmount(overCounterList, list);
+            overCounterList = list;
+        else
+        {
+            overCounterList = new List<Drug>();
+
+            overCounterList.Add(new Drug("Vitamin A", 2, 85, "Supplement for Vitamin A", true));
+            overCounterList.Add(new Drug("Vitamin B", 2, 85, "Supplement for Vitamin B", false));
+            overCounterList.Add(new Drug("Vitamin C", 2, 85, "Supplement for Vitamin C", false));
+        }
     }
 
     public static void setAmount(List<Drug> list1, List<Drug> list2)

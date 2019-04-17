@@ -66,4 +66,21 @@ public class BuyItem : MonoBehaviour {
             }
         }
     }
+
+    public static void unlockPrescription(string[] drug)
+    {
+        for (int i = 0; i < drug.Length; i++)
+            Globals.findDrug(drug[i], Globals.prescriptionList).isUnlocked = true;
+    }
+
+    public static void unlockOverCounter(string[] drug)
+    {
+        for (int i = 0; i < drug.Length; i++)
+            Globals.findDrug(drug[i], Globals.overCounterList).isUnlocked = true;
+    }
+
+    public static void unlockService(string name)
+    {
+
+    }
 }

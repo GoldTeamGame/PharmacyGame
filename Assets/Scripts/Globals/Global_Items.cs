@@ -20,9 +20,9 @@ public static class Globals_Items
         serviceList = new List<Service>();
 
         serviceList.Add(new Service("Shelf", 0, true, 2, "A Fixture for displaying over the counter drugs. Customers can only buy the drugs being displayed."));
-        serviceList.Add(new Service("Flu Shot Station", 0, false, 1, ""));
-        serviceList.Add(new Service("Vaccine Station", 0, false, 1, ""));
-        serviceList.Add(new Service("Blood Pressure Monitor", 0, false, 2, ""));
+        serviceList.Add(new Service("Flu Shot Station", 0, false, 1, "Flut Shot Station Description"));
+        serviceList.Add(new Service("Vaccine Station", 0, false, 1, "Vaccine Station Description"));
+        serviceList.Add(new Service("Blood Pressure Monitor", 0, false, 2, "Blood Pressure Monitor Description"));
 
         // If service (list from save) is not null, fill in the important values
         if (service != null)
@@ -44,5 +44,13 @@ public static class Globals_Items
     {
         storeData = storeDatas;
         currentNumberOfItems = number;
+    }
+
+    public static Service findService(string name)
+    {
+        for (int i = 0; i < serviceList.Count; i++)
+            if (serviceList[i].name.Equals(name))
+                return serviceList[i];
+        return null;
     }
 }
