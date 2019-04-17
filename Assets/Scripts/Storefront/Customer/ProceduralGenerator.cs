@@ -98,7 +98,7 @@ public class ProceduralGenerator : MonoBehaviour
 
             cd.desires = new Desires(overCounterSize, prescriptionSize);
             generateArray(ref cd.desires.overCounter, Globals.overCounterList, false);
-            generateArray(ref cd.desires.prescription, Globals.drugList, true);
+            generateArray(ref cd.desires.prescription, Globals.prescriptionList, true);
 
             if (cd.desires.overCounter.Length > 0)
                 cd.thoughts = "Looking For: " + cd.desires.overCounter[0].drug.name;

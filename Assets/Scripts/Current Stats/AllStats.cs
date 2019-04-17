@@ -21,9 +21,9 @@ public class AllStats : MonoBehaviour {
     public static int SumInventory()
     {
         int sum = 0;
-        for(int i = 0; i < Globals.drugList.Count; i++)
+        for(int i = 0; i < Globals.prescriptionList.Count; i++)
         {
-            sum += Globals.drugList[i].price * Globals.drugList[i].amount;
+            sum += Globals.prescriptionList[i].price * Globals.prescriptionList[i].amount;
         }
         return sum;
     }

@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 248363147}
   - component: {fileID: 248363146}
   m_Layer: 5
-  m_Name: DrugB_Text
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -405,7 +405,7 @@ GameObject:
   - component: {fileID: 284440495}
   - component: {fileID: 284440496}
   m_Layer: 5
-  m_Name: VitaminA_Text
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -468,7 +468,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'VitaminA: 2g'
+  m_Text: 'Vitamin A: 2g'
 --- !u!1 &335521230
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,8 +525,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2082886268}
   m_HandleRect: {fileID: 2082886266}
   m_Direction: 2
-  m_Value: 0.9999998
-  m_Size: 0.7662383
+  m_Value: 0.99999994
+  m_Size: 0.5941189
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -668,9 +668,8 @@ GameObject:
   - component: {fileID: 514414314}
   - component: {fileID: 514414313}
   - component: {fileID: 514414317}
-  - component: {fileID: 514414316}
   m_Layer: 5
-  m_Name: EmployeeB_Button
+  m_Name: Button_Alex
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -781,17 +780,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 514414311}
   m_CullTransparentMesh: 0
---- !u!114 &514414316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 514414311}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99b0ad0ff6be3d94a89a449773207179, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &514414317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -808,11 +796,91 @@ MonoBehaviour:
   tooltipState: 0
   e:
     name: 
-    isUnlocked: 0
+    appearance: 0
     wage: 0
     description: 
+    currentState: 0
+    progress: 0
+    counter: 0
+    isUnlocked: 0
+    isMoving: 0
   thePanel: {fileID: 365082171}
   theText: {fileID: 1797842015}
+--- !u!1 &546063689
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 546063690}
+  - component: {fileID: 546063692}
+  - component: {fileID: 546063691}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &546063690
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 546063689}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1093815942}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &546063691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 546063689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 40
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 50
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Vitamin B: 2g'
+--- !u!222 &546063692
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 546063689}
+  m_CullTransparentMesh: 0
 --- !u!1 &735166140
 GameObject:
   m_ObjectHideFlags: 0
@@ -824,7 +892,7 @@ GameObject:
   - component: {fileID: 735166143}
   - component: {fileID: 735166142}
   m_Layer: 5
-  m_Name: DrugA_Text
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1053,9 +1121,8 @@ GameObject:
   - component: {fileID: 849398007}
   - component: {fileID: 849398006}
   - component: {fileID: 849398010}
-  - component: {fileID: 849398009}
   m_Layer: 5
-  m_Name: EmployeeA_Button
+  m_Name: Button_Jon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1166,17 +1233,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 849398004}
   m_CullTransparentMesh: 0
---- !u!114 &849398009
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 849398004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4b3f23b370e61b41b9a91c2fe4248a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &849398010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1193,9 +1249,14 @@ MonoBehaviour:
   tooltipState: 0
   e:
     name: 
-    isUnlocked: 0
+    appearance: 0
     wage: 0
     description: 
+    currentState: 0
+    progress: 0
+    counter: 0
+    isUnlocked: 0
+    isMoving: 0
   thePanel: {fileID: 365082171}
   theText: {fileID: 1797842015}
 --- !u!1 &884130713
@@ -1325,9 +1386,8 @@ GameObject:
   - component: {fileID: 896005435}
   - component: {fileID: 896005434}
   - component: {fileID: 896005438}
-  - component: {fileID: 896005437}
   m_Layer: 5
-  m_Name: DrugC_Button
+  m_Name: Button_Lyrica
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1390,18 +1450,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 896005435}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2021118431}
-        m_MethodName: _buyPrescription
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Lyrica
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &896005435
@@ -1438,17 +1487,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 896005432}
   m_CullTransparentMesh: 0
---- !u!114 &896005437
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 896005432}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d775c2e919fd524ebbae4bf068d051d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &896005438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1472,6 +1510,7 @@ MonoBehaviour:
     isUnlocked: 0
   thePanel: {fileID: 365082171}
   theText: {fileID: 1797842015}
+  isPrescription: 1
 --- !u!1 &939960252
 GameObject:
   m_ObjectHideFlags: 0
@@ -1547,6 +1586,143 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &987308211
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 987308212}
+  - component: {fileID: 987308215}
+  - component: {fileID: 987308214}
+  - component: {fileID: 987308213}
+  - component: {fileID: 987308216}
+  m_Layer: 5
+  m_Name: Button_VitaminC
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &987308212
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 987308211}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -8325}
+  m_LocalScale: {x: 0.6549, y: 0.65027493, z: 60.47187}
+  m_Children:
+  - {fileID: 1947003282}
+  m_Father: {fileID: 1711351550}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 517, y: 93.7}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &987308213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 987308211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 987308214}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &987308214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 987308211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &987308215
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 987308211}
+  m_CullTransparentMesh: 0
+--- !u!114 &987308216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 987308211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2721417c26bc9cc4580de72e99a42aa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 0
+  buyState: 0
+  tooltipState: 0
+  d:
+    name: 
+    amount: 0
+    price: 0
+    chance: 0
+    description: 
+    isUnlocked: 0
+  thePanel: {fileID: 365082171}
+  theText: {fileID: 1797842015}
+  isPrescription: 0
 --- !u!1 &1021123132
 GameObject:
   m_ObjectHideFlags: 0
@@ -1693,6 +1869,143 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1044940652}
   m_CullTransparentMesh: 0
+--- !u!1 &1093815941
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1093815942}
+  - component: {fileID: 1093815945}
+  - component: {fileID: 1093815944}
+  - component: {fileID: 1093815943}
+  - component: {fileID: 1093815946}
+  m_Layer: 5
+  m_Name: Button_VitaminB
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1093815942
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1093815941}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -8325}
+  m_LocalScale: {x: 0.6549, y: 0.65027493, z: 60.47187}
+  m_Children:
+  - {fileID: 546063690}
+  m_Father: {fileID: 1711351550}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 517, y: 93.7}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1093815943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1093815941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1093815944}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &1093815944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1093815941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1093815945
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1093815941}
+  m_CullTransparentMesh: 0
+--- !u!114 &1093815946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1093815941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2721417c26bc9cc4580de72e99a42aa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 0
+  buyState: 0
+  tooltipState: 0
+  d:
+    name: 
+    amount: 0
+    price: 0
+    chance: 0
+    description: 
+    isUnlocked: 0
+  thePanel: {fileID: 365082171}
+  theText: {fileID: 1797842015}
+  isPrescription: 0
 --- !u!1 &1145320647
 GameObject:
   m_ObjectHideFlags: 0
@@ -2025,9 +2338,8 @@ GameObject:
   - component: {fileID: 1337394806}
   - component: {fileID: 1337394805}
   - component: {fileID: 1337394809}
-  - component: {fileID: 1337394808}
   m_Layer: 5
-  m_Name: EmployeeC_Button
+  m_Name: Button_Ross
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2138,17 +2450,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1337394803}
   m_CullTransparentMesh: 0
---- !u!114 &1337394808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1337394803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a4416218e561184e9604f10dbda2d20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1337394809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2165,9 +2466,14 @@ MonoBehaviour:
   tooltipState: 0
   e:
     name: 
-    isUnlocked: 0
+    appearance: 0
     wage: 0
     description: 
+    currentState: 0
+    progress: 0
+    counter: 0
+    isUnlocked: 0
+    isMoving: 0
   thePanel: {fileID: 365082171}
   theText: {fileID: 1797842015}
 --- !u!1 &1338641295
@@ -2181,8 +2487,9 @@ GameObject:
   - component: {fileID: 1338641299}
   - component: {fileID: 1338641298}
   - component: {fileID: 1338641297}
+  - component: {fileID: 1338641300}
   m_Layer: 5
-  m_Name: VitaminA_Button
+  m_Name: Button_VitaminA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2245,18 +2552,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1338641298}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2021118431}
-        m_MethodName: _buyOverCounter
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Vitamin A
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1338641298
@@ -2293,6 +2589,30 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1338641295}
   m_CullTransparentMesh: 0
+--- !u!114 &1338641300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1338641295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2721417c26bc9cc4580de72e99a42aa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 0
+  buyState: 0
+  tooltipState: 0
+  d:
+    name: 
+    amount: 0
+    price: 0
+    chance: 0
+    description: 
+    isUnlocked: 0
+  thePanel: {fileID: 365082171}
+  theText: {fileID: 1797842015}
+  isPrescription: 0
 --- !u!1 &1383917096
 GameObject:
   m_ObjectHideFlags: 0
@@ -2304,7 +2624,7 @@ GameObject:
   - component: {fileID: 1383917099}
   - component: {fileID: 1383917098}
   m_Layer: 5
-  m_Name: EmployeeC_Text
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2379,7 +2699,7 @@ GameObject:
   - component: {fileID: 1443693287}
   - component: {fileID: 1443693286}
   m_Layer: 5
-  m_Name: EmployeeA_Text
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2455,9 +2775,8 @@ GameObject:
   - component: {fileID: 1518848475}
   - component: {fileID: 1518848474}
   - component: {fileID: 1518848478}
-  - component: {fileID: 1518848477}
   m_Layer: 5
-  m_Name: DrugB_Button
+  m_Name: Button_Vyvanse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2520,18 +2839,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1518848475}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2021118431}
-        m_MethodName: _buyPrescription
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Vyvanse
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1518848475
@@ -2568,17 +2876,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1518848472}
   m_CullTransparentMesh: 0
---- !u!114 &1518848477
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1518848472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32b647e102d320e4b972d8d2947979e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1518848478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2602,6 +2899,7 @@ MonoBehaviour:
     isUnlocked: 0
   thePanel: {fileID: 365082171}
   theText: {fileID: 1797842015}
+  isPrescription: 1
 --- !u!1 &1554161963
 GameObject:
   m_ObjectHideFlags: 0
@@ -2614,9 +2912,8 @@ GameObject:
   - component: {fileID: 1554161966}
   - component: {fileID: 1554161965}
   - component: {fileID: 1554161969}
-  - component: {fileID: 1554161968}
   m_Layer: 5
-  m_Name: DrugA_Button
+  m_Name: Button_Ventolin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2679,18 +2976,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1554161966}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2021118431}
-        m_MethodName: _buyPrescription
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Ventolin
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1554161966
@@ -2727,17 +3013,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1554161963}
   m_CullTransparentMesh: 0
---- !u!114 &1554161968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1554161963}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ba96a58d10d436418ba75ac732a708a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1554161969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2761,6 +3036,7 @@ MonoBehaviour:
     isUnlocked: 0
   thePanel: {fileID: 365082171}
   theText: {fileID: 1797842015}
+  isPrescription: 1
 --- !u!1 &1564606344
 GameObject:
   m_ObjectHideFlags: 0
@@ -2772,7 +3048,7 @@ GameObject:
   - component: {fileID: 1564606347}
   - component: {fileID: 1564606346}
   m_Layer: 5
-  m_Name: EmployeeB_Text
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2872,6 +3148,8 @@ RectTransform:
   - {fileID: 514414312}
   - {fileID: 1337394804}
   - {fileID: 1338641296}
+  - {fileID: 1093815942}
+  - {fileID: 987308212}
   m_Father: {fileID: 884130714}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3296,6 +3574,81 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1917445794}
   m_CullTransparentMesh: 0
+--- !u!1 &1947003281
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1947003282}
+  - component: {fileID: 1947003284}
+  - component: {fileID: 1947003283}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1947003282
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1947003281}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 987308212}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1947003283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1947003281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 40
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 50
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Vitamin C: 2g'
+--- !u!222 &1947003284
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1947003281}
+  m_CullTransparentMesh: 0
 --- !u!1 &2021118425
 GameObject:
   m_ObjectHideFlags: 0
@@ -3407,22 +3760,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a7f9469f705f94696017c528bf5881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drugAbtn: {fileID: 1554161965}
-  drugAtext: {fileID: 735166142}
-  drugBbtn: {fileID: 1518848474}
-  drugBtext: {fileID: 248363146}
-  drugCbtn: {fileID: 896005434}
-  drugCtext: {fileID: 2080749676}
-  vitaminAbtn: {fileID: 1338641297}
-  vitaminAtext: {fileID: 284440496}
-  employeeAbtn: {fileID: 849398006}
-  employeeAtext: {fileID: 1443693286}
-  employeeBbtn: {fileID: 514414313}
-  employeeBtext: {fileID: 1564606346}
-  employeeCbtn: {fileID: 1337394805}
-  employeeCtext: {fileID: 1383917098}
-  selector: 0
-  tabButtons: []
+  prescriptionDrugList:
+  - {fileID: 1554161965}
+  - {fileID: 1518848474}
+  - {fileID: 896005434}
+  overTheCounterList:
+  - {fileID: 1338641297}
+  - {fileID: 1093815943}
+  - {fileID: 987308213}
+  employeeList:
+  - {fileID: 849398006}
+  - {fileID: 514414313}
+  - {fileID: 1337394805}
 --- !u!114 &2021118431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3445,7 +3794,7 @@ GameObject:
   - component: {fileID: 2080749677}
   - component: {fileID: 2080749676}
   m_Layer: 5
-  m_Name: DrugC_Text
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -81,6 +81,7 @@ public class SceneChanger : MonoBehaviour
             staticInventoryPanel.SetActive(false);
             staticMainPanel.SetActive(true);
             back.gameObject.SetActive(false);
+            currentScene = "Storefront";
         }
         // Or unload a scene
         else
@@ -93,6 +94,7 @@ public class SceneChanger : MonoBehaviour
 
             //hideShow.gameObject.SetActive(true); // re-activate hide/show button
             back.gameObject.SetActive(false); // de-activate backToStorefront button
+            currentScene = "Storefront";
         }
 
         currentButton.GetComponent<Image>().color = originalColor;
@@ -114,6 +116,7 @@ public class SceneChanger : MonoBehaviour
         // Replace main bottom panel with the inventory placement panel
         staticMainPanel.SetActive(false);
         staticInventoryPanel.SetActive(true);
+        currentScene = "Storefront";
     }
 
     public void storefrontToInv()
@@ -127,6 +130,7 @@ public class SceneChanger : MonoBehaviour
             ItemPlacer.delete();
         staticMainPanel.SetActive(true);
         staticInventoryPanel.SetActive(false);
+        currentScene = "Inventory";
     }
 
     //assumes on storefront for now
@@ -153,6 +157,7 @@ public class SceneChanger : MonoBehaviour
 
         Globals.sem = false;
         SceneManager.UnloadSceneAsync("Report");
+        currentScene = "Storefront";
         
     }
 
@@ -169,5 +174,6 @@ public class SceneChanger : MonoBehaviour
         
         if(currentScene != "Storefront")
             SceneManager.UnloadSceneAsync(currentScene);
+        currentScene = "Storefront";
     }
 }

@@ -1,93 +1,59 @@
 ﻿/* 
- * Most Recent Author: Dylan Cyphers
- * Version 1.0
- * Date: 3/19/2019
- * Description: Displays the shop items alongside their price. Buttons are used as tabs, limiting the display.
- * 
+ * Authors: Dylan Cyphers, Alexander Jacks
+ * Version 1.1.1
+ * Date: 4/16/2019
+ * Description: Displays buttons so the player can buy items. Buttons that are viewable depend on the tab
  */
-
-using System.Collections;
-using System.Collections.Generic;
+ 
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DisplayShop : MonoBehaviour {
 
-    public Button drugAbtn;
-    public Text drugAtext;
-    public Button drugBbtn;
-    public Text drugBtext;
-    public Button drugCbtn;
-    public Text drugCtext;
-    public Button vitaminAbtn;
-    public Text vitaminAtext;
-    public Button employeeAbtn;
-    public Text employeeAtext;
-    public Button employeeBbtn;
-    public Text employeeBtext;
-    public Button employeeCbtn;
-    public Text employeeCtext;
-
-    /* The selector [0,1] is the int used to designate which parts of the scrollbar are displayed
-    *  0: Stock
-    *  1: Staff
-    *  Note: No fixtures because they are exclusively in Expansions (Platinum Shop)
-    */
-    public int selector;
-
-    public Button[] tabButtons;
-
+    // IMPORTANT - both drug lists much match up with the order that the drugs are generated in Globals script
+    public Button[] prescriptionDrugList; // Array of prescription drug buttons
+    public Button[] overTheCounterList; // Array of over the counter drug buttons
+    public Button[] employeeList; // 
+    
+    // sel = 0 -> Show all drugs
+    // sel = 1 -> Show employees
     public void SetSelector(int sel)
     {
-        selector = sel;
+        // Show drugs, hide employees
+        if (sel == 0)
+        {
+            for (int i = 0; i < prescriptionDrugList.Length; i++)
+                if (Globals.prescriptionList[i].isUnlocked)
+                    prescriptionDrugList[i].gameObject.SetActive(true);
+            for (int i = 0; i < overTheCounterList.Length; i++)
+                if (Globals.overCounterList[i].isUnlocked)
+                    overTheCounterList[i].gameObject.SetActive(true);
+            for (int i = 0; i < employeeList.Length; i++)
+                employeeList[i].gameObject.SetActive(false);
+        }
+        // Hide drugs, show employees
+        else if (sel == 1)
+        {
+            for (int i = 0; i < prescriptionDrugList.Length; i++)
+                prescriptionDrugList[i].gameObject.SetActive(false);
+            for (int i = 0; i < overTheCounterList.Length; i++)
+                overTheCounterList[i].gameObject.SetActive(false);
+            for (int i = 0; i < employeeList.Length; i++)
+                employeeList[i].gameObject.SetActive(true);
+        }
     }
 
-    void Update()
+    private void Start()
     {
-        //Testing Limited Display
-        //Reminder: 0 === Stock
-        if (selector == 0)
-        {
-            drugAbtn.gameObject.SetActive(true);
-            drugBbtn.gameObject.SetActive(true);
-            drugCbtn.gameObject.SetActive(true);
-            vitaminAbtn.gameObject.SetActive(true);
-            employeeAbtn.gameObject.SetActive(false);
-            employeeBbtn.gameObject.SetActive(false);
-            employeeCbtn.gameObject.SetActive(false);
-        }
-        //Reminder: 1 === Staff
-        else if (selector == 1)
-        {
-            drugAbtn.gameObject.SetActive(false);
-            drugBbtn.gameObject.SetActive(false);
-            drugCbtn.gameObject.SetActive(false);
-            vitaminAbtn.gameObject.SetActive(false);
-            employeeAbtn.gameObject.SetActive(true);
-            employeeBbtn.gameObject.SetActive(true);
-            employeeCbtn.gameObject.SetActive(true);
-        }
+        // Hide all buttons
+        for (int i = 0; i < prescriptionDrugList.Length; i++)
+            prescriptionDrugList[i].gameObject.SetActive(false);
+        for (int i = 0; i < overTheCounterList.Length; i++)
+            overTheCounterList[i].gameObject.SetActive(false);
+        for (int i = 0; i < employeeList.Length; i++)
+            employeeList[i].gameObject.SetActive(false);
 
-        
-
-        drugAtext.text = Globals.drugList[0].name + ": " + Globals.drugList[0].price + " Gold/Unit";
-        drugBtext.text = Globals.drugList[1].name + ": " + Globals.drugList[1].price + " Gold/Unit";
-        drugCtext.text = Globals.drugList[2].name + ": " + Globals.drugList[2].price + " Gold/Unit";
-        vitaminAtext.text = Globals.overCounterList[0].name + ": " + Globals.overCounterList[0].price + " Gold/Unit";
-
-        if(!Globals_Pharmacist.pharmacistList[0].isUnlocked)
-        {
-            employeeAtext.text = Globals_Pharmacist.pharmacistList[0].name + ": " + Globals_Pharmacist.pharmacistList[0].wage + " Gold/Hour";
-
-        }
-        if(!Globals_Pharmacist.pharmacistList[1].isUnlocked)
-        {
-            employeeBtext.text = Globals_Pharmacist.pharmacistList[1].name + ": " + Globals_Pharmacist.pharmacistList[1].wage + " Gold/Hour";
-
-        }
-        if(!Globals_Pharmacist.pharmacistList[2].isUnlocked)
-        {
-            employeeCtext.text = Globals_Pharmacist.pharmacistList[2].name + ": " + Globals_Pharmacist.pharmacistList[2].wage + " Gold/Hour";
-        }
+        // Show drugs
+        SetSelector(0);
     }
 }

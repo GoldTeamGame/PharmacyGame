@@ -21,9 +21,9 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     public bool tooltipState;
 
     public Drug d;
-
     public GameObject thePanel;
     public Text theText;
+    public bool isPrescription;
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -43,7 +43,10 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         else
         {
             //buy item
-            BuyItem.buyPrescription(d.name);
+            if (isPrescription)
+                BuyItem.buyPrescription(d.name);
+            else
+                BuyItem.buyOverCounter(d.name);
         }
 
         tooltipState = false;
@@ -56,7 +59,10 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     {
         string drugNamePlusExtra = gameObject.GetComponentInChildren<Text>().text;
         string[] slice = drugNamePlusExtra.Split(':');
-        d = Globals.findDrug(slice[0], Globals.drugList);
+        if (isPrescription)
+            d = Globals.findDrug(slice[0], Globals.prescriptionList);
+        else
+            d = Globals.findDrug(slice[0], Globals.overCounterList);
     }
 
     void Update()

@@ -20,19 +20,19 @@ public static class Globals
 
     //Player inventory of drugs (in "units") and price (in gold)
     //Consider making a struct for drugs that have fields: amount, price, and name
-    public static List<Drug> drugList;
+    public static List<Drug> prescriptionList;
     public static List<Drug> overCounterList;
 
     public static void generateDrugList(List<Drug> list)
     {
-        drugList = new List<Drug>();
+        prescriptionList = new List<Drug>();
 
-        drugList.Add(new Drug("Ventolin", 5, 60, "Treats bronchospasms", true));
-        drugList.Add(new Drug("Vyvanse", 7, 40, "Treats ADHD", true));
-        drugList.Add(new Drug("Lyrica", 10, 25, "Treats muscle pain", true));
+        prescriptionList.Add(new Drug("Ventolin", 5, 60, "Treats bronchospasms", true));
+        prescriptionList.Add(new Drug("Vyvanse", 7, 40, "Treats ADHD", true));
+        prescriptionList.Add(new Drug("Lyrica", 10, 25, "Treats muscle pain", true));
 
         if (list != null)
-            setAmount(drugList, list);
+            setAmount(prescriptionList, list);
     }
 
     public static void generateOverCounterList(List<Drug> list)
@@ -46,7 +46,7 @@ public static class Globals
         if (list != null)
             setAmount(overCounterList, list);
     }
-    
+
     public static void setAmount(List<Drug> list1, List<Drug> list2)
     {
         for (int i = 0; i < list2.Count; i++)

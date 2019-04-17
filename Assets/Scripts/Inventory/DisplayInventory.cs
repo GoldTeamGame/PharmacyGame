@@ -11,113 +11,108 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DisplayInventory : MonoBehaviour {
+public class DisplayInventory : MonoBehaviour
+{
+    public static Text[] prescriptionStock;
+    public static Text[] overCounterStock;
 
-    public Sprite[] items;
-    public static Sprite[] staticItems;
-    public Text drugAtext;
-    public Text drugBtext;
-    public Text drugCtext;
-    public Text vitaminAtext;
-    public Text employeeAtext;
-    public Text employeeBtext;
-    public Text employeeCtext;
-
-    public Button fluShotBtn;
-    public Button shelfBtn;
-    public Button vacBtn;
-
-
-    public Sprite currSprite;
-
-
-    /* The selector [0,2] is the int used to designate which parts of the scrollbar are displayed
-    *  0: Stock
-    *  1: Staff
-    *  2: Fixtures
-    */
-    public int selector;
-
-    public Button[] tabButtons;
+    public Text[] _prescriptionStock;
+    public Text[] _overCounterStock;
+    public Text[] employee;
+    public Button[] service;
 
     public void SetSelector(int sel)
     {
-        selector = sel;
+        // Display Stock
+        if (sel == 0)
+        {
+            for (int i = 0; i < prescriptionStock.Length; i++)
+                if (Globals.prescriptionList[i].isUnlocked)
+                    prescriptionStock[i].gameObject.SetActive(true);
+
+            for (int i = 0; i < overCounterStock.Length; i++)
+                if (Globals.overCounterList[i].isUnlocked)
+                    overCounterStock[i].gameObject.SetActive(true);
+
+            for (int i = 0; i < employee.Length; i++)
+                employee[i].gameObject.SetActive(false);
+
+            for (int i = 0; i < service.Length; i++)
+                service[i].gameObject.SetActive(false);
+        }
+        // Display Staff
+        else if (sel == 1)
+        {
+            for (int i = 0; i < prescriptionStock.Length; i++)
+                prescriptionStock[i].gameObject.SetActive(false);
+
+            for (int i = 0; i < overCounterStock.Length; i++)
+                overCounterStock[i].gameObject.SetActive(false);
+
+            for (int i = 0; i < employee.Length; i++)
+                if (Globals_Pharmacist.pharmacistList[i].isUnlocked)
+                    employee[i].gameObject.SetActive(true);
+
+            for (int i = 0; i < service.Length; i++)
+                service[i].gameObject.SetActive(false);
+        }
+        // Display Services
+        else if (sel == 2)
+        {
+            for (int i = 0; i < prescriptionStock.Length; i++)
+                prescriptionStock[i].gameObject.SetActive(false);
+
+            for (int i = 0; i < overCounterStock.Length; i++)
+                overCounterStock[i].gameObject.SetActive(false);
+
+            for (int i = 0; i < employee.Length; i++)
+                employee[i].gameObject.SetActive(false);
+
+            for (int i = 0; i < service.Length; i++)
+                if (Globals_Items.serviceList[i].isUnlocked)
+                    service[i].gameObject.SetActive(true);
+        }
     }
 
     private void Start()
     {
-        staticItems = new Sprite[items.Length];
-        for (int i = 0; i < items.Length; i++)
-            staticItems[i] = items[i];
+        // Set static lists
+        prescriptionStock = _prescriptionStock;
+        overCounterStock = _overCounterStock;
+
+        // Set text for all Text fields
+        displayDrugs();
+
+        for (int i = 0; i < employee.Length; i++)
+            employee[i].text = Globals_Pharmacist.pharmacistList[i].name + ": " + Globals_Pharmacist.pharmacistList[i].wage + "g/hr";
+
+        // Hide everything
+        for (int i = 0; i < prescriptionStock.Length; i++)
+            prescriptionStock[i].gameObject.SetActive(false);
+
+        for (int i = 0; i < overCounterStock.Length; i++)
+            overCounterStock[i].gameObject.SetActive(false);
+
+        for (int i = 0; i < employee.Length; i++)
+            employee[i].gameObject.SetActive(false);
+
+        for (int i = 0; i < service.Length; i++)
+            service[i].gameObject.SetActive(false);
+        
+        SetSelector(0); // select first tab
     }
 
-    void Update()
+    private void Update()
     {
+        displayDrugs();
+    }
 
-        //Testing Limited Display
-        //Reminder: 0 === Stock
-        if(selector == 0)
-        {
-            drugAtext.gameObject.SetActive(true);
-            drugBtext.gameObject.SetActive(true);
-            drugCtext.gameObject.SetActive(true);
-            vitaminAtext.gameObject.SetActive(true);
-            employeeAtext.gameObject.SetActive(false);
-            employeeBtext.gameObject.SetActive(false);
-            employeeCtext.gameObject.SetActive(false);
-            fluShotBtn.gameObject.SetActive(false);
-            shelfBtn.gameObject.SetActive(false);
-            vacBtn.gameObject.SetActive(false);
-        }
-        //Reminder: 1 === Staff
-        else if (selector == 1)
-        {
-            drugAtext.gameObject.SetActive(false);
-            drugBtext.gameObject.SetActive(false);
-            drugCtext.gameObject.SetActive(false);
-            vitaminAtext.gameObject.SetActive(false);
-            employeeAtext.gameObject.SetActive(true);
-            employeeBtext.gameObject.SetActive(true);
-            employeeCtext.gameObject.SetActive(true);
-            fluShotBtn.gameObject.SetActive(false);
-            shelfBtn.gameObject.SetActive(false);
-            vacBtn.gameObject.SetActive(false);
-        }
-        //Reminder: 2 === Fixtures
-        else if (selector == 2)
-        {
-            drugAtext.gameObject.SetActive(false);
-            drugBtext.gameObject.SetActive(false);
-            drugCtext.gameObject.SetActive(false);
-            vitaminAtext.gameObject.SetActive(false);
-            employeeAtext.gameObject.SetActive(false);
-            employeeBtext.gameObject.SetActive(false);
-            employeeCtext.gameObject.SetActive(false);
-            if (Globals.unlockedFluShotStation)
-            {
-                fluShotBtn.gameObject.SetActive(true);
-            }
-            shelfBtn.gameObject.SetActive(true);
-            if (Globals.unlockedVaccineStation)
-            {
-                vacBtn.gameObject.SetActive(true);
-            }
-        }
+    public static void displayDrugs()
+    {
+        for (int i = 0; i < prescriptionStock.Length; i++)
+            prescriptionStock[i].text = Globals.prescriptionList[i].name + ": " + Globals.prescriptionList[i].amount + " Units";
 
-
-        currSprite = staticItems[0]; //testing
-
-
-
-        drugAtext.text = Globals.drugList[0].name + ": " + Globals.drugList[0].amount + " Units";
-        drugBtext.text = Globals.drugList[1].name + ": " + Globals.drugList[1].amount + " Units";
-        drugCtext.text = Globals.drugList[2].name + ": " + Globals.drugList[2].amount + " Units";
-        vitaminAtext.text = Globals.overCounterList[0].name + ": " + Globals.overCounterList[0].amount + " Units";
-
-        employeeAtext.text = Globals_Pharmacist.pharmacistList[0].name + ": " + Globals_Pharmacist.pharmacistList[0].wage + "g/hr";
-        employeeBtext.text = Globals_Pharmacist.pharmacistList[1].name + ": " + Globals_Pharmacist.pharmacistList[1].wage + "g/hr";
-        employeeCtext.text = Globals_Pharmacist.pharmacistList[2].name + ": " + Globals_Pharmacist.pharmacistList[2].wage + "g/hr";
-
+        for (int i = 0; i < overCounterStock.Length; i++)
+            overCounterStock[i].text = Globals.overCounterList[i].name + ": " + Globals.overCounterList[i].amount + " Units";
     }
 }

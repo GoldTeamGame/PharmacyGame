@@ -1,83 +1,61 @@
 ﻿/* 
- * Most Recent Author: Dylan Cyphers
- * Version 1.0
- * Date: 3/19/2019
- * Description: Displays the expansion items alongside their price. Buttons are used as tabs, limiting the display.
+ * File: DisplayExpansions
+ * Authors: Dylan Cyphers, Alexander Jacks
+ * Version 1.0.2
+ * Date: 4/17/2019
+ * Description: Display buttons on expansions scene depending on the selected tab
  * 
  */
-
-using System.Collections;
-using System.Collections.Generic;
+ 
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DisplayExpansions : MonoBehaviour {
 
-    public Button fluBtn;
-    public Text fluText;
-    public Button vacBtn;
-    public Text vacText;
-    public Button vitaminsBtn;
-    public Text vitaminsText;
-    public Button setCBtn;
-    public Text setCText;
-    public Button employeeCapBtn;
-    public Text employeeCapText;
-    public Button nextStoreBtn;
-    public Text nextStoreText;
+    public Button[] set;
+    public Button[] upgrade;
+    public Button[] service;
 
-    /* The selector [0,2] is the int used to designate which parts of the scrollbar are displayed
-    *  0: Sets
-    *  1: Upgrades
-    *  2: Fixtures
-    */
-    public int selector;
-
-    public Button[] tabButtons;
-
+    // sel == 0 -> display merchandise sets
+    // sel == 1 -> display upgrades
+    // sel == 2 -> display services
     public void SetSelector(int sel)
     {
-        selector = sel;
+        if (sel == 0)
+        {
+            display(set, true);
+            display(upgrade, false);
+            display(service, false);
+        }
+        else if (sel == 1)
+        {
+            display(set, false);
+            display(upgrade, true);
+            display(service, false);
+        }
+        else if (sel == 2)
+        {
+            display(set, false);
+            display(upgrade, false);
+            display(service, true);
+        }
     }
 
-    void Update()
+    private void Start()
     {
-        //Testing Limited Display
-        //Reminder: 0 === Sets
-        if (selector == 0)
-        {
-            vitaminsBtn.gameObject.SetActive(true);
-            setCBtn.gameObject.SetActive(true);
+        // Disable all buttons
+        display(set, false);
+        display(upgrade, false);
+        display(service, false);
 
-            employeeCapBtn.gameObject.SetActive(false);
-            nextStoreBtn.gameObject.SetActive(false);
+        // Display set buttons
+        SetSelector(0);
+    }
 
-            fluBtn.gameObject.SetActive(false);
-            vacBtn.gameObject.SetActive(false);
-        }
-        //Reminder: 1 === Uprgrades
-        else if (selector == 1)
-        {
-            vitaminsBtn.gameObject.SetActive(false);
-            setCBtn.gameObject.SetActive(false);
-
-            employeeCapBtn.gameObject.SetActive(true);
-            nextStoreBtn.gameObject.SetActive(true);
-
-            fluBtn.gameObject.SetActive(false);
-            vacBtn.gameObject.SetActive(false);
-        }
-        //Reminder: 2 === Fixtures
-        else if (selector == 2)
-        {
-            vitaminsBtn.gameObject.SetActive(false);
-            setCBtn.gameObject.SetActive(false);
-
-            employeeCapBtn.gameObject.SetActive(false);
-            nextStoreBtn.gameObject.SetActive(false);
-
-            fluBtn.gameObject.SetActive(true);
-            vacBtn.gameObject.SetActive(true);
-        }
+    // Display all buttons in the passed in list
+    public void display(Button[] list, bool willShow)
+    {
+        for (int i = 0; i < list.Length; i++)
+            list[i].gameObject.SetActive(willShow);
     }
 }

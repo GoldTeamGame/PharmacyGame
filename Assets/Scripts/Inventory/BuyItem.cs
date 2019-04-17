@@ -29,7 +29,7 @@ public class BuyItem : MonoBehaviour {
 
     public static void buyPrescription(string name)
     {
-        Drug d = Globals.findDrug(name, Globals.drugList);
+        Drug d = Globals.findDrug(name, Globals.prescriptionList);
 
         int price = d.price;
         if (d.isUnlocked && Globals.playerGold >= price)
