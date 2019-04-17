@@ -1,6 +1,7 @@
 ﻿// File: ShowGameObject
 // Author: Alexander Jacks
-// Version: 1.0.1
+// Last Modified: 4/17/19
+// Version: 1.0.2
 // Description: Script that goes on the shelf prefab. When the prefab is clicked, it will open the shelf menu
 //                  and set the static gameobject as selected
 
@@ -9,6 +10,7 @@ using UnityEngine.UI;
 
 public class ShowGameObject : MonoBehaviour {
 
+    public static bool isShowing;
     public static StoreItems si;
     public static GameObject selectedObject; // the shelf currently being viewed (can be accessed from anywhere)
     public static GameObject[] button;
@@ -36,7 +38,17 @@ public class ShowGameObject : MonoBehaviour {
 
             // Show the ShelfPanel
             ObjectReference.staticGo.SetActive(true);
+            isShowing = true;
             selectedObject = gameObject; // set selectedObject
+        }
+    }
+
+    public static void updateAmount()
+    {
+        if (isShowing)
+        {
+            button[0].transform.GetChild(1).GetComponent<Text>().text = "" + si.amount[0]; // set amount on first shelf panel
+            button[1].transform.GetChild(1).GetComponent<Text>().text = "" + si.amount[1]; // set amount on second shelf panel
         }
     }
 }

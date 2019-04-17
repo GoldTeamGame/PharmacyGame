@@ -1,17 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿// File: ShelfPanel
+// Author: Alexander Jacks
+// Last Modified: 4/17/19
+// Version: 1.0.2
+// Description: Displays shelf panel and contains shelf panel functions
+
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ShelfPanel : MonoBehaviour
 {
-    public static int totalAmount;
-    public GameObject drugPanel;
-    public static int selectedIndex;
-    public Sprite sprite;
-    
+    public static int totalAmount; // the number of a particular drug currently being displayed on the storefront
+    public GameObject drugPanel; // the drug panel gameobject
+    public static int selectedIndex; // the index of the button that was clicked (0 = first button, 1 = second button)
+    public Sprite sprite; // the sprite representing the shelf
+
+    // Remove panel
     public void remove(GameObject go)
     {
+        ShowGameObject.isShowing = false; // Set to hiding state
         go.SetActive(false);
     }
 
@@ -19,9 +25,12 @@ public class ShelfPanel : MonoBehaviour
     public void showDrugs(int index)
     {
         selectedIndex = index;
+        ShowGameObject.button[index].transform.GetChild(1).GetComponent<Text>().text = "" + ShowGameObject.si.amount[0]; // set amount on first shelf panel
+        ShowGameObject.button[index].transform.GetChild(1).GetComponent<Text>().text = "0";
         drugPanel.SetActive(true);
     }
 
+    // Increase text amount
     public void increment(int index)
     {
         string drug = ShowGameObject.button[index].transform.GetChild(0).GetComponent<Text>().text;
@@ -43,6 +52,7 @@ public class ShelfPanel : MonoBehaviour
         t.text = "" + i;
     }
 
+    // Decrease text amount
     public void decrement(int index)
     {
         Text t = ShowGameObject.button[index].transform.GetChild(1).GetComponent<Text>();
@@ -70,5 +80,4 @@ public class ShelfPanel : MonoBehaviour
         }
         return totalAmount;
     }
-
 }

@@ -190,10 +190,12 @@ public class CustomerController : MonoBehaviour
         {
             currentAmount = 0; // reset currentAmount
             CustomerData cd = GetComponent<Customer>().cd; // grab customerData from Customer Script
-            Drug d = cd.desires.getCurrentDrug();
+            Drug d = cd.desires.getCurrentDrug(); // get the drug that the customer is currently looking for
 
+            // if d exists
             if (d != null)
             {
+                // Check if d is unlocked
                 if (d.isUnlocked && findDrug(d.name))
                 {
                     cd.desires.desiresRemaining--;
@@ -263,6 +265,7 @@ public class CustomerController : MonoBehaviour
                 if (isAvailable)
                 {
                     Globals_Items.storeData[i].amount[0]--;
+                    ShowGameObject.updateAmount();
                     break;
                 }
             }

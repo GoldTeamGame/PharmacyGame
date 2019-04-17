@@ -21,6 +21,7 @@ public class PlaceItem : MonoBehaviour {
         needsPlacing = true;
     }
 
+    // Sets the available colors of the item being placed
     public static void setColors(GameObject item)
     {
         staticItem = item;

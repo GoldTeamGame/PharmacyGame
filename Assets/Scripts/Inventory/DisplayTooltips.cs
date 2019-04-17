@@ -1,13 +1,11 @@
 ﻿/* 
- * Most Recent Author: Dylan Cyphers
+ * Authors: Dylan Cyphers, Alexander Jacks
  * Version 1.2
- * Date: 4/8/2019
+ * Date: 4/17/2019
  * Description: Handles a tooltip description when the purchase button is held down for drugs
  * 
  */
-
-using System.Collections;
-using System.Collections.Generic;
+ 
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;

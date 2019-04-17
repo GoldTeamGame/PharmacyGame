@@ -25,7 +25,7 @@ public class ItemPlacer : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-	    if (isPlacing)
+        if (isPlacing)
         {
             // Spawn item at entrance (space is guarrenteed to be available)
             if (PlaceItem.needsPlacing)
@@ -101,8 +101,7 @@ public class ItemPlacer : MonoBehaviour
                         Obsticals.removeObstical(index);
                         Globals_Items.storeData.RemoveAt(index);
                         Globals_Items.objects.RemoveAt(index);
-
-                        //MovementController.repath(-2);
+                        
                         CustomerController.repath(-2); // tell customers to plan new paths now that an obstical has been removed
 
                         PlaceItem.setColors(current); // set the color array values for current
@@ -113,6 +112,8 @@ public class ItemPlacer : MonoBehaviour
                 }
             }
         }
+        else
+            setButtonState(false);
 	}
 
     // Button function
@@ -130,8 +131,7 @@ public class ItemPlacer : MonoBehaviour
             Obsticals.addObstical(current.transform.localPosition.x, current.transform.localPosition.y, s.width, s.height, s.rowOffset, s.columnOffset); // Add item to obstical array
 
             InsertItems.generate(current, s); // add s to Globals_Items.storeData
-
-            //MovementController.repath(-1);
+            
             CustomerController.repath(-1);
 
             //Obsticals.displayAllObsticals(); // Debug: display obstical array
