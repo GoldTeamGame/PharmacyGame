@@ -1,7 +1,7 @@
 ﻿// File: Globals_Items
-// Version: 1.0.2
-// Last Updated: 3/12/19
-// Authors: Ross Burnworth
+// Version: 2.0.1
+// Last Updated: 4/17/19
+// Authors: Ross Burnworth, Alexander Jacks
 // Description: Contains Global variables and functions relevent to items
 
 using System.Collections.Generic;

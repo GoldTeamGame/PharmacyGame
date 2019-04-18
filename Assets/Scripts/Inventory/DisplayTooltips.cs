@@ -18,6 +18,7 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     public bool buyState;
     public bool tooltipState;
 
+    string upgrade;
     Drug d;
     Service s;
     public GameObject thePanel;
@@ -61,6 +62,8 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
                 BuyItem.unlockPrescription(listOfDrugs);
             else if (action == 3)
                 BuyItem.unlockOverCounter(listOfDrugs);
+            else if (action == 4)
+                Upgrades.upgrade(upgrade);
             else if (action == 5)
                 s.isUnlocked = true;
         }
@@ -80,13 +83,18 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
             else if (action == 1)
                 d = Globals.findDrug(slice[0], Globals.overCounterList);
         }
+        else if (action == 4)
+        {
+            string name = gameObject.GetComponentInChildren<Text>().text;
+            string[] slice = name.Split(':');
+            upgrade = slice[0];
+        }
         else if (action == 5)
         {
             string name = gameObject.GetComponentInChildren<Text>().text;
             string[] slice = name.Split(':');
             s = Globals_Items.findService(slice[0]);
         }
-
     }
 
     void Update()
@@ -94,7 +102,7 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         if (buyState)
         {
             time++;
-            if (time > 120)
+            if (time > 15)
             {
                 tooltipState = true;
                 buyState = false;
@@ -102,7 +110,7 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
                 string theTooltip = "";
                 if (action == 0 || action == 1)
                     theTooltip = d.description;
-                if (action == 2 || action == 3)
+                if (action == 2 || action == 3 || action == 4)
                     theTooltip = description;
                 else if (action == 5)
                     theTooltip = s.description;

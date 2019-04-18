@@ -21,7 +21,7 @@ public class Pharmacist
     public int currentState; // what the pharmacist is currently doing
     public int progress; // amount of progress towards completion of an action
     public int counter; // which counter the pharmacist is assigned to
-    public bool isUnlocked; // determines if the pharmacist is unlocked
+    public bool isUnlocked; // determines if the pharmacist is purchased
     public bool isMoving; // if the customer is moving or not
 
     public Pharmacist(string name, int wage, string description, int appearance, int s0, int s1, int s2, int s3, float speed, float personality)
@@ -45,5 +45,15 @@ public class Pharmacist
         counter = -1; // not assigned to counter
         isUnlocked = false; // not unlocked
         isMoving = false; // customer is not moving
+    }
+
+    public void reset(int counter)
+    {
+        if (counter == -1 || !Globals_Pharmacist.pharmacistCounter[counter].isCustomer)
+            currentState = -1;
+        else
+            currentState = 0;
+
+        progress = 0;
     }
 }

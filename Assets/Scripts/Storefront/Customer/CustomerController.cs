@@ -69,36 +69,54 @@ public class CustomerController : MonoBehaviour
         if (isBuying)
         {
             // Do stuff while not waiting
-            if (!isWaiting)
+            if (!cd.isWaiting)
             {
+                if (cd.counter != -1 && !Globals_Pharmacist.pharmacistCounter[cd.counter].isPharmacist)
+                {
+                    cd.isDeciding = true;
+                    cd.isInLine = false;
+                    mc.setPath(transform.localPosition.x, transform.localPosition.y, Globals_Pharmacist.pharmacistCounter[cd.counter].checkout.x, Globals_Pharmacist.pharmacistCounter[cd.counter].checkout.y);
+                    cd.counter = -1;
+                }
+                if (cd.isDeciding)
+                {
+                    int counter = 0;
+                    for (int i = 1; i < Globals_Pharmacist.pharmacistCounter.Length; i++)
+                        if (Globals_Pharmacist.pharmacistCounter[i].isUnlocked && Globals_Pharmacist.pharmacistCounter[i].isPharmacist && Globals_Pharmacist.pharmacistCounter[i].numberInLine < Globals_Pharmacist.pharmacistCounter[counter].numberInLine)
+                            counter = i;
+                    cd.counter = counter;
+                    cd.isDeciding = false;
+                }
+
+                Debug.Log(Globals_Pharmacist.pharmacistCounter[cd.counter].isPharmacist);
                 // Find path to start of line
-                if (!isInLine && (transform.localPosition.x != Globals_Pharmacist.pharmacistCounter[0].lineStart.x || transform.localPosition.y != Globals_Pharmacist.pharmacistCounter[0].lineStart.y))
+                if (!cd.isInLine && (transform.localPosition.x != Globals_Pharmacist.pharmacistCounter[cd.counter].lineStart.x || transform.localPosition.y != Globals_Pharmacist.pharmacistCounter[cd.counter].lineStart.y))
                 {
                     cd.thoughts = "Going to Pharmacist Counter";
-                    mc.setPath(transform.localPosition.x, transform.localPosition.y, Globals_Pharmacist.pharmacistCounter[0].lineStart.x, Globals_Pharmacist.pharmacistCounter[0].lineStart.y);
+                    mc.setPath(transform.localPosition.x, transform.localPosition.y, Globals_Pharmacist.pharmacistCounter[cd.counter].lineStart.x, Globals_Pharmacist.pharmacistCounter[cd.counter].lineStart.y);
                     setMovementController();
                     saveLocation();
                 }
 
                 // When reaching the start of the line, find the position in the line to move to the appropriate spot in the line
-                if (transform.localPosition.x == Globals_Pharmacist.pharmacistCounter[0].lineStart.x && transform.localPosition.y == Globals_Pharmacist.pharmacistCounter[0].lineStart.y)
+                if (transform.localPosition.x == Globals_Pharmacist.pharmacistCounter[cd.counter].lineStart.x && transform.localPosition.y == Globals_Pharmacist.pharmacistCounter[cd.counter].lineStart.y)
                 {
-                    cd.positionInLine = Globals_Pharmacist.pharmacistCounter[0].numberInLine++; // increment line number
-                    Position pos = new Position(Globals_Pharmacist.pharmacistCounter[0].checkout.x + (cd.positionInLine * 0.1f), Globals_Pharmacist.pharmacistCounter[0].checkout.y);
+                    cd.positionInLine = Globals_Pharmacist.pharmacistCounter[cd.counter].numberInLine++; // increment line number
+                    Position pos = new Position(Globals_Pharmacist.pharmacistCounter[cd.counter].checkout.x + (cd.positionInLine * 0.1f), Globals_Pharmacist.pharmacistCounter[cd.counter].checkout.y);
                     mc.setPath(new Vector3(pos.x, pos.y)); // set path
                     //cd.positionInLine = Globals_Pharmacist.pharmacistCounter[0].numberInLine++; // increment line number
                     isInLine = true; // set isInLine to true (which will trigger the following if-statement after the movement finishes
                     GetComponent<Customer>().cd.isInLine = isInLine;
                 }
                 // Reached counter, now pay and change state to leaving
-                else if (isInLine)
+                else if (cd.isInLine)
                 {
-                    Globals_Pharmacist.pharmacistCounter[0].isCustomer = true; // Tell pharmacist that a customer is at the counter
+                    Globals_Pharmacist.pharmacistCounter[cd.counter].isCustomer = true; // Tell pharmacist that a customer is at the counter
                     isWaiting = true; // set isWaiting to true
                     GetComponent<Customer>().cd.isWaiting = isWaiting;
                 }
             }
-            else if (Globals_Pharmacist.pharmacistCounter[0].isFinished && cd.positionInLine == -1)
+            else if (Globals_Pharmacist.pharmacistCounter[cd.counter].isFinished && cd.positionInLine == -1)
             {
                 buyItems();
                 isLeaving = true;
@@ -111,9 +129,17 @@ public class CustomerController : MonoBehaviour
             {
                 cd.isUpdate = false;
                 GetComponent<Customer>().cd.isUpdate = false;
-                Position pos = new Position(Globals_Pharmacist.pharmacistCounter[0].checkout.x + (cd.positionInLine * 0.1f), Globals_Pharmacist.pharmacistCounter[0].checkout.y);
+                Position pos = new Position(Globals_Pharmacist.pharmacistCounter[cd.counter].checkout.x + (cd.positionInLine * 0.1f), Globals_Pharmacist.pharmacistCounter[cd.counter].checkout.y);
                 mc.setPath(new Vector3(pos.x, pos.y)); // set path
-                Globals_Pharmacist.pharmacistCounter[0].isCustomer = true; // Tell pharmacist that a customer is at the counter
+                Globals_Pharmacist.pharmacistCounter[cd.counter].isCustomer = true; // Tell pharmacist that a customer is at the counter
+            }
+            else if (!Globals_Pharmacist.pharmacistCounter[cd.counter].isPharmacist)
+            {
+                cd.isDeciding = true;
+                cd.isInLine = false;
+                mc.setPath(transform.localPosition.x, transform.localPosition.y, Globals_Pharmacist.pharmacistCounter[cd.counter].checkout.x, Globals_Pharmacist.pharmacistCounter[cd.counter].checkout.y);
+                cd.counter = -1;
+                cd.isWaiting = false;
             }
         }
         // Find the exit if the customer is ready to leave

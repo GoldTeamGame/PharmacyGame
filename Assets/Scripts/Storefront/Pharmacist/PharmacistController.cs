@@ -22,6 +22,8 @@ public class PharmacistController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        Debug.Log("Counter: " + p.counter);
+        Debug.Log("Current State: " + p.currentState);
         if (transform.localPosition.x == mc.path.destination.x && transform.localPosition.y == mc.path.destination.y)
             think();
         else
@@ -35,24 +37,16 @@ public class PharmacistController : MonoBehaviour
         if (p.currentState == -1 && Globals_Pharmacist.pharmacistCounter[p.counter].isCustomer)
             p.currentState = 0;
 
-        // Process Transaction
+        // Process Initial Transaction
         if (p.currentState == 0)
-        {
             processTransaction(0, 1);
-        }
-
-        //
+        // Process Computer
         else if (p.currentState == 1)
-        {
             processTransaction(1, 2);
-
-        }
+        // Process Drug Fetching 
         else if (p.currentState == 2)
-        {
             processTransaction(2, 3);
-        }
-
-        // Finished processing, communicate with customer and pharmacistCounter line
+        // Process Post Transaction, communicate with customer and pharmacistCounter line
         else if (p.currentState == 3)
         {
             if (p.progress == 0 && !t.getIsActive())
@@ -71,9 +65,15 @@ public class PharmacistController : MonoBehaviour
         }
     }
 
+    // Pharmacist spends time processing a transaction and then sets its path to the next location and changes state to next
     private void processTransaction(int index, int next)
     {
-        if (p.progress == 0 && !t.getIsActive())
+        if (p.currentState == -1)
+        {
+            t.stopAndReset();
+            p.progress = 0;
+        }
+        else if (p.progress == 0 && !t.getIsActive())
             t.start(); // start timer
         else if (t.getTime() > p.stats[index])
         {
@@ -89,10 +89,9 @@ public class PharmacistController : MonoBehaviour
     private static void updatePositions(int counter)
     {
         Globals_Pharmacist.pharmacistCounter[counter].numberInLine--;
-        Debug.Log(Globals_Pharmacist.pharmacistCounter[counter].numberInLine);
         int numberOfCustomers = Globals_Customer.customerData.Count;
         for (int i = 0; i < numberOfCustomers; i++)
-            if (Globals_Customer.customerData[i].positionInLine >= 0)
+            if (Globals_Customer.customerData[i].counter == counter && Globals_Customer.customerData[i].positionInLine >= 0)
             {
                 Globals_Customer.customerData[i].positionInLine--;
                 Globals_Customer.customerData[i].isUpdate = true;

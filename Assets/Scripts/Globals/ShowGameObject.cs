@@ -6,9 +6,11 @@
 //                  and set the static gameobject as selected
 
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ShowGameObject : MonoBehaviour {
+public class ShowGameObject : MonoBehaviour, IPointerClickHandler
+{
 
     public static bool isShowing;
     public static StoreItems si;
@@ -17,7 +19,7 @@ public class ShowGameObject : MonoBehaviour {
 
 
     // Function that fires when a shelf is clicked
-    private void OnMouseUp()
+    public void OnPointerClick(PointerEventData data)
     {
         // Perform action if the game is not in the itemplacing state
         if (!(ItemPlacer.isPlacing || ItemPlacer.isSelecting) && SceneChanger.isAtStorefront)
@@ -27,9 +29,9 @@ public class ShowGameObject : MonoBehaviour {
 
             // Get the 2 buttons from the ShelfPanel
             button = new GameObject[2];
-            button[0] = ObjectReference.staticGo.transform.GetChild(1).gameObject; // get first button on shelf panel
+            button[0] = ObjectReference.staticGo[0].transform.GetChild(1).gameObject; // get first button on shelf panel
             button[0].transform.GetChild(1).GetComponent<Text>().text = "" + si.amount[0]; // set amount on first shelf panel
-            button[1] = ObjectReference.staticGo.transform.GetChild(2).gameObject; // get second button on shelf panel
+            button[1] = ObjectReference.staticGo[0].transform.GetChild(2).gameObject; // get second button on shelf panel
             button[1].transform.GetChild(1).GetComponent<Text>().text = "" + si.amount[1]; // set amount on second shelf panel
 
             // Set the text of the buttons according to the drug information stored in StoreItems variable
@@ -37,7 +39,7 @@ public class ShowGameObject : MonoBehaviour {
             button[1].GetComponentInChildren<Text>().text = si.drug[1]; // set name of second button
 
             // Show the ShelfPanel
-            ObjectReference.staticGo.SetActive(true);
+            ObjectReference.staticGo[0].SetActive(true);
             isShowing = true;
             selectedObject = gameObject; // set selectedObject
         }
