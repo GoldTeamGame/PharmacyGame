@@ -22,6 +22,8 @@ public class PharmacistController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        Debug.Log("Counter: " + p.counter);
+        Debug.Log("Current State: " + p.currentState);
         if (transform.localPosition.x == mc.path.destination.x && transform.localPosition.y == mc.path.destination.y)
             think();
         else
@@ -66,7 +68,12 @@ public class PharmacistController : MonoBehaviour
     // Pharmacist spends time processing a transaction and then sets its path to the next location and changes state to next
     private void processTransaction(int index, int next)
     {
-        if (p.progress == 0 && !t.getIsActive())
+        if (p.currentState == -1)
+        {
+            t.stopAndReset();
+            p.progress = 0;
+        }
+        else if (p.progress == 0 && !t.getIsActive())
             t.start(); // start timer
         else if (t.getTime() > p.stats[index])
         {

@@ -43,5 +43,6 @@ public class CustomerData
         this.speed = speed;
         isAlive = true;
         isDeciding = true;
+        counter = -1;
     }
 }

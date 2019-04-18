@@ -46,4 +46,14 @@ public class Pharmacist
         isUnlocked = false; // not unlocked
         isMoving = false; // customer is not moving
     }
+
+    public void reset(int counter)
+    {
+        if (counter == -1 || !Globals_Pharmacist.pharmacistCounter[counter].isCustomer)
+            currentState = -1;
+        else
+            currentState = 0;
+
+        progress = 0;
+    }
 }

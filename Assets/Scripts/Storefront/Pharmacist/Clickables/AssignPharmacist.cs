@@ -51,9 +51,26 @@ public class AssignPharmacist : MonoBehaviour
             if (p.counter != -1)
             {
                 Globals_Pharmacist.pharmacistCounter[p.counter].isPharmacist = false; // tell customers that there is no longer a pharmacist at the counter
+                Globals_Pharmacist.pharmacistCounter[p.counter].isCustomer = false;
+                Globals_Pharmacist.pharmacistCounter[p.counter].numberInLine = 0;
+                //Globals_Pharmacist.pharmacistCounter[p.counter].isFinished = false;
+                p.reset(counter);
                 Destroy(Globals_Pharmacist.pharmacistGo[p.counter]); // destroy the gameobject
             }
-
+            
+            // If a pharmacist exists in the place being assigned a pharmacist, then remove the one who was there before
+            if (Globals_Pharmacist.pharmacistGo[counter] != null)
+                // Find the pharmacist who is being replaced
+                for (int i = 0; i < Globals_Pharmacist.pharmacistList.Count; i++)
+                {
+                    if (Globals_Pharmacist.pharmacistList[i].counter == counter)
+                    {
+                        Globals_Pharmacist.pharmacistList[i].counter = -1; // set pharmacist who is being replaced to "unassigned" state
+                        Globals_Pharmacist.pharmacistList[i].reset(-1);
+                        Destroy(Globals_Pharmacist.pharmacistGo[counter]); // destroy the game object
+                        break; // break out of loop
+                    }
+                }
             p.counter = counter; // set new counter location
 
             // Find position of pharmacist
