@@ -12,6 +12,9 @@ public class ReportMainanence : MonoBehaviour {
 	public GameObject screen1;
 	public GameObject screen2;
 	public GameObject screen3;
+	public GameObject screen4;
+	public GameObject screen5;
+	public GameObject screen6;
 	//public GameObject screen4;
 	//public GameObject screen5;
 	//public GameObject screen6;
@@ -28,6 +31,18 @@ public class ReportMainanence : MonoBehaviour {
 			screen3.SetActive(false);
 			screen2.SetActive(true);
 		}
+		else if(screen4.active){
+			screen4.SetActive(false);
+			screen3.SetActive(true);
+		}
+		else if(screen5.active){
+			screen5.SetActive(false);
+			screen4.SetActive(true);
+		}
+		else if(screen6.active){
+			screen6.SetActive(false);
+			screen5.SetActive(true);
+		}
 	}
 	public void pageRight(){
 		if(screen1.active){
@@ -37,6 +52,18 @@ public class ReportMainanence : MonoBehaviour {
 		else if(screen2.active){
 			screen2.SetActive(false);
 			screen3.SetActive(true);
+		}
+		else if(screen3.active){
+			screen3.SetActive(false);
+			screen4.SetActive(true);
+		}
+		else if(screen4.active){
+			screen4.SetActive(false);
+			screen5.SetActive(true);
+		}
+		else if(screen5.active){
+			screen5.SetActive(false);
+			screen6.SetActive(true);
 		}
 	}
 
