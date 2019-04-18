@@ -8,25 +8,56 @@ public class AssignPharmacist : MonoBehaviour
     public GameObject pharmacist;
     public GameObject panel;
     public Button b;
-    public GameObject selectedButton;
-
+    public static bool needToUpdate; // a check to see if the drug list needs to be updated
+    public bool[] exist; // a check to see if the button has already been added to the list (this array matches up with the overCounterList)
 
     private void Start()
     {
-        for (int i = 0; i < Globals_Pharmacist.pharmacistList.Count; i++)
+        exist = new bool[Globals_Pharmacist.pharmacistList.Count];
+        needToUpdate = true;
+        //for (int i = 0; i < Globals_Pharmacist.pharmacistList.Count; i++)
+        //{
+        //    if (Globals_Pharmacist.pharmacistList[i].isUnlocked)
+        //    {
+        //        Button newButton = Instantiate(b, transform);
+        //        string s = Globals_Pharmacist.pharmacistList[i].name;
+        //        newButton.transform.GetChild(0).GetComponent<Text>().text = s;
+        //        newButton.onClick.AddListener(delegate { assign(s); });
+        //    }
+        //}
+    }
+
+    private void Update()
+    {
+        // Update if gameobject is active
+        if (gameObject.activeSelf)
         {
-            if (Globals_Pharmacist.pharmacistList[i].isUnlocked)
+            // Update if needToUpdate is set to true
+            if (needToUpdate)
             {
-                Button newButton = Instantiate(b, transform);
-                string s = Globals_Pharmacist.pharmacistList[i].name;
-                newButton.transform.GetChild(0).GetComponent<Text>().text = s;
-                newButton.onClick.AddListener(delegate { assign(s); });
+                // Loop through all overCounterList drugs
+                for (int i = 0; i < Globals_Pharmacist.pharmacistList.Count; i++)
+                {
+                    // If a button for the drug has not been added to the list
+                    // and the drug has been unlocked,
+                    // Then create a button and add it to the list
+                    if (!exist[i] && Globals_Pharmacist.pharmacistList[i].isUnlocked)
+                    {
+                        exist[i] = true; // set that the button exists
+                        Button newButton = Instantiate(b, transform); // instantiate the button in the list
+                        string s = Globals_Pharmacist.pharmacistList[i].name; // get the name of the drug
+                        newButton.transform.GetChild(0).GetComponent<Text>().text = s; // set the button text to the drug name
+                        newButton.onClick.AddListener(delegate { assign(s); }); // add the function to the button
+                    }
+                }
+                needToUpdate = false; // Set need to update to false after adding buttons to list (prevents unecessary repetition)
             }
         }
     }
 
     public void remove(GameObject go)
     {
+        needToUpdate = true;
         go.SetActive(false);
     }
 
