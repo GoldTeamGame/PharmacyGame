@@ -61,6 +61,7 @@ public class SceneChanger : MonoBehaviour
             CustomerScreen.isAtCustomerScene = scene.Equals("Customers");
             shelfPanel.SetActive(false);
             drugListPanel.SetActive(false);
+            DrugSelectPanel.needToUpdate = true;
             SceneManager.LoadScene(scene, LoadSceneMode.Additive);
         }
         // Or close the current scene and load the new scene
@@ -128,6 +129,7 @@ public class SceneChanger : MonoBehaviour
     {
         shelfPanel.SetActive(false);
         drugListPanel.SetActive(false);
+        DrugSelectPanel.needToUpdate = true;
         isAtStorefront = false;
         SceneManager.LoadScene("Inventory", LoadSceneMode.Additive);
 
@@ -146,6 +148,7 @@ public class SceneChanger : MonoBehaviour
     {
         shelfPanel.SetActive(false);
         drugListPanel.SetActive(false);
+        DrugSelectPanel.needToUpdate = true;
         currentScene = "Report";
         isAtStorefront = false;       
         staticMainPanel.SetActive(false);

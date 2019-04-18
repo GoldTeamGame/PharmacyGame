@@ -13,17 +13,14 @@ public class CustomerData
     public int mood; // how happy a customer is
     public string thoughts; // what the customer is currently thinking about
     public Desires desires;
-    //public string[] desires; // what a customer wants to buy
-    //public string[] prescriptionDesires; // prescriptions the customer wants to buy
-    //public int numberOfDesires; // number of desires
-    //public int desiresRemaining;
-    //public int numberOfPrescriptionDesires; // number of prescriptionDesires
-    //public int lookingFor; // The drug currently being looked for
+
     public bool isAlive; // does the customer gameObject still exist?
     public bool isBuying; // is the customer buying something
     public bool isLeaving; // is the customer leaving the store
     public bool isWaiting; // is the customer finding something
     public bool isInLine;
+    public bool isDeciding;
+    public int counter;
 
     public int positionInLine;
     public bool isUpdate; // set to true if the customer needs to update their position in line
@@ -45,5 +42,6 @@ public class CustomerData
         this.name = name;
         this.speed = speed;
         isAlive = true;
+        isDeciding = true;
     }
 }

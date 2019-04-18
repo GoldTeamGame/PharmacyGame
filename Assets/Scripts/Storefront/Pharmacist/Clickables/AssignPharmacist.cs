@@ -13,16 +13,6 @@ public class AssignPharmacist : MonoBehaviour
 
     private void Start()
     {
-        // Find counter to assign customers to
-        string name = CounterInteraction.name;
-        int index = -1;
-        if (name.Equals("PharmacistZone1"))
-            index = 0;
-        else if (name.Equals("PharmacistZone2"))
-            index = 1;
-        else if (name.Equals("PharmacistZone3"))
-            index = 2;
-
         for (int i = 0; i < Globals_Pharmacist.pharmacistList.Count; i++)
         {
             if (Globals_Pharmacist.pharmacistList[i].isUnlocked)
@@ -30,7 +20,7 @@ public class AssignPharmacist : MonoBehaviour
                 Button newButton = Instantiate(b, transform);
                 string s = Globals_Pharmacist.pharmacistList[i].name;
                 newButton.transform.GetChild(0).GetComponent<Text>().text = s;
-                newButton.onClick.AddListener(delegate { assign(s, index); });
+                newButton.onClick.AddListener(delegate { assign(s); });
             }
         }
     }
@@ -40,14 +30,32 @@ public class AssignPharmacist : MonoBehaviour
         go.SetActive(false);
     }
 
-    public void assign(string name, int counter)
+    public void assign(string name)
     {
-        Pharmacist p = Globals_Pharmacist.findPharmacist(name);
+        Pharmacist p = Globals_Pharmacist.findPharmacist(name); // find pharmacist
 
-        // Do not instantiate customer if they are not assigned to a counter
-        if (p.counter == -1)
+        // Find counter to assign pharmacist to
+        string counterName = CounterInteraction.name;
+        int counter = -1;
+        if (counterName.Equals("PharmacistZone1"))
+            counter = 0;
+        else if (counterName.Equals("PharmacistZone2"))
+            counter = 1;
+        else if (counterName.Equals("PharmacistZone3"))
+            counter = 2;
+
+        // Do nothing if pharmacist is already assigned to counter
+        if (p.counter != counter)
         {
-            p.counter = counter;
+            // If pharmacist has already been placed, first clear pharmacist from zone being moved from (p.counter)
+            if (p.counter != -1)
+            {
+                Globals_Pharmacist.pharmacistCounter[p.counter].isPharmacist = false; // tell customers that there is no longer a pharmacist at the counter
+                Destroy(Globals_Pharmacist.pharmacistGo[p.counter]); // destroy the gameobject
+            }
+
+            p.counter = counter; // set new counter location
+
             // Find position of pharmacist
             Position pos;
             if (p.currentState == -1 || p.currentState > 2)
@@ -60,11 +68,10 @@ public class AssignPharmacist : MonoBehaviour
             go.GetComponent<PharmacistController>().p = p; // set Pharmacist
             go.GetComponent<SpriteRenderer>().sprite = PharmacistGenerator.STATIC_APPEARANCE[p.appearance];
             go.transform.localScale = new Vector3(2.25f, 2.25f, 0); // set customer sprite size (make it bigger)
+            Globals_Pharmacist.pharmacistGo[counter] = go; // set pharmacist game object
+            Globals_Pharmacist.pharmacistCounter[counter].isPharmacist = true; // Tell customers that there is a pharmacist at the counter
         }
-        //selectedButton = ShowGameObject.button[ShelfPanel.selectedIndex];
-        //selectedButton.GetComponentInChildren<Text>().text = s;
-        //ShowGameObject.si.drug[ShelfPanel.selectedIndex] = s;
-        //ShowGameObject.si.amount[ShelfPanel.selectedIndex] = 0;
-        panel.SetActive(false);
+
+        panel.SetActive(false); // hide selection panel
     }
 }

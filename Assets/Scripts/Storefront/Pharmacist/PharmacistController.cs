@@ -82,10 +82,9 @@ public class PharmacistController : MonoBehaviour
     private static void updatePositions(int counter)
     {
         Globals_Pharmacist.pharmacistCounter[counter].numberInLine--;
-        Debug.Log(Globals_Pharmacist.pharmacistCounter[counter].numberInLine);
         int numberOfCustomers = Globals_Customer.customerData.Count;
         for (int i = 0; i < numberOfCustomers; i++)
-            if (Globals_Customer.customerData[i].positionInLine >= 0)
+            if (Globals_Customer.customerData[i].counter == counter && Globals_Customer.customerData[i].positionInLine >= 0)
             {
                 Globals_Customer.customerData[i].positionInLine--;
                 Globals_Customer.customerData[i].isUpdate = true;

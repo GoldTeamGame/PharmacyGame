@@ -8,23 +8,40 @@ public class DrugSelectPanel : MonoBehaviour {
     public GameObject panel;
     public Button b;
     public GameObject selectedButton;
+    public static bool needToUpdate;
+    public bool[] exist;
 
     private void Start()
     {
-        for (int i = 0; i < Globals.overCounterList.Count; i++)
+        exist = new bool[Globals.overCounterList.Count];
+        needToUpdate = true;
+    }
+
+    private void Update()
+    {
+        if (gameObject.activeSelf)
         {
-            if (Globals.overCounterList[i].isUnlocked)
+            if (needToUpdate)
             {
-                Button newButton = Instantiate(b, transform);
-                string s = Globals.overCounterList[i].name;
-                newButton.transform.GetChild(0).GetComponent<Text>().text = s;
-                newButton.onClick.AddListener(delegate { selectDrug(s); });
+                for (int i = 0; i < Globals.overCounterList.Count; i++)
+                {
+                    if (!exist[i] && Globals.overCounterList[i].isUnlocked)
+                    {
+                        exist[i] = true;
+                        Button newButton = Instantiate(b, transform);
+                        string s = Globals.overCounterList[i].name;
+                        newButton.transform.GetChild(0).GetComponent<Text>().text = s;
+                        newButton.onClick.AddListener(delegate { selectDrug(s); });
+                    }
+                }
+                needToUpdate = false;
             }
         }
     }
 
     public void remove(GameObject go)
     {
+        needToUpdate = true;
         go.SetActive(false);
     }
 

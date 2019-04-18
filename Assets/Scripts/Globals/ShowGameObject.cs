@@ -6,9 +6,11 @@
 //                  and set the static gameobject as selected
 
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ShowGameObject : MonoBehaviour {
+public class ShowGameObject : MonoBehaviour, IPointerClickHandler
+{
 
     public static bool isShowing;
     public static StoreItems si;
@@ -17,7 +19,7 @@ public class ShowGameObject : MonoBehaviour {
 
 
     // Function that fires when a shelf is clicked
-    private void OnMouseUp()
+    public void OnPointerClick(PointerEventData data)
     {
         // Perform action if the game is not in the itemplacing state
         if (!(ItemPlacer.isPlacing || ItemPlacer.isSelecting) && SceneChanger.isAtStorefront)

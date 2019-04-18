@@ -15,12 +15,15 @@ public class PharmacistGenerator : MonoBehaviour
 	// Use this for initialization
 	void Start()
     {
+        Globals_Pharmacist.zone = zone;
+        Globals_Pharmacist.block = block;
         STATIC_APPEARANCE = APPEARANCE;
         // If pharmacistCounter is null, then the game is new,
         // so generate counters and pharmacists and assign an employee to the counter
         if (Globals_Pharmacist.pharmacistCounter == null)
         {
             // Generate global data
+            Globals_Pharmacist.pharmacistGo = new GameObject[3];
             generateCounters();
             generatePharmacistList();
 
@@ -31,7 +34,8 @@ public class PharmacistGenerator : MonoBehaviour
         }
         else
         {
-            if (true)
+            Globals_Pharmacist.pharmacistGo = new GameObject[3];
+            if (Globals_Pharmacist.pharmacistCounter[1].isUnlocked)
             {
                 block[0].SetActive(false);
                 zone[0].SetActive(true);
@@ -67,6 +71,7 @@ public class PharmacistGenerator : MonoBehaviour
             go.GetComponent<PharmacistController>().p = p; // set Pharmacist
             go.GetComponent<SpriteRenderer>().sprite = APPEARANCE[p.appearance];
             go.transform.localScale = new Vector3(2.25f, 2.25f, 0); // set customer sprite size (make it bigger)
+            Globals_Pharmacist.pharmacistGo[p.counter] = go; // set globals gameobject
         }
     }
 
@@ -94,5 +99,7 @@ public class PharmacistGenerator : MonoBehaviour
         {
             Globals_Pharmacist.pharmacistCounter[i] = new PharmacistCounter(Globals_Pharmacist.STARTING_LOCATIONS[i]);
         }
+
+        Globals_Pharmacist.pharmacistCounter[0].isPharmacist = true;
     }
 }
