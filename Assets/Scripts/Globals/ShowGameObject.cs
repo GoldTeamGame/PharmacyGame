@@ -27,9 +27,9 @@ public class ShowGameObject : MonoBehaviour {
 
             // Get the 2 buttons from the ShelfPanel
             button = new GameObject[2];
-            button[0] = ObjectReference.staticGo.transform.GetChild(1).gameObject; // get first button on shelf panel
+            button[0] = ObjectReference.staticGo[0].transform.GetChild(1).gameObject; // get first button on shelf panel
             button[0].transform.GetChild(1).GetComponent<Text>().text = "" + si.amount[0]; // set amount on first shelf panel
-            button[1] = ObjectReference.staticGo.transform.GetChild(2).gameObject; // get second button on shelf panel
+            button[1] = ObjectReference.staticGo[0].transform.GetChild(2).gameObject; // get second button on shelf panel
             button[1].transform.GetChild(1).GetComponent<Text>().text = "" + si.amount[1]; // set amount on second shelf panel
 
             // Set the text of the buttons according to the drug information stored in StoreItems variable
@@ -37,7 +37,7 @@ public class ShowGameObject : MonoBehaviour {
             button[1].GetComponentInChildren<Text>().text = si.drug[1]; // set name of second button
 
             // Show the ShelfPanel
-            ObjectReference.staticGo.SetActive(true);
+            ObjectReference.staticGo[0].SetActive(true);
             isShowing = true;
             selectedObject = gameObject; // set selectedObject
         }

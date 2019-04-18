@@ -19,7 +19,7 @@ public class PharmacistCounter
     public Position checkout; // Where customer can checkout
     public Position lineStart; // Where the customer enters the line
     public int numberInLine; // number of customers currently in line
-    //public bool isUnlocked; // determines if the PharmacistCounter exists
+    public bool isUnlocked; // determines if the PharmacistCounter exists
 
     // Generates all positions based on the passed in position
     // Constructor is only called on a new game

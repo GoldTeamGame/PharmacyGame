@@ -35,24 +35,16 @@ public class PharmacistController : MonoBehaviour
         if (p.currentState == -1 && Globals_Pharmacist.pharmacistCounter[p.counter].isCustomer)
             p.currentState = 0;
 
-        // Process Transaction
+        // Process Initial Transaction
         if (p.currentState == 0)
-        {
             processTransaction(0, 1);
-        }
-
-        //
+        // Process Computer
         else if (p.currentState == 1)
-        {
             processTransaction(1, 2);
-
-        }
+        // Process Drug Fetching 
         else if (p.currentState == 2)
-        {
             processTransaction(2, 3);
-        }
-
-        // Finished processing, communicate with customer and pharmacistCounter line
+        // Process Post Transaction, communicate with customer and pharmacistCounter line
         else if (p.currentState == 3)
         {
             if (p.progress == 0 && !t.getIsActive())
@@ -71,6 +63,7 @@ public class PharmacistController : MonoBehaviour
         }
     }
 
+    // Pharmacist spends time processing a transaction and then sets its path to the next location and changes state to next
     private void processTransaction(int index, int next)
     {
         if (p.progress == 0 && !t.getIsActive())

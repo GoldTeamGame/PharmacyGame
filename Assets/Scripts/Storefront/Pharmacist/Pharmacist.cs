@@ -21,7 +21,7 @@ public class Pharmacist
     public int currentState; // what the pharmacist is currently doing
     public int progress; // amount of progress towards completion of an action
     public int counter; // which counter the pharmacist is assigned to
-    public bool isUnlocked; // determines if the pharmacist is unlocked
+    public bool isUnlocked; // determines if the pharmacist is purchased
     public bool isMoving; // if the customer is moving or not
 
     public Pharmacist(string name, int wage, string description, int appearance, int s0, int s1, int s2, int s3, float speed, float personality)

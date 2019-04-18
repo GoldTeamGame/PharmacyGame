@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class PharmacistGenerator : MonoBehaviour
 {
+    public static Sprite[] STATIC_APPEARANCE;
     public Sprite[] APPEARANCE; // Hardcoded sprite array
     public GameObject pharmacist; // passed in gameObject prefab for pharmacist
     public Transform parent; // The tilemap transform the pharmacist will belong to
 
+    public GameObject[] zone;
+    public GameObject[] block;
+
 	// Use this for initialization
 	void Start()
     {
+        STATIC_APPEARANCE = APPEARANCE;
         // If pharmacistCounter is null, then the game is new,
         // so generate counters and pharmacists and assign an employee to the counter
         if (Globals_Pharmacist.pharmacistCounter == null)
@@ -26,6 +31,18 @@ public class PharmacistGenerator : MonoBehaviour
         }
         else
         {
+            if (true)
+            {
+                block[0].SetActive(false);
+                zone[0].SetActive(true);
+            }
+
+            if (Globals_Pharmacist.pharmacistCounter[2].isUnlocked)
+            {
+                block[1].SetActive(false);
+                zone[1].SetActive(true);
+            }
+
             for (int i = 0; i < Globals_Pharmacist.pharmacistList.Count; i++)
                 generatePharmacist(Globals_Pharmacist.pharmacistList[i]);
         }
@@ -62,15 +79,19 @@ public class PharmacistGenerator : MonoBehaviour
         Globals_Pharmacist.pharmacistList.Add(new Pharmacist("Jon", 15, "Works at his own pace", 1, 3, 3, 3, 3, 0.005f, 0));
         Globals_Pharmacist.pharmacistList.Add(new Pharmacist("Ross", 19, "Standard skilled employee", 2, 3, 3, 3, 3, 0.005f, 0));
         Globals_Pharmacist.pharmacistList.Add(new Pharmacist("Alex", 22, "Hard working and reliable", 3, 3, 3, 3, 3, 0.005f, 0));
+
+        Globals_Pharmacist.pharmacistList[0].isUnlocked = true;
+        Globals_Pharmacist.pharmacistList[1].isUnlocked = true;
     }
 
     // Generate pharmacist counters on new save
     void generateCounters()
     {
+        Globals_Pharmacist.pharmacistCounter = new PharmacistCounter[Globals_Pharmacist.STARTING_LOCATIONS.Length];
+
         // Instantiate pharmacistCounter list using predefined locations
         for (int i = 0; i < Globals_Pharmacist.STARTING_LOCATIONS.Length; i++)
         {
-            Globals_Pharmacist.pharmacistCounter = new PharmacistCounter[Globals_Pharmacist.STARTING_LOCATIONS.Length];
             Globals_Pharmacist.pharmacistCounter[i] = new PharmacistCounter(Globals_Pharmacist.STARTING_LOCATIONS[i]);
         }
     }

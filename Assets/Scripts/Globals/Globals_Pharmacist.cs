@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Globals_Pharmacist
 {
-    public static Position[] STARTING_LOCATIONS = { new Position(0.5f, -2) }; // holds all PharmacistZone starting locations
+    public static Position[] STARTING_LOCATIONS = { new Position(0.5f, -2), new Position(-2.5f, -2), new Position(3.5f, -2) }; // holds all PharmacistZone starting locations
     
     public static List<Pharmacist> pharmacistList; // pharmacist data
     public static PharmacistCounter[] pharmacistCounter; // pharmacistCounter data
