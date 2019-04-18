@@ -1,15 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿// File: DrugSelectPanel
+// Authors: Alexander Jacks
+// Version: 1.0.1
+// Last Modified: 4/18/19
+// Description: Handles displaying assignable over the counter drugs while assigning drugs to shelves
+
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DrugSelectPanel : MonoBehaviour {
 
-    public GameObject panel;
-    public Button b;
-    public GameObject selectedButton;
-    public static bool needToUpdate;
-    public bool[] exist;
+    public GameObject panel; // The panel being shown
+    public Button b; // A Button (Probably doesnt need to be passed in from inspector)
+    public GameObject selectedButton; // The button that was used to enter the DrugSelectPanel
+    public static bool needToUpdate; // A check to see if the drug list needs to be updated
+    public bool[] exist; // a check to see if the button has already been added to the list
 
     private void Start()
     {
