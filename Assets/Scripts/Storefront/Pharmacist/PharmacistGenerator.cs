@@ -85,8 +85,7 @@ public class PharmacistGenerator : MonoBehaviour
         Globals_Pharmacist.pharmacistList.Add(new Pharmacist("Ross", 19, "Standard skilled employee", 2, 3, 3, 3, 3, 0.005f, 0));
         Globals_Pharmacist.pharmacistList.Add(new Pharmacist("Alex", 22, "Hard working and reliable", 3, 3, 3, 3, 3, 0.005f, 0));
 
-        Globals_Pharmacist.pharmacistList[0].isUnlocked = true;
-        Globals_Pharmacist.pharmacistList[1].isUnlocked = true;
+        Globals_Pharmacist.pharmacistList[0].isUnlocked = true; // Unlock Dylan by default
     }
 
     // Generate pharmacist counters on new save

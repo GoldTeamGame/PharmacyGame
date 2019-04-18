@@ -6586,6 +6586,8 @@ MonoBehaviour:
   APPEARANCE:
   - {fileID: 21300002, guid: 15e6616fac99bbc42878ebf746799d22, type: 3}
   - {fileID: 21300002, guid: 15e6616fac99bbc42878ebf746799d22, type: 3}
+  - {fileID: 21300002, guid: 15e6616fac99bbc42878ebf746799d22, type: 3}
+  - {fileID: 21300002, guid: 15e6616fac99bbc42878ebf746799d22, type: 3}
   pharmacist: {fileID: 1909597689119352, guid: 9191dc0d4c941a548a67ce83da003714, type: 2}
   parent: {fileID: 801694237}
   zone:
