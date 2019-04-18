@@ -7097,7 +7097,7 @@ MonoBehaviour:
   pharmacist: {fileID: 1909597689119352, guid: 9191dc0d4c941a548a67ce83da003714, type: 2}
   panel: {fileID: 888879859}
   b: {fileID: 114804005465698410, guid: 1b50311273801494f8d75d9d2f2703c6, type: 2}
-  selectedButton: {fileID: 0}
+  exist: 
 --- !u!114 &664924791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9964,7 +9964,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 754954971}
+        - m_Target: {fileID: 664924790}
           m_MethodName: remove
           m_Mode: 2
           m_Arguments:
