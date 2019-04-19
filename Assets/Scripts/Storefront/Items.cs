@@ -6,7 +6,6 @@
 
 using UnityEngine;
 
-[System.Serializable]
 public class Items : MonoBehaviour
 {
     public StoreItems s; // contains information about item

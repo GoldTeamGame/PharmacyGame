@@ -7220,6 +7220,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 266f091e7e0e74a79bf1078a4d0d264b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _appearance:
+  - {fileID: 21300000, guid: 3ac97ae264c541747a38bb4d21944dfb, type: 3}
+  - {fileID: 21300000, guid: cfbe1abc754a7bc41bb199b9bd69b053, type: 3}
+  - {fileID: 21300000, guid: 10b7bbb9519e81e488a4a8a690db769a, type: 3}
+  - {fileID: 21300000, guid: a9505a10a2b135b4b8f335cc1fc4e259, type: 3}
+  - {fileID: 21300000, guid: 65176c829b06f334e90447b34804dc62, type: 3}
+  - {fileID: 21300000, guid: 8f11ebee7b04dea4da13eab1122d9884, type: 3}
+  - {fileID: 21300000, guid: e7a40e3375855a84da5e36184cd1c9b1, type: 3}
+  - {fileID: 21300000, guid: ecc7f73e19221bf46851a6604b1fc965, type: 3}
+  - {fileID: 21300000, guid: 7d5f05dab72198941af82d67ac396e6a, type: 3}
+  - {fileID: 21300000, guid: 453357d10f7c24045b7830900ac60f58, type: 3}
   parent: {fileID: 597789906}
   itemList:
   - {fileID: 1137710557247274, guid: dead97f02b136d649a12d4962f6f6cda, type: 2}

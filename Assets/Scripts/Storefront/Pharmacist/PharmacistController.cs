@@ -22,8 +22,6 @@ public class PharmacistController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        Debug.Log("Counter: " + p.counter);
-        Debug.Log("Current State: " + p.currentState);
         if (transform.localPosition.x == mc.path.destination.x && transform.localPosition.y == mc.path.destination.y)
             think();
         else
