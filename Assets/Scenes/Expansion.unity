@@ -1201,7 +1201,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 603166746}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 657934014}
+        m_MethodName: tutorialButton
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 7
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &603166746
@@ -1406,6 +1417,55 @@ MonoBehaviour:
   - Vitamin C
   description: Unlocks Vitamin B and Vitamin C
   action: 3
+--- !u!1 &657934013
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 657934015}
+  - component: {fileID: 657934014}
+  m_Layer: 5
+  m_Name: Tutorial
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &657934014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 657934013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c22d387b33221cd46903b3c4cd15ba56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentButtons:
+  - {fileID: 1426767301}
+  - {fileID: 1831022011}
+  - {fileID: 1160747248}
+--- !u!224 &657934015
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 657934013}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.0070800004, y: 0.00703, z: 0.65375}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 1.4480664, y: 3.20568}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &675315334
 GameObject:
   m_ObjectHideFlags: 0
@@ -2493,7 +2553,7 @@ GameObject:
   - component: {fileID: 1160747251}
   - component: {fileID: 1160747250}
   m_Layer: 5
-  m_Name: ServicesTabBtn
+  m_Name: Button_Services
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2511,7 +2571,7 @@ RectTransform:
   m_Children:
   - {fileID: 1112478699}
   m_Father: {fileID: 1436234793}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2564,6 +2624,17 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 657934014}
+        m_MethodName: tutorialButton
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 6
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3018,7 +3089,7 @@ GameObject:
   - component: {fileID: 1426767304}
   - component: {fileID: 1426767303}
   m_Layer: 5
-  m_Name: SetsTabBtn
+  m_Name: Button_Sets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3036,7 +3107,7 @@ RectTransform:
   m_Children:
   - {fileID: 1085897801}
   m_Father: {fileID: 1436234793}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3217,9 +3288,9 @@ RectTransform:
   m_Children:
   - {fileID: 23600098}
   - {fileID: 1154913406}
-  - {fileID: 1160747249}
   - {fileID: 1426767302}
   - {fileID: 1831022012}
+  - {fileID: 1160747249}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3726,7 +3797,7 @@ GameObject:
   - component: {fileID: 1831022014}
   - component: {fileID: 1831022013}
   m_Layer: 5
-  m_Name: UpgradesTabBtn
+  m_Name: Button_Upgrades
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3744,7 +3815,7 @@ RectTransform:
   m_Children:
   - {fileID: 1200314189}
   m_Father: {fileID: 1436234793}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

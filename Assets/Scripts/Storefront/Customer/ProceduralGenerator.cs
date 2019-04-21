@@ -14,14 +14,13 @@ public class ProceduralGenerator : MonoBehaviour
     public static Sprite[] staticAppearanceList; // Static version of appearanceList which can be used in static functions
     public GameObject customer; // object being spawned
     public Transform spawnPoint; // location the object will be spawned at
-    public float spawnTime = 5; // when the object will be spawned
+    float spawnTime = 5; // when the object will be spawned
     public SpriteRenderer sprite; // the sprite that represents the customer (will be overwritten)
     public static float xSpawnPoint; // the x-coordinate of the spawn point
 
     // Use this for initialization
     void Start()
     {
-        Globals.setPlatinum(50);
         xSpawnPoint = spawnPoint.localPosition.x;
 
         // Instantiate customerData list if none currently exists
@@ -52,7 +51,7 @@ public class ProceduralGenerator : MonoBehaviour
     // Spawn a new customer until the limit is reached
     private void Spawn()
     {
-        if (Globals_Customer.customerData.Count < Globals_Customer.LIMIT)
+        if (Globals_Customer.customerData.Count < Globals_Customer.limit)
             instantiateObject(spawnPoint.localPosition);
     }
 

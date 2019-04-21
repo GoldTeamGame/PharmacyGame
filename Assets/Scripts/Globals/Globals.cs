@@ -14,7 +14,7 @@ using UnityEngine.UI;
 public static class Globals
 {
     //Player currencies
-    public static int playerGold = 50;
+    public static int playerGold = 7;
     public static int playerPlatinum;
     public static int monthlyGold;
 

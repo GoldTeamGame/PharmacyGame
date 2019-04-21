@@ -44,6 +44,12 @@ public class ShelfPanel : MonoBehaviour
             int remainingDrugs = d.amount - getTotalAmount(d.name);
             if (remainingDrugs > 0 && i < 10)
             {
+                if (Globals_Tutorials.tutorialIndex == 16)
+                {
+                    Globals_Tutorials.tutorialIndex++;
+                    TutorialMonitor.isPopup = true;
+                }
+
                 i++;
                 ShowGameObject.si.amount[index] = i;
             }
