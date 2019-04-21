@@ -21,15 +21,15 @@ public class Tutorial
 
     public void showCurrentPage()
     {
-        page[Globals_Tutorials.pageIndex++].setPage(0, 0);
+        page[Globals_Tutorials.pageIndex++].setPage();
     }
 
-    public void addPage(int index, string header, Sprite sprite, string body)
+    public void addPage(int index, string header, Sprite sprite, int size, string body)
     {
         string buttonText = "Next";
         if (index == page.Length - 1)
             buttonText = "OK";
 
-        page[index] = new Page(header, sprite, body, buttonText);
+        page[index] = new Page(header, sprite, size, body, buttonText);
     }
 }

@@ -53,6 +53,11 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         }
         else
         {
+            if (Globals_Tutorials.tutorialIndex == 1 || Globals_Tutorials.tutorialIndex == 3)
+            {
+                Globals_Tutorials.tutorialIndex++;
+                TutorialMonitor.isPopup = true;
+            }
             //buy item
             if (action == 0)
                 BuyItem.buyPrescription(d.name);
@@ -65,7 +70,8 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
             else if (action == 4)
                 Upgrades.upgrade(upgrade);
             else if (action == 5)
-                s.isUnlocked = true;
+                if (s != null)
+                    s.isUnlocked = true;
         }
 
         tooltipState = false;
@@ -113,7 +119,8 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
                 if (action == 2 || action == 3 || action == 4)
                     theTooltip = description;
                 else if (action == 5)
-                    theTooltip = s.description;
+                    if (s != null)
+                        theTooltip = s.description;
                 theText.text = theTooltip;
                 thePanel.SetActive(true);
             }

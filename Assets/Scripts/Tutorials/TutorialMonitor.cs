@@ -5,20 +5,38 @@ using UnityEngine.UI;
 
 public class TutorialMonitor : MonoBehaviour
 {
+    public static bool isActive;
+    public bool _isActive;
     public static bool isPopup;
     public static bool isConfirm;
     public GameObject[] go; // holds parts of the tutorial panel
     public Sprite[] sprite; // holds all sprites used in tutorial panels
     public static GameObject[] button;
     public GameObject[] _button;
+    public static GameObject currentBody = null;
 
     private void Start()
     {
+        isActive = _isActive;
         Globals_Tutorials.go = go;
         Globals_Tutorials.sprite = sprite;
         button = _button;
         Globals_Tutorials.generateTutorials();
-        isPopup = true;
+
+        if (Globals_Tutorials.tutorialIndex == 0 && isActive)
+        {
+            Globals.playerGold = 7;
+            for (int i = 0; i < button.Length - 1; i++)
+                button[i].GetComponent<Button>().interactable = false;
+            isPopup = true;
+            button[14].SetActive(true);
+        }
+        else if (!isActive)
+        {
+            Globals.playerGold = 100;
+            Globals.playerPlatinum = 100;
+            Globals_Customer.limit = 10;
+        }
     }
 
     // Monitors storefront activity
@@ -35,8 +53,6 @@ public class TutorialMonitor : MonoBehaviour
         {
             if (isPopup)
             {
-                for (int i = 0; i < button.Length - 1; i++)
-                    button[i].GetComponent<Button>().interactable = false;
                 displayTutorial();
             }
             if (isConfirm)
@@ -56,6 +72,7 @@ public class TutorialMonitor : MonoBehaviour
                 TutorialMonitor_Extra.currentButtons[1].GetComponent<Button>().interactable = false; // over counter
                 TutorialMonitor_Extra.currentButtons[2].GetComponent<Button>().interactable = false; // staff
 
+                button[2].GetComponent<Button>().interactable = false; // shop
                 isConfirm = false;
             }
         }
@@ -100,6 +117,7 @@ public class TutorialMonitor : MonoBehaviour
                 displayTutorial();
             if (isConfirm)
             {
+                button[3].GetComponent<Button>().interactable = false; // expansions
                 isConfirm = false;
             }
         }
@@ -136,6 +154,8 @@ public class TutorialMonitor : MonoBehaviour
                 displayTutorial();
             if (isConfirm)
             {
+                button[1].GetComponent<Button>().interactable = false; // inventory
+                TutorialMonitor_Extra.currentButtons[3].GetComponent<Button>().interactable = false; // edit mode
                 isConfirm = false;
             }
         }
@@ -184,6 +204,7 @@ public class TutorialMonitor : MonoBehaviour
                 displayTutorial();
             if (isConfirm)
             {
+                button[8].GetComponent<Button>().interactable = false; // back to inventory
                 TutorialMonitor_Extra.currentButtons[3].GetComponent<Button>().interactable = true; // edit mode
                 isConfirm = false;
             }
@@ -219,7 +240,6 @@ public class TutorialMonitor : MonoBehaviour
                 displayTutorial();
             if (isConfirm)
             {
-                button[8].GetComponent<Button>().interactable = false; // back to inventory
                 button[13].GetComponent<Button>().interactable = true; // back to storefront
                 isConfirm = false;
             }
@@ -258,7 +278,9 @@ public class TutorialMonitor : MonoBehaviour
                 Globals_Customer.limit = 2;
                 for (int i = 0; i < button.Length; i++)
                     button[i].GetComponent<Button>().interactable = true;
+                button[14].SetActive(false);
                 isConfirm = false;
+                Globals_Tutorials.tutorialIndex++;
             }
         }
     }

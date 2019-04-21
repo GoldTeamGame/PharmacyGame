@@ -15,6 +15,10 @@ public class Save
     public int p;
 
     public int g;
+
+    public int tutorialIndex;
+    public int customerLimit;
+
     //public static int currentID;
     public List<CustomerData> cd;
     public List<StoreItems> si;
