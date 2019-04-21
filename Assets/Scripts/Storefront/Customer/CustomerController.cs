@@ -87,8 +87,7 @@ public class CustomerController : MonoBehaviour
                     cd.counter = counter;
                     cd.isDeciding = false;
                 }
-
-                Debug.Log(Globals_Pharmacist.pharmacistCounter[cd.counter].isPharmacist);
+                
                 // Find path to start of line
                 if (!cd.isInLine && (transform.localPosition.x != Globals_Pharmacist.pharmacistCounter[cd.counter].lineStart.x || transform.localPosition.y != Globals_Pharmacist.pharmacistCounter[cd.counter].lineStart.y))
                 {

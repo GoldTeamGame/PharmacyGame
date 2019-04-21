@@ -26,10 +26,12 @@ public class TutorialMonitor : MonoBehaviour
         if (Globals_Tutorials.pageIndex == Globals_Tutorials.tutorial[Globals_Tutorials.tutorialIndex].numberOfPages)
         {
             // hide panel
+            Globals_Tutorials.go[4].SetActive(false);
+            Globals_Tutorials.pageIndex = 0;
         }
         else
         {
-            Globals_Tutorials.tutorial[Globals_Tutorials.tutorialIndex].showCurrentPage();
+            Globals_Tutorials.tutorial[1].showCurrentPage();
         }
     }
 }

@@ -11,7 +11,7 @@ public class Tutorial
 
     public Tutorial(int startIndex, int numberOfPages)
     {
-        this.startIndex = startIndex;
+        this.startIndex = 0;
         this.numberOfPages = numberOfPages;
         page = new Page[numberOfPages];
     }
