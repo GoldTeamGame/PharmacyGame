@@ -65,6 +65,9 @@ public class DrugSelectPanel : MonoBehaviour {
         selectedButton.GetComponentInChildren<Text>().text = s; // set text of the button to the drug that has been assigned
         ShowGameObject.si.drug[ShelfPanel.selectedIndex] = s; // set the shelf data's name to the drug that has been assigned
         ShowGameObject.si.amount[ShelfPanel.selectedIndex] = 0; // reset amount to 0
+        //ShowGameObject.si.appearanc
+        ShowGameObject.si.appearance = InsertItems.getAppearance(ShowGameObject.si.drug[0], ShowGameObject.si.drug[1]);
+        ShowGameObject.selectedObject.GetComponent<SpriteRenderer>().sprite = InsertItems.appearance[ShowGameObject.si.appearance];
         panel.SetActive(false); // hide panel after selection
     }
 }
