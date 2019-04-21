@@ -1,36 +1,45 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿// File: TutorialMonitor
+// Authors: Alexander Jacks
+// Last Modified: 4/21/19
+// Version: 1.0.1
+// Description: Monitors state of tutorial and takes tutorial related data from the inspector.
+//          Also holds various tutorial related functions.
+
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TutorialMonitor : MonoBehaviour
 {
-    public static bool isActive;
-    public bool _isActive;
-    public static bool isPopup;
-    public static bool isConfirm;
+    public static bool isActive; // is the tutorial activated from the inspector?
+    public bool _isActive; 
+    public static bool isPopup; // will the Tutorial Panel need to pop up?
+    public static bool isConfirm; // has the last page of a tutorial been clicked?
     public GameObject[] go; // holds parts of the tutorial panel
     public Sprite[] sprite; // holds all sprites used in tutorial panels
-    public static GameObject[] button;
+    public static GameObject[] button; // holds buttons that need to be activated/de-activated to force player down the tutorials path
     public GameObject[] _button;
-    public static GameObject currentBody = null;
 
     private void Start()
     {
-        isActive = _isActive;
-        Globals_Tutorials.go = go;
-        Globals_Tutorials.sprite = sprite;
-        button = _button;
-        Globals_Tutorials.generateTutorials();
+        isActive = _isActive; // set static isActive to what is in the inspector
+        Globals_Tutorials.go = go; // set static go from Globals_Tutorials to what is in the inspector
+        Globals_Tutorials.sprite = sprite; // set static sprite from Globals_Tutorials to what is in the inspector
+        button = _button; // set static button equal to what is in the inspector
+        Globals_Tutorials.generateTutorials(); // generate all tutorials (Hardcoded)
 
+        // if tutorialIndex is 0 and the isActive is checked to true, then start the game with the tutorial
         if (Globals_Tutorials.tutorialIndex == 0 && isActive)
         {
             Globals.playerGold = 7;
+
+            // de-activate all buttons
             for (int i = 0; i < button.Length - 1; i++)
                 button[i].GetComponent<Button>().interactable = false;
-            isPopup = true;
-            button[14].SetActive(true);
+
+            isPopup = true; // make tutorial pop-up
+            button[14].SetActive(true); // set tutorial button to active
         }
+        // if tutorial is not active, then go into dev mode
         else if (!isActive)
         {
             Globals.playerGold = 100;
@@ -285,6 +294,7 @@ public class TutorialMonitor : MonoBehaviour
         }
     }
 
+    // Displays the appropriate Tutorial screen, then sets isPopup to false that way this function is not repeatedly called
     static void displayTutorial()
     {
         Globals_Tutorials.tutorial[Globals_Tutorials.tutorialIndex].showCurrentPage();
@@ -292,6 +302,7 @@ public class TutorialMonitor : MonoBehaviour
         isPopup = false;
     }
 
+    // Shows the tutorial screen, and resets the page index
     public void viewCurrentTutorial()
     {
         Globals_Tutorials.pageIndex = 0;
@@ -299,6 +310,7 @@ public class TutorialMonitor : MonoBehaviour
         Globals_Tutorials.go[4].SetActive(true);
     }
 
+    // Used on various buttons to progress the tutorial to the next state
     public void tutorialButton(int state)
     {
         if (state - 1 == Globals_Tutorials.tutorialIndex)
@@ -308,6 +320,7 @@ public class TutorialMonitor : MonoBehaviour
         }
     }
 
+    // Flip to next page in the tutorial
     public void nextPage()
     {
         if (Globals_Tutorials.pageIndex == Globals_Tutorials.tutorial[Globals_Tutorials.tutorialIndex].numberOfPages)

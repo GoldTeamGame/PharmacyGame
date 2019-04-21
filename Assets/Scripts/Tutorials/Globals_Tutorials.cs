@@ -1,26 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿// File: Globals_Tutorials
+// Authors: Alexander Jacks
+// Last Modified: 4/21/19
+// Version: 1.0.1
+// Description: Holds tutorial data that is used everywhere else.
+//          It is also where all the tutorials are progrmatically generated (hard-coded)
+
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Globals_Tutorials
 {
-    public static Sprite[] sprite;
+    public static Sprite[] sprite; // holds all sprites used in the tutorials
 
-    public static GameObject[] go;
+    public static GameObject[] go; // holds important parts of the Tutorial Screen
 
-    public static Tutorial[] tutorial;
-    public static int tutorialIndex;
-    public static int pageIndex;
-    static int counter;
+    public static Tutorial[] tutorial; // holds all tutorials
+    public static int tutorialIndex; // the current tutorial[] element being viewed 
+    public static int pageIndex; // the current page in the tutorial[] element being viewed
+    static int counter; // a count variable used to match every sprite[] element with every tutorial page
 
-    public static Flags flags; // holds flags to save when various activities occur
-    
-    public static void displayTutorial()
-    {
-
-    }
-
+    // Programmatically generate all tutorials (Hard-coded)
     public static void generateTutorials()
     {
         int tutorialIndex = 0;
