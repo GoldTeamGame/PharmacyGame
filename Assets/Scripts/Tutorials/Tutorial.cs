@@ -5,20 +5,18 @@ using UnityEngine.UI;
 
 public class Tutorial
 {
-    int startIndex;
     public int numberOfPages;
     Page[] page;
 
-    public Tutorial(int startIndex, int numberOfPages)
+    public Tutorial(int numberOfPages)
     {
-        this.startIndex = 0;
         this.numberOfPages = numberOfPages;
         page = new Page[numberOfPages];
     }
 
     public void setToStart()
     {
-        Globals_Tutorials.tutorialIndex = startIndex;
+        Globals_Tutorials.pageIndex = 0;
     }
 
     public void showCurrentPage()

@@ -27,12 +27,23 @@ public class DisplayShop : MonoBehaviour {
                     prescriptionDrugList[i].gameObject.SetActive(true);
             for (int i = 0; i < overTheCounterList.Length; i++)
                 if (Globals.overCounterList[i].isUnlocked)
+                    overTheCounterList[i].gameObject.SetActive(false);
+            for (int i = 0; i < employeeList.Length; i++)
+                employeeList[i].gameObject.SetActive(false);
+        }
+        else if (sel == 1)
+        {
+            for (int i = 0; i < prescriptionDrugList.Length; i++)
+                if (Globals.prescriptionList[i].isUnlocked)
+                    prescriptionDrugList[i].gameObject.SetActive(false);
+            for (int i = 0; i < overTheCounterList.Length; i++)
+                if (Globals.overCounterList[i].isUnlocked)
                     overTheCounterList[i].gameObject.SetActive(true);
             for (int i = 0; i < employeeList.Length; i++)
                 employeeList[i].gameObject.SetActive(false);
         }
         // Hide drugs, show employees
-        else if (sel == 1)
+        else if (sel == 2)
         {
             for (int i = 0; i < prescriptionDrugList.Length; i++)
                 prescriptionDrugList[i].gameObject.SetActive(false);

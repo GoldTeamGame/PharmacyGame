@@ -924,6 +924,8 @@ MonoBehaviour:
   back: {fileID: 316026015}
   mainPanel: {fileID: 0}
   inventoryPanel: {fileID: 0}
+  shelfPanel: {fileID: 0}
+  drugListPanel: {fileID: 0}
 --- !u!114 &389883696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2523,6 +2525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe21e62949b49684abb13180c5c5e3dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _editModeButton: {fileID: 0}
   _prescriptionStock:
   - {fileID: 1445169704}
   - {fileID: 303783154}
@@ -3459,7 +3462,7 @@ GameObject:
   - component: {fileID: 1736040942}
   - component: {fileID: 1736040941}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Button_EditMode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

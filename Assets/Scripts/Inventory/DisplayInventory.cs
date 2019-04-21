@@ -13,6 +13,9 @@ using UnityEngine.UI;
 
 public class DisplayInventory : MonoBehaviour
 {
+    public static GameObject editModeButton;
+    public GameObject _editModeButton;
+
     public static Text[] prescriptionStock;
     public static Text[] overCounterStock;
 
@@ -76,6 +79,8 @@ public class DisplayInventory : MonoBehaviour
 
     private void Start()
     {
+        editModeButton = _editModeButton;
+
         // Set static lists
         prescriptionStock = _prescriptionStock;
         overCounterStock = _overCounterStock;
