@@ -61,6 +61,11 @@ public class DrugSelectPanel : MonoBehaviour {
     // Function connected to buttons in drug panel list
     public void selectDrug(string s)
     {
+        if (Globals_Tutorials.tutorialIndex == 15)
+        {
+            Globals_Tutorials.tutorialIndex++;
+            TutorialMonitor.isPopup = true;
+        }
         selectedButton = ShowGameObject.button[ShelfPanel.selectedIndex]; // get the button that was selected to reach the drug select panel
         selectedButton.GetComponentInChildren<Text>().text = s; // set text of the button to the drug that has been assigned
         ShowGameObject.si.drug[ShelfPanel.selectedIndex] = s; // set the shelf data's name to the drug that has been assigned

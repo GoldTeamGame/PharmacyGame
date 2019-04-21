@@ -91,16 +91,24 @@ public class Game : MonoBehaviour
             FileStream file = File.Open(Application.persistentDataPath + path, FileMode.Open);
             Save save = (Save)bf.Deserialize(file);
 
-            //set globals from save object
-            Globals.setGold(save.g);
-            Globals.setPlatinum(save.p);
-            Globals_Customer.setCustomers(save.cd, save.cd.Count);
-            Globals_Items.setItems(save.si, save.si.Count);
-            Obsticals.obstical = save.obstical;
-            Globals.generateDrugList(save.drugList);
-            Globals.generateOverCounterList(save.overCounterList);
-            Globals_Items.generateServices(save.service);
-            Globals_Pharmacist.load(save.pharmacistCounter, save.pharmacistList);
+            // If tutorial was finished, then load
+            if (save.tutorialIndex > 17 || !TutorialMonitor.isActive)
+            {
+                //set globals from save object
+                Globals_Tutorials.tutorialIndex = save.tutorialIndex;
+                Globals.setGold(save.g);
+                Globals.setPlatinum(save.p);
+                if (save.cd != null)
+                    Globals_Customer.setCustomers(save.cd, save.cd.Count);
+                if (save.si != null)
+                    Globals_Items.setItems(save.si, save.si.Count);
+                Obsticals.obstical = save.obstical;
+                Globals.generateDrugList(save.drugList);
+                Globals.generateOverCounterList(save.overCounterList);
+                Globals_Items.generateServices(save.service);
+                Globals_Pharmacist.load(save.pharmacistCounter, save.pharmacistList);
+                Globals_Customer.limit = save.customerLimit;
+            }
             Debug.Log("Game Loaded");
             Unpause();
         }
@@ -115,17 +123,22 @@ public class Game : MonoBehaviour
         //create save object using the object class
         Save save = new Save();
 
-        //save globals, eventualy can change to a void setVarables fuction
-        save.g = Globals.getGold();
-        save.p = Globals.getPlatinum();
-        save.cd = Globals_Customer.GetCustomers();
-        save.si = Globals_Items.GetItems();
-        save.obstical = Obsticals.obstical;
-        save.drugList = Globals.prescriptionList;
-        save.overCounterList = Globals.overCounterList;
-        save.service = Globals_Items.serviceList;
-        save.pharmacistList = Globals_Pharmacist.pharmacistList;
-        save.pharmacistCounter = Globals_Pharmacist.pharmacistCounter;
+        if (Globals_Tutorials.tutorialIndex > 17 || !TutorialMonitor.isActive)
+        {
+            //save globals, eventualy can change to a void setVarables fuction
+            save.g = Globals.getGold();
+            save.p = Globals.getPlatinum();
+            save.cd = Globals_Customer.GetCustomers();
+            save.si = Globals_Items.GetItems();
+            save.obstical = Obsticals.obstical;
+            save.drugList = Globals.prescriptionList;
+            save.overCounterList = Globals.overCounterList;
+            save.service = Globals_Items.serviceList;
+            save.pharmacistList = Globals_Pharmacist.pharmacistList;
+            save.pharmacistCounter = Globals_Pharmacist.pharmacistCounter;
+            save.tutorialIndex = Globals_Tutorials.tutorialIndex;
+            save.customerLimit = Globals_Customer.limit;
+        }
 
         //return the object to write to the file
         return save;

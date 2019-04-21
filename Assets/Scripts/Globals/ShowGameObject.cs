@@ -21,6 +21,12 @@ public class ShowGameObject : MonoBehaviour, IPointerClickHandler
     // Function that fires when a shelf is clicked
     public void OnPointerClick(PointerEventData data)
     {
+        //if (Globals_Tutorials.tutorialIndex == 15)
+        //{
+        //    Globals_Tutorials.tutorialIndex++;
+        //    TutorialMonitor.isPopup = true;
+        //}
+
         // Perform action if the game is not in the itemplacing state
         if (!(ItemPlacer.isPlacing || ItemPlacer.isSelecting) && SceneChanger.isAtStorefront)
         {

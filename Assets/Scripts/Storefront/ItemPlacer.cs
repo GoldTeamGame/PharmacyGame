@@ -126,6 +126,12 @@ public class ItemPlacer : MonoBehaviour
 
         if (isValidPlacement)
         {
+            if (Globals_Tutorials.tutorialIndex == 10 || Globals_Tutorials.tutorialIndex == 13)
+            {
+                Globals_Tutorials.tutorialIndex++;
+                TutorialMonitor.isPopup = true;
+            }
+
             setButtonState(false);
             current.GetComponent<SpriteRenderer>().color = PlaceItem.color[0]; // Set color back to original
             Obsticals.addObstical(current.transform.localPosition.x, current.transform.localPosition.y, s.width, s.height, s.rowOffset, s.columnOffset); // Add item to obstical array
