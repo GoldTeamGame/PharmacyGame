@@ -1689,6 +1689,7 @@ MonoBehaviour:
   - {fileID: 547080625}
   - {fileID: 886781512}
   - {fileID: 1156188101}
+  - {fileID: 12879893}
   sprite:
   - {fileID: 0}
   - {fileID: 0}
