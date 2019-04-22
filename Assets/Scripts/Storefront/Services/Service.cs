@@ -1,26 +1,32 @@
 ﻿// File: Service
 // Author: Alexander Jacks
-// Last Modified: 4/16/19
-// Version: 1.0.1
+// Last Modified: 4/21/19
+// Version: 1.1.1
 // Description: Data that is stored for a unique service placement
 
 [System.Serializable]
 public class Service
 {
     public string name; // name of service
-    public int cost; // platinum cost to unlock service
-    public bool isUnlocked; // determines if the service has been unlocked
-    public bool isPlaced; // determines if the service has been placed on the storefront
-    public int limit; // the max number of the particular service that you are allowed to place
-    public int amount; // the number of the particular service that is currently placed down
+    public int amountPlaced; // the number of the particular service that is current placed down
+    public int amountOwned; // the number of the particular service that is in the players possesion
     public string description; // info about the service
 
-    public Service(string name, int cost, bool isUnlocked, int limit, string description)
+    public Service(string name, string description)
     {
         this.name = name;
-        this.cost = cost;
-        this.isUnlocked = isUnlocked;
-        this.limit = limit;
         this.description = description;
+    }
+
+    // Increase amount by specified value
+    public void increaseAmount(int num)
+    {
+        amountOwned += num;
+    }
+
+    // Returns true if the service can be placed down
+    public bool isAvailable()
+    {
+        return amountOwned > amountPlaced;
     }
 }

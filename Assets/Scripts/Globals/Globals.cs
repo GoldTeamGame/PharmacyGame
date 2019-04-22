@@ -14,9 +14,11 @@ using UnityEngine.UI;
 public static class Globals
 {
     //Player currencies
-    public static int playerGold = 50;
+    public static int playerGold = 7;
     public static int playerPlatinum;
     public static int monthlyGold;
+
+    public static StoreValues sv; // holds store global values
 
     //Player inventory of drugs (in "units") and price (in gold)
     //Consider making a struct for drugs that have fields: amount, price, and name
@@ -31,9 +33,9 @@ public static class Globals
         {
             prescriptionList = new List<Drug>();
 
-            prescriptionList.Add(new Drug("Ventolin", 5, 60, "Treats bronchospasms", true));
-            prescriptionList.Add(new Drug("Vyvanse", 7, 40, "Treats ADHD", true));
-            prescriptionList.Add(new Drug("Lyrica", 10, 25, "Treats muscle pain", true));
+            prescriptionList.Add(new Drug("Ventolin", 5, 60, "Treats bronchospasms\nCommon", true));
+            prescriptionList.Add(new Drug("Vyvanse", 7, 40, "Treats ADHD\nUncommon", true));
+            prescriptionList.Add(new Drug("Lyrica", 10, 25, "Treats muscle pain\nRare", true));
         }
     }
 
@@ -45,9 +47,9 @@ public static class Globals
         {
             overCounterList = new List<Drug>();
 
-            overCounterList.Add(new Drug("Vitamin A", 2, 85, "Supplement for Vitamin A", true));
-            overCounterList.Add(new Drug("Vitamin B", 2, 85, "Supplement for Vitamin B", false));
-            overCounterList.Add(new Drug("Vitamin C", 2, 85, "Supplement for Vitamin C", false));
+            overCounterList.Add(new Drug("Vitamin A", 2, 85, "Supplement for Vitamin A\nVery Common", true));
+            overCounterList.Add(new Drug("Vitamin B", 2, 85, "Supplement for Vitamin B\nVery Common", false));
+            overCounterList.Add(new Drug("Vitamin C", 2, 85, "Supplement for Vitamin C\nVery Common", false));
         }
     }
 

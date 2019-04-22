@@ -15,12 +15,17 @@ public class Save
     public int p;
 
     public int g;
+
+    public int tutorialIndex;
+    public int customerLimit;
+
     //public static int currentID;
     public List<CustomerData> cd;
     public List<StoreItems> si;
 
     public bool[][] obstical;
 
+    public StoreValues sv;
     public List<Drug> drugList;
     public List<Drug> overCounterList;
     public List<Service> service;

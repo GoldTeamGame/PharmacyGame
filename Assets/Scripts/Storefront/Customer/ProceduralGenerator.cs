@@ -14,14 +14,13 @@ public class ProceduralGenerator : MonoBehaviour
     public static Sprite[] staticAppearanceList; // Static version of appearanceList which can be used in static functions
     public GameObject customer; // object being spawned
     public Transform spawnPoint; // location the object will be spawned at
-    public float spawnTime = 5; // when the object will be spawned
+    float spawnTime = 5; // when the object will be spawned
     public SpriteRenderer sprite; // the sprite that represents the customer (will be overwritten)
     public static float xSpawnPoint; // the x-coordinate of the spawn point
 
     // Use this for initialization
     void Start()
     {
-        Globals.setPlatinum(50);
         xSpawnPoint = spawnPoint.localPosition.x;
 
         // Instantiate customerData list if none currently exists
@@ -52,7 +51,7 @@ public class ProceduralGenerator : MonoBehaviour
     // Spawn a new customer until the limit is reached
     private void Spawn()
     {
-        if (Globals_Customer.customerData.Count < Globals_Customer.LIMIT)
+        if (Globals_Customer.customerData.Count < Globals_Customer.limit)
             instantiateObject(spawnPoint.localPosition);
     }
 
@@ -83,7 +82,10 @@ public class ProceduralGenerator : MonoBehaviour
             
             cd = new CustomerData(name, speed); // instantiate cd with name and speed
             cd.appearance = Random.Range(0, 9); // set appearance
-            cd.mood = Random.Range(0, 6); // set a random mood
+            cd.mood = Random.Range(40, 60); // set a random mood
+            cd.tolerance = Random.Range(1, 5) + Globals.sv.toleranceBonus;
+            cd.flexibility = Random.Range(1, 3) + Globals.sv.flexibilityBonus;
+
             cd.positionInLine = -1;
             // Set desires
             int overCounterSize = Toolbox.random(0, 3); // 0-3 overcounter drugs

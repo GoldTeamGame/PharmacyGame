@@ -87,8 +87,7 @@ public class CustomerController : MonoBehaviour
                     cd.counter = counter;
                     cd.isDeciding = false;
                 }
-
-                Debug.Log(Globals_Pharmacist.pharmacistCounter[cd.counter].isPharmacist);
+                
                 // Find path to start of line
                 if (!cd.isInLine && (transform.localPosition.x != Globals_Pharmacist.pharmacistCounter[cd.counter].lineStart.x || transform.localPosition.y != Globals_Pharmacist.pharmacistCounter[cd.counter].lineStart.y))
                 {
@@ -197,7 +196,10 @@ public class CustomerController : MonoBehaviour
             {
                 cart += cd.desires.prescription[i].drug.price + (cd.desires.prescription[i].drug.price / 2);
                 cd.desires.prescription[i].drug.amount--;
+                increaseMood(1);
             }
+            else
+                decreaseMood(4);
         }
     }
 
@@ -210,6 +212,7 @@ public class CustomerController : MonoBehaviour
     void updateDesire(int distance)
     {
         currentAmount += distance; // add distance traveled to currentAmount
+        decreaseMood(0);
 
         // When currentAmount reaches limit, update desires
         if (!isBuying && !isLeaving && currentAmount >= limit)
@@ -227,12 +230,17 @@ public class CustomerController : MonoBehaviour
                     cd.desires.desiresRemaining--;
                     d.amount--;
                     cd.desires.overCounter[cd.desires.currentDrug].hasPickedUp = true;
+                    increaseMood(0);
                     //d.name = Toolbox.StrikeThrough(d.name);
                     cd.desires.willBuyOverCounter = true;
                 }
                 else
                 {
-                    // Decrease mood
+                    if (d.isUnlocked)
+                        decreaseMood(1);
+                    else
+                        decreaseMood(2);
+
                     if (++cd.desires.overCounter[cd.desires.currentDrug].attempts >= 2)
                         cd.desires.desiresRemaining--;
                     cd.desires.currentDrug++;
@@ -274,7 +282,7 @@ public class CustomerController : MonoBehaviour
     }
 
     // Attempt to find if "s" is somewhere on the storefront
-    public static bool findDrug(string s)
+    public bool findDrug(string s)
     {
         bool isAvailable = false;
 
@@ -305,6 +313,7 @@ public class CustomerController : MonoBehaviour
                 if (isAvailable)
                 {
                     Globals_Items.storeData[i].amount[1]--;
+                    ShowGameObject.updateAmount();
                     break;
                 }
             }
@@ -346,6 +355,52 @@ public class CustomerController : MonoBehaviour
         cd.isAlive = false; // set customer to "dead" allowing its id to be replaced
         Globals_Customer.customerData.Remove(cd); // remove customerData element
         Destroy(gameObject); // remove object from game world
+    }
+
+    private void decreaseMood(int trigger)
+    {
+        int decrease = 0;
+
+        // Traveling penalty
+        if (trigger == 0)
+            decrease = Random.Range(2, 4) - (cd.tolerance / 3);
+        // No over-counter stock penalty
+        else if (trigger == 1)
+            decrease = Random.Range(5, 10) - cd.tolerance;
+        // No over-counter unlocked penalty
+        else if (trigger == 2)
+            decrease = Random.Range(2, 4) - (cd.tolerance / 3);
+        // No prescription stock
+        else if (trigger == 4)
+            decrease = Random.Range(8, 14) - cd.tolerance;
+
+        // Restrict lowest decrease amount to 1
+        if (decrease < 1)
+            decrease = 1;
+
+        cd.mood -= decrease; // lower mood
+
+        // Make sure mood doesn't go below 0
+        if (cd.mood < 0)
+            cd.mood = 0;
+    }
+
+    private void increaseMood(int trigger)
+    {
+        int increase = 0;
+
+        // Increase after finding over-counter drug
+        if (trigger == 0)
+            increase = Random.Range(3, 6) + cd.flexibility;
+        // Increase after getting prescription drug
+        else if (trigger == 1)
+            increase = Random.Range(6, 10) + cd.flexibility;
+
+        cd.mood += increase; // increase mood
+
+        // Make sure mood does not go over 100
+        if (cd.mood > 100)
+            cd.mood = 100;
     }
 
     private void setMovementController()

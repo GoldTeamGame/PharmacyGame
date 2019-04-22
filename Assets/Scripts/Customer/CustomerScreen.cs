@@ -77,7 +77,8 @@ public class CustomerScreen : MonoBehaviour
 
         // Set button variables
         newButton.GetComponentsInChildren<Text>()[0].text = cd.name; // set name
-        newButton.GetComponentsInChildren<Text>()[1].text = Globals_Customer.mood[Globals_Customer.customerData[index].mood]; // set mood
+        newButton.GetComponentsInChildren<Text>()[1].text = "Mood Rating: " + Globals_Customer.customerData[index].mood + "%"; // set mood
+        setColor(newButton.GetComponentsInChildren<Text>()[1], Globals_Customer.customerData[index].mood);
         newButton.GetComponentsInChildren<Image>()[1].sprite = ProceduralGenerator.staticAppearanceList[cd.appearance]; // set image
 
         // Add Listener to button
@@ -106,7 +107,8 @@ public class CustomerScreen : MonoBehaviour
             currentCustomer = index; // set global index to index
             staticPanel.GetComponentsInChildren<Image>()[2].sprite = ProceduralGenerator.staticAppearanceList[Globals_Customer.customerData[index].appearance]; // set image
             staticPanel.GetComponentsInChildren<Text>()[0].text = Globals_Customer.customerData[index].name; // set name
-            staticPanel.GetComponentsInChildren<Text>()[1].text = Globals_Customer.mood[Globals_Customer.customerData[index].mood]; // set mood
+            staticPanel.GetComponentsInChildren<Text>()[1].text = "Mood Rating: " + Globals_Customer.customerData[index].mood + "%"; // set mood
+            setColor(staticPanel.GetComponentsInChildren<Text>()[1], Globals_Customer.customerData[index].mood);
             staticPanel.GetComponentsInChildren<Text>()[3].text = Globals_Customer.customerData[index].thoughts; // set current thoughts
 
             // List desires
@@ -126,5 +128,21 @@ public class CustomerScreen : MonoBehaviour
             listOfDesires += cd.desires.prescription[i].drug.name + "\n";
 
         staticPanel.GetComponentsInChildren<Text>()[5].text = listOfDesires; // set desires
+    }
+
+    public static void setColor(Text text, int number)
+    {
+        if (number > 90)
+            text.color = new Color(0, 255, 0);
+        else if (number > 80)
+            text.color = new Color(0, 200, 0);
+        else if (number > 60)
+            text.color = new Color(100, 200, 0);
+        else if (number > 40)
+            text.color = new Color(160, 160, 0);
+        else if (number > 30)
+            text.color = new Color(255, 160, 0);
+        else if (number >= 0)
+            text.color = new Color(255, 0, 0);
     }
 }

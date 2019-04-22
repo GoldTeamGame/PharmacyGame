@@ -10,6 +10,7 @@ using System.Collections.Generic;
 public class StoreItems
 {
     public string name;
+    public int appearance = 0;
 
     public string[] drug; // The drug on the shelf
     public int[] amount; // The amount of drugs on the shelf
