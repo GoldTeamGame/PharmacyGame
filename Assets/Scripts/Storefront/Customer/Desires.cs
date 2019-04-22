@@ -1,6 +1,8 @@
-﻿
-using UnityEngine;
-using System.Collections.Generic;
+﻿// File: Desires
+// Author: Alexander Jacks
+// Last Modified: 4/15/19
+// Version: 1.0.2
+// Description: Holds a customer's desires for what they want in the store
 
 [System.Serializable]
 public class Desires

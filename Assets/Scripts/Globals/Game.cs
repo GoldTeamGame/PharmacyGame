@@ -85,6 +85,7 @@ public class Game : MonoBehaviour
         Globals.generateDrugList(null);
         Globals.generateOverCounterList(null);
         Globals_Items.generateServices(null);
+        Globals.sv = new StoreValues();
         if (File.Exists(Application.persistentDataPath + path))
         {
             BinaryFormatter bf = new BinaryFormatter();
@@ -108,6 +109,8 @@ public class Game : MonoBehaviour
                 Globals_Items.generateServices(save.service);
                 Globals_Pharmacist.load(save.pharmacistCounter, save.pharmacistList);
                 Globals_Customer.limit = save.customerLimit;
+                if (save.sv != null)
+                    Globals.sv = save.sv;
             }
             Debug.Log("Game Loaded");
             Unpause();
@@ -138,6 +141,7 @@ public class Game : MonoBehaviour
             save.pharmacistCounter = Globals_Pharmacist.pharmacistCounter;
             save.tutorialIndex = Globals_Tutorials.tutorialIndex;
             save.customerLimit = Globals_Customer.limit;
+            save.sv = Globals.sv;
         }
 
         //return the object to write to the file

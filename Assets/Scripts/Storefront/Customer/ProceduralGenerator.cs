@@ -82,7 +82,10 @@ public class ProceduralGenerator : MonoBehaviour
             
             cd = new CustomerData(name, speed); // instantiate cd with name and speed
             cd.appearance = Random.Range(0, 9); // set appearance
-            cd.mood = Random.Range(0, 6); // set a random mood
+            cd.mood = Random.Range(40, 60); // set a random mood
+            cd.tolerance = Random.Range(1, 5) + Globals.sv.toleranceBonus;
+            cd.flexibility = Random.Range(1, 3) + Globals.sv.flexibilityBonus;
+
             cd.positionInLine = -1;
             // Set desires
             int overCounterSize = Toolbox.random(0, 3); // 0-3 overcounter drugs

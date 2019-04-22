@@ -45,6 +45,7 @@ public class TutorialMonitor : MonoBehaviour
             Globals.playerGold = 100;
             Globals.playerPlatinum = 100;
             Globals_Customer.limit = 10;
+            Globals_Tutorials.tutorialIndex = 18;
         }
     }
 

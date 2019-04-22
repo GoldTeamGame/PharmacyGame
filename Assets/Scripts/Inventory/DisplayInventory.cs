@@ -72,7 +72,7 @@ public class DisplayInventory : MonoBehaviour
                 employee[i].gameObject.SetActive(false);
 
             for (int i = 0; i < service.Length; i++)
-                if (Globals_Items.serviceList[i].isUnlocked)
+                if (Globals_Items.serviceList[i].isAvailable())
                     service[i].gameObject.SetActive(true);
         }
     }

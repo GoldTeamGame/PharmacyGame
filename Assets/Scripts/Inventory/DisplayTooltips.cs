@@ -71,7 +71,7 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
                 Upgrades.upgrade(upgrade);
             else if (action == 5)
                 if (s != null)
-                    s.isUnlocked = true;
+                    s.increaseAmount(1);
         }
 
         tooltipState = false;

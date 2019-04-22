@@ -18,6 +18,8 @@ public static class Globals
     public static int playerPlatinum;
     public static int monthlyGold;
 
+    public static StoreValues sv; // holds store global values
+
     //Player inventory of drugs (in "units") and price (in gold)
     //Consider making a struct for drugs that have fields: amount, price, and name
     public static List<Drug> prescriptionList;

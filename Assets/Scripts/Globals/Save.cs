@@ -25,6 +25,7 @@ public class Save
 
     public bool[][] obstical;
 
+    public StoreValues sv;
     public List<Drug> drugList;
     public List<Drug> overCounterList;
     public List<Service> service;

@@ -1,13 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿// File: CartItem
+// Author: Alexander Jacks
+// Last Modified: 4/15/19
+// Version: 1.0.1
+// Description: Represents an item picked up or being searched for
+//          by a customer.
 
 [System.Serializable]
 public class CartItem
 {
-    public Drug drug;
-    public int attempts;
-    public bool hasPickedUp;
+    public Drug drug; // the drug being searched for
+    public int attempts; // the number of attempts made to search for the item
+    public bool hasPickedUp; // did the customer pick the item up?
 
     public CartItem(Drug drug)
     {
