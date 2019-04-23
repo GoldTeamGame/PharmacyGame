@@ -58,7 +58,9 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
             }
 
             // Buy Item
-            if (!item.isUnlocked)
+            if (action <= 1)
+                item.action();
+            else if (!item.isUnlocked)
                 item.action();
         }
 
