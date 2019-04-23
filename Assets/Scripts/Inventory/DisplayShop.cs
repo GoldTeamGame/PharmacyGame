@@ -52,7 +52,7 @@ public class DisplayShop : MonoBehaviour {
             for (int i = 0; i < employeeList.Length; i++)
             {
                 employeeList[i].gameObject.SetActive(true);
-                if (((Pharmacist)Globals_Items.item[2][i]).isUnlocked)
+                if (((Pharmacist)Globals_Items.item[2][i+1]).isUnlocked)
                     employeeList[i].gameObject.GetComponent<Button>().interactable = false;
             }
         }

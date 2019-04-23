@@ -19,8 +19,8 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     float time;
 
-    public static bool buyState;
-    public static bool tooltipState;
+    bool buyState;
+    bool tooltipState;
 
     /*
      * Actions...
@@ -87,7 +87,7 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         if (buyState)
         {
             time++;
-            if (time > 15)
+            if (time > 30)
             {
                 tooltipState = true;
                 buyState = false;

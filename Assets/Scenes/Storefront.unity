@@ -9744,7 +9744,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 829439695}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5190d731b3aca7643be28a68377bf235, type: 3}
   m_Name: 
@@ -15371,6 +15371,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 61483910226861180, guid: 76f192678eebc4a44b9c3eda47080972,
+        type: 2}
+      propertyPath: m_EdgeRadius
+      value: 0.35
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76f192678eebc4a44b9c3eda47080972, type: 2}
   m_IsPrefabAsset: 0
@@ -18918,12 +18923,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f7533528751caa459848d1ad42f0c7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  go: {fileID: 0}
-  topLeft: {fileID: 0}
-  topRight: {fileID: 0}
-  botLeft: {fileID: 0}
-  botRight: {fileID: 0}
-  currSprite: {fileID: 21300000, guid: 1635dace4e72dc34a8fdb3224ec3a84e, type: 3}
 --- !u!114 &1709188328
 MonoBehaviour:
   m_ObjectHideFlags: 0

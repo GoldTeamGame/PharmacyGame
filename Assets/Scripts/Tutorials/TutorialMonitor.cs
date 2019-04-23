@@ -42,7 +42,7 @@ public class TutorialMonitor : MonoBehaviour
         // if tutorial is not active, then go into dev mode
         else if (!isActive)
         {
-            Globals.playerGold = 100;
+            Globals.playerGold = 10000;
             Globals.playerPlatinum = 100;
             Globals_Customer.limit = 10;
             Globals_Tutorials.tutorialIndex = 18;
