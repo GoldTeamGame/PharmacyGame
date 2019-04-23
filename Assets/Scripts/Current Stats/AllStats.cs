@@ -34,11 +34,11 @@ public class AllStats : MonoBehaviour {
         int sum = 0;
 
         // Loop through all services
-        for (int i = 0; i < Globals_Items.item[6].Length; i++)
+        for (int i = 0; i < Globals_Items.item[5].Length; i++)
         {
             // If service is unlocked, then 
-            if (((Service)Globals_Items.item[6][i]).amountOwned > 0)
-                sum += Globals_Items.item[6][i].price;
+            if (((Service)Globals_Items.item[5][i]).amountOwned > 0)
+                sum += Globals_Items.item[5][i].price;
         }
 
         return sum;
