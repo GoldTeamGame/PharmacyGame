@@ -21,6 +21,7 @@ public class StatTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     };
 
     public float time;
+    public string toolTip;
 
     public bool buyState;
     public bool tooltipState;
@@ -74,18 +75,19 @@ public class StatTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     void selectText()
     {
         string text = gameObject.GetComponentInChildren<Text>().text;
-        if (text.Equals("Inventory"))
-        {
-            //theText.text = descriptions[0];
-            theText.text = "Inventory: Sum of (Drugs Currently Owned) x Their Price";
-        } 
-        else if(text.Equals("Equipment"))
-        {
-            theText.text = "Equipment: Sum of the cost of each owned service";
-        }
-        else if(text.Equals("Salaries Payable\n"))
-        {
-            theText.text = "Salaries Payable: Sum of all the employee salaries";
-        }
+        theText.text = toolTip;
+        //if (text.Equals("Inventory"))
+        //{
+        //    //theText.text = descriptions[0];
+        //    theText.text = "Inventory: Sum of (Drugs Currently Owned) x Their Price";
+        //} 
+        //else if(text.Equals("Equipment"))
+        //{
+        //    theText.text = "Equipment: Sum of the cost of each owned service";
+        //}
+        //else if(text.Equals("Salaries Payable\n"))
+        //{
+        //    theText.text = "Salaries Payable: Sum of all the employee salaries";
+        //}
     }
 }

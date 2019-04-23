@@ -17,6 +17,7 @@ public class AllStats : MonoBehaviour {
     public Text sumEquText;
     public Text sumSalText;
 
+
     //Sums up your stock that has yet to be purchased by a customer at the end of the month
     public static int SumInventory()
     {
