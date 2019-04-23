@@ -94,6 +94,7 @@ public class Game : MonoBehaviour
             if (save.tutorialIndex > 17 || !TutorialMonitor.isActive)
             {
                 //set globals from save object
+                Clock.time = save.time;
                 Globals_Tutorials.tutorialIndex = save.tutorialIndex;
                 Globals.setGold(save.g);
                 Globals.setPlatinum(save.p);
@@ -139,6 +140,7 @@ public class Game : MonoBehaviour
             save.customerLimit = Globals_Customer.limit;
             save.sv = Globals.sv;
             save.isUnlocked = Globals_Items.isUnlocked;
+            save.time = Clock.time;
         }
 
         //return the object to write to the file

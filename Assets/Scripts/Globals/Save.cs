@@ -12,6 +12,8 @@ using UnityEngine;
 [System.Serializable]
 public class Save
 {
+    public int time;
+
     public int p;
 
     public int g;
