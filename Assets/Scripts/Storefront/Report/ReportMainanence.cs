@@ -67,6 +67,10 @@ public class ReportMainanence : MonoBehaviour {
 		}
 	}
 
+	public void saveReport(){
+		
+	}
+
 	// Use this for initialization
 	void Start () {
 

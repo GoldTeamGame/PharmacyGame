@@ -3058,7 +3058,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Equipment
+  m_Text: Plant
 --- !u!222 &350456938
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3264,7 +3264,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Equipment
+  m_Text: Capital
 --- !u!222 &362155117
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5234,7 +5234,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Equipment
+  m_Text: Retained
 --- !u!222 &738700743
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6975,7 +6975,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 50
+    m_FontSize: 45
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -6986,7 +6986,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Equipment
+  m_Text: Accounts Rec
 --- !u!222 &994868966
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7061,7 +7061,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Equipment
+  m_Text: Stock
 --- !u!222 &1008322980
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7851,7 +7851,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Equipment
+  m_Text: Equity
 --- !u!222 &1104879261
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9793,7 +9793,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Equipment
+  m_Text: Property
 --- !u!222 &1366897440
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10432,6 +10432,8 @@ MonoBehaviour:
   back: {fileID: 0}
   mainPanel: {fileID: 0}
   inventoryPanel: {fileID: 0}
+  shelfPanel: {fileID: 0}
+  drugListPanel: {fileID: 0}
 --- !u!1 &1482027550
 GameObject:
   m_ObjectHideFlags: 0
@@ -11945,7 +11947,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Equipment
+  m_Text: Cash
 --- !u!222 &1770655328
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12117,6 +12119,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+      - m_Target: {fileID: 1481242029}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1833173670
@@ -12254,7 +12267,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Equipment
+  m_Text: Obligations
 --- !u!222 &1833232923
 CanvasRenderer:
   m_ObjectHideFlags: 0
