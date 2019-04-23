@@ -15,7 +15,6 @@ public class Drug : Item
         this.chance = chance;
         amount = 0;
         this.description = description;
-        isUnlocked = true;
     }
 
     override public void action()
