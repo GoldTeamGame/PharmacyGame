@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+//using AllStats;
 
 public class ReportMainanence : MonoBehaviour {
 
@@ -15,6 +17,8 @@ public class ReportMainanence : MonoBehaviour {
 	public GameObject screen4;
 	public GameObject screen5;
 	public GameObject screen6;
+
+	public Text [] wordBankList = new Text[12];
 	//public GameObject screen4;
 	//public GameObject screen5;
 	//public GameObject screen6;
@@ -70,10 +74,98 @@ public class ReportMainanence : MonoBehaviour {
 	public void saveReport(){
 		
 	}
+	
+	public void randomizeWordBank(){
+		System.Random rand = new System.Random();
+		int nextRand;
+
+		// gold
+		nextRand = rand.Next(12);
+		wordBankList[nextRand].text = "Cash: " + Globals.getGold().ToString();
+
+		// inventory
+		nextRand = rand.Next(12);
+		while(wordBankList[nextRand].text != ""){
+			nextRand = rand.Next(12);
+		}
+		wordBankList[nextRand].text = "Inventory: " + AllStats.SumInventory().ToString();
+		
+		// accounts recievable Embellish
+		nextRand = rand.Next(12);
+		while(wordBankList[nextRand].text != ""){
+			nextRand = rand.Next(12);
+		}
+		wordBankList[nextRand].text = "Accounts Rec: 157";
+
+		// equipment
+		nextRand = rand.Next(12);
+		while(wordBankList[nextRand].text != ""){
+			nextRand = rand.Next(12);
+		}
+		wordBankList[nextRand].text = "Equipment: " + AllStats.SumEquipment().ToString();
+
+		// property Embellish
+		nextRand = rand.Next(12);
+		while(wordBankList[nextRand].text != ""){
+			nextRand = rand.Next(12);
+		}
+		wordBankList[nextRand].text = "Property: 120000";
+
+		//plant Embellish
+		nextRand = rand.Next(12);
+		while(wordBankList[nextRand].text != ""){
+			nextRand = rand.Next(12);
+		}
+		wordBankList[nextRand].text = "Plant: 12000";
+
+		// salaries 
+		nextRand = rand.Next(12);
+		while(wordBankList[nextRand].text != ""){
+			nextRand = rand.Next(12);
+		}
+		wordBankList[nextRand].text = "Salaries: " + AllStats.SumSalaries().ToString();
+
+		// obligations Embellish the rest
+		nextRand = rand.Next(12);
+		while(wordBankList[nextRand].text != ""){
+			nextRand = rand.Next(12);
+		}
+		wordBankList[nextRand].text = "Obligations: 13000";
+
+		// stock
+		nextRand = rand.Next(12);
+		while(wordBankList[nextRand].text != ""){
+			nextRand = rand.Next(12);
+		}
+		wordBankList[nextRand].text = "Stock: 534";
+
+		// capital
+		nextRand = rand.Next(12);
+		while(wordBankList[nextRand].text != ""){
+			nextRand = rand.Next(12);
+		}
+		wordBankList[nextRand].text ="Capital: 1500";
+
+		// retained
+		nextRand = rand.Next(12);
+		while(wordBankList[nextRand].text != ""){
+			nextRand = rand.Next(12);
+		}
+		wordBankList[nextRand].text = "Retained: 753";
+
+		// equity
+		nextRand = rand.Next(12);
+		while(wordBankList[nextRand].text != ""){
+			nextRand = rand.Next(12);
+		}
+		wordBankList[nextRand].text = "Equity: 16000";
+
+
+	}
 
 	// Use this for initialization
 	void Start () {
-
+		randomizeWordBank();
 	}
 	
 	// Update is called once per frame
