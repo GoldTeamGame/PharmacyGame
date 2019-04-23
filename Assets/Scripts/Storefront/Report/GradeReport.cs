@@ -55,10 +55,14 @@ public class GradeReport : MonoBehaviour {
         answers[9] = AnswerOwners2.text;
         answers[10] = AnswerOwners3.text;
         answers[11] = AnswerOwners4.text;
-        answers[12] = PercentGrade(answers).ToString();
+        answers[12] = ((int)(PercentGrade(answers) * 100)).ToString();
 
+        for(int i = 0; i < 13; i++){
+            Globals.reports[Globals.month-1,i] = answers[i];
+        }
+        
         //reward for each correct
-        Console.WriteLine(PercentGrade(answers));
+        Debug.Log("test " + PercentGrade(answers).ToString());
         Globals.setPlatinum(Globals.getPlatinum() +(int)(10 * PercentGrade(answers)));
     }
 

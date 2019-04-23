@@ -12145,8 +12145,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1481242033}
-        m_MethodName: reportToStore
+      - m_Target: {fileID: 1481242034}
+        m_MethodName: Grade
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12156,8 +12156,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
-      - m_Target: {fileID: 1481242034}
-        m_MethodName: Grade
+      - m_Target: {fileID: 1481242033}
+        m_MethodName: reportToStore
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
