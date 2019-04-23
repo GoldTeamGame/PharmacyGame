@@ -64,7 +64,7 @@ public class Pharmacist : Item
 
     override public string generateTooltip()
     {
-        return "Description: " + description + "\nCheckout Time: " + stats[0] + "seconds\nComputer Time: " + stats[1] + "seconds\nDrug Fetching Time: " + stats[2] + "seconds";
+        return "Description: " + description + "\nCheckout Time: " + stats[0] + " seconds\nComputer Time: " + stats[1] + " seconds\nDrug Fetching Time: " + stats[2] + " seconds";
     }
 
     public static Pharmacist[] generatePharmacistList()

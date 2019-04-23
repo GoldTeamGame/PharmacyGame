@@ -49,19 +49,19 @@ public class DisplayExpansions : MonoBehaviour
         Globals_Items.createIsUnlocked(set.Length, upgrade.Length, service.Length); // Create isUnlocked if it hasn't been created
 
         // Disable items in set if that have been unlocked
-        for (int i = 0; i < Globals_Items.isUnlocked[0].Length; i++)
-            if (Globals_Items.isUnlocked[0][i])
+        for (int i = 0; i < Globals_Items.item[3].Length; i++)
+            if (Globals_Items.item[3][i].isUnlocked)
                 set[i].interactable = false;
 
         // Disable items in upgrades if that have been unlocked
-        for (int i = 0; i < Globals_Items.isUnlocked[1].Length; i++)
-            if (Globals_Items.isUnlocked[1][i])
-                set[i].interactable = false;
+        for (int i = 0; i < Globals_Items.item[4].Length; i++)
+            if (Globals_Items.item[4][i].isUnlocked)
+                upgrade[i].interactable = false;
 
         // Disable items in services if that have been unlocked
-        for (int i = 0; i < Globals_Items.isUnlocked[2].Length; i++)
-            if (Globals_Items.isUnlocked[2][i])
-                set[i].interactable = false;
+        for (int i = 0; i < Globals_Items.item[5].Length; i++)
+            if (Globals_Items.item[5][i].isUnlocked)
+                service[i].interactable = false;
 
         // Disable all buttons
         display(set, false);
@@ -76,6 +76,8 @@ public class DisplayExpansions : MonoBehaviour
     public void display(Button[] list, bool willShow)
     {
         for (int i = 0; i < list.Length; i++)
+        {
             list[i].gameObject.SetActive(willShow);
+        }
     }
 }
