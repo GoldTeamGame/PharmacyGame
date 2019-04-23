@@ -12,27 +12,25 @@ using UnityEngine.EventSystems;
 
 public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-
-    public float time;
-
-    public bool buyState;
-    public bool tooltipState;
-
-    string upgrade;
-    Drug d;
-    Service s;
     public GameObject thePanel;
     public Text theText;
-    public string[] listOfDrugs;
-    public string description;
+
+    Item item;
+
+    float time;
+
+    public static bool buyState;
+    public static bool tooltipState;
+
     /*
      * Actions...
      * 0: Interact with prescription drug
      * 1: Interact with over the counter drug
-     * 2: Interact with prescription drug set
-     * 3: Interact with over the counter drug set
-     * 4: Interact with upgrades
-     * 5: Interact with services
+     * 2: Interact with pharmacist list
+     * 3: Interact with prescription drug set
+     * 4: Interact with over the counter drug set
+     * 5: Interact with upgrades
+     * 6: Interact with services
      */
     public int action;
 
@@ -58,20 +56,10 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
                 Globals_Tutorials.tutorialIndex++;
                 TutorialMonitor.isPopup = true;
             }
-            //buy item
-            if (action == 0)
-                BuyItem.buyPrescription(d.name);
-            else if (action == 1)
-                BuyItem.buyOverCounter(d.name);
-            else if (action == 2)
-                BuyItem.unlockPrescription(listOfDrugs);
-            else if (action == 3)
-                BuyItem.unlockOverCounter(listOfDrugs);
-            else if (action == 4)
-                Upgrades.upgrade(upgrade);
-            else if (action == 5)
-                if (s != null)
-                    s.increaseAmount(1);
+
+            // Buy Item
+            if (!item.isUnlocked)
+                item.action();
         }
 
         tooltipState = false;
@@ -80,27 +68,16 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     void Start()
     {
-        if (action == 0 || action == 1)
-        {
-            string drugNamePlusExtra = gameObject.GetComponentInChildren<Text>().text;
-            string[] slice = drugNamePlusExtra.Split(':');
-            if (action == 0)
-                d = Globals.findDrug(slice[0], Globals.prescriptionList);
-            else if (action == 1)
-                d = Globals.findDrug(slice[0], Globals.overCounterList);
-        }
-        else if (action == 4)
-        {
-            string name = gameObject.GetComponentInChildren<Text>().text;
-            string[] slice = name.Split(':');
-            upgrade = slice[0];
-        }
-        else if (action == 5)
-        {
-            string name = gameObject.GetComponentInChildren<Text>().text;
-            string[] slice = name.Split(':');
-            s = Globals_Items.findService(slice[0]);
-        }
+        // Figure out what item has been selected...
+        // Grab text from button
+        string drugNamePlusExtra = gameObject.GetComponentInChildren<Text>().text;
+
+        // Split text so that slice[0] will hold just the name of the item
+        string[] slice = drugNamePlusExtra.Split(':');
+
+        // Find and set item equal to the item found using Item.find()
+        // Item.find will use the action integer to decide which list to search to find the name (slice[0])
+        item = Item.find(action, slice[0]);
     }
 
     void Update()
@@ -113,14 +90,7 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
                 tooltipState = true;
                 buyState = false;
                 //show tooltip
-                string theTooltip = "";
-                if (action == 0 || action == 1)
-                    theTooltip = d.description;
-                if (action == 2 || action == 3 || action == 4)
-                    theTooltip = description;
-                else if (action == 5)
-                    if (s != null)
-                        theTooltip = s.description;
+                string theTooltip = item.generateTooltip();
                 theText.text = theTooltip;
                 thePanel.SetActive(true);
             }

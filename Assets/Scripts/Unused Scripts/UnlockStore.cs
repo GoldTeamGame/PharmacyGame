@@ -13,26 +13,26 @@ using UnityEngine.UI;
 
 public class UnlockStore : MonoBehaviour {
 
-    Button button;
+    //Button button;
 
-    // Use this for initialization
-    void Start()
-    {
-        button = GetComponent<Button>();
-        button.onClick.AddListener(() => Unlock());
-    }
+    //// Use this for initialization
+    //void Start()
+    //{
+    //    button = GetComponent<Button>();
+    //    button.onClick.AddListener(() => Unlock());
+    //}
 
-    void Unlock()
-    {
-        int cost = Globals.platStore;
-        if (Globals.playerPlatinum >= cost)
-        {
-            if (Globals.storeB) //has the player already purchased an additional store (store B)?
-            Globals.storeC = true;
-        }
-        else
-        {
-            Globals.storeB = true;
-        }
-    }
+    //void Unlock()
+    //{
+    //    int cost = Globals.platStore;
+    //    if (Globals.playerPlatinum >= cost)
+    //    {
+    //        if (Globals.storeB) //has the player already purchased an additional store (store B)?
+    //        Globals.storeC = true;
+    //    }
+    //    else
+    //    {
+    //        Globals.storeB = true;
+    //    }
+    //}
 }

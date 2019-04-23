@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Pharmacist
+public class Pharmacist : Item
 {
-    public string name; // name of pharmacist
     public int appearance; // sprite appearance index
-    public int wage; // pharmacist upkeep
-    public string description; // pharmacist info
     
     // [0] - Initial Checkout time
     // [1] - Computer Processing time
@@ -21,13 +18,12 @@ public class Pharmacist
     public int currentState; // what the pharmacist is currently doing
     public int progress; // amount of progress towards completion of an action
     public int counter; // which counter the pharmacist is assigned to
-    public bool isUnlocked; // determines if the pharmacist is purchased
     public bool isMoving; // if the customer is moving or not
 
-    public Pharmacist(string name, int wage, string description, int appearance, int s0, int s1, int s2, int s3, float speed, float personality)
+    public Pharmacist(string name, int price, string description, int appearance, int s0, int s1, int s2, int s3, float speed, float personality)
     {
         this.name = name;
-        this.wage = wage;
+        this.price = price;
         this.description = description;
         this.appearance = appearance;
 
@@ -55,5 +51,33 @@ public class Pharmacist
             currentState = 0;
 
         progress = 0;
+    }
+
+    override public void action()
+    {
+        if (Globals.playerGold - price >= 0)
+        {
+            isUnlocked = true;
+            Globals.playerGold -= price;
+        }
+    }
+
+    override public string generateTooltip()
+    {
+        return "Description: " + description + "\nCheckout Time: " + stats[0] + "seconds\nComputer Time: " + stats[1] + "seconds\nDrug Fetching Time: " + stats[2] + "seconds";
+    }
+
+    public static Pharmacist[] generatePharmacistList()
+    {
+        Pharmacist[] pharmacistList = new Pharmacist[4];
+
+        pharmacistList[0] = new Pharmacist("Dylan", 0, "A dude that works for free", 0, 3, 3, 3, 3, 0.005f, 0);
+        pharmacistList[1] = new Pharmacist("Jon", 15, "Works at his own pace", 1, 3, 3, 3, 3, 0.005f, 0);
+        pharmacistList[2] = new Pharmacist("Ross", 19, "Standard skilled employee", 2, 3, 3, 3, 3, 0.005f, 0);
+        pharmacistList[3] = new Pharmacist("Alex", 22, "Hard working and reliable", 3, 3, 3, 3, 3, 0.005f, 0);
+
+        pharmacistList[0].isUnlocked = true; // Unlock Dylan by default
+
+        return pharmacistList;
     }
 }

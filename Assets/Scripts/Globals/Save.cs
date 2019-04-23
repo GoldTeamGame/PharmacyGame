@@ -25,11 +25,10 @@ public class Save
 
     public bool[][] obstical;
 
+    public bool[][] isUnlocked;
+
     public StoreValues sv;
-    public List<Drug> drugList;
-    public List<Drug> overCounterList;
-    public List<Service> service;
-    public List<Pharmacist> pharmacistList;
+    public Item[][] item;
     public PharmacistCounter[] pharmacistCounter;
     //public object shots { get; internal set; }
 }

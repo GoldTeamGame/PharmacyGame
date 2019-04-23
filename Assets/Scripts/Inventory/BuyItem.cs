@@ -29,7 +29,7 @@ public class BuyItem : MonoBehaviour {
 
     public static void buyPrescription(string name)
     {
-        Drug d = Globals.findDrug(name, Globals.prescriptionList);
+        Drug d = (Drug)Item.find(0, name);
 
         int price = d.price;
         if (d.isUnlocked && Globals.playerGold >= price)
@@ -42,7 +42,7 @@ public class BuyItem : MonoBehaviour {
 
     public static void buyOverCounter(string name)
     {
-        Drug d = Globals.findDrug(name, Globals.overCounterList);
+        Drug d = (Drug)Item.find(1, name);
 
         int price = d.price;
         if (d.isUnlocked && Globals.playerGold >= price)
@@ -54,33 +54,16 @@ public class BuyItem : MonoBehaviour {
 
     public static void hire(string name)
     {
-        Pharmacist e = Globals_Pharmacist.findPharmacist(name);
+        Pharmacist e = (Pharmacist)Item.find(2, name);
 
         if (!e.isUnlocked)
         {
-            int wage = e.wage;
-            if (Globals.playerGold >= wage)
+            int price = e.price;
+            if (Globals.playerGold >= price)
             {
                 e.isUnlocked = true; //worker becomes employed
-                Globals.playerGold -= wage; //at the cost of his/her wage
+                Globals.playerGold -= price; //at the cost of his/her wage
             }
         }
-    }
-
-    public static void unlockPrescription(string[] drug)
-    {
-        for (int i = 0; i < drug.Length; i++)
-            Globals.findDrug(drug[i], Globals.prescriptionList).isUnlocked = true;
-    }
-
-    public static void unlockOverCounter(string[] drug)
-    {
-        for (int i = 0; i < drug.Length; i++)
-            Globals.findDrug(drug[i], Globals.overCounterList).isUnlocked = true;
-    }
-
-    public static void unlockService(string name)
-    {
-
     }
 }

@@ -37,7 +37,7 @@ public class ShelfPanel : MonoBehaviour
         Text t = ShowGameObject.button[index].transform.GetChild(1).GetComponent<Text>();
         int i = ShowGameObject.si.amount[index];
 
-        Drug d = Globals.findDrug(drug, Globals.overCounterList);
+        Drug d = (Drug)Item.find(1, drug);
 
         if (d != null)
         {

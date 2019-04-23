@@ -13,21 +13,21 @@ using UnityEngine.UI;
 
 public class UnlockEmployeeCap : MonoBehaviour {
 
-    Button button;
+    //Button button;
 
-    // Use this for initialization
-    void Start()
-    {
-        button = GetComponent<Button>();
-        button.onClick.AddListener(() => Unlock());
-    }
+    //// Use this for initialization
+    //void Start()
+    //{
+    //    button = GetComponent<Button>();
+    //    button.onClick.AddListener(() => Unlock());
+    //}
 
-    void Unlock()
-    {
-        int cost = Globals.platCap;
-        if (Globals.playerPlatinum >= cost)
-        {
-            Globals.employeeCap = 3;
-        }
-    }
+    //void Unlock()
+    //{
+    //    int cost = Globals.platCap;
+    //    if (Globals.playerPlatinum >= cost)
+    //    {
+    //        Globals.employeeCap = 3;
+    //    }
+    //}
 }

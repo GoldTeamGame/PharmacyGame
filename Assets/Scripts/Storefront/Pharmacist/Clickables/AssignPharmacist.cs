@@ -13,18 +13,8 @@ public class AssignPharmacist : MonoBehaviour
 
     private void Start()
     {
-        exist = new bool[Globals_Pharmacist.pharmacistList.Count];
+        exist = new bool[Globals_Items.item[2].Length];
         needToUpdate = true;
-        //for (int i = 0; i < Globals_Pharmacist.pharmacistList.Count; i++)
-        //{
-        //    if (Globals_Pharmacist.pharmacistList[i].isUnlocked)
-        //    {
-        //        Button newButton = Instantiate(b, transform);
-        //        string s = Globals_Pharmacist.pharmacistList[i].name;
-        //        newButton.transform.GetChild(0).GetComponent<Text>().text = s;
-        //        newButton.onClick.AddListener(delegate { assign(s); });
-        //    }
-        //}
     }
 
     private void Update()
@@ -36,16 +26,16 @@ public class AssignPharmacist : MonoBehaviour
             if (needToUpdate)
             {
                 // Loop through all overCounterList drugs
-                for (int i = 0; i < Globals_Pharmacist.pharmacistList.Count; i++)
+                for (int i = 0; i < Globals_Items.item[2].Length; i++)
                 {
                     // If a button for the drug has not been added to the list
                     // and the drug has been unlocked,
                     // Then create a button and add it to the list
-                    if (!exist[i] && Globals_Pharmacist.pharmacistList[i].isUnlocked)
+                    if (!exist[i] && ((Pharmacist)Globals_Items.item[2][i]).isUnlocked)
                     {
                         exist[i] = true; // set that the button exists
                         Button newButton = Instantiate(b, transform); // instantiate the button in the list
-                        string s = Globals_Pharmacist.pharmacistList[i].name; // get the name of the drug
+                        string s = Globals_Items.item[2][i].name; // get the name of the drug
                         newButton.transform.GetChild(0).GetComponent<Text>().text = s; // set the button text to the drug name
                         newButton.onClick.AddListener(delegate { assign(s); }); // add the function to the button
                     }
@@ -63,7 +53,7 @@ public class AssignPharmacist : MonoBehaviour
 
     public void assign(string name)
     {
-        Pharmacist p = Globals_Pharmacist.findPharmacist(name); // find pharmacist
+        Pharmacist p = (Pharmacist)Item.find(2, name);
 
         // Find counter to assign pharmacist to
         string counterName = CounterInteraction.name;
@@ -92,12 +82,12 @@ public class AssignPharmacist : MonoBehaviour
             // If a pharmacist exists in the place being assigned a pharmacist, then remove the one who was there before
             if (Globals_Pharmacist.pharmacistGo[counter] != null)
                 // Find the pharmacist who is being replaced
-                for (int i = 0; i < Globals_Pharmacist.pharmacistList.Count; i++)
+                for (int i = 0; i < Globals_Items.item[2].Length; i++)
                 {
-                    if (Globals_Pharmacist.pharmacistList[i].counter == counter)
+                    if (((Pharmacist)Globals_Items.item[2][i]).counter == counter)
                     {
-                        Globals_Pharmacist.pharmacistList[i].counter = -1; // set pharmacist who is being replaced to "unassigned" state
-                        Globals_Pharmacist.pharmacistList[i].reset(-1);
+                        ((Pharmacist)Globals_Items.item[2][i]).counter = -1; // set pharmacist who is being replaced to "unassigned" state
+                        ((Pharmacist)Globals_Items.item[2][i]).reset(-1);
                         Destroy(Globals_Pharmacist.pharmacistGo[counter]); // destroy the game object
                         break; // break out of loop
                     }

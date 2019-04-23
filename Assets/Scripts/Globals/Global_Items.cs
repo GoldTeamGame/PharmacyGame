@@ -9,24 +9,58 @@ using UnityEngine;
 
 public static class Globals_Items
 {
+    /*
+     * item[][]
+     * 0: Prescription Drug Data
+     * 1: Over-the-counter Drug Data
+     * 2: Pharmacist Data
+     * 3: Drug Sets
+     * 4: Upgrade List
+     * 5: Service List
+     */
+    public static Item[][] item;
     public static int numberOfItems = 0;
     public static int currentNumberOfItems;
     public static List<StoreItems> storeData; // holds the item data (item attributes)
     public static List<GameObject> objects; // holds the item gameObjects
-    public static List<Service> serviceList; // list of services
 
-    public static void generateServices(List<Service> service)
+    public static bool[][] isUnlocked; // keeps track of which buttons have been unlocked in the expansions screen
+
+    public static void generateItems(Item[][] savedItem)
     {
-        if (service != null)
-            serviceList = service;
+        // Set list if it isn't null
+        if (savedItem != null)
+            item = savedItem;
+        // Or generate a new list
         else
         {
-            serviceList = new List<Service>();
+            // Create the 7 lists and populate them
+            item = new Item[6][];
+            item[0] = Drug.generatePrescriptionList();
+            item[1] = Drug.generateOverCounterList();
+            item[2] = Pharmacist.generatePharmacistList();
+            item[3] = Set.generateSetList();
+            item[4] = Upgrade.generateUpgradeList();
+            item[5] = Service.generateServiceList();
+        }
+    }
 
-            serviceList.Add(new Service("Shelf", "A Fixture for displaying over the counter drugs. Customers can only buy the drugs being displayed."));
-            serviceList.Add(new Service("Flu Shot Station", "Flut Shot Station Description"));
-            serviceList.Add(new Service("Vaccine Station", "Vaccine Station Description"));
-            serviceList.Add(new Service("Blood Pressure Monitor", "Blood Pressure Monitor Description"));
+    // Sets isUnlocked if the passed argument is not null
+    public static void setIsUnlocked(bool[][] isUnlocked)
+    {
+        if (isUnlocked != null)
+            Globals_Items.isUnlocked = isUnlocked;
+    }
+
+    // Creates isUnlocked if it hasn't been created
+    public static void createIsUnlocked(int size0, int size1, int size2)
+    {
+        if (isUnlocked == null)
+        {
+            isUnlocked = new bool[3][];
+            isUnlocked[0] = new bool[size0];
+            isUnlocked[1] = new bool[size1];
+            isUnlocked[2] = new bool[size2];
         }
     }
 
@@ -39,13 +73,5 @@ public static class Globals_Items
     {
         storeData = storeDatas;
         currentNumberOfItems = number;
-    }
-
-    public static Service findService(string name)
-    {
-        for (int i = 0; i < serviceList.Count; i++)
-            if (name.Contains(serviceList[i].name))
-                return serviceList[i];
-        return null;
     }
 }

@@ -30,11 +30,11 @@ public class DisplayInventory : MonoBehaviour
         if (sel == 0)
         {
             for (int i = 0; i < prescriptionStock.Length; i++)
-                if (Globals.prescriptionList[i].isUnlocked)
+                if (((Drug)Globals_Items.item[0][i]).isUnlocked)
                     prescriptionStock[i].gameObject.SetActive(true);
 
             for (int i = 0; i < overCounterStock.Length; i++)
-                if (Globals.overCounterList[i].isUnlocked)
+                if (((Drug)Globals_Items.item[1][i]).isUnlocked)
                     overCounterStock[i].gameObject.SetActive(true);
 
             for (int i = 0; i < employee.Length; i++)
@@ -53,7 +53,7 @@ public class DisplayInventory : MonoBehaviour
                 overCounterStock[i].gameObject.SetActive(false);
 
             for (int i = 0; i < employee.Length; i++)
-                if (Globals_Pharmacist.pharmacistList[i].isUnlocked)
+                if (((Pharmacist)Globals_Items.item[2][i]).isUnlocked)
                     employee[i].gameObject.SetActive(true);
 
             for (int i = 0; i < service.Length; i++)
@@ -72,7 +72,7 @@ public class DisplayInventory : MonoBehaviour
                 employee[i].gameObject.SetActive(false);
 
             for (int i = 0; i < service.Length; i++)
-                if (Globals_Items.serviceList[i].isAvailable())
+                if (((Service)Globals_Items.item[5][i]).isAvailable())
                     service[i].gameObject.SetActive(true);
         }
     }
@@ -89,7 +89,7 @@ public class DisplayInventory : MonoBehaviour
         displayDrugs();
 
         for (int i = 0; i < employee.Length; i++)
-            employee[i].text = Globals_Pharmacist.pharmacistList[i].name + ": " + Globals_Pharmacist.pharmacistList[i].wage + "g/hr";
+            employee[i].text = Globals_Items.item[2][i].name + ": " + Globals_Items.item[2][i].price + "g/hr";
 
         // Hide everything
         for (int i = 0; i < prescriptionStock.Length; i++)
@@ -115,9 +115,9 @@ public class DisplayInventory : MonoBehaviour
     public static void displayDrugs()
     {
         for (int i = 0; i < prescriptionStock.Length; i++)
-            prescriptionStock[i].text = Globals.prescriptionList[i].name + ": " + Globals.prescriptionList[i].amount + " Units";
+            prescriptionStock[i].text = ((Drug)Globals_Items.item[0][i]).name + ": " + ((Drug)Globals_Items.item[0][i]).amount + " Units";
 
         for (int i = 0; i < overCounterStock.Length; i++)
-            overCounterStock[i].text = Globals.overCounterList[i].name + ": " + Globals.overCounterList[i].amount + " Units";
+            overCounterStock[i].text = ((Drug)Globals_Items.item[1][i]).name + ": " + ((Drug)Globals_Items.item[1][i]).amount + " Units";
     }
 }

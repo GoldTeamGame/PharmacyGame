@@ -13,21 +13,21 @@ using UnityEngine.UI;
 
 public class UnlockVaccineStation : MonoBehaviour {
 
-    Button button;
+    //Button button;
 
-    // Use this for initialization
-    void Start()
-    {
-        button = GetComponent<Button>();
-        button.onClick.AddListener(() => Unlock());
-    }
+    //// Use this for initialization
+    //void Start()
+    //{
+    //    button = GetComponent<Button>();
+    //    button.onClick.AddListener(() => Unlock());
+    //}
 
-    void Unlock()
-    {
-        int cost = Globals.platVac;
-        if (Globals.playerPlatinum >= cost)
-        {
-            Globals.unlockedVaccineStation = true;
-        }
-    }
+    //void Unlock()
+    //{
+    //    int cost = Globals.platVac;
+    //    if (Globals.playerPlatinum >= cost)
+    //    {
+    //        Globals.unlockedVaccineStation = true;
+    //    }
+    //}
 }

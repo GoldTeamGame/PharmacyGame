@@ -99,8 +99,9 @@ public class ProceduralGenerator : MonoBehaviour
                 prescriptionSize = Toolbox.random(1, 3);
 
             cd.desires = new Desires(overCounterSize, prescriptionSize);
-            generateArray(ref cd.desires.overCounter, Globals.overCounterList, false);
-            generateArray(ref cd.desires.prescription, Globals.prescriptionList, true);
+            Item[][] ie = Globals_Items.item;
+            generateArray(ref cd.desires.overCounter, Globals_Items.item[1], false);
+            generateArray(ref cd.desires.prescription, Globals_Items.item[0], true);
 
             if (cd.desires.overCounter.Length > 0)
                 cd.thoughts = "Looking For: " + cd.desires.overCounter[0].drug.name;
@@ -114,26 +115,26 @@ public class ProceduralGenerator : MonoBehaviour
     }
 
     // Fill array with drugs
-    public static void generateArray(ref CartItem[] array, List<Drug> drugList, bool isPrescription)
+    public static void generateArray(ref CartItem[] array, Item[] drugList, bool isPrescription)
     {
         int desireCount = 0; // current number of desires in array
 
         // Continue filling array while there are remaining available drugs
         // and while there is still remaining space in the array
-        for (int i = 0; i < drugList.Count && desireCount < array.Length; i++)
+        for (int i = 0; i < drugList.Length && desireCount < array.Length; i++)
             // Add drug to array if it passes the check
             // Customers may have over counter drugs on their list of desires that havent been unlocked yet,
             //      but as for prescription drugs, they will ONLY have it on their list if the player has it unlocked
             // (A person would not go to a store to pick up a prescription without first knowing it the store has the drug)
             // Of course, it is still possible that the store has none of the prescribed drug in stock, in which case, the customer will not be able to buy it,
             //      but it would still show up on their list of desires.
-            if (Toolbox.randomBool(drugList[i].chance) || (isPrescription && drugList[i].isUnlocked))
-                array[desireCount++] = new CartItem(drugList[i]);
+            if (Toolbox.randomBool(((Drug)drugList[i]).chance) || (isPrescription && ((Drug)drugList[i]).isUnlocked))
+                array[desireCount++] = new CartItem(((Drug)drugList[i]));
 
         // If no desires were added, but the array length is 1, then forcefully add item to list
         if (desireCount == 0 && array.Length == 1)
         {
-            array[0] = new CartItem(drugList[0]);
+            array[0] = new CartItem(((Drug)drugList[0]));
             desireCount++;
         }
 

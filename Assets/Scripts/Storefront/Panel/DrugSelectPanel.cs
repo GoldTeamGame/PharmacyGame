@@ -18,7 +18,7 @@ public class DrugSelectPanel : MonoBehaviour {
     // Instantiate exist list (DO NOT SAVE THIS LIST)
     private void Start()
     {
-        exist = new bool[Globals.overCounterList.Count];
+        exist = new bool[Globals_Items.item[1].Length];
         needToUpdate = true;
     }
 
@@ -32,16 +32,16 @@ public class DrugSelectPanel : MonoBehaviour {
             if (needToUpdate)
             {
                 // Loop through all overCounterList drugs
-                for (int i = 0; i < Globals.overCounterList.Count; i++)
+                for (int i = 0; i < Globals_Items.item[1].Length; i++)
                 {
                     // If a button for the drug has not been added to the list
                     // and the drug has been unlocked,
                     // Then create a button and add it to the list
-                    if (!exist[i] && Globals.overCounterList[i].isUnlocked)
+                    if (!exist[i] && ((Drug)Globals_Items.item[1][i]).isUnlocked)
                     {
                         exist[i] = true; // set that the button exists
                         Button newButton = Instantiate(b, transform); // instantiate the button in the list
-                        string s = Globals.overCounterList[i].name; // get the name of the drug
+                        string s = Globals_Items.item[1][i].name; // get the name of the drug
                         newButton.transform.GetChild(0).GetComponent<Text>().text = s; // set the button text to the drug name
                         newButton.onClick.AddListener(delegate { selectDrug(s); }); // add the function to the button
                     }

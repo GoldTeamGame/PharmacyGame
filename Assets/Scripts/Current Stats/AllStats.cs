@@ -21,9 +21,9 @@ public class AllStats : MonoBehaviour {
     public static int SumInventory()
     {
         int sum = 0;
-        for(int i = 0; i < Globals.prescriptionList.Count; i++)
+        for(int i = 0; i < Globals_Items.item[0].Length; i++)
         {
-            sum += Globals.prescriptionList[i].price * Globals.prescriptionList[i].amount;
+            sum += ((Drug)Globals_Items.item[0][i]).price * ((Drug)Globals_Items.item[0][i]).amount;
         }
         return sum;
     }
@@ -32,14 +32,15 @@ public class AllStats : MonoBehaviour {
     public static int SumEquipment()
     {
         int sum = 0;
-        if(Globals.unlockedFluShotStation)
+
+        // Loop through all services
+        for (int i = 0; i < Globals_Items.item[6].Length; i++)
         {
-            sum += Globals.platFlu;
+            // If service is unlocked, then 
+            if (((Service)Globals_Items.item[6][i]).amountOwned > 0)
+                sum += Globals_Items.item[6][i].price;
         }
-        if(Globals.unlockedVaccineStation)
-        {
-            sum += Globals.platVac;
-        }
+
         return sum;
     }
 
@@ -48,11 +49,11 @@ public class AllStats : MonoBehaviour {
     public static int SumSalaries()
     {
         int sum = 0;
-        for(int i = 0; i < Globals_Pharmacist.pharmacistList.Count; i++)
+        for(int i = 0; i < Globals_Items.item[2].Length; i++)
         {
-            if(Globals_Pharmacist.pharmacistList[i].isUnlocked)
+            if(((Pharmacist)Globals_Items.item[2][i]).isUnlocked)
             {
-                sum += Globals_Pharmacist.pharmacistList[i].wage;
+                sum += Globals_Items.item[2][i].price;
             }
         }
         return sum;

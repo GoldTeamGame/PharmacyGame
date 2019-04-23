@@ -23,10 +23,10 @@ public class DisplayShop : MonoBehaviour {
         if (sel == 0)
         {
             for (int i = 0; i < prescriptionDrugList.Length; i++)
-                if (Globals.prescriptionList[i].isUnlocked)
+                if (((Drug)Globals_Items.item[0][i]).isUnlocked)
                     prescriptionDrugList[i].gameObject.SetActive(true);
             for (int i = 0; i < overTheCounterList.Length; i++)
-                if (Globals.overCounterList[i].isUnlocked)
+                if (((Drug)Globals_Items.item[1][i]).isUnlocked)
                     overTheCounterList[i].gameObject.SetActive(false);
             for (int i = 0; i < employeeList.Length; i++)
                 employeeList[i].gameObject.SetActive(false);
@@ -34,10 +34,10 @@ public class DisplayShop : MonoBehaviour {
         else if (sel == 1)
         {
             for (int i = 0; i < prescriptionDrugList.Length; i++)
-                if (Globals.prescriptionList[i].isUnlocked)
+                if (((Drug)Globals_Items.item[0][i]).isUnlocked)
                     prescriptionDrugList[i].gameObject.SetActive(false);
             for (int i = 0; i < overTheCounterList.Length; i++)
-                if (Globals.overCounterList[i].isUnlocked)
+                if (((Drug)Globals_Items.item[1][i]).isUnlocked)
                     overTheCounterList[i].gameObject.SetActive(true);
             for (int i = 0; i < employeeList.Length; i++)
                 employeeList[i].gameObject.SetActive(false);
@@ -50,7 +50,11 @@ public class DisplayShop : MonoBehaviour {
             for (int i = 0; i < overTheCounterList.Length; i++)
                 overTheCounterList[i].gameObject.SetActive(false);
             for (int i = 0; i < employeeList.Length; i++)
+            {
                 employeeList[i].gameObject.SetActive(true);
+                if (((Pharmacist)Globals_Items.item[2][i]).isUnlocked)
+                    employeeList[i].gameObject.GetComponent<Button>().interactable = false;
+            }
         }
     }
 

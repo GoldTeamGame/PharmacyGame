@@ -25,12 +25,11 @@ public class PharmacistGenerator : MonoBehaviour
             // Generate global data
             Globals_Pharmacist.pharmacistGo = new GameObject[3];
             generateCounters();
-            generatePharmacistList();
 
             // Create and assign pharmacist to counter
-            Globals_Pharmacist.pharmacistList[0].isUnlocked = true;
-            Globals_Pharmacist.pharmacistList[0].counter = 0;
-            generatePharmacist(Globals_Pharmacist.pharmacistList[0]);
+            ((Pharmacist)Globals_Items.item[2][0]).isUnlocked = true;
+            ((Pharmacist)Globals_Items.item[2][0]).counter = 0;
+            generatePharmacist(((Pharmacist)Globals_Items.item[2][0]));
         }
         else
         {
@@ -47,8 +46,8 @@ public class PharmacistGenerator : MonoBehaviour
                 zone[1].SetActive(true);
             }
 
-            for (int i = 0; i < Globals_Pharmacist.pharmacistList.Count; i++)
-                generatePharmacist(Globals_Pharmacist.pharmacistList[i]);
+            for (int i = 0; i < Globals_Items.item[2].Length; i++)
+                generatePharmacist(((Pharmacist)Globals_Items.item[2][i]));
         }
 
 	}
@@ -73,19 +72,6 @@ public class PharmacistGenerator : MonoBehaviour
             go.transform.localScale = new Vector3(2.25f, 2.25f, 0); // set customer sprite size (make it bigger)
             Globals_Pharmacist.pharmacistGo[p.counter] = go; // set globals gameobject
         }
-    }
-
-    // Generate pharmacist list on new game
-    void generatePharmacistList()
-    {
-        Globals_Pharmacist.pharmacistList = new List<Pharmacist>();
-
-        Globals_Pharmacist.pharmacistList.Add(new Pharmacist("Dylan", 0, "A dude that works for free", 0, 3, 3, 3, 3, 0.005f, 0));
-        Globals_Pharmacist.pharmacistList.Add(new Pharmacist("Jon", 15, "Works at his own pace", 1, 3, 3, 3, 3, 0.005f, 0));
-        Globals_Pharmacist.pharmacistList.Add(new Pharmacist("Ross", 19, "Standard skilled employee", 2, 3, 3, 3, 3, 0.005f, 0));
-        Globals_Pharmacist.pharmacistList.Add(new Pharmacist("Alex", 22, "Hard working and reliable", 3, 3, 3, 3, 3, 0.005f, 0));
-
-        Globals_Pharmacist.pharmacistList[0].isUnlocked = true; // Unlock Dylan by default
     }
 
     // Generate pharmacist counters on new save

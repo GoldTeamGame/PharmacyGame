@@ -712,6 +712,7 @@ GameObject:
   - component: {fileID: 514414314}
   - component: {fileID: 514414313}
   - component: {fileID: 514414317}
+  - component: {fileID: 514414316}
   m_Layer: 5
   m_Name: Button_Alex
   m_TagString: Untagged
@@ -776,18 +777,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 514414314}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2021118431}
-        m_MethodName: _hire
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Alex
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &514414314
@@ -824,6 +814,20 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 514414311}
   m_CullTransparentMesh: 0
+--- !u!114 &514414316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 514414311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2721417c26bc9cc4580de72e99a42aa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thePanel: {fileID: 365082171}
+  theText: {fileID: 1797842015}
+  action: 2
 --- !u!114 &514414317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1167,7 +1171,7 @@ GameObject:
   - component: {fileID: 849398008}
   - component: {fileID: 849398007}
   - component: {fileID: 849398006}
-  - component: {fileID: 849398010}
+  - component: {fileID: 849398009}
   m_Layer: 5
   m_Name: Button_Jon
   m_TagString: Untagged
@@ -1232,18 +1236,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 849398007}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2021118431}
-        m_MethodName: _hire
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Jon
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &849398007
@@ -1280,7 +1273,7 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 849398004}
   m_CullTransparentMesh: 0
---- !u!114 &849398010
+--- !u!114 &849398009
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1288,27 +1281,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 849398004}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d352f5b714e515409da9920158b0ae5, type: 3}
+  m_Script: {fileID: 11500000, guid: 2721417c26bc9cc4580de72e99a42aa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 0
-  buyState: 0
-  tooltipState: 0
-  e:
-    name: 
-    appearance: 0
-    wage: 0
-    description: 
-    stats: 
-    speed: 0
-    personality: 0
-    currentState: 0
-    progress: 0
-    counter: 0
-    isUnlocked: 0
-    isMoving: 0
   thePanel: {fileID: 365082171}
   theText: {fileID: 1797842015}
+  action: 2
 --- !u!1 &884130713
 GameObject:
   m_ObjectHideFlags: 0
@@ -1548,13 +1526,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2721417c26bc9cc4580de72e99a42aa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 0
-  buyState: 0
-  tooltipState: 0
   thePanel: {fileID: 365082171}
   theText: {fileID: 1797842015}
-  listOfDrugs: []
-  description: 
   action: 0
 --- !u!1 &939960252
 GameObject:
@@ -1755,13 +1728,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2721417c26bc9cc4580de72e99a42aa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 0
-  buyState: 0
-  tooltipState: 0
   thePanel: {fileID: 365082171}
   theText: {fileID: 1797842015}
-  listOfDrugs: []
-  description: 
   action: 1
 --- !u!1 &1021123132
 GameObject:
@@ -1956,13 +1924,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2721417c26bc9cc4580de72e99a42aa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 0
-  buyState: 0
-  tooltipState: 0
   thePanel: {fileID: 365082171}
   theText: {fileID: 1797842015}
-  listOfDrugs: []
-  description: 
   action: 1
 --- !u!1 &1098853891
 GameObject:
@@ -2505,6 +2468,7 @@ GameObject:
   - component: {fileID: 1337394806}
   - component: {fileID: 1337394805}
   - component: {fileID: 1337394809}
+  - component: {fileID: 1337394808}
   m_Layer: 5
   m_Name: Button_Ross
   m_TagString: Untagged
@@ -2569,18 +2533,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1337394806}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2021118431}
-        m_MethodName: _hire
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Ross
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1337394806
@@ -2617,6 +2570,20 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1337394803}
   m_CullTransparentMesh: 0
+--- !u!114 &1337394808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1337394803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2721417c26bc9cc4580de72e99a42aa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thePanel: {fileID: 365082171}
+  theText: {fileID: 1797842015}
+  action: 2
 --- !u!114 &1337394809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2770,13 +2737,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2721417c26bc9cc4580de72e99a42aa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 0
-  buyState: 0
-  tooltipState: 0
   thePanel: {fileID: 365082171}
   theText: {fileID: 1797842015}
-  listOfDrugs: []
-  description: 
   action: 1
 --- !u!1 &1348587649
 GameObject:
@@ -3127,13 +3089,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2721417c26bc9cc4580de72e99a42aa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 0
-  buyState: 0
-  tooltipState: 0
   thePanel: {fileID: 365082171}
   theText: {fileID: 1797842015}
-  listOfDrugs: []
-  description: 
   action: 0
 --- !u!1 &1554161963
 GameObject:
@@ -3259,13 +3216,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2721417c26bc9cc4580de72e99a42aa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 0
-  buyState: 0
-  tooltipState: 0
   thePanel: {fileID: 365082171}
   theText: {fileID: 1797842015}
-  listOfDrugs: []
-  description: 
   action: 0
 --- !u!1 &1564606344
 GameObject:

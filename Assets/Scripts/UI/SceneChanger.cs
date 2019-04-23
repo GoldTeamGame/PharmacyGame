@@ -36,7 +36,6 @@ public class SceneChanger : MonoBehaviour
     // Change from currentScene to scene
     public void changeScene(string scene)
     {
-        Globals.inEditMode = false;
         // Disable hide/show button
         //hideShow.gameObject.SetActive(false);
 
