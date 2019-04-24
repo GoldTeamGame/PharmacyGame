@@ -123,6 +123,7 @@ public class CustomerController : MonoBehaviour
                 GetComponent<Customer>().cd.isLeaving = true;
                 GetComponent<Customer>().cd.isBuying = false;
                 Globals.setGold(Globals.getGold() + cart);
+                Globals.monthlyGold += cart;
             }
             else if (GetComponent<Customer>().cd.isUpdate)
             {

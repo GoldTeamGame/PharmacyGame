@@ -293,6 +293,8 @@ public class TutorialMonitor : MonoBehaviour
                 for (int i = 0; i < button.Length; i++)
                     button[i].GetComponent<Button>().interactable = true;
                 button[14].SetActive(false);
+                button[6].GetComponent<Button>().interactable = false;
+                button[7].GetComponent<Button>().interactable = false;
                 isConfirm = false;
                 Globals_Tutorials.tutorialIndex++;
                 Clock.start(); // start timer
