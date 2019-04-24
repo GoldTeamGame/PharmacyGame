@@ -84,6 +84,7 @@ public class Game : MonoBehaviour
         //if so, read file and set global varables
         
         Globals.sv = new StoreValues();
+        Globals_Items.generateItems(null);
         if (File.Exists(Application.persistentDataPath + path))
         {
             BinaryFormatter bf = new BinaryFormatter();
@@ -110,6 +111,9 @@ public class Game : MonoBehaviour
                 if (save.sv != null)
                     Globals.sv = save.sv;
                 Globals_Items.setIsUnlocked(save.isUnlocked);
+                Globals_Customer.limit = save.limit;
+                Globals_Customer._limit = save._limit;
+                TutorialMonitor.doesSaveExist = save.doesSaveExist;
             }
             Debug.Log("Game Loaded");
             Unpause();
@@ -117,7 +121,6 @@ public class Game : MonoBehaviour
         //no saved game, just proceed with default globals
         else
         {
-            Globals_Items.generateItems(null);
             Debug.Log("No game saved!");
         }
     }
@@ -141,6 +144,9 @@ public class Game : MonoBehaviour
             save.sv = Globals.sv;
             save.isUnlocked = Globals_Items.isUnlocked;
             save.time = Clock.time;
+            save.limit = Globals_Customer.limit;
+            save._limit = Globals_Customer._limit;
+            save.doesSaveExist = true;
         }
 
         //return the object to write to the file

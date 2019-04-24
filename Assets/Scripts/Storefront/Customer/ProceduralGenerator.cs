@@ -10,6 +10,7 @@ using System.Collections.Generic;
 public class ProceduralGenerator : MonoBehaviour
 {
     public Transform parent; // The container that the customer will be spawned into
+    public static Transform staticParent;
     public Sprite[] appearanceList; // contains sprites passed in from unity editor
     public static Sprite[] staticAppearanceList; // Static version of appearanceList which can be used in static functions
     public GameObject customer; // object being spawned
@@ -21,6 +22,7 @@ public class ProceduralGenerator : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        staticParent = parent;
         xSpawnPoint = spawnPoint.localPosition.x;
 
         // Instantiate customerData list if none currently exists
@@ -145,6 +147,22 @@ public class ProceduralGenerator : MonoBehaviour
             for (int i = 0; i < desireCount; i++)
                 temp[i] = array[i];
             array = temp;
+        }
+    }
+
+    public static void removeCustomers()
+    {
+        Globals_Customer._limit = Globals_Customer.limit; // save previous limit value
+        Globals_Customer.limit = 0; // set limit to 0 (don't allow any more customers in store)
+
+        int numberOfChildren = staticParent.childCount;
+
+        for (int i = 1; i < numberOfChildren; i++)
+        {
+            Destroy(staticParent.GetChild(i).gameObject);
+            Globals_Customer.currentNumberOfCustomers = 0;
+            Globals_Customer.numberOfCustomers = 0;
+            Globals_Customer.customerData.Clear();
         }
     }
 }

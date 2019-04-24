@@ -5,7 +5,7 @@ using UnityEngine;
 public class PharmacistController : MonoBehaviour
 {
     public Pharmacist p;
-    MovementController mc; // handles movement
+    public MovementController mc; // handles movement
     Timer t;
 
 	// Use this for initialization

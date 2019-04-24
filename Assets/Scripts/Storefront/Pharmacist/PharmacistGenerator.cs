@@ -87,4 +87,18 @@ public class PharmacistGenerator : MonoBehaviour
 
         Globals_Pharmacist.pharmacistCounter[0].isPharmacist = true;
     }
+
+    public static void resetPharmacist()
+    {
+        // Reset all pharmacist counters
+        for (int i = 0; i < Globals_Pharmacist.pharmacistCounter.Length; i++)
+        {
+            if (Globals_Pharmacist.pharmacistCounter[i].isUnlocked)
+            {
+                Globals_Pharmacist.pharmacistCounter[i].isCustomer = false;
+                Globals_Pharmacist.pharmacistCounter[i].isFinished = false;
+                Globals_Pharmacist.pharmacistCounter[i].numberInLine = 0;
+            }
+        }
+    }
 }

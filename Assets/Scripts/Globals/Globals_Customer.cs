@@ -10,6 +10,7 @@ public static class Globals_Customer
 {
     
     public static int limit = 0; // Maximum amount of customers that can be in the store
+    public static int _limit = 0;
     public static int numberOfCustomers = 0;
     public static int currentNumberOfCustomers;
     public static List<CustomerData> customerData; // holds the customer's data (customer attributes)

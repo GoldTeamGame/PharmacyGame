@@ -12,7 +12,10 @@ using UnityEngine;
 [System.Serializable]
 public class Save
 {
+    public bool doesSaveExist;
     public int time;
+    public int limit;
+    public int _limit;
 
     public int p;
 
