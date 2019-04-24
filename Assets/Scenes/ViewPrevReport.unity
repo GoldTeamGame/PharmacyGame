@@ -3714,7 +3714,7 @@ RectTransform:
   m_Children:
   - {fileID: 1730415526}
   m_Father: {fileID: 1172396112}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -7648,8 +7648,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1834477170}
   - {fileID: 369491230}
+  - {fileID: 1834477170}
   - {fileID: 1145885393}
   - {fileID: 1770195559}
   - {fileID: 105487522}
@@ -9327,6 +9327,7 @@ GameObject:
   - component: {fileID: 1481242030}
   - component: {fileID: 1481242032}
   - component: {fileID: 1481242033}
+  - component: {fileID: 1481242034}
   m_Layer: 0
   m_Name: ScriptHolder
   m_TagString: Untagged
@@ -9405,6 +9406,43 @@ MonoBehaviour:
   inventoryPanel: {fileID: 0}
   shelfPanel: {fileID: 0}
   drugListPanel: {fileID: 0}
+--- !u!114 &1481242034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1481242029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d703db41f7eb094a97c9aa6f50d73cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reportToView: 0
+  toDisplay:
+  - {fileID: 856512874}
+  - {fileID: 1859652991}
+  - {fileID: 337690526}
+  - {fileID: 313275621}
+  - {fileID: 656318128}
+  - {fileID: 719954271}
+  - {fileID: 1730415527}
+  - {fileID: 1328506648}
+  - {fileID: 237693730}
+  - {fileID: 1654143608}
+  - {fileID: 601395910}
+  - {fileID: 200141599}
+  - {fileID: 864260519}
+  - {fileID: 529873158}
+  - {fileID: 577316929}
+  - {fileID: 259070928}
+  - {fileID: 1866618311}
+  - {fileID: 12830590}
+  - {fileID: 961943074}
+  - {fileID: 1850022203}
+  - {fileID: 2104200580}
+  - {fileID: 1018150042}
+  - {fileID: 547211217}
+  - {fileID: 722357697}
 --- !u!1 &1482027550
 GameObject:
   m_ObjectHideFlags: 0
@@ -11108,7 +11146,7 @@ RectTransform:
   m_Children:
   - {fileID: 1328506647}
   m_Father: {fileID: 1172396112}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
