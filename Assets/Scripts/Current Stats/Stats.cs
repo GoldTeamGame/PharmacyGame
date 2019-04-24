@@ -1,8 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿// File: Stats
+// Author: Alexander Jacks
+// Last Modified: 4/24/19
+// Version: 1.0.1
+// Description: Holds all values that would be in statistics screen
+
 using UnityEngine;
 
-public class stat
+public class Stats
 {
     public static int InventoryAtBeginningOfMonth;
     public static int PurchasesDuringMonth;
