@@ -25,5 +25,11 @@ public class Customer : MonoBehaviour
         // Save current coordinate position of customer in customerData (for save/load purposes)
         cd.locationX = transform.localPosition.x;
         cd.locationY = transform.localPosition.y;
+
+        if (!Obsticals.isInBounds(Obsticals.yToRow(cd.locationY), Obsticals.xToColumn(cd.locationX)))
+        {
+            transform.gameObject.transform.localPosition = new Vector3(-1.5f, 6);
+            gameObject.GetComponent<CustomerController>().mc.setPath(-1.5f, 6, -1.5f, 6);
+        }
     }
 }
