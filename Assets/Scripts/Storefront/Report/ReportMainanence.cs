@@ -25,43 +25,7 @@ public class ReportMainanence : MonoBehaviour {
 	//public GameObject screen7;
 	//public GameObject screen8;
 	
-	public void pageLeftPrev(){
-		if(screen2.active){
-			screen2.SetActive(false);
-			screen1.SetActive(true);
-		}
-		else if(screen3.active){
-			screen3.SetActive(false);
-			screen2.SetActive(true);
-		}
-		else if(screen4.active){
-			screen4.SetActive(false);
-			screen3.SetActive(true);
-		}
-		else if(screen5.active){
-			screen5.SetActive(false);
-			screen4.SetActive(true);
-		}
-		
-	}
-	public void pageRightPrev(){
-		if(screen1.active){
-			screen1.SetActive(false);
-			screen2.SetActive(true);
-		}
-		else if(screen2.active){
-			screen2.SetActive(false);
-			screen3.SetActive(true);
-		}
-		else if(screen3.active){
-			screen3.SetActive(false);
-			screen4.SetActive(true);
-		}
-		else if(screen4.active){
-			screen4.SetActive(false);
-			screen5.SetActive(true);
-		}
-	}
+	
 
 	public void pageLeft(){
 		if(screen2.active){
