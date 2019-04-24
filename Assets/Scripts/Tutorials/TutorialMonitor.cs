@@ -295,6 +295,7 @@ public class TutorialMonitor : MonoBehaviour
                 button[14].SetActive(false);
                 isConfirm = false;
                 Globals_Tutorials.tutorialIndex++;
+                Clock.start(); // start timer
             }
         }
     }
@@ -318,9 +319,15 @@ public class TutorialMonitor : MonoBehaviour
     // Used on various buttons to progress the tutorial to the next state
     public void tutorialButton(int state)
     {
+        staticTutorialButton(state);
+    }
+
+    public static void staticTutorialButton(int state)
+    {
         if (state - 1 == Globals_Tutorials.tutorialIndex)
         {
             Globals_Tutorials.tutorialIndex++;
+            Debug.Log("Current State: " + Globals_Tutorials.tutorialIndex);
             isPopup = true;
         }
     }

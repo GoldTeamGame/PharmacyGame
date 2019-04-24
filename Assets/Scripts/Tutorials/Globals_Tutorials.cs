@@ -33,7 +33,7 @@ public class Globals_Tutorials
         tutorial[tutorialIndex].addPage(pageIndex++, "Note on Saving", sprite[counter++], 0, "This game only autosaves and cannot be manually saved. You can close out of the game at any time and come back to where you were before.\n\nNOTICE: You must complete the tutorial before the game begins to autosave.");
         tutorial[tutorialIndex].addPage(pageIndex++, "Tutorial", sprite[counter++], 0, "To start off the game, you will be taken through a tutorial where you must follow objectives as they appear.\n\nTap the tutorial button on the bottom right of the screen to view the current tutorial objective at any time.");
         tutorial[tutorialIndex].addPage(pageIndex++, "Currency", sprite[counter++], 1, "As you play, your store will generate Gold (G) through sales.\n\nPlatinum (P), on the other hand, can only be earned at the end of each month.");
-        tutorial[tutorialIndex].addPage(pageIndex++, "Calendar", sprite[counter++], 1, "Each month lasts for x minutes. Next to the Calendar is the timer which shows how far you are currently into the month.\n\nAt the end of the month, all customers will leave the store and you will have to fill out a report before going to the next month.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Calendar", sprite[counter++], 1, "Each month lasts for 10 minutes. Next to the Calendar is the timer which shows how far you are currently into the month.\n\nAt the end of the month, all customers will leave the store and you will have to fill out a report before going to the next month.");
         tutorial[tutorialIndex].addPage(pageIndex++, "UI", sprite[counter++], 2, "There are several buttons which will lead you to different interfaces.");
         tutorial[tutorialIndex].addPage(pageIndex++, "Select the Shop Button", sprite[counter++], 0, "Your store is currently closed. Before you can open the store, you will need products for your customers to buy.\n\nTo purchase drugs, tap on the Store Button.");
         tutorialIndex++;
@@ -43,7 +43,7 @@ public class Globals_Tutorials
         tutorial[tutorialIndex] = new Tutorial(3);
         tutorial[tutorialIndex].addPage(pageIndex++, "Shop", sprite[counter++], 0, "The shop is where you can purchase drugs and hire employees");
         tutorial[tutorialIndex].addPage(pageIndex++, "Tooltips", sprite[counter++], 1, "You can tap a drug to purchase it.\n\nAlternatively, you can hold down the button to view a description of the drug.\n\nAlmost every button in the game has a tooltip, so if you need more information on something, hold the button down to find out more about it.");
-        tutorial[tutorialIndex].addPage(pageIndex++, "Purchase Drugs", sprite[counter++], 0,"Purchase Ventolin by tapping on it.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Purchase Drugs", sprite[counter++], 0, "Purchase Amlodipine Besylate 10mg by tapping on it.");
         tutorialIndex++;
         pageIndex = 0;
 

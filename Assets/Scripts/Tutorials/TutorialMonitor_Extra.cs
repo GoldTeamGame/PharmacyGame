@@ -23,6 +23,7 @@ public class TutorialMonitor_Extra : MonoBehaviour {
         if (state - 1 == Globals_Tutorials.tutorialIndex)
         {
             Globals_Tutorials.tutorialIndex++;
+            Debug.Log("Current State: " + Globals_Tutorials.tutorialIndex);
             TutorialMonitor.isPopup = true;
         }
     }

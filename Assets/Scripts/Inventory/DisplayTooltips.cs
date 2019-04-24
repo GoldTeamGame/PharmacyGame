@@ -57,6 +57,9 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
                 TutorialMonitor.isPopup = true;
             }
 
+            if (item.name.Equals("Shelf +1"))
+                TutorialMonitor.staticTutorialButton(7);
+
             GameObject child = EventSystem.current.currentSelectedGameObject; // button clicked
 
             // Buy Item
@@ -70,7 +73,9 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
                             item = Globals_Items.item[action][i];
 
                 item.action();
-                child.GetComponent<Button>().interactable = false;
+
+                if (item.isUnlocked)
+                    child.GetComponent<Button>().interactable = false;
             }
         }
 

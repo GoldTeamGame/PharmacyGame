@@ -35,6 +35,7 @@ public class Service : Item
         {
             Globals.playerPlatinum -= price;
             isUnlocked = true;
+            amountOwned++;
         }
     }
 

@@ -16,7 +16,11 @@ public class Clock : MonoBehaviour
 	void Start ()
     {
         t = new Timer(time);
-        t.start();
+
+        // Do not start clock if tutorial is ongoing
+        if (Globals_Tutorials.tutorialIndex > 17)
+            t.start();
+
         setTime();
         GetComponent<Text>().text = displayTime;
     }
