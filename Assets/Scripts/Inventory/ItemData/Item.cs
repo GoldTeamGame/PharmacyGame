@@ -31,4 +31,13 @@ public abstract class Item
 
         return null;
     }
+
+    public static bool canBeUnlocked(int listIndex, string name)
+    {
+        for (int i = 0; i < Globals_Items.item[listIndex].Length; i++)
+            if (name.Equals(Globals_Items.item[listIndex][i].name) && !Globals_Items.item[listIndex][i].isUnlocked)
+                return true;
+
+        return false;
+    }
 }

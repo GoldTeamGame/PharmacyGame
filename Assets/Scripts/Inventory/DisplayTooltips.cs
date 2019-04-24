@@ -19,8 +19,8 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     float time;
 
-    public static bool buyState;
-    public static bool tooltipState;
+    bool buyState;
+    bool tooltipState;
 
     /*
      * Actions...
@@ -57,11 +57,21 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
                 TutorialMonitor.isPopup = true;
             }
 
+            GameObject child = EventSystem.current.currentSelectedGameObject; // button clicked
+
             // Buy Item
             if (action <= 1)
                 item.action();
-            else if (!item.isUnlocked)
+            else if (child != null && Item.canBeUnlocked(action, item.name))
+            {
+                if (item.isUnlocked)
+                    for (int i = 0; i < Globals_Items.item[action].Length; i++)
+                        if (item.name.Equals(Globals_Items.item[action][i].name))
+                            item = Globals_Items.item[action][i];
+
                 item.action();
+                child.GetComponent<Button>().interactable = false;
+            }
         }
 
         tooltipState = false;

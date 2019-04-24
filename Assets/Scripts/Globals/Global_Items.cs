@@ -34,7 +34,7 @@ public static class Globals_Items
         // Or generate a new list
         else
         {
-            // Create the 7 lists and populate them
+            // Create the 6 lists and populate them
             item = new Item[6][];
             item[0] = Drug.generatePrescriptionList();
             item[1] = Drug.generateOverCounterList();

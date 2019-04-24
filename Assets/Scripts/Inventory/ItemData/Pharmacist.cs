@@ -64,17 +64,22 @@ public class Pharmacist : Item
 
     override public string generateTooltip()
     {
-        return "Description: " + description + "\nCheckout Time: " + stats[0] + "seconds\nComputer Time: " + stats[1] + "seconds\nDrug Fetching Time: " + stats[2] + "seconds";
+        return "Description: " + description + "\nCheckout Time: " + stats[0] + " seconds\nComputer Time: " + stats[1] + " seconds\nDrug Fetching Time: " + stats[2] + " seconds";
     }
 
     public static Pharmacist[] generatePharmacistList()
     {
-        Pharmacist[] pharmacistList = new Pharmacist[4];
+        Pharmacist[] pharmacistList = new Pharmacist[8];
 
-        pharmacistList[0] = new Pharmacist("Dylan", 0, "A dude that works for free", 0, 3, 3, 3, 3, 0.005f, 0);
-        pharmacistList[1] = new Pharmacist("Jon", 15, "Works at his own pace", 1, 3, 3, 3, 3, 0.005f, 0);
-        pharmacistList[2] = new Pharmacist("Ross", 19, "Standard skilled employee", 2, 3, 3, 3, 3, 0.005f, 0);
-        pharmacistList[3] = new Pharmacist("Alex", 22, "Hard working and reliable", 3, 3, 3, 3, 3, 0.005f, 0);
+        int index = 0; // index is used to make it easier to edit the structure of the array when hardcoding
+        pharmacistList[index++] = new Pharmacist("Dylan",   0,  "A Dude that Works for Free",   0, 3, 3, 3, 3, 0.005f, 0);
+        pharmacistList[index++] = new Pharmacist("Bob",     50, "A Very Lazy Guy",              1, 3, 5, 5, 3, 0.003f, 0);
+        pharmacistList[index++] = new Pharmacist("Carlos",  200, "Works at his Own Pace",       1, 3, 4, 4, 3, 0.004f, 0);
+        pharmacistList[index++] = new Pharmacist("Sasha",   400, "Standard Employee",           2, 3, 3, 3, 3, 0.006f, 0);
+        pharmacistList[index++] = new Pharmacist("Sheldon", 500, "A Skilled Technition",        3, 3, 1, 3, 3, 0.004f, 0);
+        pharmacistList[index++] = new Pharmacist("Lewis",   1000, "Hard Working and Reliable",  3, 2, 3, 2, 1, 0.007f, 0);
+        pharmacistList[index++] = new Pharmacist("Miranda", 1500, "Very Skilled Worker",        3, 1, 2, 2, 1, 0.009f, 0);
+        pharmacistList[index++] = new Pharmacist("Hero",    2500, "The Greatest of All Time",   3, 1, 1, 1, 1, 0.01f, 0);
 
         pharmacistList[0].isUnlocked = true; // Unlock Dylan by default
 
