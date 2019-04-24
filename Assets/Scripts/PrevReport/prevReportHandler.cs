@@ -66,7 +66,7 @@ public class prevReportHandler : MonoBehaviour {
 			buttons.SetActive(true);
 		}
 		for(int i = 0; i < 12; i++){
-			toDisplay[i*2].text = Globals.reports[report, i];
+			toDisplay[i*2].text = Globals.reports[report, i].Split(':')[0];
 		}
 		toDisplay[1].text = "Cash";
 		toDisplay[3].text = "Inventory";
