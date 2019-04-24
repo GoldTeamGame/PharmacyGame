@@ -13,6 +13,10 @@ using UnityEngine.UI;
 
 public static class Globals
 {
+    // info passing for showing what prev report is to be shown
+    // at -1 should never show, but any other value will display a report
+    public static int prevReportToDisplay = -1;
+
     // report saving
     // the first index for the array is the month (0 - 23) and the second is for the answers that were submitted
     public static string[,] reports = new string [24,13];

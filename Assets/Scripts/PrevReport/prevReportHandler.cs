@@ -8,6 +8,9 @@ public class prevReportHandler : MonoBehaviour {
     public GameObject[] reportButtons = new GameObject[12];
 	public Text[] reportText = new Text[24];
 
+	public void setUpToTransfer(int report){
+		Globals.prevReportToDisplay = report;
+	}
 
     // Use this for initialization
     void Start () {
