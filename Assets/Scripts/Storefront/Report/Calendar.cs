@@ -39,7 +39,7 @@ public class Calendar : MonoBehaviour
             {
                 Globals.sem = true;
                 Globals.newMonth = true;
-                Globals.month = (Globals.month + 1) % 12;
+                Globals.month = (Globals.month + 1) % 24;
                 reportPanel.gameObject.SetActive(true);
                 Globals.newMonth = false;
                 setMonth(calendar);
@@ -53,7 +53,7 @@ public class Calendar : MonoBehaviour
 
     public static void setMonth(Text calendar)
     {
-        switch (Globals.month)
+        switch (Globals.month % 12)
         {
             case 0:
                 calendar.text = "January";

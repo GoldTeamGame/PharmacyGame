@@ -13,6 +13,11 @@ using UnityEngine.UI;
 
 public static class Globals
 {
+    // report saving
+    // the first index for the array is the month (0 - 23) and the second is for the answers that were submitted
+    public static string[,] reports = new string [24,13];
+
+
     //Player currencies
     public static int playerGold = 7;
     public static int playerPlatinum;

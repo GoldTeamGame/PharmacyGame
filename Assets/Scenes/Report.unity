@@ -241,7 +241,7 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 290, y: 90}
+  m_CellSize: {x: 590, y: 90}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -660,7 +660,7 @@ GameObject:
   - component: {fileID: 43711250}
   - component: {fileID: 43711249}
   m_Layer: 5
-  m_Name: word_slot_5 (7)
+  m_Name: word_slot_12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -767,7 +767,7 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 290, y: 90}
+  m_CellSize: {x: 590, y: 90}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -1048,7 +1048,7 @@ GameObject:
   - component: {fileID: 82770113}
   - component: {fileID: 82770112}
   m_Layer: 5
-  m_Name: word_slot_5 (5)
+  m_Name: word_slot_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1155,7 +1155,7 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 290, y: 90}
+  m_CellSize: {x: 590, y: 90}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -1448,8 +1448,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.0031738286}
-  m_SizeDelta: {x: 0, y: -467.29004}
+  m_AnchoredPosition: {x: 0, y: 69.701}
+  m_SizeDelta: {x: 0, y: -606.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &130898493
 MonoBehaviour:
@@ -3002,7 +3002,7 @@ GameObject:
   - component: {fileID: 350456938}
   - component: {fileID: 350456937}
   m_Layer: 5
-  m_Name: word_slot_1_text
+  m_Name: word_slot_5_text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3058,7 +3058,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Equipment
+  m_Text: 
 --- !u!222 &350456938
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3208,7 +3208,7 @@ GameObject:
   - component: {fileID: 362155117}
   - component: {fileID: 362155116}
   m_Layer: 5
-  m_Name: word_slot_1_text
+  m_Name: word_slot_9_text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3264,7 +3264,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Equipment
+  m_Text: 
 --- !u!222 &362155117
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3683,7 +3683,7 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 290, y: 90}
+  m_CellSize: {x: 590, y: 90}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -3788,7 +3788,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Equipment
+  m_Text: 
 --- !u!222 &454439107
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4464,7 +4464,7 @@ GameObject:
   - component: {fileID: 590696518}
   - component: {fileID: 590696517}
   m_Layer: 5
-  m_Name: word_slot_5 (4)
+  m_Name: word_slot_9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4571,7 +4571,7 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 290, y: 90}
+  m_CellSize: {x: 590, y: 90}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -5178,7 +5178,7 @@ GameObject:
   - component: {fileID: 738700743}
   - component: {fileID: 738700742}
   m_Layer: 5
-  m_Name: word_slot_1_text
+  m_Name: word_slot_11_text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5234,7 +5234,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Equipment
+  m_Text: 
 --- !u!222 &738700743
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6052,8 +6052,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1035669343}
   m_HandleRect: {fileID: 1035669342}
   m_Direction: 0
-  m_Value: 0.00000001690584
-  m_Size: 0.18140377
+  m_Value: 0.00000006403633
+  m_Size: 0.21862683
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6531,7 +6531,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Salaries Payable
+  m_Text: 
 --- !u!222 &895761006
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6573,8 +6573,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.0031738286}
-  m_SizeDelta: {x: 0, y: -467.29004}
+  m_AnchoredPosition: {x: 0, y: 69.701}
+  m_SizeDelta: {x: 0, y: -606.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &951032351
 MonoBehaviour:
@@ -6881,7 +6881,7 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 290, y: 90}
+  m_CellSize: {x: 590, y: 90}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -6930,7 +6930,7 @@ GameObject:
   - component: {fileID: 994868966}
   - component: {fileID: 994868965}
   m_Layer: 5
-  m_Name: word_slot_1_text
+  m_Name: word_slot_8_text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6975,7 +6975,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 50
+    m_FontSize: 45
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -6986,7 +6986,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Equipment
+  m_Text: 
 --- !u!222 &994868966
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7005,7 +7005,7 @@ GameObject:
   - component: {fileID: 1008322980}
   - component: {fileID: 1008322979}
   m_Layer: 5
-  m_Name: word_slot_1_text
+  m_Name: word_slot_6_text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7061,7 +7061,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Equipment
+  m_Text: 
 --- !u!222 &1008322980
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7795,7 +7795,7 @@ GameObject:
   - component: {fileID: 1104879261}
   - component: {fileID: 1104879260}
   m_Layer: 5
-  m_Name: word_slot_1_text
+  m_Name: word_slot_12_text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7851,7 +7851,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Equipment
+  m_Text: 
 --- !u!222 &1104879261
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8116,7 +8116,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Inventory
+  m_Text: 
 --- !u!222 &1199968974
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8169,8 +8169,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1805.1499, y: -0.000003452813}
-  m_SizeDelta: {x: 3610.3, y: -50.4}
+  m_AnchoredPosition: {x: 1429.7, y: -0.000003452813}
+  m_SizeDelta: {x: 2859.4, y: -50.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1201708936
 MonoBehaviour:
@@ -8243,7 +8243,7 @@ GameObject:
   - component: {fileID: 1213193027}
   - component: {fileID: 1213193026}
   m_Layer: 5
-  m_Name: word_slot_5 (6)
+  m_Name: word_slot_11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8350,7 +8350,7 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 290, y: 90}
+  m_CellSize: {x: 590, y: 90}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -8402,7 +8402,7 @@ GameObject:
   - component: {fileID: 1217681983}
   - component: {fileID: 1217681982}
   m_Layer: 5
-  m_Name: word_slot_5 (3)
+  m_Name: word_slot_8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8509,7 +8509,7 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 290, y: 90}
+  m_CellSize: {x: 590, y: 90}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -9066,8 +9066,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.0031738286}
-  m_SizeDelta: {x: 0, y: -467.29004}
+  m_AnchoredPosition: {x: 0, y: 69.701}
+  m_SizeDelta: {x: 0, y: -606.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1295576134
 MonoBehaviour:
@@ -9530,8 +9530,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.0031738286}
-  m_SizeDelta: {x: 0, y: -467.29004}
+  m_AnchoredPosition: {x: 0, y: 69.701}
+  m_SizeDelta: {x: 0, y: -606.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1341427211
 MonoBehaviour:
@@ -9737,7 +9737,7 @@ GameObject:
   - component: {fileID: 1366897440}
   - component: {fileID: 1366897439}
   m_Layer: 5
-  m_Name: word_slot_1_text
+  m_Name: word_slot_10_text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9793,7 +9793,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Equipment
+  m_Text: 
 --- !u!222 &1366897440
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10213,7 +10213,7 @@ GameObject:
   - component: {fileID: 1446388135}
   - component: {fileID: 1446388134}
   m_Layer: 5
-  m_Name: word_slot_5 (1)
+  m_Name: word_slot_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10320,7 +10320,7 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 290, y: 90}
+  m_CellSize: {x: 590, y: 90}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -10369,6 +10369,7 @@ GameObject:
   - component: {fileID: 1481242030}
   - component: {fileID: 1481242032}
   - component: {fileID: 1481242033}
+  - component: {fileID: 1481242034}
   m_Layer: 0
   m_Name: ScriptHolder
   m_TagString: Untagged
@@ -10418,6 +10419,19 @@ MonoBehaviour:
   screen4: {fileID: 1341427209}
   screen5: {fileID: 130898491}
   screen6: {fileID: 1295576132}
+  wordBankList:
+  - {fileID: 454439106}
+  - {fileID: 895761005}
+  - {fileID: 1199968973}
+  - {fileID: 1770655327}
+  - {fileID: 350456937}
+  - {fileID: 1008322979}
+  - {fileID: 1833232922}
+  - {fileID: 994868965}
+  - {fileID: 362155116}
+  - {fileID: 1366897439}
+  - {fileID: 738700742}
+  - {fileID: 1104879260}
 --- !u!114 &1481242033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10432,6 +10446,31 @@ MonoBehaviour:
   back: {fileID: 0}
   mainPanel: {fileID: 0}
   inventoryPanel: {fileID: 0}
+  shelfPanel: {fileID: 0}
+  drugListPanel: {fileID: 0}
+--- !u!114 &1481242034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1481242029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93074dd3ddc20b34f933ce3e8e5640b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnswerAssets1: {fileID: 856512874}
+  AnswerAssets2: {fileID: 1859652991}
+  AnswerAssets3: {fileID: 337690526}
+  AnswerLongTermAssets1: {fileID: 1339466638}
+  AnswerLongTermAssets2: {fileID: 849504430}
+  AnswerLongTermAssets3: {fileID: 271919218}
+  AnswerLiabilities1: {fileID: 864260519}
+  AnswerLongTermLiabilities1: {fileID: 577316929}
+  AnswerOwners1: {fileID: 1866618311}
+  AnswerOwners2: {fileID: 961943074}
+  AnswerOwners3: {fileID: 2104200580}
+  AnswerOwners4: {fileID: 547211217}
 --- !u!1 &1482027550
 GameObject:
   m_ObjectHideFlags: 0
@@ -10769,8 +10808,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.0031738286}
-  m_SizeDelta: {x: 0, y: -467.29004}
+  m_AnchoredPosition: {x: 0, y: 69.701}
+  m_SizeDelta: {x: 0, y: -606.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1531754396
 MonoBehaviour:
@@ -11342,7 +11381,7 @@ GameObject:
   - component: {fileID: 1694107838}
   - component: {fileID: 1694107837}
   m_Layer: 5
-  m_Name: word_slot_5 (2)
+  m_Name: word_slot_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11449,7 +11488,7 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 290, y: 90}
+  m_CellSize: {x: 590, y: 90}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -11889,7 +11928,7 @@ GameObject:
   - component: {fileID: 1770655328}
   - component: {fileID: 1770655327}
   m_Layer: 5
-  m_Name: word_slot_1_text
+  m_Name: word_slot_4_text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11945,7 +11984,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Equipment
+  m_Text: 
 --- !u!222 &1770655328
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12106,6 +12145,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1481242034}
+        m_MethodName: Grade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
       - m_Target: {fileID: 1481242033}
         m_MethodName: reportToStore
         m_Mode: 1
@@ -12198,7 +12248,7 @@ GameObject:
   - component: {fileID: 1833232923}
   - component: {fileID: 1833232922}
   m_Layer: 5
-  m_Name: word_slot_1_text
+  m_Name: word_slot_7_text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12254,7 +12304,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Equipment
+  m_Text: 
 --- !u!222 &1833232923
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12839,7 +12889,7 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 290, y: 90}
+  m_CellSize: {x: 590, y: 90}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -14001,7 +14051,7 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 290, y: 90}
+  m_CellSize: {x: 590, y: 90}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
