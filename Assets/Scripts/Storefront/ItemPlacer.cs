@@ -69,7 +69,7 @@ public class ItemPlacer : MonoBehaviour
                 }
             }
         }
-        else if (isSelecting)
+        else if (isSelecting && Globals_Tutorials.tutorialIndex != 11 && Globals_Tutorials.tutorialIndex != 14)
         {
             setButtonState(false);
             if (Input.GetMouseButtonDown(0))

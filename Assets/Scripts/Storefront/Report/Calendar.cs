@@ -13,42 +13,47 @@ using UnityEngine.UI;
 
 public class Calendar : MonoBehaviour
 {
-
-    public static int inGameTime;
+    public static bool isReport;
     public Text calendar;
-
     public GameObject reportPanel;
-
-    //public Button toReports;
     
     // Use this for initialization
     void Start()
     {
         setMonth(calendar);
+
+        // If there is currently a report, then stop the clock and open the reportPanel
+        if (isReport)
+        {
+            Clock.reset();
+            SceneChanger.forceToStore(reportPanel);
+        }
         // calendar.text = inGameTime.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Globals.globalTime = (int)Time.time;
         if (!Globals.newMonth)
         {
             //calendar.text = inGameTime.ToString();
-            if (Globals.getInGameTime() == Globals.timePerMonth - 1 && Globals.sem == false)
+            if (Clock.time == Globals.timePerMonth && Globals.sem == false)
             {
+                Globals_Customer.limit += 2; // increase total amount of customers
+                isReport = true;
+                Clock.reset();
+                ProceduralGenerator.removeCustomers();
+                PharmacistGenerator.resetPharmacist();
                 Globals.sem = true;
                 Globals.newMonth = true;
                 Globals.month = (Globals.month + 1) % 24;
                 reportPanel.gameObject.SetActive(true);
                 Globals.newMonth = false;
                 setMonth(calendar);
+                Clock.time = 0;
                 SceneChanger.forceToStore(reportPanel);
             }
         }
-        //Debug.Log(Globals.getInGameTime());
-        
-
     }
 
     public static void setMonth(Text calendar)

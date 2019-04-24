@@ -10,6 +10,7 @@ using UnityEngine.UI;
 
 public class TutorialMonitor : MonoBehaviour
 {
+    public static bool doesSaveExist;
     public static bool isActive; // is the tutorial activated from the inspector?
     public bool _isActive; 
     public static bool isPopup; // will the Tutorial Panel need to pop up?
@@ -27,25 +28,28 @@ public class TutorialMonitor : MonoBehaviour
         button = _button; // set static button equal to what is in the inspector
         Globals_Tutorials.generateTutorials(); // generate all tutorials (Hardcoded)
 
-        // if tutorialIndex is 0 and the isActive is checked to true, then start the game with the tutorial
-        if (Globals_Tutorials.tutorialIndex == 0 && isActive)
+        if (!doesSaveExist)
         {
-            Globals.playerGold = 7;
+            // if tutorialIndex is 0 and the isActive is checked to true, then start the game with the tutorial
+            if (Globals_Tutorials.tutorialIndex == 0 && isActive)
+            {
+                Globals.playerGold = 7;
 
-            // de-activate all buttons
-            for (int i = 0; i < button.Length - 1; i++)
-                button[i].GetComponent<Button>().interactable = false;
+                // de-activate all buttons
+                for (int i = 0; i < button.Length - 1; i++)
+                    button[i].GetComponent<Button>().interactable = false;
 
-            isPopup = true; // make tutorial pop-up
-            button[14].SetActive(true); // set tutorial button to active
-        }
-        // if tutorial is not active, then go into dev mode
-        else if (!isActive)
-        {
-            Globals.playerGold = 10000;
-            Globals.playerPlatinum = 100;
-            Globals_Customer.limit = 10;
-            Globals_Tutorials.tutorialIndex = 18;
+                isPopup = true; // make tutorial pop-up
+                button[14].SetActive(true); // set tutorial button to active
+            }
+            // if tutorial is not active, then go into dev mode
+            else if (!isActive)
+            {
+                Globals.playerGold = 10000;
+                Globals.playerPlatinum = 100;
+                Globals_Customer.limit = 10;
+                Globals_Tutorials.tutorialIndex = 18;
+            }
         }
     }
 
@@ -291,6 +295,7 @@ public class TutorialMonitor : MonoBehaviour
                 button[14].SetActive(false);
                 isConfirm = false;
                 Globals_Tutorials.tutorialIndex++;
+                Clock.start(); // start timer
             }
         }
     }
@@ -314,9 +319,15 @@ public class TutorialMonitor : MonoBehaviour
     // Used on various buttons to progress the tutorial to the next state
     public void tutorialButton(int state)
     {
+        staticTutorialButton(state);
+    }
+
+    public static void staticTutorialButton(int state)
+    {
         if (state - 1 == Globals_Tutorials.tutorialIndex)
         {
             Globals_Tutorials.tutorialIndex++;
+            Debug.Log("Current State: " + Globals_Tutorials.tutorialIndex);
             isPopup = true;
         }
     }

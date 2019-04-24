@@ -10,6 +10,7 @@ using System.Collections.Generic;
 public class ProceduralGenerator : MonoBehaviour
 {
     public Transform parent; // The container that the customer will be spawned into
+    public static Transform staticParent;
     public Sprite[] appearanceList; // contains sprites passed in from unity editor
     public static Sprite[] staticAppearanceList; // Static version of appearanceList which can be used in static functions
     public GameObject customer; // object being spawned
@@ -21,6 +22,7 @@ public class ProceduralGenerator : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        staticParent = parent;
         xSpawnPoint = spawnPoint.localPosition.x;
 
         // Instantiate customerData list if none currently exists
@@ -77,12 +79,12 @@ public class ProceduralGenerator : MonoBehaviour
         else
         {
             string name = Globals_Customer.name[Random.Range(0, Globals_Customer.name.Length)]; // generate a random name
-            float speed = .009f;
+            float speed = .0075f * Globals.sv.customerSpeedMultiplier;
                 //Random.Range(0.4f, 0.6f); // generate a random speed
             
             cd = new CustomerData(name, speed); // instantiate cd with name and speed
             cd.appearance = Random.Range(0, 9); // set appearance
-            cd.mood = Random.Range(40, 60); // set a random mood
+            cd.mood = Random.Range(40, 60) + Globals.sv.moodBonus; // set a random mood
             cd.tolerance = Random.Range(1, 5) + Globals.sv.toleranceBonus;
             cd.flexibility = Random.Range(1, 3) + Globals.sv.flexibilityBonus;
 
@@ -122,14 +124,31 @@ public class ProceduralGenerator : MonoBehaviour
         // Continue filling array while there are remaining available drugs
         // and while there is still remaining space in the array
         for (int i = 0; i < drugList.Length && desireCount < array.Length; i++)
+        {
+            bool willFind = false;
+            // If prescription drug is being looked for, just use normal chance to roll the dice
+            if (isPrescription)
+                willFind = Toolbox.randomBool(((Drug)drugList[i]).chance);
+            // If overcounter drug is being looked for, lower the chance if the drug is not unlocked
+            else
+            {
+                int chance = ((Drug)drugList[i]).chance;
+
+                // if drug is not unlocked, lower chance
+                if (!drugList[i].isUnlocked)
+                    chance = ((Drug)drugList[i]).chance / 10;
+
+                willFind = Toolbox.randomBool(chance);
+            }
             // Add drug to array if it passes the check
             // Customers may have over counter drugs on their list of desires that havent been unlocked yet,
             //      but as for prescription drugs, they will ONLY have it on their list if the player has it unlocked
             // (A person would not go to a store to pick up a prescription without first knowing it the store has the drug)
             // Of course, it is still possible that the store has none of the prescribed drug in stock, in which case, the customer will not be able to buy it,
             //      but it would still show up on their list of desires.
-            if (Toolbox.randomBool(((Drug)drugList[i]).chance) || (isPrescription && ((Drug)drugList[i]).isUnlocked))
+            if ((!isPrescription && willFind) || (isPrescription && ((Drug)drugList[i]).isUnlocked) && willFind)
                 array[desireCount++] = new CartItem(((Drug)drugList[i]));
+        }
 
         // If no desires were added, but the array length is 1, then forcefully add item to list
         if (desireCount == 0 && array.Length == 1)
@@ -145,6 +164,22 @@ public class ProceduralGenerator : MonoBehaviour
             for (int i = 0; i < desireCount; i++)
                 temp[i] = array[i];
             array = temp;
+        }
+    }
+
+    public static void removeCustomers()
+    {
+        Globals_Customer._limit = Globals_Customer.limit; // save previous limit value
+        Globals_Customer.limit = 0; // set limit to 0 (don't allow any more customers in store)
+
+        int numberOfChildren = staticParent.childCount;
+
+        for (int i = 1; i < numberOfChildren; i++)
+        {
+            Destroy(staticParent.GetChild(i).gameObject);
+            Globals_Customer.currentNumberOfCustomers = 0;
+            Globals_Customer.numberOfCustomers = 0;
+            Globals_Customer.customerData.Clear();
         }
     }
 }
