@@ -320,6 +320,7 @@ public class FinalStats : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         CashText.text = Cash.ToString();
+        AccountsPayableToSuppliersText.text = AccountsPayableToSuppliers.ToString();
         AccountsReceivableFromSuppliersText.text = AccountsReceivableFromSuppliers.ToString();
         InventoryText.text = Inventory.ToString();
         PropertyPlantEquipmentText.text = PropertyPlantEquipment.ToString();
