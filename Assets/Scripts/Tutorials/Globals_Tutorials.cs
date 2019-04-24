@@ -74,7 +74,7 @@ public class Globals_Tutorials
 
         // 6
         tutorial[tutorialIndex] = new Tutorial(1);
-        tutorial[tutorialIndex].addPage(pageIndex++, "Unlock Shelf", sprite[counter++], 0, "Tap the Shelf +1 button to unlock the shelf");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Unlock Shelf", sprite[counter++], 0, "Tap the Shelf button to unlock the shelf");
         tutorialIndex++;
         pageIndex = 0;
 
@@ -93,7 +93,7 @@ public class Globals_Tutorials
 
         // 9
         tutorial[tutorialIndex] = new Tutorial(1);
-        tutorial[tutorialIndex].addPage(pageIndex++, "Place a Shelf", sprite[counter++], 2, "To place the shelf on the Storefront, tap the Shelf button.\n\nIf you hold the button down, you can view the Shelf tooltip, which will also show you how many more shelves you can place.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Place a Shelf", sprite[counter++], 2, "To place the shelf on the Storefront, tap the Shelf button.");
         tutorialIndex++;
         pageIndex = 0;
 
