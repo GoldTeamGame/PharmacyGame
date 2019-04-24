@@ -50,7 +50,7 @@ public static class Globals
     //Game time storage
     public static int globalTime = 0;
     public static int loadTime = 0;
-    public const int timePerMonth = 60;
+    public const int timePerMonth = 30;
     public static int month = 0;
     public static int year = 2019;
 
