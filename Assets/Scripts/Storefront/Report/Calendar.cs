@@ -56,17 +56,17 @@ public class Calendar : MonoBehaviour
         switch (Globals.month % 12)
         {
             case 0:
-                calendar.text = "January";
+                calendar.text = "Jan";
                 break;
 
             case 1:
-                calendar.text = "February";
+                calendar.text = "Feb";
                 break;
             case 2:
-                calendar.text = "March";
+                calendar.text = "Mar";
                 break;
             case 3:
-                calendar.text = "April";
+                calendar.text = "Apr";
                 break;
             case 4:
                 calendar.text = "May";
@@ -78,19 +78,19 @@ public class Calendar : MonoBehaviour
                 calendar.text = "July";
                 break;
             case 7:
-                calendar.text = "August";
+                calendar.text = "Aug";
                 break;
             case 8:
-                calendar.text = "September";
+                calendar.text = "Sept";
                 break;
             case 9:
-                calendar.text = "October";
+                calendar.text = "Oct";
                 break;
             case 10:
-                calendar.text = "November";
+                calendar.text = "Nov";
                 break;
             case 11:
-                calendar.text = "December";
+                calendar.text = "Dec";
                 break;
             default:
 
