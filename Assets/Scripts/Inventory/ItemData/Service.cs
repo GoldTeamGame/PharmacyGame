@@ -36,6 +36,7 @@ public class Service : Item
             Globals.playerPlatinum -= price;
             isUnlocked = true;
             amountOwned++;
+            Globals.sv.applyService(name);
         }
     }
 
@@ -49,10 +50,10 @@ public class Service : Item
     {
         Service[] serviceList = new Service[4];
 
-        serviceList[0] = new Service("Shelf +1", 0, "A Fixture for displaying over the counter drugs. Customers can only buy the drugs being displayed.");
-        serviceList[1] = new Service("Flu Shot Station", 10, "Flut Shot Station Description");
-        serviceList[2] = new Service("Vaccine Station", 10, "Vaccine Station Description");
-        serviceList[3] = new Service("Blood Pressure Monitor", 10, "Blood Pressure Monitor Description");
+        serviceList[0] = new Service("Shelf", 0, "A Fixture for displaying over the counter drugs. Customers can only buy the drugs being displayed.");
+        serviceList[1] = new Service("Flu Shot Station", 25, "Makes your customers happier.");
+        serviceList[2] = new Service("Vaccine Station", 50, "Makes your customers more tolerant when things go wrong.");
+        serviceList[3] = new Service("Blood Pressure Monitor", 100, "Helps your customers move faster.");
 
         return serviceList;
     }

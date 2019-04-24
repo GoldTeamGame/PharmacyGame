@@ -23,4 +23,24 @@ public class StoreValues
     public int moodBonus; // flat bonus applied to customer mood upon procedural generation
     public int toleranceBonus; // flat bonus applied to tolerance upon procedural generation
     public int flexibilityBonus; // flat bonus applied to flexibility upon procedural generation
+
+    public void applyService(string name)
+    {
+        // Apply bonus depending on the service that was unlocked
+        switch (name)
+        {
+            case "Flu Shot Station":
+                moodBonus += 5;
+                break;
+            case "Vaccine Station":
+                toleranceBonus += 5;
+                break;
+            case "Blood Pressure Monitor":
+                customerSpeedMultiplier += 0.15f;
+                break;
+            default:
+                DebugTool.Log("Service does not exist: " + name);
+                break;
+        }
+    }
 }

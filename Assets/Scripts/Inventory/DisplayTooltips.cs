@@ -57,7 +57,7 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
                 TutorialMonitor.isPopup = true;
             }
 
-            if (item.name.Equals("Shelf +1"))
+            if (item.name.Equals("Shelf"))
                 TutorialMonitor.staticTutorialButton(7);
 
             GameObject child = EventSystem.current.currentSelectedGameObject; // button clicked
