@@ -158,10 +158,11 @@ public class SceneChanger : MonoBehaviour
 
     public void reportToStore()
     {
-        
-
         isAtStorefront = true;
-        
+        Clock.start(); // start timer
+        Globals_Customer.limit = Globals_Customer._limit; // set limit back to what it was before
+        Calendar.isReport = false;
+
         staticMainPanel.SetActive(true);
         Globals.loadTime = Globals.globalTime;
         
@@ -169,21 +170,24 @@ public class SceneChanger : MonoBehaviour
         Globals.sem = false;
         SceneManager.UnloadSceneAsync("Report");
         currentScene = "Storefront";
-        
     }
 
     public static void forceToStore(GameObject reportPanel)
     {
-        staticInventoryPanel.SetActive(false);
-        ItemPlacer.isPlacing = false;
-        ItemPlacer.isSelecting = false;
+        if (ItemPlacer.isPlacing || ItemPlacer.isSelecting)
+        {
+            staticInventoryPanel.SetActive(false);
+            ItemPlacer.isPlacing = false;
+            ItemPlacer.isSelecting = false;
+        }
         if (ItemPlacer.current != null)
             ItemPlacer.delete();
         isAtStorefront = true;
-        staticMainPanel.SetActive(false);
+        if (staticMainPanel != null)
+            staticMainPanel.SetActive(false);
         reportPanel.SetActive(true);
-        
-        if(currentScene != "Storefront")
+
+        if(currentScene != null && currentScene != "Storefront")
             SceneManager.UnloadSceneAsync(currentScene);
         currentScene = "Storefront";
     }

@@ -13,6 +13,7 @@ using UnityEngine.UI;
 
 public class Calendar : MonoBehaviour
 {
+    public static bool isReport;
     public Text calendar;
     public GameObject reportPanel;
     
@@ -20,6 +21,13 @@ public class Calendar : MonoBehaviour
     void Start()
     {
         setMonth(calendar);
+
+        // If there is currently a report, then stop the clock and open the reportPanel
+        if (isReport)
+        {
+            Clock.reset();
+            SceneChanger.forceToStore(reportPanel);
+        }
         // calendar.text = inGameTime.ToString();
     }
 
@@ -31,6 +39,7 @@ public class Calendar : MonoBehaviour
             //calendar.text = inGameTime.ToString();
             if (Clock.time == Globals.timePerMonth && Globals.sem == false)
             {
+                isReport = true;
                 Clock.reset();
                 ProceduralGenerator.removeCustomers();
                 PharmacistGenerator.resetPharmacist();

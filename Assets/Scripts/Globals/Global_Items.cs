@@ -29,7 +29,7 @@ public static class Globals_Items
     public static void generateItems(Item[][] savedItem)
     {
         // Set list if it isn't null
-        if (savedItem != null  && TutorialMonitor.doesSaveExist)
+        if (savedItem != null)
             item = savedItem;
         // Or generate a new list
         else

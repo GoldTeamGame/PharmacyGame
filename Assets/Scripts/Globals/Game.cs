@@ -84,12 +84,14 @@ public class Game : MonoBehaviour
         //if so, read file and set global varables
         
         Globals.sv = new StoreValues();
-        Globals_Items.generateItems(null);
         if (File.Exists(Application.persistentDataPath + path))
         {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + path, FileMode.Open);
             Save save = (Save)bf.Deserialize(file);
+            
+            if (!TutorialMonitor.doesSaveExist)
+                Globals_Items.generateItems(null);
 
             // If tutorial was finished, then load
             if (save.tutorialIndex > 17 || !TutorialMonitor.isActive)
@@ -114,6 +116,8 @@ public class Game : MonoBehaviour
                 Globals_Customer.limit = save.limit;
                 Globals_Customer._limit = save._limit;
                 TutorialMonitor.doesSaveExist = save.doesSaveExist;
+                Calendar.isReport = save.isReport;
+                Globals.month = save.month;
             }
             Debug.Log("Game Loaded");
             Unpause();
@@ -121,6 +125,7 @@ public class Game : MonoBehaviour
         //no saved game, just proceed with default globals
         else
         {
+            Globals_Items.generateItems(null);
             Debug.Log("No game saved!");
         }
     }
@@ -147,6 +152,8 @@ public class Game : MonoBehaviour
             save.limit = Globals_Customer.limit;
             save._limit = Globals_Customer._limit;
             save.doesSaveExist = true;
+            save.isReport = Calendar.isReport;
+            save.month = Globals.month;
         }
 
         //return the object to write to the file
