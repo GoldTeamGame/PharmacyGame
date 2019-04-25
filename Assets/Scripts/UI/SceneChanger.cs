@@ -22,6 +22,7 @@ public class SceneChanger : MonoBehaviour
     public static GameObject staticInventoryPanel;
     private GameObject currentButton;
     private Color originalColor;
+    public static string cScene;
 
 
     public void Start()
@@ -72,6 +73,8 @@ public class SceneChanger : MonoBehaviour
             currentScene = scene;
             SceneManager.LoadScene(scene, LoadSceneMode.Additive);
         }
+
+        cScene = scene;
     }
 
     // Return focus to storefront scene
@@ -102,6 +105,7 @@ public class SceneChanger : MonoBehaviour
             currentScene = "Storefront";
         }
 
+        cScene = "Storefront";
         currentButton.GetComponent<Image>().color = originalColor;
         currentButton = null;
     }
@@ -122,6 +126,7 @@ public class SceneChanger : MonoBehaviour
         staticMainPanel.SetActive(false);
         staticInventoryPanel.SetActive(true);
         currentScene = "Storefront";
+        cScene = "InventoryStorefront";
     }
 
     public void storefrontToInv()
@@ -139,6 +144,7 @@ public class SceneChanger : MonoBehaviour
         staticMainPanel.SetActive(true);
         staticInventoryPanel.SetActive(false);
         currentScene = "Inventory";
+        cScene = "Inventory";
     }
 
     //assumes on storefront for now
@@ -154,6 +160,7 @@ public class SceneChanger : MonoBehaviour
         GameObject myPanel = myButton.transform.parent.gameObject;
         myPanel.gameObject.SetActive(false);
         SceneManager.LoadScene("Report", LoadSceneMode.Additive);
+        cScene = "Report";
     }
 
     public void reportToStore()
@@ -170,6 +177,7 @@ public class SceneChanger : MonoBehaviour
         Globals.sem = false;
         SceneManager.UnloadSceneAsync("Report");
         currentScene = "Storefront";
+        cScene = "Storefront";
     }
 
     public static void forceToStore(GameObject reportPanel)
@@ -190,5 +198,46 @@ public class SceneChanger : MonoBehaviour
         if(currentScene != null && currentScene != "Storefront")
             SceneManager.UnloadSceneAsync(currentScene);
         currentScene = "Storefront";
+        cScene = "ReportStorefront";
+    }
+
+    // Button-Click function
+    // Displays the approriate tutorial based on the current scene
+    public void showTutorial()
+    {
+        Globals_Tutorials.tutorialIndex = findIndex(); // set index
+        Globals_Tutorials.pageIndex = 0; // reset page index
+        Globals_Tutorials.tutorial[Globals_Tutorials.tutorialIndex].showCurrentPage(); // show currently selected tutorial
+        Globals_Tutorials.go[4].SetActive(true); // show panel
+    }
+
+    // Determine the index that will be used based on the current scene
+    private int findIndex()
+    {
+        switch (cScene)
+        {
+            case "Storefront":
+                return 18;
+            case "InventoryStorefront":
+                return 19;
+            case "ReportStorefront":
+                return 20;
+            case "Customers":
+                return 21;
+            case "Inventory":
+                return 22;
+            case "Shop":
+                return 23;
+            case "Expansion":
+                return 24;
+            case "PreviousReports":
+                return 25;
+            case "Statistics":
+                return 26;
+            case "Report":
+                return 27;
+            default:
+                return 18;
+        }
     }
 }

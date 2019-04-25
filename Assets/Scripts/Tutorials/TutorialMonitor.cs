@@ -17,6 +17,7 @@ public class TutorialMonitor : MonoBehaviour
     public static bool isConfirm; // has the last page of a tutorial been clicked?
     public GameObject[] go; // holds parts of the tutorial panel
     public Sprite[] sprite; // holds all sprites used in tutorial panels
+    public Sprite[] sprite_Button; // holds all sprites used in tutorial_Button panels
     public static GameObject[] button; // holds buttons that need to be activated/de-activated to force player down the tutorials path
     public GameObject[] _button;
 
@@ -25,6 +26,7 @@ public class TutorialMonitor : MonoBehaviour
         isActive = _isActive; // set static isActive to what is in the inspector
         Globals_Tutorials.go = go; // set static go from Globals_Tutorials to what is in the inspector
         Globals_Tutorials.sprite = sprite; // set static sprite from Globals_Tutorials to what is in the inspector
+        Globals_Tutorials.sprite_Button = sprite_Button; // set state sprite_Button from Globals_Tutorials to what is in the inspector
         button = _button; // set static button equal to what is in the inspector
         Globals_Tutorials.generateTutorials(); // generate all tutorials (Hardcoded)
 
@@ -303,7 +305,7 @@ public class TutorialMonitor : MonoBehaviour
     }
 
     // Displays the appropriate Tutorial screen, then sets isPopup to false that way this function is not repeatedly called
-    static void displayTutorial()
+    public static void displayTutorial()
     {
         Globals_Tutorials.tutorial[Globals_Tutorials.tutorialIndex].showCurrentPage();
         Globals_Tutorials.go[4].SetActive(true);

@@ -34,8 +34,6 @@ public class Calendar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        Debug.Log(Clock.time);
         if (!Globals.newMonth)
         {
             //calendar.text = inGameTime.ToString();
