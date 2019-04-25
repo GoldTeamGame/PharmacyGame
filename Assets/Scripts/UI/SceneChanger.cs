@@ -205,10 +205,13 @@ public class SceneChanger : MonoBehaviour
     // Displays the approriate tutorial based on the current scene
     public void showTutorial()
     {
-        Globals_Tutorials.tutorialIndex = findIndex(); // set index
-        Globals_Tutorials.pageIndex = 0; // reset page index
-        Globals_Tutorials.tutorial[Globals_Tutorials.tutorialIndex].showCurrentPage(); // show currently selected tutorial
-        Globals_Tutorials.go[4].SetActive(true); // show panel
+        if (Globals_Tutorials.tutorialIndex > 17)
+        {
+            Globals_Tutorials.tutorialIndex = findIndex(); // set index
+            Globals_Tutorials.pageIndex = 0; // reset page index
+            Globals_Tutorials.tutorial[Globals_Tutorials.tutorialIndex].showCurrentPage(); // show currently selected tutorial
+            Globals_Tutorials.go[4].SetActive(true); // show panel
+        }
     }
 
     // Determine the index that will be used based on the current scene

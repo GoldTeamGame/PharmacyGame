@@ -108,7 +108,7 @@ public class Globals_Tutorials
 
         // 11
         tutorial[tutorialIndex] = new Tutorial(1);
-        tutorial[tutorialIndex].addPage(pageIndex++, "Return to Inventory", sprite[counter++], 0, "Now that you have placed the shelf, you should return to the Inventory Screen by tapping the left-most button.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Return to Inventory", sprite[counter++], 0, "Now that you have placed the shelf, you should return to the Inventory Screen by tapping the inventory button.");
         tutorialIndex++;
         pageIndex = 0;
 
@@ -148,10 +148,11 @@ public class Globals_Tutorials
         tutorialIndex++;
         pageIndex = 0;
 
+        counter = 0;
         // 18
         // Storefront
         tutorial[tutorialIndex] = new Tutorial(8);
-        tutorial[tutorialIndex].addPage(pageIndex++, "Storefront Screen", sprite_Button[counter++], 0, "The Storefront Screen is where you can view your actual pharmacy. From here you can watch customers enter and interact with your store.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Storefront Screen", null, 0, "The Storefront Screen is where you can view your actual pharmacy. From here you can watch customers enter and interact with your store.");
         tutorial[tutorialIndex].addPage(pageIndex++, "Currency", sprite_Button[counter++], 1, "As time goes by, your store will generate Gold (G) through sales.\n\nPlatinum (P), on the other hand, can only be earned at the end of each month.");
         tutorial[tutorialIndex].addPage(pageIndex++, "Calendar", sprite_Button[counter++], 1, "Each month lasts for 10 minutes. Next to the Calendar is the timer which shows how far you are currently into the month.\n\nAt the end of the month, all customers will leave the store and you will have to fill out a report before going to the next month.");
         tutorial[tutorialIndex].addPage(pageIndex++, "UI", sprite_Button[counter++], 2, "The buttons you see below the storefront screen can be selected to bring you to other screens.");
@@ -168,7 +169,7 @@ public class Globals_Tutorials
         tutorial[tutorialIndex].addPage(pageIndex++, "Edit Mode", sprite_Button[counter++], 0, "You are currently in Edit Mode. In this mode, you can manipulate the objects that are placed on the storefront.");
         tutorial[tutorialIndex].addPage(pageIndex++, "Picking up Objects", sprite_Button[counter++], 2, "Now that you are back in Edit Mode. Tap the shelf to pick it up.\n\nOnce again decide where to place it, then tap the green arrow button to confrim the location.");
         tutorial[tutorialIndex].addPage(pageIndex++, "The Buttons", sprite_Button[counter++], 2, "Notice the Buttons below the storefront have changed.\n\nThe green checkmark is used to confirm the location of an object you have picked up.\n\nThe clockwise\\counter-clockwise arrows can be used to rotate the object you have picked up.\n\nThe garbage can is used to delete the object you have selected.\n\nThe Inventory Button will bring you back to the inventory screen.");
-        tutorial[tutorialIndex].addPage(pageIndex++, "Placing Objects", sprite_Button[counter++], 2, "When the object you have selected is transparent, that means you can use the green checkmark to confirm the objects location.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Placing Objects", sprite_Button[counter++], 0, "When the object you have selected is transparent, that means you can use the green checkmark to confirm the objects location.");
         tutorial[tutorialIndex].addPage(pageIndex++, "Illegal Placements", sprite_Button[counter++], 2, "If the object is red, then it is in a location that you cannot place it.\n\nYou cannot place objects in front of the store entrance and along the bottom-most row of the store.\n\nAlso, you cannot arrange objects in a way that will cut off the path from the store entrance to the bottom-most row of the store.");
         tutorial[tutorialIndex].addPage(pageIndex++, "Back Button", sprite_Button[counter++], 0, "The back button will simply exit the edit mode.");
         tutorialIndex++;
@@ -176,9 +177,10 @@ public class Globals_Tutorials
 
         // 20
         // Storefront - Report
-        tutorial[tutorialIndex] = new Tutorial(2);
-        tutorial[tutorialIndex].addPage(pageIndex++, "Report!", sprite_Button[counter++], 0, "It has currently reached the end of the month. At this point in time, all of your customers have been kicked out of the store.\n\nIn order to continue playing, you must tap the Report Button and fill out the report.");
-        tutorial[tutorialIndex].addPage(pageIndex++, "The Buttons", sprite_Button[counter++], 0, "Notice the Buttons below the storefront have changed. With these buttons you can view your previous reports, view your current statistics, go the the report, and use the tutorial button.");
+        tutorial[tutorialIndex] = new Tutorial(3);
+        tutorial[tutorialIndex].addPage(pageIndex++, "Report!", null, 0, "It has currently reached the end of the month. At this point in time, all of your customers have been kicked out of the store.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "The Buttons", sprite_Button[counter++], 2, "Notice the Buttons below the storefront have changed. With these buttons you can view your previous reports, view your current statistics, go the the report, and use the tutorial button.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Start Report", sprite_Button[counter++], 0, "In order to continue playing, you must tap the Report Button and fill out the report.");
         tutorialIndex++;
         pageIndex = 0;
 
@@ -187,7 +189,7 @@ public class Globals_Tutorials
         tutorial[tutorialIndex] = new Tutorial(5);
         tutorial[tutorialIndex].addPage(pageIndex++, "Customer Screen", sprite_Button[counter++], 0, "The Customer Screen is where you can view all customers currently in your store, how they are feeling, and what they want to purchase.");
         tutorial[tutorialIndex].addPage(pageIndex++, "Mood Rating", sprite_Button[counter++], 2, "Customer Mood Rating is a value out of 100 that indicates how happy a customer is.\n\nMood gets lower as customers cannot find what they are looking for and get higher when they can find what they are looking for.");
-        tutorial[tutorialIndex].addPage(pageIndex++, "Overall Mood Rating", sprite_Button[counter++], 0, "The higher the overall mood rating is, the more customers will enter your store, thus, the more products you can sell.\n\nTry to keep your customers happy to make the store flourish.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Overall Mood Rating", null, 0, "The higher the overall mood rating is, the more customers will enter your store, thus, the more products you can sell.\n\nTry to keep your customers happy to make the store flourish.");
         tutorial[tutorialIndex].addPage(pageIndex++, "Customer Information", null, 0, "By clicking a customer's button, you can view what they want they are currently doing and what they want to buy.\n\nTry to provide them with everything they want.");
         tutorial[tutorialIndex].addPage(pageIndex++, "Back Button", sprite_Button[counter++], 0, "Tap the back button to go back to the storefront screen.");
         tutorialIndex++;
@@ -197,9 +199,9 @@ public class Globals_Tutorials
         // Inventory
         tutorial[tutorialIndex] = new Tutorial(6);
         tutorial[tutorialIndex].addPage(pageIndex++, "Inventory", sprite_Button[counter++], 0, "The Inventory Screen is where you can view everything you own as well as the people you have hired.");
-        tutorial[tutorialIndex].addPage(pageIndex++, "Stock Tab", sprite_Button[counter++], 0, "The Stock Tab is where you can view all the drugs you own.\n\nIf a drug is not unlocked, it will not show up in the list.");
-        tutorial[tutorialIndex].addPage(pageIndex++, "Staff", sprite_Button[counter++], 0, "The Staff Tab is where you can view the employees you have hired at a glance.");
-        tutorial[tutorialIndex].addPage(pageIndex++, "Services", sprite_Button[counter++], 0, "The Services Tab is you can place down the services that you have unlocked.\n\nTo place them, select the button and you will be sent to the storefront to place the item.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Stock Tab", sprite_Button[counter++], 1, "The Stock Tab is where you can view all the drugs you own.\n\nIf a drug is not unlocked, it will not show up in the list.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Staff Tab", sprite_Button[counter++], 1, "The Staff Tab is where you can view the employees you have hired at a glance.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Services Tab", sprite_Button[counter++], 1, "The Services Tab is you can place down the services that you have unlocked.\n\nTo place them, select the button and you will be sent to the storefront to place the item.");
         tutorial[tutorialIndex].addPage(pageIndex++, "Edit Mode Button", sprite_Button[counter++], 0, "You can access edit mode by tapping the Edit Mode Button.\n\nEdit Mode will let you move items around on the storefront.");
         tutorial[tutorialIndex].addPage(pageIndex++, "Back Button", sprite_Button[counter++], 0, "Tap the back button to go back to the storefront screen.");
         tutorialIndex++;
@@ -212,7 +214,7 @@ public class Globals_Tutorials
         tutorial[tutorialIndex].addPage(pageIndex++, "Prescription Tab", sprite_Button[counter++], 1, "The Prescription Tab is where you can purchase prescription drugs that you have unlocked.\n\nPrescription drugs are held behind the Pharmacist Counters.");
         tutorial[tutorialIndex].addPage(pageIndex++, "Over Counter Tab", sprite_Button[counter++], 1, "The Over Counter Tab is where you can purchase over the counter drugs that you have unlocked.\n]nOver the Counter drugs must be stocked on shelves in order to be sold.");
         tutorial[tutorialIndex].addPage(pageIndex++, "Staff Tab", sprite_Button[counter++], 1, "The Staff Tab is where you can hire pharmacists to work at your store.\n\nHiring a pharmacist is a one time transaction, so they will continue working for you without needing to be paid again!");
-        tutorial[tutorialIndex].addPage(pageIndex++, "Pharmacist Stats", sprite_Button[counter++], 1, "Each pharmacist has their own stats that determine how fast they process customer transactions.\n\nPharmacists with better stats can sell drugs faster to prevent long lines which will make you more money per month.\n\nYou can view a pharmacist's stats by viewing their tooltip.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Pharmacist Stats", sprite_Button[counter++], 2, "Each pharmacist has their own stats that determine how fast they process customer transactions.\n\nPharmacists with better stats can sell drugs faster to prevent long lines which will make you more money per month.\n\nYou can view a pharmacist's stats by viewing their tooltip.");
         tutorial[tutorialIndex].addPage(pageIndex++, "Assigning Pharmacists", null, 1, "Pharmacists can be assigned while at the Storefront Screen. Assign the pharmacist by tapping the pharmacist counter and then selecting the pharmacist in the list that pops up.");
         tutorial[tutorialIndex].addPage(pageIndex++, "Back Button", sprite_Button[counter++], 0, "Tap the back button to go back to the storefront screen.");
         tutorialIndex++;
@@ -222,9 +224,9 @@ public class Globals_Tutorials
         // Expansions
         tutorial[tutorialIndex] = new Tutorial(5);
         tutorial[tutorialIndex].addPage(pageIndex++, "Expansions Screen", sprite_Button[counter++], 0, "The Expansions Screen is where you can unlock items with Platinum.\n\nPlatinum is earned from reports that you do at the end of the month.");
-        tutorial[tutorialIndex].addPage(pageIndex++, "Sets Tab", sprite_Button[counter++], 0, "The Sets Tab is where you can unlock drug sets.\n\nAfter unlocking the drugs, you can then purchase them at the shop.");
-        tutorial[tutorialIndex].addPage(pageIndex++, "Upgrades Tab", sprite_Button[counter++], 0, "The Upgrades Tab is where you can unlock permanent store upgrades.\n\nThese upgrades give you a variety of benefits such increasing the value of your goods, making your pharmacist's more efficient, unlocking more pharmacist counters, and more!");
-        tutorial[tutorialIndex].addPage(pageIndex++, "Services Tab", sprite_Button[counter++], 0, "The Services Tab is where you can unlock placeable services.\n\nThese services can make your customer's happier and give your store more decor.\n\nServices that have been unlocked can be placed by visiting the Inventory Screen.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Sets Tab", sprite_Button[counter++], 1, "The Sets Tab is where you can unlock drug sets.\n\nAfter unlocking the drugs, you can then purchase them at the shop.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Upgrades Tab", sprite_Button[counter++], 1, "The Upgrades Tab is where you can unlock permanent store upgrades.\n\nThese upgrades give you a variety of benefits such increasing the value of your goods, making your pharmacist's more efficient, unlocking more pharmacist counters, and more!");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Services Tab", sprite_Button[counter++], 1, "The Services Tab is where you can unlock placeable services.\n\nThese services can make your customer's happier and give your store more decor.\n\nServices that have been unlocked can be placed by visiting the Inventory Screen.");
         tutorial[tutorialIndex].addPage(pageIndex++, "Back Button", sprite_Button[counter++], 0, "Tap the back button to go back to the storefront screen.");
         tutorialIndex++;
         pageIndex = 0;
@@ -233,7 +235,7 @@ public class Globals_Tutorials
         // Previous Reports
         tutorial[tutorialIndex] = new Tutorial(3);
         tutorial[tutorialIndex].addPage(pageIndex++, "Previous Reports", sprite_Button[counter++], 0, "The Previous Reports Screen is where you can view the reports that you have previously finished and see the grades you have received.");
-        tutorial[tutorialIndex].addPage(pageIndex++, "Viewing Previous Reports", null, 0, "To View the report, tap the button");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Viewing Previous Reports", sprite_Button[counter++], 2, "To View the report, tap the button");
         tutorial[tutorialIndex].addPage(pageIndex++, "Back Button", sprite_Button[counter++], 0, "Tap the back button to go back to the storefront screen.");
         tutorialIndex++;
         pageIndex = 0;
@@ -242,9 +244,9 @@ public class Globals_Tutorials
         // Statistics
         tutorial[tutorialIndex] = new Tutorial(5);
         tutorial[tutorialIndex].addPage(pageIndex++, "Statistics Screen", sprite_Button[counter++], 0, "The Statistics Screen is where you can view various financial reports and values associated with them.\n\nEach field can be tapped and held down to view a description of the field.\n\nSome of the actions you perform will have an impact on these values while others are fixed and predetermined.");
-        tutorial[tutorialIndex].addPage(pageIndex++, "Balance Sheet Tab", sprite_Button[counter++], 0, "The Balance Sheet Tabe shows your store's balance sheet with its values being calculated real-time.");
-        tutorial[tutorialIndex].addPage(pageIndex++, "Income Statement Tab", sprite_Button[counter++], 0, "The Income Statement Tab shows your store's income statement with its values being calculated real-time.");
-        tutorial[tutorialIndex].addPage(pageIndex++, "Ratios Tab", sprite_Button[counter++], 0, "The Ratios Tab shows important financial ratios.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Balance Sheet Tab", sprite_Button[counter++], 1, "The Balance Sheet Tabe shows your store's balance sheet with its values being calculated real-time.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Income Statement Tab", sprite_Button[counter++], 1, "The Income Statement Tab shows your store's income statement with its values being calculated real-time.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Ratios Tab", sprite_Button[counter++], 1, "The Ratios Tab shows important financial ratios.");
         tutorial[tutorialIndex].addPage(pageIndex++, "Back Button", sprite_Button[counter++], 0, "Tap the back button to go back to the storefront screen.");
         tutorialIndex++;
         pageIndex = 0;
@@ -254,11 +256,11 @@ public class Globals_Tutorials
         tutorial[tutorialIndex] = new Tutorial(8);
         tutorial[tutorialIndex].addPage(pageIndex++, "The Report", sprite_Button[counter++], 0, "The report screen is where you fill out a financial report.\n\nYour report's correctness will be assessed and you will earn platinum based on your score.");
         tutorial[tutorialIndex].addPage(pageIndex++, "Balance Sheet", null, 0, "In this report you will build each part of the Balance Sheet (ie. Assets, liabilities, owners equity).");
-        tutorial[tutorialIndex].addPage(pageIndex++, "The Answer Slots", sprite_Button[counter++], 0, "The blank spaces on each part of the report are answer slots. You must fill these blanks with phrases from the word bank.");
-        tutorial[tutorialIndex].addPage(pageIndex++, "The Word Bank", sprite_Button[counter++], 0, "All of the possible answers are stored in the word bank below.\n\nYou can scroll left and right to view all the options.");
-        tutorial[tutorialIndex].addPage(pageIndex++, "Selecting an Answer", sprite_Button[counter++], 0, "To fill an answer slot, first select a phrase from the word bank by tapping it, then tap the answer slot where you want to place the phrase.");
-        tutorial[tutorialIndex].addPage(pageIndex++, "Arrow Navigation", sprite_Button[counter++], 0, "Use the Left and Right arrows to navigate between each part of the report.");
-        tutorial[tutorialIndex].addPage(pageIndex++, "Submit", sprite_Button[counter++], 0, "When you have finished filling out the report, tap the submit button on the last screen.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "The Answer Slots", sprite_Button[counter++], 2, "The blank spaces on each part of the report are answer slots. You must fill these blanks with phrases from the word bank.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "The Word Bank", sprite_Button[counter++], 2, "All of the possible answers are stored in the word bank below.\n\nYou can scroll left and right to view all the options.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Selecting an Answer", sprite_Button[counter++], 2, "To fill an answer slot, first select a phrase from the word bank by tapping it, then tap the answer slot where you want to place the phrase.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Arrow Navigation", sprite_Button[counter++], 2, "Use the Left and Right arrows to navigate between each part of the report.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Submit", sprite_Button[counter++], 1, "When you have finished filling out the report, tap the submit button on the last screen.");
         tutorial[tutorialIndex].addPage(pageIndex++, "Note on Saving", null, 0, "Your progress on reports are not saved until you submit it.\n\nIf you exit the game during a report, you will be sent back to the moment right before starting the report when you come back to the game.");
         tutorialIndex = 0;
         pageIndex = 0;

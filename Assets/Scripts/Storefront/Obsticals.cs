@@ -16,7 +16,7 @@ public class Obsticals : MonoBehaviour
     public static int numberOfColumns;
     
     // Use this for initialization
-    void Awake()
+    void Start()
     {
         // 15 x 14
         if (obstical == null)

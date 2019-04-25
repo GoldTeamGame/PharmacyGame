@@ -266,7 +266,7 @@ public class CustomerController : MonoBehaviour
             }
 
             // Set isBuying to true when customer has picked up everything they want to purchase
-            if (cd.desires.desiresRemaining == 0)
+            if (cd.desires.isLooking())
             {
                 if (cd.desires.willBuyOverCounter || cd.desires.prescription.Length > 0)
                 {

@@ -126,6 +126,7 @@ public class ProceduralGenerator : MonoBehaviour
         for (int i = 0; i < drugList.Length && desireCount < array.Length; i++)
         {
             bool willFind = false;
+
             // If prescription drug is being looked for, just use normal chance to roll the dice
             if (isPrescription)
                 willFind = Toolbox.randomBool(((Drug)drugList[i]).chance);
@@ -140,6 +141,7 @@ public class ProceduralGenerator : MonoBehaviour
 
                 willFind = Toolbox.randomBool(chance);
             }
+
             // Add drug to array if it passes the check
             // Customers may have over counter drugs on their list of desires that havent been unlocked yet,
             //      but as for prescription drugs, they will ONLY have it on their list if the player has it unlocked
