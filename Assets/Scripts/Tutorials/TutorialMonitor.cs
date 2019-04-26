@@ -50,9 +50,10 @@ public class TutorialMonitor : MonoBehaviour
             else if (!isActive)
             {
                 Globals.playerGold = 10000;
-                Globals.playerPlatinum = 100;
-                Globals_Customer.limit = 10;
+                Globals.playerPlatinum = 1000;
+                Globals_Customer.limit = 5;
                 Globals_Tutorials.tutorialIndex = 18;
+                Globals.timePerMonth = 600;
             }
         }
     }

@@ -8,6 +8,6 @@ public class CustomerMood : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        GetComponent<Text>().text = "Overall Mood: " + Globals_Customer.globalMood;
+        GetComponent<Text>().text = "Overall Mood: " + Globals_Customer.globalMood + "%";
 	}
 }
