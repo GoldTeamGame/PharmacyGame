@@ -395,10 +395,13 @@ public class CustomerController : MonoBehaviour
 
         // Increase after finding over-counter drug
         if (trigger == 0)
-            increase = Random.Range(3, 6) + cd.flexibility;
+            increase = Random.Range(3, 8) + cd.flexibility;
         // Increase after getting prescription drug
         else if (trigger == 1)
             increase = Random.Range(6, 10) + cd.flexibility;
+        // Increase after purchasing over the counter drug
+        else if (trigger == 2)
+            increase = 2 + cd.flexibility / 2;
 
         cd.mood += increase; // increase mood
 

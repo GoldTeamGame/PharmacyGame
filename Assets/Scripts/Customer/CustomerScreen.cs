@@ -120,10 +120,18 @@ public class CustomerScreen : MonoBehaviour
     public static void listDesires(CustomerData cd)
     {
         staticPanel.GetComponentsInChildren<Text>()[3].text = cd.thoughts; // set current thoughts
+        
         // Fill string with desires
         string listOfDesires = "";
+        string word = "";
         for (int i = 0; i < cd.desires.overCounter.Length; i++)
-            listOfDesires += cd.desires.overCounter[i].drug.name + "\n";
+        {
+            if (cd.desires.overCounter[i].hasPickedUp)
+                word = Toolbox.StrikeThrough(cd.desires.overCounter[i].drug.name);
+            else
+                word = cd.desires.overCounter[i].drug.name;
+            listOfDesires += word + "\n";
+        }
         for (int i = 0; i < cd.desires.prescription.Length; i++)
             listOfDesires += cd.desires.prescription[i].drug.name + "\n";
 

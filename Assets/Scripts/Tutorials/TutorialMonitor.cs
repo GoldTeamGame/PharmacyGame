@@ -53,7 +53,7 @@ public class TutorialMonitor : MonoBehaviour
                 Globals.playerPlatinum = 1000;
                 Globals_Customer.limit = 5;
                 Globals_Tutorials.tutorialIndex = 18;
-                Globals.timePerMonth = 600;
+                Globals.timePerMonth = 60;
             }
         }
     }

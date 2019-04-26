@@ -89,7 +89,7 @@ public class DisplayInventory : MonoBehaviour
         displayDrugs();
 
         for (int i = 0; i < employee.Length; i++)
-            employee[i].text = Globals_Items.item[2][i].name + ": " + Globals_Items.item[2][i].price + "g/hr";
+            employee[i].text = Globals_Items.item[2][i].name;
 
         // Hide everything
         for (int i = 0; i < prescriptionStock.Length; i++)
