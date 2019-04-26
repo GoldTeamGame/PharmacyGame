@@ -28,7 +28,7 @@ public class Drug : Item
 
     override public string generateTooltip()
     {
-        return "Description: " + description + "\nProfit: " + price * Globals.sv.profitMultiplier + "\nRarity: " + rarity();
+        return "Description: " + description + "\nProfit: " + price * Globals.sv.profitMultiplier + "G";
     }
 
     private string rarity()
