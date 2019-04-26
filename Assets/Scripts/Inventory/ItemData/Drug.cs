@@ -28,7 +28,7 @@ public class Drug : Item
 
     override public string generateTooltip()
     {
-        return "Description: " + description + "\nProfit: " + price * Globals.sv.profitMultiplier + "G";
+        return "Description: " + description + "\nResale: " + price * Globals.sv.profitMultiplier + " G";
     }
 
     private string rarity()
@@ -96,9 +96,9 @@ public class Drug : Item
     {
         Drug[] overCounterList = new Drug[3];
 
-        overCounterList[0] = new Drug("Vitamin A", 2, 85, "Supplement for Vitamin A\nVery Common");
-        overCounterList[1] = new Drug("Vitamin B", 2, 85, "Supplement for Vitamin B\nVery Common");
-        overCounterList[2] = new Drug("Vitamin C", 2, 85, "Supplement for Vitamin C\nVery Common");
+        overCounterList[0] = new Drug("Vitamin A", 2, 85, "Supplement for Vitamin A");
+        overCounterList[1] = new Drug("Vitamin B", 2, 85, "Supplement for Vitamin B");
+        overCounterList[2] = new Drug("Vitamin C", 2, 85, "Supplement for Vitamin C");
 
         overCounterList[0].isUnlocked = true;
 
