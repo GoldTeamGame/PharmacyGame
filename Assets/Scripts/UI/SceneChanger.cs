@@ -22,7 +22,7 @@ public class SceneChanger : MonoBehaviour
     public static GameObject staticInventoryPanel;
     private GameObject currentButton;
     private Color originalColor;
-    public static string cScene;
+    public static string cScene = "";
 
 
     public void Start()

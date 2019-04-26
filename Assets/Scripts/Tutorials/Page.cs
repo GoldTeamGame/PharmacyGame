@@ -87,6 +87,17 @@ public class Page : MonoBehaviour {
             Globals_Tutorials.go[1].GetComponent<Image>().sprite = sprite; // set contents of image
         }
 
+        if (SceneChanger.cScene.Equals("Report"))
+        {
+            RectTransform rt = Globals_Tutorials.go[4].GetComponent<RectTransform>();
+            rt.offsetMax = new Vector2(rt.offsetMax.x, -308.26f);
+        }
+        else
+        {
+            RectTransform rt = Globals_Tutorials.go[4].GetComponent<RectTransform>();
+            rt.offsetMax = new Vector2(rt.offsetMax.x, -309.0664f);
+        }
+
         Globals_Tutorials.go[2].GetComponent<Text>().text = body; // set contents of body
         Globals_Tutorials.go[3].GetComponent<Text>().text = buttonText; // set contents of button
     }
