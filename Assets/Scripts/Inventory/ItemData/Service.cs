@@ -42,7 +42,7 @@ public class Service : Item
 
     override public string generateTooltip()
     {
-        return "Effects: " + description + "\nStock: " + amountPlaced + "/" + amountOwned;
+        return "Effects: " + description;
     }
 
 

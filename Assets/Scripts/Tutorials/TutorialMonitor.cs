@@ -17,6 +17,7 @@ public class TutorialMonitor : MonoBehaviour
     public static bool isConfirm; // has the last page of a tutorial been clicked?
     public GameObject[] go; // holds parts of the tutorial panel
     public Sprite[] sprite; // holds all sprites used in tutorial panels
+    public Sprite[] sprite_Button; // holds all sprites used in tutorial_Button panels
     public static GameObject[] button; // holds buttons that need to be activated/de-activated to force player down the tutorials path
     public GameObject[] _button;
 
@@ -25,6 +26,7 @@ public class TutorialMonitor : MonoBehaviour
         isActive = _isActive; // set static isActive to what is in the inspector
         Globals_Tutorials.go = go; // set static go from Globals_Tutorials to what is in the inspector
         Globals_Tutorials.sprite = sprite; // set static sprite from Globals_Tutorials to what is in the inspector
+        Globals_Tutorials.sprite_Button = sprite_Button; // set state sprite_Button from Globals_Tutorials to what is in the inspector
         button = _button; // set static button equal to what is in the inspector
         Globals_Tutorials.generateTutorials(); // generate all tutorials (Hardcoded)
 
@@ -40,15 +42,18 @@ public class TutorialMonitor : MonoBehaviour
                     button[i].GetComponent<Button>().interactable = false;
 
                 isPopup = true; // make tutorial pop-up
-                button[14].SetActive(true); // set tutorial button to active
+                button[7].GetComponent<Button>().interactable = true; // set tutorial button to active
+                button[10].GetComponent<Button>().interactable = true; // set tutorial button to active
+                //button[14].SetActive(true); // set tutorial button to active
             }
             // if tutorial is not active, then go into dev mode
             else if (!isActive)
             {
                 Globals.playerGold = 10000;
-                Globals.playerPlatinum = 100;
-                Globals_Customer.limit = 10;
+                Globals.playerPlatinum = 1000;
+                Globals_Customer.limit = 5;
                 Globals_Tutorials.tutorialIndex = 18;
+                Globals.timePerMonth = 60;
             }
         }
     }
@@ -219,6 +224,8 @@ public class TutorialMonitor : MonoBehaviour
             if (isConfirm)
             {
                 button[8].GetComponent<Button>().interactable = false; // back to inventory
+                for (int i = 0; i < TutorialMonitor_Extra.currentButtons.Length; i++)
+                    TutorialMonitor_Extra.currentButtons[i].GetComponent<Button>().interactable = false;
                 TutorialMonitor_Extra.currentButtons[3].GetComponent<Button>().interactable = true; // edit mode
                 isConfirm = false;
             }
@@ -231,7 +238,6 @@ public class TutorialMonitor : MonoBehaviour
                 displayTutorial();
             if (isConfirm)
             {
-                
                 isConfirm = false;
             }
         }
@@ -294,7 +300,6 @@ public class TutorialMonitor : MonoBehaviour
                     button[i].GetComponent<Button>().interactable = true;
                 button[14].SetActive(false);
                 button[6].GetComponent<Button>().interactable = false;
-                button[7].GetComponent<Button>().interactable = false;
                 isConfirm = false;
                 Globals_Tutorials.tutorialIndex++;
                 Clock.start(); // start timer
@@ -303,7 +308,7 @@ public class TutorialMonitor : MonoBehaviour
     }
 
     // Displays the appropriate Tutorial screen, then sets isPopup to false that way this function is not repeatedly called
-    static void displayTutorial()
+    public static void displayTutorial()
     {
         Globals_Tutorials.tutorial[Globals_Tutorials.tutorialIndex].showCurrentPage();
         Globals_Tutorials.go[4].SetActive(true);
@@ -313,9 +318,12 @@ public class TutorialMonitor : MonoBehaviour
     // Shows the tutorial screen, and resets the page index
     public void viewCurrentTutorial()
     {
-        Globals_Tutorials.pageIndex = 0;
-        Globals_Tutorials.tutorial[Globals_Tutorials.tutorialIndex].showCurrentPage();
-        Globals_Tutorials.go[4].SetActive(true);
+        if (Globals_Tutorials.tutorialIndex < 18)
+        {
+            Globals_Tutorials.pageIndex = 0;
+            Globals_Tutorials.tutorial[Globals_Tutorials.tutorialIndex].showCurrentPage();
+            Globals_Tutorials.go[4].SetActive(true);
+        }
     }
 
     // Used on various buttons to progress the tutorial to the next state

@@ -98,6 +98,12 @@ public class ItemPlacer : MonoBehaviour
                         current = Globals_Items.objects[index].gameObject; // Set current to selected gameObject
 
                         // Remove gameObject and data from lists and obstical array
+                        if (Globals_Items.storeData[index].name.Equals("shelf01"))
+                        {
+                            current.GetComponent<Items>().s.appearance = 0;
+                            current.GetComponent<SpriteRenderer>().sprite = InsertItems.appearance[0]; // reset shelf sprite
+                        }
+
                         Obsticals.removeObstical(index);
                         Globals_Items.storeData.RemoveAt(index);
                         Globals_Items.objects.RemoveAt(index);

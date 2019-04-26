@@ -60,4 +60,12 @@ public class Desires
         else
             return null;
     }
+
+    public bool isLooking()
+    {
+        for (int i = 0; i < overCounter.Length; i++)
+            if (!overCounter[i].hasPickedUp)
+                return false;
+        return true;
+    }
 }

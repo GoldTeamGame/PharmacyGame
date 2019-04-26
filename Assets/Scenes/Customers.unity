@@ -442,7 +442,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -0.000030517578, y: 0.000030517578}
+  m_AnchoredPosition: {x: -0.000030517578, y: 0.000016016844}
   m_SizeDelta: {x: 467.6, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &430408426
@@ -704,8 +704,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -9.591474, y: -38.377}
-  m_SizeDelta: {x: 465.6, y: 625.11}
+  m_AnchoredPosition: {x: -9.591474, y: -58.978}
+  m_SizeDelta: {x: 465.6, y: 583.91}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &508627347
 MonoBehaviour:
@@ -740,6 +740,93 @@ CanvasRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 508627345}
+  m_CullTransparentMesh: 0
+--- !u!1 &658223515
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 658223516}
+  - component: {fileID: 658223519}
+  - component: {fileID: 658223518}
+  - component: {fileID: 658223517}
+  m_Layer: 5
+  m_Name: Text_NumberOfCustomers (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &658223516
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 658223515}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1394013294}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.000034332, y: 260}
+  m_SizeDelta: {x: 520.04, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &658223517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 658223515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8f159a709f8bcd478d2b8980bec2e14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &658223518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 658223515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 30
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 40
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: <# of Customers>
+--- !u!222 &658223519
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 658223515}
   m_CullTransparentMesh: 0
 --- !u!1 &758419859
 GameObject:
@@ -798,7 +885,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 136438462}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -851,12 +938,12 @@ RectTransform:
   m_Children:
   - {fileID: 2089720080}
   m_Father: {fileID: 1394013294}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 242.91747, y: -39.009}
-  m_SizeDelta: {x: 20, y: 626.37}
+  m_AnchoredPosition: {x: 242.91747, y: -59.609}
+  m_SizeDelta: {x: 20, y: 585.17}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &779682777
 GameObject:
@@ -1282,7 +1369,7 @@ RectTransform:
   m_Children:
   - {fileID: 1862688135}
   m_Father: {fileID: 1394013294}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1384,12 +1471,12 @@ RectTransform:
   m_Children:
   - {fileID: 430408425}
   m_Father: {fileID: 1394013294}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -6.960205, y: -38.4}
-  m_SizeDelta: {x: -59.7, y: -103.6}
+  m_AnchoredPosition: {x: -6.960205, y: -59}
+  m_SizeDelta: {x: -59.7, y: -144.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1016576088
 MonoBehaviour:
@@ -1561,6 +1648,7 @@ RectTransform:
   - {fileID: 1468796483}
   - {fileID: 3001198}
   - {fileID: 1556957771}
+  - {fileID: 658223516}
   - {fileID: 758419863}
   - {fileID: 1016576087}
   - {fileID: 1004697362}
@@ -1783,8 +1871,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00000047684, y: 297}
-  m_SizeDelta: {x: 265.9, y: 30}
+  m_AnchoredPosition: {x: 0.000011444, y: 297}
+  m_SizeDelta: {x: 520.04, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1556957772
 MonoBehaviour:
@@ -1794,7 +1882,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1556957770}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8f159a709f8bcd478d2b8980bec2e14, type: 3}
+  m_Script: {fileID: 11500000, guid: d67eb1b6bd301944189982bcb6701c99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1556957773
@@ -1829,7 +1917,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: <# of Customers>
+  m_Text: <Customer Mood>
 --- !u!222 &1556957774
 CanvasRenderer:
   m_ObjectHideFlags: 0

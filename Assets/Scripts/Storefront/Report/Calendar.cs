@@ -34,14 +34,12 @@ public class Calendar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        Debug.Log(Clock.time);
         if (!Globals.newMonth)
         {
             //calendar.text = inGameTime.ToString();
             if (Clock.time == Globals.timePerMonth && Globals.sem == false)
             {
-                Globals_Customer.limit += 2; // increase total amount of customers
+                Globals_Customer.limit++; // increase total amount of customers
                 isReport = true;
                 Clock.reset();
                 ProceduralGenerator.removeCustomers();

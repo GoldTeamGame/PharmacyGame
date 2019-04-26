@@ -53,6 +53,20 @@ public class ProceduralGenerator : MonoBehaviour
     // Spawn a new customer until the limit is reached
     private void Spawn()
     {
+        // Determine if limit should increase
+        // Buffer is used to make rate slowly increase
+        if (Globals_Customer.globalMood > (50 + Globals_Customer.buffer + (Globals_Customer.limit)))
+        {
+            Globals_Customer.limit++;
+            Globals_Customer.buffer += 50;
+        }
+        else if (Globals_Customer.buffer > 0)
+            Globals_Customer.buffer -= 5;
+
+        if (Globals_Customer.limit > 30)
+            Globals_Customer.limit = 25;
+
+
         if (Globals_Customer.customerData.Count < Globals_Customer.limit)
             instantiateObject(spawnPoint.localPosition);
     }
@@ -83,8 +97,15 @@ public class ProceduralGenerator : MonoBehaviour
                 //Random.Range(0.4f, 0.6f); // generate a random speed
             
             cd = new CustomerData(name, speed); // instantiate cd with name and speed
-            cd.appearance = Random.Range(0, 9); // set appearance
-            cd.mood = Random.Range(40, 60) + Globals.sv.moodBonus; // set a random mood
+            cd.appearance = Random.Range(0, 10); // set appearance
+
+            // increase upper bounds based on how many prescription drugs you have unlocked
+            int bonus = 0;
+            for (int i = 0; i < Globals_Items.item[0].Length; i++)
+                if (Globals_Items.item[0][i].isUnlocked)
+                    bonus++;
+
+            cd.mood = Random.Range(40 - Globals_Customer.limit, 60 + bonus) + Globals.sv.moodBonus; // set a random mood (mood has a chance to be lower when you have more customers)
             cd.tolerance = Random.Range(1, 5) + Globals.sv.toleranceBonus;
             cd.flexibility = Random.Range(1, 3) + Globals.sv.flexibilityBonus;
 
@@ -104,7 +125,7 @@ public class ProceduralGenerator : MonoBehaviour
             Item[][] ie = Globals_Items.item;
             generateArray(ref cd.desires.overCounter, Globals_Items.item[1], false);
             generateArray(ref cd.desires.prescription, Globals_Items.item[0], true);
-
+            cd.desires.desiresRemaining = cd.desires.overCounter.Length;
             if (cd.desires.overCounter.Length > 0)
                 cd.thoughts = "Looking For: " + cd.desires.overCounter[0].drug.name;
             else
@@ -126,6 +147,7 @@ public class ProceduralGenerator : MonoBehaviour
         for (int i = 0; i < drugList.Length && desireCount < array.Length; i++)
         {
             bool willFind = false;
+
             // If prescription drug is being looked for, just use normal chance to roll the dice
             if (isPrescription)
                 willFind = Toolbox.randomBool(((Drug)drugList[i]).chance);
@@ -140,6 +162,7 @@ public class ProceduralGenerator : MonoBehaviour
 
                 willFind = Toolbox.randomBool(chance);
             }
+
             // Add drug to array if it passes the check
             // Customers may have over counter drugs on their list of desires that havent been unlocked yet,
             //      but as for prescription drugs, they will ONLY have it on their list if the player has it unlocked

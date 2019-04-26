@@ -14,6 +14,10 @@ public static class Globals_Customer
     public static int numberOfCustomers = 0;
     public static int currentNumberOfCustomers;
     public static List<CustomerData> customerData; // holds the customer's data (customer attributes)
+    public static int cumulativeMood = 0;
+    public static int customersServed = 0;
+    public static int globalMood = 50; // average mood of the store
+    public static int buffer = 0; // a value that lowers the chance of increasing customer limit if a new customer has recently been added
 
     public static string[] name = { "Alex", "Dylan", "Jon", "Ross" }; // List of names
    
