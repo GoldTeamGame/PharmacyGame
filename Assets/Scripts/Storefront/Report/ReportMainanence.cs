@@ -124,7 +124,7 @@ public class ReportMainanence : MonoBehaviour {
 		while(wordBankList[nextRand].text != ""){
 			nextRand = rand.Next(12);
 		}
-		wordBankList[nextRand].text = "Salaries: " + AllStats.SumSalaries().ToString();
+		wordBankList[nextRand].text = "Accrued Salaries Payable: " + AllStats.SumSalaries().ToString();
 
 		// obligations Embellish the rest
 		nextRand = rand.Next(12);
