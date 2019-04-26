@@ -109,7 +109,6 @@ public class Game : MonoBehaviour
                 Globals_Pharmacist.load(save.pharmacistCounter);
                 if (save.item != null)
                     Globals_Items.generateItems(save.item);
-                Globals_Customer.limit = save.customerLimit;
                 if (save.sv != null)
                     Globals.sv = save.sv;
                 Globals_Items.setIsUnlocked(save.isUnlocked);
@@ -118,6 +117,8 @@ public class Game : MonoBehaviour
                 TutorialMonitor.doesSaveExist = save.doesSaveExist;
                 Calendar.isReport = save.isReport;
                 Globals.month = save.month;
+                Globals_Customer.cumulativeMood = save.cumulativeMood;
+                Globals_Customer.customersServed = save.customersServed;
             }
             Debug.Log("Game Loaded");
             Unpause();
@@ -145,7 +146,6 @@ public class Game : MonoBehaviour
             save.item = Globals_Items.item;
             save.pharmacistCounter = Globals_Pharmacist.pharmacistCounter;
             save.tutorialIndex = Globals_Tutorials.tutorialIndex;
-            save.customerLimit = Globals_Customer.limit;
             save.sv = Globals.sv;
             save.isUnlocked = Globals_Items.isUnlocked;
             save.time = Clock.time;
@@ -154,6 +154,8 @@ public class Game : MonoBehaviour
             save.doesSaveExist = true;
             save.isReport = Calendar.isReport;
             save.month = Globals.month;
+            save.cumulativeMood = Globals_Customer.cumulativeMood;
+            save.customersServed = Globals_Customer.customersServed;
         }
 
         //return the object to write to the file

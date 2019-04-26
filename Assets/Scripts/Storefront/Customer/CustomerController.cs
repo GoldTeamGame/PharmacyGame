@@ -266,7 +266,7 @@ public class CustomerController : MonoBehaviour
             }
 
             // Set isBuying to true when customer has picked up everything they want to purchase
-            if (cd.desires.isLooking())
+            if (cd.desires.isLooking() || cd.desires.desiresRemaining == 0)
             {
                 if (cd.desires.willBuyOverCounter || cd.desires.prescription.Length > 0)
                 {
@@ -335,6 +335,9 @@ public class CustomerController : MonoBehaviour
     void removeCustomer()
     {
         CustomerData cd = GetComponent<Customer>().cd;
+        Globals_Customer.cumulativeMood += cd.mood;
+        Globals_Customer.customersServed++;
+        Globals_Customer.globalMood = Globals_Customer.cumulativeMood / Globals_Customer.customersServed; // set new average
         CustomerScreen.updateList(Globals_Customer.customerData.IndexOf(cd)); // Remove button from customer screen
 
         // Find the index of the customer being removed

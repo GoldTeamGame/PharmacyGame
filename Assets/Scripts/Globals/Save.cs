@@ -12,19 +12,26 @@ using UnityEngine;
 [System.Serializable]
 public class Save
 {
-    public bool doesSaveExist;
+    public bool doesSaveExist; // save
+
+    // Report data
     public int time;
     public int month;
     public bool isReport;
+
+    // Customer limit data
     public int limit;
     public int _limit;
+
+    // Customer mood data
+    public int cumulativeMood;
+    public int customersServed;
 
     public int p;
 
     public int g;
 
     public int tutorialIndex;
-    public int customerLimit;
 
     //public static int currentID;
     public List<CustomerData> cd;

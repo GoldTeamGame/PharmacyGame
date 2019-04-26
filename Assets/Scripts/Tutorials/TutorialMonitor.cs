@@ -223,6 +223,8 @@ public class TutorialMonitor : MonoBehaviour
             if (isConfirm)
             {
                 button[8].GetComponent<Button>().interactable = false; // back to inventory
+                for (int i = 0; i < TutorialMonitor_Extra.currentButtons.Length; i++)
+                    TutorialMonitor_Extra.currentButtons[i].GetComponent<Button>().interactable = false;
                 TutorialMonitor_Extra.currentButtons[3].GetComponent<Button>().interactable = true; // edit mode
                 isConfirm = false;
             }
@@ -235,7 +237,6 @@ public class TutorialMonitor : MonoBehaviour
                 displayTutorial();
             if (isConfirm)
             {
-                
                 isConfirm = false;
             }
         }

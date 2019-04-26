@@ -199,6 +199,11 @@ public class SceneChanger : MonoBehaviour
             SceneManager.UnloadSceneAsync(currentScene);
         currentScene = "Storefront";
         cScene = "ReportStorefront";
+
+        // Reset mood
+        Globals_Customer.globalMood = 50;
+        Globals_Customer.cumulativeMood = 0;
+        Globals_Customer.customersServed = 0;
     }
 
     // Button-Click function
