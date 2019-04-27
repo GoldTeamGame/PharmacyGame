@@ -34,11 +34,14 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
      */
     public int action;
 
+    public static Vector3 mousePosition;
+
     public void OnPointerDown(PointerEventData eventData)
     {
         time = 0;
         buyState = true;
         tooltipState = false;
+        mousePosition = Input.mousePosition;
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -51,31 +54,34 @@ public class DisplayTooltips : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         }
         else
         {
-            if (Globals_Tutorials.tutorialIndex == 1 || Globals_Tutorials.tutorialIndex == 3)
+            if (mousePosition.Equals(Input.mousePosition))
             {
-                Globals_Tutorials.tutorialIndex++;
-                TutorialMonitor.isPopup = true;
-            }
+                if (Globals_Tutorials.tutorialIndex == 1 || Globals_Tutorials.tutorialIndex == 3)
+                {
+                    Globals_Tutorials.tutorialIndex++;
+                    TutorialMonitor.isPopup = true;
+                }
 
-            if (item.name.Equals("Shelf"))
-                TutorialMonitor.staticTutorialButton(7);
+                if (item.name.Equals("Shelf"))
+                    TutorialMonitor.staticTutorialButton(7);
 
-            GameObject child = EventSystem.current.currentSelectedGameObject; // button clicked
+                GameObject child = EventSystem.current.currentSelectedGameObject; // button clicked
 
-            // Buy Item
-            if (action <= 1)
-                item.action();
-            else if (child != null && Item.canBeUnlocked(action, item.name))
-            {
-                if (item.isUnlocked)
-                    for (int i = 0; i < Globals_Items.item[action].Length; i++)
-                        if (item.name.Equals(Globals_Items.item[action][i].name))
-                            item = Globals_Items.item[action][i];
+                // Buy Item
+                if (action <= 1)
+                    item.action();
+                else if (child != null && Item.canBeUnlocked(action, item.name))
+                {
+                    if (item.isUnlocked)
+                        for (int i = 0; i < Globals_Items.item[action].Length; i++)
+                            if (item.name.Equals(Globals_Items.item[action][i].name))
+                                item = Globals_Items.item[action][i];
 
-                item.action();
+                    item.action();
 
-                if (item.isUnlocked)
-                    child.GetComponent<Button>().interactable = false;
+                    if (item.isUnlocked)
+                        child.GetComponent<Button>().interactable = false;
+                }
             }
         }
 

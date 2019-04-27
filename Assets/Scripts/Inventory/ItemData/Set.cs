@@ -60,7 +60,16 @@ public class Set : Item
 
     override public string generateTooltip()
     {
-        return "Unlocks: " + description;
+        string tooltip = "";
+
+        if (index == 0)
+            tooltip = "Perscription Drug Set\n";
+        else
+            tooltip = "Over-the-Counter Drug Set\n";
+
+        tooltip += "Unlocks: " + description;
+
+        return tooltip;
     }
 
     public static Set[] generateSetList()

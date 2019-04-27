@@ -32,77 +32,80 @@ public class Globals_Tutorials
         tutorial[tutorialIndex] = new Tutorial(7);
         tutorial[tutorialIndex].addPage(pageIndex++, "Welcome to the Pharmacy!", sprite[counter++], 0, "In this game, you will manage and grow your pharmacy.\n\nBut first, lets introduce you to the basics.");
         tutorial[tutorialIndex].addPage(pageIndex++, "Note on Saving", sprite[counter++], 0, "This game only autosaves and cannot be manually saved. You can close out of the game at any time and come back to where you were before.\n\nNOTICE: You must complete the tutorial before the game begins to autosave.");
-        tutorial[tutorialIndex].addPage(pageIndex++, "Tutorial", sprite[counter++], 0, "To start off the game, you will be taken through a tutorial where you must follow objectives as they appear.\n\nTap the tutorial button on the bottom right of the screen to view the current tutorial objective at any time.");
-        tutorial[tutorialIndex].addPage(pageIndex++, "Currency", sprite[counter++], 1, "As you play, your store will generate Gold (G) through sales.\n\nPlatinum (P), on the other hand, can only be earned at the end of each month.");
-        tutorial[tutorialIndex].addPage(pageIndex++, "Calendar", sprite[counter++], 1, "Each month lasts for 10 minutes. Next to the Calendar is the timer which shows how far you are currently into the month.\n\nAt the end of the month, all customers will leave the store and you will have to fill out a report before going to the next month.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Tutorial", sprite[counter++], 0, "To start off the game, you will be taken through a tutorial where you must perform tasks after reading the directions and pressing \"OK\".\n\nTap the tutorial button on the bottom right of the screen to view the current tutorial directions at any time.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Currency", sprite[counter++], 1, "As you play, your store will generate Gold (G) via sales of drugs.\n\nPlatinum (P), on the other hand, can only be earned at the end of each month.\n\nWhat these currencies can be spent on will be explained later.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Calendar", sprite[counter++], 1, "Each month lasts for 8 minutes. Next to the Calendar is the timer which shows how far you are currently into the month.\n\nAt the end of the month, all customers will leave the store and you will have to complete a report before starting the next month.");
         tutorial[tutorialIndex].addPage(pageIndex++, "UI", sprite[counter++], 2, "There are several buttons which will lead you to different interfaces.");
-        tutorial[tutorialIndex].addPage(pageIndex++, "Select the Shop Button", sprite[counter++], 0, "Your store is currently closed. Before you can open the store, you will need products for your customers to buy.\n\nTo purchase drugs, tap on the Store Button.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Select the Shop Button", sprite[counter++], 0, "The shelves in your pharmacy are currently empty. Before you can open the store, you will need products before you can serve your customers.\n\nTo purchase drugs, you need to go to the shop. After clicking/tapping OK, click/tap on the Shop Button.");
         tutorialIndex++;
         pageIndex = 0;
 
         // 1
         tutorial[tutorialIndex] = new Tutorial(3);
-        tutorial[tutorialIndex].addPage(pageIndex++, "Shop", sprite[counter++], 0, "The shop is where you can purchase drugs and hire employees");
-        tutorial[tutorialIndex].addPage(pageIndex++, "Tooltips", sprite[counter++], 1, "You can tap a drug to purchase it.\n\nAlternatively, you can hold down the button to view a description of the drug.\n\nAlmost every button in the game has a tooltip, so if you need more information on something, hold the button down to find out more about it.");
-        tutorial[tutorialIndex].addPage(pageIndex++, "Purchase Drugs", sprite[counter++], 0, "Purchase Amlodipine Besylate 10mg by tapping on it.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Shop", sprite[counter++], 0, "You are now at the Shop. The Shop is where you can purchase drugs and hire staff. The shop is where gold is spent");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Tooltips", sprite[counter++], 1, "You can tap a drug (or any item) to purchase it.\n\nAlternatively, you can hold down the button to view a description of the drug.\n\nAlmost every button in the game has a tooltip, so if you need more information on something, hold the button down to find out more about it.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Purchase Drugs", sprite[counter++], 0, "After clicking OK, purchase Amlodipine Besylate 10mg by clicking on it. (Notice your gold count at the top-left of the screen will decrease afting purchasing the drug)");
         tutorialIndex++;
         pageIndex = 0;
 
         // 2
         tutorial[tutorialIndex] = new Tutorial(1);
-        tutorial[tutorialIndex].addPage(pageIndex++, "Switch Tabs", sprite[counter++], 1, "Select the over-the-counter tab to view the list of available over-the-counter drugs you can buy.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Switch Tabs", sprite[counter++], 1, "You have just purchased Amlodipine Besylate 10mg. The drug you have just purchased was a prescription drug, but customers will also be interested in over-the-counter drugs.\n\nAfter clicking OK, select the over-the-counter tab to view the list of available over-the-counter drugs you can buy.");
         tutorialIndex++;
         pageIndex = 0;
 
         // 3
         tutorial[tutorialIndex] = new Tutorial(1);
-        tutorial[tutorialIndex].addPage(pageIndex++, "Purchase Drugs", sprite[counter++], 0, "Purchase Vitamin A by tapping on the button.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Purchase Drugs", sprite[counter++], 0, "Now that you have clicked the Over Counter tab, you can see the over-the-counter drugs available for purchase.\n\nAfter clicking OK, tap the Vitamin A button to purchase it.");
         tutorialIndex++;
         pageIndex = 0;
 
         // 4
         tutorial[tutorialIndex] = new Tutorial(1);
-        tutorial[tutorialIndex].addPage(pageIndex++, "Select Expansions Button", sprite[counter++], 0, "Now that you have purchased an over-the-counter drug you will need a shelf to display it.\n\nBut you have not unlocked shelves yet!\n\nTo unlock shelves, go to the Expansions Screen by tapping the Expansions Button.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Select Expansions Button", sprite[counter++], 0, "You have just purchased an over-the-counter drug. Prescription drugs will be sold by the pharmacists, but over-the-counter drugs must be stocked onto shelves. Currently, you have not unlocked shelves.\n\nTo unlock shelves, go to the Expansions Screen. To get there, first click OK, then click the Expansions Button.");
         tutorialIndex++;
         pageIndex = 0;
 
         // 5
-        tutorial[tutorialIndex] = new Tutorial(2);
-        tutorial[tutorialIndex].addPage(pageIndex++, "Expansions", sprite[counter++], 0, "The Expansions Screen is hwere you can unlock new items with Platinum (P).\n\nPlatinum (P) can be spent to unlock things such as new Drugs, Store Upgrades, and Services.");
-        tutorial[tutorialIndex].addPage(pageIndex++, "Select the Services Tab", sprite[counter++], 1, "To unlock more shelves, tap on the Services Tab.");
+        tutorial[tutorialIndex] = new Tutorial(4);
+        tutorial[tutorialIndex].addPage(pageIndex++, "Expansions", sprite[counter++], 0, "Now you are at the Expansions Screen. The Expansions Screen is where you can unlock things for your pharmacy with Platinum (P).\n\nPlatinum (P) can be spent to unlock things such as new Drugs, Store Upgrades, and Services.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Sets Tab", null, 1, "The Sets Tab shows you drug sets that you can unlock. Unlocking drug sets will allow you to purchase additional drugs in the shop screen.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Upgrades Tab", null, 1, "The Upgrades Tab shows you store upgrades that you can unlock. Upgrades are permanant bonuses for your stores.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Select the Services Tab", sprite[counter++], 1, "The Services Tab shows you placeable objects that you can unlock. This is the tab where you will be able to unlock shelves.\n\nTo unlock shelves for your store, first click the OK button, then click on the Services Tab.");
         tutorialIndex++;
         pageIndex = 0;
 
         // 6
         tutorial[tutorialIndex] = new Tutorial(1);
-        tutorial[tutorialIndex].addPage(pageIndex++, "Unlock Shelf", sprite[counter++], 0, "Tap the Shelf button to unlock the shelf");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Unlock Shelf", sprite[counter++], 0, "You will now see a list of unlockable services. After clicking OK, click the Shelf button to unlock the shelf");
         tutorialIndex++;
         pageIndex = 0;
 
         // 7
         tutorial[tutorialIndex] = new Tutorial(1);
-        tutorial[tutorialIndex].addPage(pageIndex++, "Select the Inventory Button", sprite[counter++], 0, "Now that you have unlocked a shelf, you need to place it.\n\nTo do so, go to the Inventory Screen by tapping the Inventory Button.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Select the Inventory Button", sprite[counter++], 0, "Now that you have unlocked shelves, you need to place it.\n\nTo do so, first click OK, then go to the Inventory Screen by clicking the Inventory Button.");
         tutorialIndex++;
         pageIndex = 0;
 
         // 8
         tutorial[tutorialIndex] = new Tutorial(2);
-        tutorial[tutorialIndex].addPage(pageIndex++, "Inventory", sprite[counter++], 0, "The Inventory screen allows you to view the drugs you have in stock and the employees you have hired.\n\nThe Services Tab allows you to place down items you have unlocked.");
-        tutorial[tutorialIndex].addPage(pageIndex++, "Select the Services Tab", sprite[counter++], 1, "Tap the Services Tab to find the shelf you unlocked.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Inventory", sprite[counter++], 0, "You are now at the Inventory Screen. The Inventory Screen allows you to view the drugs you have in stock and the employees you have hired.\n\nIt is also where you can place the services you have unlocked from the Expansions Screen.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Select the Services Tab", sprite[counter++], 1, "After clicking OK, tap the Services Tab to find the shelf you have unlocked.");
         tutorialIndex++;
         pageIndex = 0;
 
         // 9
         tutorial[tutorialIndex] = new Tutorial(1);
-        tutorial[tutorialIndex].addPage(pageIndex++, "Place a Shelf", sprite[counter++], 2, "To place the shelf on the Storefront, tap the Shelf button.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Place a Shelf", sprite[counter++], 2, "Now that you have changed tabs, you will see the shelf button.\n\nAfter clicking OK, click the shelf button to place the shelf onto the Storefront.");
         tutorialIndex++;
         pageIndex = 0;
 
         // 10
-        tutorial[tutorialIndex] = new Tutorial(3);
-        tutorial[tutorialIndex].addPage(pageIndex++, "Placing Objects", sprite[counter++], 2, "Find a spot to place the shelf.\n\nYou can tap anywhere on the screen to choose where to place the object.");
+        tutorial[tutorialIndex] = new Tutorial(4);
+        tutorial[tutorialIndex].addPage(pageIndex++, "Placing Objects", sprite[counter++], 2, "After this part of the tutorial, you will be able to place the shelf down.");
         tutorial[tutorialIndex].addPage(pageIndex++, "Illegal Placements", sprite[counter++], 2, "If the object is red, then it is in a location that you cannot place it.\n\nYou cannot place objects in front of the store entrance and along the bottom-most row of the store.\n\nAlso, you cannot arrange objects in a way that will cut off the path from the store entrance to the bottom-most row of the store.");
         tutorial[tutorialIndex].addPage(pageIndex++, "The Buttons", sprite[counter++], 2, "When you have found a good spot, tap the green checkmark button to confirm the object's placement.\n\nYou can use the clockwise and counter-clockwise buttons to rotate the item.\n\nYou can use the garbage can to delete the object you have selected. (but for now, lets not do that)");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Place the Shelf", null, 2, "After clicking OK, place your shelf by clicking anywhere on the Storefront. If the Shelf is not red, then click the green confirm arrow to confirm your shelf's position.");
         tutorialIndex++;
         pageIndex = 0;
 
@@ -114,37 +117,38 @@ public class Globals_Tutorials
 
         // 12
         tutorial[tutorialIndex] = new Tutorial(1);
-        tutorial[tutorialIndex].addPage(pageIndex++, "OH DARN!", sprite[counter++], 0, "You actually didn't like where you placed the shelf and want to move it somewhere else!\n\nTo move your shelf (or any object you place in the future), tap the button on the top-right to enter edit mode.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Move the Shelf", sprite[counter++], 0, "Suppose you didn't like where you placed the shelf and want to move it somewhere else!\n\nTo move your shelf (or any object you place in the future), click the button on the top-right to enter edit mode. (After clicking OK)");
         tutorialIndex++;
         pageIndex = 0;
 
         // 13
         tutorial[tutorialIndex] = new Tutorial(1);
-        tutorial[tutorialIndex].addPage(pageIndex++, "Move the Shelf", sprite[counter++], 2, "Now that you are back in Edit Mode. Tap the shelf to pick it up.\n\nOnce again decide where to place it, then tap the green arrow button to confrim the location.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Move the Shelf", sprite[counter++], 2, "Now that you are back in Edit Mode, you will need to click the shelf to pick it up.\n\nOnce again decide where to place it, then click the green arrow button to confrim the location.");
         tutorialIndex++;
         pageIndex = 0;
 
         // 14
         tutorial[tutorialIndex] = new Tutorial(1);
-        tutorial[tutorialIndex].addPage(pageIndex++, "Exit Edit Mode", sprite[counter++], 0, "Now that you are completely, 100%, without a doubt, certain that your shelf is where you want it, exit Edit Mode.\n\nThis time, tap the back arrow at the top-left of the screen.\n\nThis button will return your storefront interface back to normal.\n\nThe button also appears on every screen and is used universally to return you to the Storefront.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Exit Edit Mode", sprite[counter++], 0, "You have just moved your shelf. Now that you are certain that your shelf is where you want it, exit Edit Mode.\n\nThis time, you should click the \"Back Button\".\n\nThis button will return your storefront interface back to normal.\n\nThe button also appears on every screen and is used universally to return you to the Storefront. Now, click OK, then click the Back Button at the top-left of the screen.");
         tutorialIndex++;
         pageIndex = 0;
 
         // 15
         tutorial[tutorialIndex] = new Tutorial(1);
-        tutorial[tutorialIndex].addPage(pageIndex++, "Assign Drugs to Shelf", sprite[counter++], 2, "You are almost ready to receive customers. There is one more thing you must do: stock the shelf with drugs.\n\nTo assign drugs to your shelf, tap the shelf.\n\nTapping the shelf will open an interface which will let you assign drugs to the shelf.\n\nEach shelf can hold 2 types of drugs. Tap one of the 2 buttons to assign Vitamin A to the shelf.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Assign Drugs to Shelf", sprite[counter++], 2, "You have now exited Edit Mode. You are almost ready to receive customers. There is one more thing you must do: stock the shelf with drugs.\n\nTo assign drugs to your shelf, click the shelf.\n\nClicking the shelf will open an interface which will let you assign drugs to the shelf.\n\nEach shelf can hold 2 types of drugs. Click one of the 2 buttons to assign Vitamin A to the shelf.\n\nNow click OK, then click the shelf and assign it Vitamin A");
         tutorialIndex++;
         pageIndex = 0;
 
         // 16
         tutorial[tutorialIndex] = new Tutorial(1);
-        tutorial[tutorialIndex].addPage(pageIndex++, "Fill the Shelf", sprite[counter++], 2, "Now that the drug is assigned, you must fill the shelf.\n\nTo do so, tap the \"+\" Button to increase the amount of Vitamin A on the shelf.\n\nYou can only fill the shelf if you have enough of the item in stock.\n\nKeep in mind that customers will pick drugs up off the shelves and you will need to restock them. So keep an eye out on your shelf stocks!");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Fill the Shelf", sprite[counter++], 2, "Now that the drug is assigned, you must fill the shelf.\n\nTo do so, click the \"+\" Button to increase the amount of Vitamin A on the shelf.\n\nYou can only fill the shelf if you have enough of the item in stock.\n\nKeep in mind that customers will pick drugs up off the shelves and you will need to restock them. So keep an eye out on your shelf stocks! Now click OK, then click the + button to stock the shelf.");
         tutorialIndex++;
         pageIndex = 0;
 
         // 17
-        tutorial[tutorialIndex] = new Tutorial(1);
-        tutorial[tutorialIndex].addPage(pageIndex++, "The Store's Open!", sprite[counter++], 0, "Great! Your store is ready for customers. Customers will begin entering the store now.\n\nTry to keep them satisfied by keeping your drugs in stock, reducing their traveling/waiting time, and by unlocking additional services.\n\nIf you can keep your customers happy, more will show up to your store.\n\nNow that the store is open, continue playing until the end of the month.");
+        tutorial[tutorialIndex] = new Tutorial(2);
+        tutorial[tutorialIndex].addPage(pageIndex++, "The Store's Open!", sprite[counter++], 0, "Great! Your store is ready for customers. Customers will begin entering the store now.\n\nTry to keep them satisfied by keeping your drugs in stock, reducing their traveling/waiting time, and by unlocking additional services.\n\nIf you can keep your customers happy, more will show up to your store.\n\nThe goal of the game is to make lots of gold, improve your pharmacy, and correctly complete the end of the month reports.");
+        tutorial[tutorialIndex].addPage(pageIndex++, "Continue Playing", null, 0, "Now customers will begin entering the store and buying your products.\n\nThe rest of the buttons are now unlocked, so feel free to explore the rest of the game. Remember, if you are ever confused about something, use the Tutorial Button.\n\nNow continue playing until the end of the month (8:00 minutes).");
         tutorialIndex++;
         pageIndex = 0;
 
