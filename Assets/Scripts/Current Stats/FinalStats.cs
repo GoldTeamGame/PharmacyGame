@@ -8,7 +8,6 @@ public class FinalStats : MonoBehaviour {
     public Text AccountsReceivableFromSuppliersText;
     public Text InventoryText;
     public Text totalAssetsText;
-    public Text PropertyPlantEquipmentText;
     public Text AccountsPayableToSuppliersText;
     public Text LongtermLiabilitiesText;
     public Text TotalLiabilitiesText;
