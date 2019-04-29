@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FinalStats : MonoBehaviour {
+public class FinalStats : MonoBehaviour
+{
     public Text CashText;
     public Text AccountsReceivableFromSuppliersText;
     public Text InventoryText;
@@ -16,16 +17,18 @@ public class FinalStats : MonoBehaviour {
     public Text SalesText;
     public Text CostOfGoodsSoldText;
     public Text GrossMarginText;
-    public Text AdministrativeExpensesText;
-    public Text GeneralExpensesText;
-    public Text SellingExpensesText;
-    public Text OtherExpensesText;
+    public Text SalariesText;
     public Text TotalOperatingExpensesText;
-    public Text NetOperatingIncomeBeforeTaxesText;
-    public Text OtherIncomeText;
     public Text TotalNetIncomeBeforeTaxesText;
     public Text TaxesText;
     public Text NetIncomeAfterTaxesText;
+    public Text TotalExpensesText;
+
+    public Text ROEText;
+    public Text NetIncomePercentText;
+    public Text GrossMarginPercentText;
+    public Text CurrentRatioText;
+    public Text InventoryTurnoverText;
 
 
     public static int InventoryAtBeginningOfMonth;
@@ -122,7 +125,7 @@ public class FinalStats : MonoBehaviour {
     // Long Term Loans/Mortgages
     private static void calculateLongtermLiabilities()
     {
-        if (Time.frameCount % 1800 == 0)
+        if (Time.frameCount % 6000 == 0)
         {
             LongtermLiabilities = Random.Range(1200, 8000); // Generate random int
         }
@@ -146,7 +149,7 @@ public class FinalStats : MonoBehaviour {
     {
         int mood = 0;
         // TODO: keep track of mood when customers leave store and add it to an average. The average happiness of store will cause stocks to be higher
-        if (Time.frameCount % 1800 == 0)
+        if (Time.frameCount % 60000 == 0)
         {
             CommonStockOutstanding = Random.Range(1400, 5000);
         }
@@ -162,11 +165,11 @@ public class FinalStats : MonoBehaviour {
     private static void calculateRetainedEarnings()
     {
         // Randomize Retained Earnings
-        if (Time.frameCount % 1800 == 0)
+        if (Time.frameCount % 6000 == 0)
         {
             RetainedEarnings = TotalAssets;
-            RetainedEarnings += Random.Range(0, RetainedEarnings / 5);
-            RetainedEarnings -= Random.Range(0, RetainedEarnings / 5);
+            RetainedEarnings += Random.Range(1, RetainedEarnings / 5);
+            RetainedEarnings -= Random.Range(1, RetainedEarnings / 5);
         }
     }
 
@@ -211,6 +214,7 @@ public class FinalStats : MonoBehaviour {
     public static int TotalNetIncomeBeforeTaxes;
     public static int Taxes;
     public static int NetIncomeAfterTaxes;
+    public static int salaries;
 
     // Money earned from sales of goods
     private static void calculateSales()
@@ -244,7 +248,7 @@ public class FinalStats : MonoBehaviour {
         // Add 500 to sum for every unlocked pharmacist counter
         for (int i = 0; i < Globals_Pharmacist.pharmacistCounter.Length; i++)
             if (Globals_Pharmacist.pharmacistCounter[i].isUnlocked)
-                sum += 500;
+                sum += 50;
 
         GeneralExpenses = sum;
     }
@@ -257,15 +261,12 @@ public class FinalStats : MonoBehaviour {
     }
 
     // Expenses from interest and disposal of fixed assets
-    private static void calculateOtherExpenses()
-    {
-        OtherExpenses = 0;
-    }
+   
 
     // Sum of the 4 above expenses
     private static void calculateTotalOperatingExpenses()
     {
-        TotalOperatingExpenses = AdministrativeExpenses + GeneralExpenses + SellingExpenses + OtherExpenses;
+        TotalOperatingExpenses = AdministrativeExpenses ;
     }
 
     // Difference between gross margin and total operating expenses
@@ -297,6 +298,18 @@ public class FinalStats : MonoBehaviour {
     {
         NetIncomeAfterTaxes = TotalNetIncomeBeforeTaxes - Taxes;
     }
+    public static void SumSalaries()
+    {
+        int sum = 0;
+        for (int i = 0; i < Globals_Items.item[2].Length; i++)
+        {
+            if (((Pharmacist)Globals_Items.item[2][i]).isUnlocked)
+            {
+                sum += Globals_Items.item[2][i].price;
+            }
+        }
+        salaries = sum;
+    }
 
     // Caculate all values for income statement
     public static void calulateIncomeStatement()
@@ -307,7 +320,6 @@ public class FinalStats : MonoBehaviour {
         calculateAdministrativeExpenses();
         calculateGeneralExpenses();
         calculateSellingExpenses();
-        calculateOtherExpenses();
         calculateTotalOperatingExpenses();
         calculateNetOperatingIncomeBeforeTaxes();
         calculateOtherIncome();
@@ -315,9 +327,62 @@ public class FinalStats : MonoBehaviour {
         calculateTaxes();
         calculateNetIncomeAfterTaxes();
 
-       
+
+    }
+    //ratios
+    private static int ROE;
+    private static int netIncomePercent;
+    private static int grossMarginPercent;
+    private static int currentRatio;
+    private static int inventoryTurn;
+
+    private static void calculateROE()
+    {
+        if (Time.frameCount % 60000 == 0)
+        {
+            ROE = (TotalNetIncomeBeforeTaxes * 100) / TotalOwnersEquity;
+        }
     }
 
+    private static void calculateNetIncomePercent()
+    {
+        if (Time.frameCount % 60000 == 0)
+        {
+            netIncomePercent = (TotalNetIncomeBeforeTaxes / Sales) * 100;
+        }
+    }
+
+    private static void calculateGMP()
+    {
+        if (Time.frameCount % 60000 == 0)
+        {
+            grossMarginPercent = (GrossMargin / Sales) * 100;
+        }
+    }
+
+    private static void calculateCurrentRatio()
+    {
+        if (Time.frameCount % 60000 == 0)
+        {
+            currentRatio = TotalAssets / TotalLiabilities;
+        }
+    }
+
+    private static void calculateInventoryTurn()
+    {
+        if (Time.frameCount % 60000 == 0)
+        {
+            inventoryTurn = CostOfGoodsSold / Inventory;
+        }
+    }
+    private static void calculateRatios()
+    {
+        calculateROE();
+        calculateNetIncomePercent();
+        calculateGMP();
+        calculateCurrentRatio();
+        calculateInventoryTurn();
+    }
     // Use this for initialization
     void Start () {
 		
@@ -328,12 +393,12 @@ public class FinalStats : MonoBehaviour {
        
             calculateBalanceSheet();
             calulateIncomeStatement();
+            calculateRatios();
             CashText.text = Cash.ToString();
             AccountsPayableToSuppliersText.text = AccountsPayableToSuppliers.ToString();
             totalAssetsText.text = TotalAssets.ToString();
             AccountsReceivableFromSuppliersText.text = AccountsReceivableFromSuppliers.ToString();
             InventoryText.text = Inventory.ToString();
-            PropertyPlantEquipmentText.text = PropertyPlantEquipment.ToString();
             AccountsPayableToSuppliersText.text = AccountsPayableToSuppliers.ToString();
             LongtermLiabilitiesText.text = LongtermLiabilities.ToString();
             TotalLiabilitiesText.text = TotalLiabilities.ToString();
@@ -341,16 +406,19 @@ public class FinalStats : MonoBehaviour {
             SalesText.text = Sales.ToString();
             CostOfGoodsSoldText.text = CostOfGoodsSold.ToString();
             GrossMarginText.text = GrossMargin.ToString();
-            AdministrativeExpensesText.text = AdministrativeExpenses.ToString();
-            GeneralExpensesText.text = GeneralExpenses.ToString();
-            SellingExpensesText.text = SellingExpenses.ToString();
-            OtherExpensesText.text = OtherExpenses.ToString();
+            SalariesText.text = salaries.ToString();
             TotalOperatingExpensesText.text = TotalOperatingExpenses.ToString();
-            NetOperatingIncomeBeforeTaxesText.text = NetOperatingIncomeBeforeTaxes.ToString();
-            OtherIncomeText.text = OtherIncome.ToString();
             TotalNetIncomeBeforeTaxesText.text = TotalNetIncomeBeforeTaxes.ToString();
             TaxesText.text = Taxes.ToString();
             NetIncomeAfterTaxesText.text = NetIncomeAfterTaxes.ToString();
+            ROEText.text = ROE.ToString();
+            NetIncomePercentText.text = netIncomePercent.ToString();
+            GrossMarginPercentText.text = grossMarginPercent.ToString();
+            CurrentRatioText.text = currentRatio.ToString();
+            InventoryTurnoverText.text = inventoryTurn.ToString();
+        TotalExpensesText.text = salaries.ToString();
+
+
 
     }
 }
