@@ -7,13 +7,11 @@ public class FinalStats : MonoBehaviour {
     public Text CashText;
     public Text AccountsReceivableFromSuppliersText;
     public Text InventoryText;
+    public Text totalAssetsText;
     public Text PropertyPlantEquipmentText;
     public Text AccountsPayableToSuppliersText;
-    public Text AccruedSalariesPayableText;
     public Text LongtermLiabilitiesText;
     public Text TotalLiabilitiesText;
-    public Text CommonStockOutstandingText;
-    public Text RetainedEarningsText;
     public Text TotalOwnersEquityText;
 
     public Text SalesText;
@@ -125,7 +123,10 @@ public class FinalStats : MonoBehaviour {
     // Long Term Loans/Mortgages
     private static void calculateLongtermLiabilities()
     {
-        LongtermLiabilities = Random.Range(1200, 8000); // Generate random int
+        if (Time.frameCount % 1800 == 0)
+        {
+            LongtermLiabilities = Random.Range(1200, 8000); // Generate random int
+        }
     }
 
     // Sum of all liabilities
@@ -146,7 +147,10 @@ public class FinalStats : MonoBehaviour {
     {
         int mood = 0;
         // TODO: keep track of mood when customers leave store and add it to an average. The average happiness of store will cause stocks to be higher
-        CommonStockOutstanding = Random.Range(1400, 5000);
+        if (Time.frameCount % 1800 == 0)
+        {
+            CommonStockOutstanding = Random.Range(1400, 5000);
+        }
     }
 
     // Value of all stocks held by Owner of Pharmacy
@@ -159,9 +163,12 @@ public class FinalStats : MonoBehaviour {
     private static void calculateRetainedEarnings()
     {
         // Randomize Retained Earnings
-        RetainedEarnings = TotalAssets;
-        RetainedEarnings += Random.Range(0, RetainedEarnings / 5);
-        RetainedEarnings -= Random.Range(0, RetainedEarnings / 5);
+        if (Time.frameCount % 1800 == 0)
+        {
+            RetainedEarnings = TotalAssets;
+            RetainedEarnings += Random.Range(0, RetainedEarnings / 5);
+            RetainedEarnings -= Random.Range(0, RetainedEarnings / 5);
+        }
     }
 
     // Sum of all owners equity
@@ -319,30 +326,32 @@ public class FinalStats : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        CashText.text = Cash.ToString();
-        AccountsPayableToSuppliersText.text = AccountsPayableToSuppliers.ToString();
-        AccountsReceivableFromSuppliersText.text = AccountsReceivableFromSuppliers.ToString();
-        InventoryText.text = Inventory.ToString();
-        PropertyPlantEquipmentText.text = PropertyPlantEquipment.ToString();
-        AccountsPayableToSuppliersText.text = AccountsPayableToSuppliers.ToString();
-        AccruedSalariesPayableText.text = AccruedSalariesPayable.ToString();
-        LongtermLiabilitiesText.text = LongtermLiabilities.ToString();
-        TotalLiabilitiesText.text = TotalLiabilities.ToString();
-        CommonStockOutstandingText.text = CommonStockOutstanding.ToString();
-        RetainedEarningsText.text = RetainedEarnings.ToString();
-        TotalOwnersEquityText.text = TotalOwnersEquity.ToString();
-        SalesText.text = Sales.ToString();
-        CostOfGoodsSoldText.text = CostOfGoodsSold.ToString();
-        GrossMarginText.text = GrossMargin.ToString();
-        AdministrativeExpensesText.text = AdministrativeExpenses.ToString();
-        GeneralExpensesText.text = GeneralExpenses.ToString();
-        SellingExpensesText.text = SellingExpenses.ToString();
-        OtherExpensesText.text = OtherExpenses.ToString();
-        TotalOperatingExpensesText.text = TotalOperatingExpenses.ToString();
-        NetOperatingIncomeBeforeTaxesText.text = NetOperatingIncomeBeforeTaxes.ToString();
-        OtherIncomeText.text = OtherIncome.ToString();
-        TotalNetIncomeBeforeTaxesText.text = TotalNetIncomeBeforeTaxes.ToString();
-        TaxesText.text = Taxes.ToString();
-        NetIncomeAfterTaxesText.text = NetIncomeAfterTaxes.ToString();
+       
+            calculateBalanceSheet();
+            calulateIncomeStatement();
+            CashText.text = Cash.ToString();
+            AccountsPayableToSuppliersText.text = AccountsPayableToSuppliers.ToString();
+            totalAssetsText.text = TotalAssets.ToString();
+            AccountsReceivableFromSuppliersText.text = AccountsReceivableFromSuppliers.ToString();
+            InventoryText.text = Inventory.ToString();
+            PropertyPlantEquipmentText.text = PropertyPlantEquipment.ToString();
+            AccountsPayableToSuppliersText.text = AccountsPayableToSuppliers.ToString();
+            LongtermLiabilitiesText.text = LongtermLiabilities.ToString();
+            TotalLiabilitiesText.text = TotalLiabilities.ToString();
+            TotalOwnersEquityText.text = TotalOwnersEquity.ToString();
+            SalesText.text = Sales.ToString();
+            CostOfGoodsSoldText.text = CostOfGoodsSold.ToString();
+            GrossMarginText.text = GrossMargin.ToString();
+            AdministrativeExpensesText.text = AdministrativeExpenses.ToString();
+            GeneralExpensesText.text = GeneralExpenses.ToString();
+            SellingExpensesText.text = SellingExpenses.ToString();
+            OtherExpensesText.text = OtherExpenses.ToString();
+            TotalOperatingExpensesText.text = TotalOperatingExpenses.ToString();
+            NetOperatingIncomeBeforeTaxesText.text = NetOperatingIncomeBeforeTaxes.ToString();
+            OtherIncomeText.text = OtherIncome.ToString();
+            TotalNetIncomeBeforeTaxesText.text = TotalNetIncomeBeforeTaxes.ToString();
+            TaxesText.text = Taxes.ToString();
+            NetIncomeAfterTaxesText.text = NetIncomeAfterTaxes.ToString();
+
     }
 }
